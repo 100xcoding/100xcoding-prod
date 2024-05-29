@@ -66,3 +66,29 @@ model VerificationToken {
 
   @@id([identifier, token])
 }
+
+model Profile {
+  id              String  @id @default(uuid())
+  userId          String
+  title           String?
+  bio             String?
+  website         String?
+  profileImageUrl String?
+  resumeUrl       String?
+}
+
+model SocialLink {
+  id         String  @id @default(uuid())
+  userId     String
+  github     String?
+  twitter    String?
+  instagram  String?
+  youtube    String?
+  medium     String?
+  threads    String?
+  leetcode   String?
+  gfg        String?
+  codechef   String?
+  codeforces String?
+  linkedIn   String?
+}
