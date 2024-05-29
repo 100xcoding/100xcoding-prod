@@ -6,19 +6,8 @@ import { JWT } from "next-auth/jwt";
 import { Adapter, AdapterUser } from "next-auth/adapters";
 import Env from "./lib/env";
 import { db } from "./lib/db";
-export type CustomSession = {
-	user?: CustomUser;
-	expires: Date;
-};
-export type CustomUser = {
-	id: string;
-	name?: string | null;
-	email: string;
-	role?: string | null;
-	image?: string | null;
-	username: string;
-	emailVerified?: Date | null;
-};
+import { CustomUser } from "./types";
+
 declare module "next-auth" {
 	interface Session {
 		user?: CustomUser;
@@ -33,13 +22,6 @@ declare module "next-auth/jwt" {
 		user?: CustomUser;
 	}
 }
-// interface GitHubProfile extends Profile {
-// 	id: string;
-// 	name: string;
-// 	email: string;
-// 	login: string;
-// 	avatar_url: string;
-// }
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	adapter: PrismaAdapter(db),
 	session: {
@@ -52,15 +34,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			clientSecret: Env.AUTH_GITHUB_SECRET,
 			allowDangerousEmailAccountLinking: true,
 			profile(profile) {
-				// console.log(profile);
 				return {
 					role: "user",
 					email: profile.email,
 					name: profile.name,
 					username: profile.login,
 					image: profile.avatar_url,
-					// id: profile.id,
-					// emailVerified: null,
 				};
 			},
 		}),
