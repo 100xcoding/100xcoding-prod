@@ -23,9 +23,8 @@ model User {
   role          String    @default("user")
   accounts      Account[]
   sessions      Session[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 model Account {
@@ -91,4 +90,18 @@ model SocialLink {
   codechef   String?
   codeforces String?
   linkedIn   String?
+}
+
+model Challenge {
+  id                  String @id @default(uuid())
+  title               String
+  slug                String
+  challengeCategoryId String
+  description         String
+}
+
+model ChallengeCategory {
+  id    String @id @default(uuid())
+  name  String
+  score Int
 }
