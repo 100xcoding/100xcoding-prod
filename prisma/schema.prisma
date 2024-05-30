@@ -74,6 +74,7 @@ model Profile {
   website         String?
   profileImageUrl String?
   resumeUrl       String?
+  socialLinkId    String?
 }
 
 model SocialLink {
@@ -93,15 +94,32 @@ model SocialLink {
 }
 
 model Challenge {
-  id                  String @id @default(uuid())
+  id                  String   @id @default(uuid())
   title               String
   slug                String
   challengeCategoryId String
   description         String
+  challengeTechIds    String[]
+  challengeResources  String[]
+  task                String
+  about               String
+  requirements        String
+  steps               String
 }
 
 model ChallengeCategory {
   id    String @id @default(uuid())
   name  String
   score Int
+}
+
+model ChallengeTech {
+  id   String @id @default(uuid())
+  name String
+}
+
+model ChallengeResource {
+  id   String @id @default(uuid())
+  name String
+  link String
 }
