@@ -68,7 +68,7 @@ model VerificationToken {
 
 model Profile {
   id              String  @id @default(uuid())
-  userId          String
+  userId          String  @unique
   title           String?
   bio             String?
   website         String?
@@ -79,7 +79,7 @@ model Profile {
 
 model SocialLink {
   id         String  @id @default(uuid())
-  userId     String
+  userId     String  @unique
   github     String?
   twitter    String?
   instagram  String?
