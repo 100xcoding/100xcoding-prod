@@ -7,14 +7,14 @@ import { ProfileMenu } from "./profile-menu";
 const routes = [];
 export const NavbarRoutes = () => {
 	return (
-		<div className="flex justify-between items-center ">
+		<div className="md:flex justify-between items-center hidden">
 			<div className="">
 				<Link href="/">
 					<Logo />
 				</Link>
 			</div>
 			<div className="">
-				<ul className="flex gap-7 items-center ">
+				<ul className="flex gap-7 items-center text-lg">
 					<Link
 						href={"/"}
 						className="hover:border-b hover:border-white hover:scale-105 transition hover:text-white/85"
