@@ -4,7 +4,7 @@ import { logo as Logo } from "./logo";
 import { FaYoutube } from "react-icons/fa6";
 import { BsInstagram } from "react-icons/bs";
 import { FaXTwitter } from "react-icons/fa6";
-
+import { FaDiscord } from "react-icons/fa";
 export const Footer = () => {
   return (
     <footer className=" bg-primary py-2  px-2.5">
@@ -21,7 +21,7 @@ export const Footer = () => {
             Terms of use
           </Link>
         </div>
-        <div className="flex lg:justify-center items-center gap-3">
+        <div className="flex lg:justify-center items-center gap-5">
           <Link href={"/"}>
             <FaXTwitter size={26}/>
           </Link>
@@ -30,6 +30,9 @@ export const Footer = () => {
           </Link>
           <Link href={"/"}>
             <BsInstagram size={26}/>
+          </Link>
+          <Link href={"/"}>
+            <FaDiscord size={26}/>
           </Link>
         </div>
       </div>
