@@ -15,13 +15,14 @@ export const MobileSidebar = () => {
       <div className="w-24 md:hidden">
         <Logo />
       </div>
+      <div className="flex gap-4 items-center">
+        <span className="md:hidden"><ProfileMenu /></span>
       <Sheet>
         <SheetTrigger className="md:hidden  hover:opacity-75 transition flex gap-6 items-center">
-          <ProfileMenu />
           <Menu />
         </SheetTrigger>
         <SheetContent>
-          <div className="p-2 mt-12">
+          <div className="p-2 mt-12 md:hidden">
             <ul className="flex flex-col  gap-6">
               <Link
                 href={"/"}
@@ -63,6 +64,8 @@ export const MobileSidebar = () => {
           </div>
         </SheetContent>
       </Sheet>
+      </div>
+      
     </div>
   );
 };

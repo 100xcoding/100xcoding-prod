@@ -13,7 +13,11 @@ import { FaUser } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 export const ProfileMenu = ({ data }: any) => {
+  const handleLogout = async () => {
+		await signOut();
+	}; 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -35,7 +39,7 @@ export const ProfileMenu = ({ data }: any) => {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem >
             <div className="flex gap-3 items-center cursor-pointer text-lg">
               <MdLogout size={21}/>
               <span>Logout</span>
