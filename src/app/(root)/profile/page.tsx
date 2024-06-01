@@ -1,8 +1,9 @@
+import { auth } from "@/auth";
 import ProfileForm from "./_components/profile-form";
 import { ProfileImageForm } from "./_components/profile-image-form";
 import { SocialForm } from "./_components/social-form";
 
-const ProfilePage = () => {
+const ProfilePage = async () => {
 	return (
 		<div className="my-10">
 			<h1 className="text-center text-4xl font-poppins font-bold">Your Profile</h1>

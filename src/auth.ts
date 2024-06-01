@@ -28,6 +28,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		strategy: "jwt",
 	},
 	secret: Env.AUTH_SECRET,
+	pages: {
+		signIn: "/",
+	},
 	providers: [
 		GitHub({
 			clientId: Env.AUTH_GITHUB_ID,
@@ -45,17 +48,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		}),
 	],
 	callbacks: {
-		// async signIn({
-		// 	user,
-		// 	account,
-		// 	profile,
-		// }: {
-		// 	user: any;
-		// 	account: Account | null;
-		// 	profile?: Profile | undefined;
-		// }) {
-		// 	if (account?.provider === "github") {
-		// 		const checkUser = await prisma.user.upsert({
+		// async signIn({ user, account, profile }: any) {
+		// 	console.log(account);
+		// 	if (account?.provider == "github") {
+		// 		const checkUser = await db.user.upsert({
 		// 			where: { email: profile?.email! },
 		// 			update: {
 		// 				name: profile?.name,
@@ -74,9 +70,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		// 			return false;
 		// 		}
 		// 	}
-		// 	// console.log("Account :", account);
-		// 	// console.log("USER ", user);
-		// 	// console.log("PROFILE :", profile);
+		// 	// 	// console.log("Account :", account);
+		// 	// 	// console.log("USER ", user);
+		// 	console.log("PROFILE :", profile);
 		// 	return true;
 		// },
 		jwt({ token, user }) {
