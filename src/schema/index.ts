@@ -34,12 +34,9 @@ export const ProfileFormSchema = z.object({
 			message: "Bio can upto 100 characters long.",
 		})
 		.optional(),
-	website: z
-		.string()
-		.url({
-			message: "Invalid Website URL",
-		})
-		.optional(),
+	website: z.string().url().optional(),
+	email: z.string().email(),
+	username: z.string().toLowerCase(),
 });
 export const SocialLinkFormSchema = z.object({
 	github: z
