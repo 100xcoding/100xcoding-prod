@@ -8,14 +8,16 @@ import { HiCodeBracketSquare } from "react-icons/hi2";
 import { GrResources } from "react-icons/gr";
 import { SiMicrodotblog } from "react-icons/si";
 import Link from "next/link";
+import { ProfileMenu } from "./profile-menu";
 export const MobileSidebar = () => {
   return (
     <div className="flex justify-between items-center">
-      <div className="w-20">
+      <div className="w-24 md:hidden">
         <Logo />
       </div>
       <Sheet>
-        <SheetTrigger className="md:hidden  hover:opacity-75 transition ">
+        <SheetTrigger className="md:hidden  hover:opacity-75 transition flex gap-6 items-center">
+          <ProfileMenu />
           <Menu />
         </SheetTrigger>
         <SheetContent>
