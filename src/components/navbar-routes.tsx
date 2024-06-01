@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { logo as Logo } from "./logo";
 import { ProfileMenu } from "./profile-menu";
+import { SignIn } from "@/app/_comp/sign-in";
 
 export const NavbarRoutes = () => {
   return (
@@ -38,9 +39,10 @@ export const NavbarRoutes = () => {
             <li className="">Quizzes</li>
           </Link>
         </ul>
-        <span>
-          <ProfileMenu />
-        </span>
+
+        <ProfileMenu />
+
+        {/* <SignIn /> */}
       </div>
     </div>
   );
