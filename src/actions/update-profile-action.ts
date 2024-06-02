@@ -5,6 +5,7 @@ import { getErrorMessage } from "@/lib/utils";
 import { ProfileFormSchema } from "@/schema";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { createUploadUrlAction } from "./file-upload-actions";
 type Inputs = z.infer<typeof ProfileFormSchema>;
 export async function updateProfileAction(data: Inputs) {
 	try {
@@ -34,4 +35,34 @@ export async function updateProfileAction(data: Inputs) {
 		};
 	}
 	//TODO: Add Revalidate function
+}
+export async function addProfileImageAction(
+	fileName: string,
+	fileType: string,
+	fileData: Blob
+) {
+	const uploadUrl = await createUploadUrlAction(fileName, fileType);
+	if (!uploadUrl) {
+		return {
+			success: false,
+			message: "URL Failed, Try again!",
+		};
+	}
+	const response = await fetch(uploadUrl, {
+		method: "PUT",
+		body: fileData,
+	});
+	console.log(response);
+	//TODO: Update the image name in the profile schema
+	if (response.ok && response.status === 200) {
+		return {
+			success: true,
+			message: "Image Upload Successfully!",
+		};
+	}
+	return {
+		success: false,
+		message: "Something went wrong, Try again!",
+	};
+	// TODO: re-Validate the Path
 }
