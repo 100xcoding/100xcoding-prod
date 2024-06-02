@@ -1,4 +1,5 @@
 "use client";
+import { createUploadUrlAction } from "@/actions/file-upload-actions";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +7,7 @@ import React from "react";
 import { toast } from "sonner";
 
 export const ProfileImageForm = () => {
-	const handleImageUpload = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleImageUpload = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const form = e.currentTarget as HTMLFormElement;
 		const formData = new FormData(form);
@@ -16,6 +17,13 @@ export const ProfileImageForm = () => {
 			toast.error("Upload an Image!");
 			return;
 		}
+		console.log(file.name, file.type);
+		const uploadUrl = await createUploadUrlAction(file.name, file.type);
+		console.log(uploadUrl);
+		// await fetch(uploadUrl, {
+		// 	method: "PUT",
+		// 	body: file,
+		// });
 	};
 	const onSubmitResume = () => {
 		console.log("dasjk");
