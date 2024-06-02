@@ -1,3 +1,4 @@
+"use server";
 import { getSignedUrlForS3Object } from "@/lib/s3";
 
 export async function createUploadUrlAction(key: string, type: string) {

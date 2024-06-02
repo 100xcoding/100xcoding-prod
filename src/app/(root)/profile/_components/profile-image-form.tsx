@@ -18,12 +18,16 @@ export const ProfileImageForm = () => {
 			return;
 		}
 		console.log(file.name, file.type);
+		//TODO:update the file name
+		// TODO: empty the field after submit
 		const uploadUrl = await createUploadUrlAction(file.name, file.type);
 		console.log(uploadUrl);
-		// await fetch(uploadUrl, {
-		// 	method: "PUT",
-		// 	body: file,
-		// });
+		const response = await fetch(uploadUrl, {
+			method: "PUT",
+			body: file,
+		});
+		console.log(response);
+		// TODO: after this save the file name into the db
 	};
 	const onSubmitResume = () => {
 		console.log("dasjk");
