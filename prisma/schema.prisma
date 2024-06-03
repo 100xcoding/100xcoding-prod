@@ -14,17 +14,19 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String      @id @default(cuid())
   name          String?
-  email         String    @unique
+  email         String      @unique
   emailVerified DateTime?
   image         String?
-  username      String    @unique
-  role          String    @default("user")
+  username      String      @unique
+  role          String      @default("user")
   accounts      Account[]
   sessions      Session[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  profile       Profile?
+  socialLink    SocialLink?
 }
 
 model Account {
@@ -67,14 +69,14 @@ model VerificationToken {
 }
 
 model Profile {
-  id              String  @id @default(uuid())
-  userId          String  @unique
-  title           String?
-  bio             String?
-  website         String?
-  profileImageUrl String?
-  resumeUrl       String?
-  socialLinkId    String?
+  id           String  @id @default(uuid())
+  userId       String  @unique
+  title        String?
+  bio          String?
+  website      String?
+  profileImage String?
+  resume       String? @unique
+  user         User    @relation(fields: [userId], references: [id])
 }
 
 model SocialLink {
@@ -91,6 +93,7 @@ model SocialLink {
   codechef   String?
   codeforces String?
   linkedIn   String?
+  user       User    @relation(fields: [userId], references: [id])
 }
 
 model Challenge {

@@ -1,5 +1,6 @@
 "use client";
 import { createUploadUrlAction } from "@/actions/file-upload-actions";
+import { updateProfileImageAction } from "@/actions/update-profile-action";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,11 +48,16 @@ export const ProfileImageForm = () => {
 			body: modifiedFile,
 		});
 		if (response.ok && response.status === 200) {
+			console.log("CLOUD-RES", response);
 			if (fileInputRef.current) {
 				fileInputRef.current.value = "";
 			}
-			// TODO: after this save the file name into the db
-			toast.success("Image Upload Successfully");
+			const result = await updateProfileImageAction(fileNameWithDate);
+			if (result.success) {
+				toast.success(result?.message);
+			} else {
+				toast.error(result.message);
+			}
 		} else {
 			toast.error("Something went wrong, Try again!");
 		}
