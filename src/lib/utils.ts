@@ -45,3 +45,13 @@ export function appendDateToFileName(fileName: string): string {
 		return `${fileName}_${formattedDate}`;
 	}
 }
+export const getSlug = (text: string) => {
+	return text
+		.toString()
+		.toLowerCase()
+		.replace(/\s+/g, "-") // Replace spaces with -
+		.replace(/[^\w\-]+/g, "") // Remove all non-word chars
+		.replace(/\-\-+/g, "-") // Replace multiple - with single -
+		.replace(/^-+/, "") // Trim - from start of text
+		.replace(/-+$/, ""); // Trim - from end of text
+};
