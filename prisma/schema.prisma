@@ -27,6 +27,7 @@ model User {
   updatedAt     DateTime    @updatedAt
   profile       Profile?
   socialLink    SocialLink?
+  challenge     Challenge[]
 }
 
 model Account {
@@ -97,32 +98,42 @@ model SocialLink {
 }
 
 model Challenge {
-  id                  String   @id @default(uuid())
+  id                  String             @id @default(uuid())
+  userId              String
+  creatorId           String
   title               String
   slug                String
   challengeCategoryId String
   description         String
-  challengeTechIds    String[]
-  challengeResources  String[]
   task                String
   about               String
   requirements        String
   steps               String
+  challengeResourceId String?
+  challengeTechId     String?
+  user                User               @relation(fields: [userId], references: [id])
+  challengeCategory   ChallengeCategory  @relation(fields: [challengeCategoryId], references: [id])
+  challengeTech       ChallengeTech?     @relation(fields: [challengeTechId], references: [id])
+  challengeResource   ChallengeResource? @relation(fields: [challengeResourceId], references: [id])
 }
 
 model ChallengeCategory {
-  id    String @id @default(uuid())
-  name  String
-  score Int
+  id         String      @id @default(uuid())
+  name       String
+  score      Int
+  challenges Challenge[]
 }
 
 model ChallengeTech {
-  id   String @id @default(uuid())
-  name String
+  id         String      @id @default(uuid())
+  name       String
+  challenges Challenge[]
 }
 
 model ChallengeResource {
-  id   String @id @default(uuid())
-  name String
-  link String
+  id         String      @id @default(uuid())
+  name       String
+  link       String
+  type       String
+  challenges Challenge[]
 }
