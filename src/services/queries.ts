@@ -12,3 +12,14 @@ export function useProfile() {
         data,error,refreshProfile
     }
 }
+
+export function useCreatorChallenges() {
+    const cacheKey = "/creator/challenges"
+    const {data,error} = useSWR(cacheKey,fetcher);
+    const refreshCreatorChallengesData = async () => {
+        await mutate(cacheKey); // Trigger revalidation for the specific cache key
+    };
+    return {
+        data,error,refreshCreatorChallengesData
+    }
+}
