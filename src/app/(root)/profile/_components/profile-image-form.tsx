@@ -127,7 +127,7 @@ export const ProfileImageForm = () => {
 						src={
 							data
 								? getImageUrl(data?.profile?.profileImage!)
-								: "https://github.com/shadcn.png"
+								: "/user.svg"
 						}
 						alt={data ? data.username : "profile-img"}
 					/>
