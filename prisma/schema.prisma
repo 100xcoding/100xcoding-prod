@@ -102,7 +102,7 @@ model Challenge {
   userId              String
   creatorId           String
   title               String
-  slug                String
+  slug                String             @unique
   challengeCategoryId String?
   description         String?
   task                String?
@@ -111,9 +111,9 @@ model Challenge {
   steps               String?
   challengeResourceId String?
   challengeTechId     String?
-  publish Boolean @default(false)
+  publish             Boolean            @default(false)
   user                User               @relation(fields: [userId], references: [id])
-  challengeCategory   ChallengeCategory?  @relation(fields: [challengeCategoryId], references: [id])
+  challengeCategory   ChallengeCategory? @relation(fields: [challengeCategoryId], references: [id])
   challengeTech       ChallengeTech?     @relation(fields: [challengeTechId], references: [id])
   challengeResource   ChallengeResource? @relation(fields: [challengeResourceId], references: [id])
 }
