@@ -81,7 +81,7 @@ export const columns: ColumnDef<Challenge>[] = [
 			);
 		},
 		cell: ({ row }:any) => {
-			const isPublished = row.getValue("Publish") || false;
+			const isPublished = row.getValue("publish") || false;
 
 			return (
 				<Badge className={cn("bg-slate-500", isPublished && "bg-sky-700")}>

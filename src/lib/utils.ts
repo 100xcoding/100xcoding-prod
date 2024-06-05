@@ -46,6 +46,9 @@ export function appendDateToFileName(fileName: string): string {
 	}
 }
 export const getSlug = (text: string) => {
+	if(!text){
+		return ""
+	}
 	return text
 		.toString()
 		.toLowerCase()

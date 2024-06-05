@@ -6,6 +6,7 @@ import { DataTable } from "./_components/data-table";
 
 const ChallengePage = () => {
   const {data} = useCreatorChallenges();
+  console.log(data);
   return (
     <div className="p-6">
 			<DataTable

@@ -5,3 +5,6 @@ export const CreateChallengeSchema = z.object({
     }),
     slug:z.string()
 })
+export const ChallengeCategorySchema = z.object({
+	challengeCategoryId: z.string().min(1),
+});
