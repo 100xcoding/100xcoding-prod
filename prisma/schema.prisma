@@ -115,7 +115,11 @@ model Challenge {
   user                User               @relation(fields: [userId], references: [id])
   challengeCategory   ChallengeCategory? @relation(fields: [challengeCategoryId], references: [id])
   challengeTech       ChallengeTech?     @relation(fields: [challengeTechId], references: [id])
-  challengeResource   ChallengeResource? @relation(fields: [challengeResourceId], references: [id])
+  // challengeResource   ChallengeResource? @relation(fields: [challengeResourceId], references: [id])
+  figmaDesktop        String?
+  figmaMobile         String?
+  image               String?
+  resource            String?
 }
 
 model ChallengeCategory {
@@ -132,9 +136,9 @@ model ChallengeTech {
 }
 
 model ChallengeResource {
-  id         String      @id @default(uuid())
-  name       String
-  link       String
-  type       String
-  challenges Challenge[]
+  id   String @id @default(uuid())
+  name String
+  link String
+  type String
+  // challenges Challenge[]
 }
