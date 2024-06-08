@@ -1,16 +1,20 @@
 "use client";
 
 import { IconBadge } from "@/components/icon-badge";
-import { useChallengeCategories, useCreatorChallengeById } from "@/services/queries";
+import { useChallengeCategories, useChallengeTech, useCreatorChallengeById } from "@/services/queries";
 import { LayoutDashboard, ListChecks } from "lucide-react";
 import { TitleForm } from "./_components/title-form";
 import { CategoryForm } from "./_components/category-from";
-import { ChallengeCategory } from "@prisma/client";
+import { ChallengeCategory, ChallengeTech } from "@prisma/client";
+import { ShortDescriptionForm } from "./_components/short-description-form";
+import { AboutForm } from "./_components/about-form";
+import { LanguageForm } from "./_components/language-form";
 
 const CreatorChallengePage = ({ params }: { params: { challengeId: string } }) => {
   const {data} = useCreatorChallengeById(params?.challengeId);
   const {data:categoryData} = useChallengeCategories();
-  console.log(categoryData);
+  const {data:techData} = useChallengeTech();
+  // console.log(categoryData);
   return (
     <>
     {/* {!course?.isPublished && (
@@ -40,15 +44,18 @@ const CreatorChallengePage = ({ params }: { params: { challengeId: string } }) =
           </div>
           <TitleForm initialData={data} challengeId={data?.id} />
           <CategoryForm
-            initialData={categoryData}
+            initialData={data}
             challengeId={data?.id}
             options={categoryData?.map((category:ChallengeCategory) => ({
               label: category.name,
               value: category.id,
             }))}
-            />
+          />
+            <AboutForm initialData={data}
+            challengeId={data?.id} />
+            
           {/*
-          <ShortDescriptionForm initialData={course!} courseId={course?.id!} />
+          
           <DescriptionForm initialData={course!} courseId={course?.id!} />
           <ImageForm initialData={course!} courseId={course?.id!} />
           <CategoryForm
@@ -64,17 +71,16 @@ const CreatorChallengePage = ({ params }: { params: { challengeId: string } }) =
           <div>
             <div className="flex items-center gap-x-2">
               <IconBadge icon={ListChecks} />
-              <h2 className="text-xl">Course chapters</h2>
+              {/* <h2 className="text-xl">Course chapters</h2> */}
             </div>
+            <ShortDescriptionForm initialData={data} challengeId={data?.id} />
+            <LanguageForm initialData={data} challengeId={data?.id} options={techData?.map((tech:ChallengeTech) => ({
+              label: tech.name,
+              value: tech.id,
+            }))} />
             {/* <ChaptersForm initialData={course!} courseId={course?.id!} /> */}
           </div>
-          {/* <div>
-            <div className="flex items-center gap-x-2">
-              <IconBadge icon={IndianRupee} />
-              <h2 className="text-xl">Sell your course</h2>
-            </div>
-            <PriceForm initialData={course!} courseId={course?.id!} />
-          </div> */}
+          
         </div>
       </div>
     </div>

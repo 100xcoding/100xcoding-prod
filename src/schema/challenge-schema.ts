@@ -8,3 +8,9 @@ export const CreateChallengeSchema = z.object({
 export const ChallengeCategorySchema = z.object({
 	challengeCategoryId: z.string().min(1),
 });
+export const ChallengeShortDescriptionSchema = z.object({
+	description: z.string().min(1),
+});
+export const ChallengeTechSchema = z.object({
+	challengeTechId: z.string().min(1),
+});

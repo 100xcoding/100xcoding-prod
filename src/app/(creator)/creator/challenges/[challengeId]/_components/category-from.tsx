@@ -9,9 +9,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Challenge } from "@prisma/client";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { updateChallengeCategoryAction } from "../../../_actions";
+import { toast } from "sonner";
+import { useCreatorChallengeById } from "@/services/queries";
 
 interface CategoryFormProps {
 	initialData: Challenge;
@@ -19,37 +22,38 @@ interface CategoryFormProps {
 	options: { label: string; value: string }[];
 }
 export const CategoryForm = ({initialData,challengeId,options}:CategoryFormProps) => {
-    console.log("CT - ",options);
+    // console.log("CT - ",initialData);
+	const {refreshCreatorChallengeData} = useCreatorChallengeById(challengeId);
     const [isEditing, setIsEditing] = useState(false);
 
-	const toggleEdit = () => setIsEditing((current) => !current);
-
+	const toggleEdit = useCallback(() => setIsEditing((current) => !current), []);
 	const router = useRouter();
 
 	const form = useForm<z.infer<typeof ChallengeCategorySchema>>({
 		resolver: zodResolver(ChallengeCategorySchema),
-		defaultValues: {
-			challengeCategoryId: initialData?.challengeCategoryId || "",
-		},
+		defaultValues: useMemo(() => ({
+            challengeCategoryId: initialData?.challengeCategoryId || "",
+        }), [initialData])
 	});
+	const {control,handleSubmit} = form;
+	const { isSubmitting, isValid  } = form.formState
 
-	const { isSubmitting, isValid } = form.formState;
-    const onSubmit = async (values: z.infer<typeof ChallengeCategorySchema>) => {
-		// try {
-		// 	await axios.patch(`/api/courses/${courseId}`, values);
-		// 	toast.success("Course updated");
-		// 	toggleEdit();
-		// 	router.refresh();
-		// } catch {
-		// 	toast.error("Something went wrong");
-		// }
-	};
+    const onSubmit = useCallback(async (values: z.infer<typeof ChallengeCategorySchema>) => {
+        const response = await updateChallengeCategoryAction(values, challengeId);
+        if (response?.success) {
+            setIsEditing(false);
+            refreshCreatorChallengeData();
+            toast.success(response.message);
+        } else {
+            toast.error(response?.message);
+        }
+    }, [challengeId, refreshCreatorChallengeData]);
 
-	const selectedOption = options?.find(
-		(option) => option.value === initialData.challengeCategoryId
-	);
+	const selectedOption = useMemo(() => {
+        return options?.find(option => option?.value === initialData?.challengeCategoryId);
+    }, [options, initialData?.challengeCategoryId]);
   return (
-    <div className="mt-6 border dark:bg-muted rounded-md p-4">
+    <div className="mt-6  dark:bg-muted rounded-md p-4">
 			<div className="font-medium flex items-center justify-between">
 				Challenge category
 				<Button
@@ -69,7 +73,7 @@ export const CategoryForm = ({initialData,challengeId,options}:CategoryFormProps
 			{!isEditing && (
 				<p
 					className={cn(
-						"text-sm mt-2",
+						"text-sm mt-2 capitalize",
 						!initialData?.challengeCategoryId && "text-slate-500 italic"
 					)}
 				>
@@ -79,17 +83,18 @@ export const CategoryForm = ({initialData,challengeId,options}:CategoryFormProps
 			{isEditing && (
 				<Form {...form}>
 					<form
-						onSubmit={form.handleSubmit(onSubmit)}
+						onSubmit={handleSubmit(onSubmit)}
 						className="space-y-4 mt-4"
 					>
 						<FormField
-							control={form.control}
+							control={control}
 							name="challengeCategoryId"
 							render={({ field }) => (
 								<FormItem>
 									<FormControl>
 										<Combobox
-											options={options?.map((option)=>(option))}
+										
+											options={options}
 											{...field}
 										/>
 									</FormControl>

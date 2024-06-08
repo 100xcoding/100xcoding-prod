@@ -22,6 +22,16 @@ export function useChallengeCategories() {
         data,error,refreshChallengeCategoriesData
     }
 }
+export function useChallengeTech() {
+    const cacheKey = "/tech"
+    const {data,error} = useSWR(cacheKey,fetcher);
+    const refreshChallengeTechData = async () => {
+        await mutate(cacheKey); // Trigger revalidation for the specific cache key
+    };
+    return {
+        data,error,refreshChallengeTechData
+    }
+}
 export function useCreatorChallenges() {
     const cacheKey = "/creator/challenges"
     const {data,error} = useSWR(cacheKey,fetcher);
