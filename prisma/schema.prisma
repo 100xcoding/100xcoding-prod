@@ -14,20 +14,22 @@ datasource db {
 }
 
 model User {
-  id            String      @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String?
-  email         String      @unique
+  email         String        @unique
   emailVerified DateTime?
   image         String?
-  username      String      @unique
-  role          String      @default("user")
+  username      String        @unique
+  role          String        @default("user")
   accounts      Account[]
   sessions      Session[]
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
   profile       Profile?
   socialLink    SocialLink?
   challenge     Challenge[]
+  quiz          Quiz[]
+  quizAttempt   QuizAttempt[]
 }
 
 model Account {
@@ -115,7 +117,6 @@ model Challenge {
   user                User               @relation(fields: [userId], references: [id])
   challengeCategory   ChallengeCategory? @relation(fields: [challengeCategoryId], references: [id])
   challengeTech       ChallengeTech?     @relation(fields: [challengeTechId], references: [id])
-  // challengeResource   ChallengeResource? @relation(fields: [challengeResourceId], references: [id])
   figmaDesktop        String?
   figmaMobile         String?
   image               String?
@@ -135,10 +136,81 @@ model ChallengeTech {
   challenges Challenge[]
 }
 
-model ChallengeResource {
-  id   String @id @default(uuid())
-  name String
-  link String
-  type String
-  // challenges Challenge[]
+model Quiz {
+  id             String   @id @default(uuid())
+  title          String
+  description    String?
+  creatorId      String
+  duration       Int?
+  quizCategoryId String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  questions    Question[]
+  user         User          @relation(fields: [creatorId], references: [id])
+  quizAttempts QuizAttempt[]
+  quizCategory QuizCategory? @relation(fields: [quizCategoryId], references: [id])
+  tags         QuizToTag[] // Many-to-many relationship with QuizTag through QuizToTag
+}
+
+model Question {
+  id      String          @id @default(uuid())
+  text    String
+  quiz    Quiz            @relation(fields: [quizId], references: [id])
+  quizId  String
+  options Option[]
+  score   Int // Score for this question
+  tags    QuestionToTag[] // Many-to-many relationship with QuizTag through QuestionToTag
+}
+
+model Option {
+  id         String   @id @default(uuid())
+  text       String
+  isCorrect  Boolean
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String
+}
+
+model QuizAttempt {
+  id          String    @id @default(uuid())
+  student     User      @relation(fields: [studentId], references: [id])
+  studentId   String
+  quiz        Quiz      @relation(fields: [quizId], references: [id])
+  quizId      String
+  startedAt   DateTime  @default(now())
+  completedAt DateTime?
+  score       Int?
+}
+
+model QuizCategory {
+  id      String @id @default(uuid())
+  name    String @unique
+  quizzes Quiz[]
+}
+
+model QuizTag {
+  id        String          @id @default(uuid())
+  name      String          @unique
+  quizzes   QuizToTag[] // Many-to-many relationship with Quiz through QuizToTag
+  questions QuestionToTag[] // Many-to-many relationship with Question through QuestionToTag
+}
+
+model QuizToTag {
+  quizId String
+  tagId  String
+
+  quiz Quiz    @relation(fields: [quizId], references: [id])
+  tag  QuizTag @relation(fields: [tagId], references: [id])
+
+  @@id([quizId, tagId])
+}
+
+model QuestionToTag {
+  questionId String
+  tagId      String
+
+  question Question @relation(fields: [questionId], references: [id])
+  tag      QuizTag  @relation(fields: [tagId], references: [id])
+
+  @@id([questionId, tagId])
 }
