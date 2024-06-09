@@ -137,20 +137,21 @@ model ChallengeTech {
 }
 
 model Quiz {
-  id             String   @id @default(uuid())
+  id             String        @id @default(uuid())
   title          String
   description    String?
   creatorId      String
   duration       Int?
   quizCategoryId String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  questions    Question[]
-  user         User          @relation(fields: [creatorId], references: [id])
-  quizAttempts QuizAttempt[]
-  quizCategory QuizCategory? @relation(fields: [quizCategoryId], references: [id])
-  tags         QuizToTag[] // Many-to-many relationship with QuizTag through QuizToTag
+  image          String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  isPublished    Boolean       @default(false)
+  questions      Question[]
+  user           User          @relation(fields: [creatorId], references: [id])
+  quizAttempts   QuizAttempt[]
+  quizCategory   QuizCategory? @relation(fields: [quizCategoryId], references: [id])
+  tags           QuizToTag[] // Many-to-many relationship with QuizTag through QuizToTag
 }
 
 model Question {
