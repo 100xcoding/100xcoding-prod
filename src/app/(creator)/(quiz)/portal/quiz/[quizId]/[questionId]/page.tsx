@@ -1,19 +1,19 @@
 "use client";
-import { IconBadge } from "@/components/icon-badge";
-import { useCreatorQuizById, useQuizCategories } from "@/services/queries";
-import { LayoutDashboard, ListChecks } from "lucide-react";
-import { TitleForm } from "./_components/title-form";
-import { DescriptionForm } from "./_components/description-form";
-import { DurationForm } from "./_components/duration-form";
-import { ImageForm } from "./_components/image-form";
-import { CategoryForm } from "./_components/category-form";
-import { QuizCategory } from "@prisma/client";
-import QuestionForm from "./_components/question-form";
 
-const QuizPage = ({ params }: { params: { quizId: string } }) => {
-	const { data } = useCreatorQuizById(params?.quizId);
+import { IconBadge } from "@/components/icon-badge";
+import { useCreatorQuizQuestionById } from "@/services/queries";
+import { LayoutDashboard, ListChecks } from "lucide-react";
+import { QuestionTitleForm } from "./_components/question-title-form";
+import { QuestionScoreForm } from "./_components/question-score-form";
+import { QuestionOptionForm } from "./_components/question-option-form";
+
+const QuizQuestionPage = ({
+	params,
+}: {
+	params: { quizId: string; questionId: string };
+}) => {
+	const { data } = useCreatorQuizQuestionById(params.questionId, params.quizId);
 	console.log(data);
-	const { data: quizCategories } = useQuizCategories();
 	return (
 		<>
 			{/* {!course?.isPublished && (
@@ -23,7 +23,7 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
 			<div className="p-6">
 				<div className="flex items-center justify-between">
 					<div className="flex flex-col gap-y-2">
-						<h1 className="text-2xl font-medium">Quiz setup</h1>
+						<h1 className="text-2xl font-medium">Quiz Question setup</h1>
 						<span className="text-sm text-slate-700">
 							{/* Complete all fields {completionText} */}
 							Complete all fields
@@ -41,26 +41,32 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
 							<IconBadge icon={LayoutDashboard} />
 							<h2 className="text-xl">Customize your quiz</h2>
 						</div>
-						<TitleForm
+						<QuestionTitleForm
+							initialData={data}
+							quizId={params?.quizId}
+							questionId={data?.id}
+						/>
+						<QuestionScoreForm
+							initialData={data}
+							quizId={params?.quizId}
+							questionId={data?.id}
+						/>
+						{/* <DescriptionForm
 							initialData={data}
 							quizId={data?.id}
-						/>
-						<DescriptionForm
+						/> */}
+						{/* <DurationForm
 							initialData={data}
 							quizId={data?.id}
-						/>
-						<DurationForm
-							initialData={data}
-							quizId={data?.id}
-						/>
-						<CategoryForm
+						/> */}
+						{/* <CategoryForm
 							initialData={data}
 							quizId={data?.id}
 							options={quizCategories?.map((category: QuizCategory) => ({
 								label: category.name,
 								value: category.id,
 							}))}
-						/>
+						/> */}
 						{/* <AboutForm
 							initialData={data}
 							challengeId={data?.id}
@@ -89,6 +95,11 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
 								<IconBadge icon={ListChecks} />
 								{/* <h2 className="text-xl">Course chapters</h2> */}
 							</div>
+							<QuestionOptionForm
+								initialData={data}
+								quizId={params?.quizId}
+								questionId={data?.id}
+							/>
 							{/* <ShortDescriptionForm
 								initialData={data}
 								challengeId={data?.id}
@@ -105,14 +116,14 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
 								initialData={data}
 								challengeId={data?.id}
 							/> */}
-							<ImageForm
+							{/* <ImageForm
 								initialData={data}
 								quizId={data?.id}
-							/>
-							<QuestionForm
+							/> */}
+							{/* <QuestionForm
 								initialData={data}
 								quizId={data?.id}
-							/>
+							/> */}
 							{/* <ChaptersForm initialData={course!} courseId={course?.id!} /> */}
 						</div>
 					</div>
@@ -122,4 +133,4 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
 	);
 };
 
-export default QuizPage;
+export default QuizQuestionPage;

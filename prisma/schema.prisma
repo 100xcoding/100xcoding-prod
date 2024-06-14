@@ -14,22 +14,23 @@ datasource db {
 }
 
 model User {
-  id            String        @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String        @unique
+  email         String         @unique
   emailVerified DateTime?
   image         String?
-  username      String        @unique
-  role          String        @default("user")
+  username      String         @unique
+  role          String         @default("user")
   accounts      Account[]
   sessions      Session[]
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   profile       Profile?
   socialLink    SocialLink?
   challenge     Challenge[]
   quiz          Quiz[]
   quizAttempt   QuizAttempt[]
+  quizQuestions QuizQuestion[]
 }
 
 model Account {
@@ -137,38 +138,41 @@ model ChallengeTech {
 }
 
 model Quiz {
-  id             String        @id @default(uuid())
+  id             String         @id @default(uuid())
   title          String
   description    String?
   creatorId      String
   duration       Int?
   quizCategoryId String?
   image          String?
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  isPublished    Boolean       @default(false)
-  questions      Question[]
-  user           User          @relation(fields: [creatorId], references: [id])
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  isPublished    Boolean        @default(false)
+  questions      QuizQuestion[]
+  user           User           @relation(fields: [creatorId], references: [id])
   quizAttempts   QuizAttempt[]
-  quizCategory   QuizCategory? @relation(fields: [quizCategoryId], references: [id])
+  quizCategory   QuizCategory?  @relation(fields: [quizCategoryId], references: [id])
   tags           QuizToTag[] // Many-to-many relationship with QuizTag through QuizToTag
 }
 
-model Question {
-  id      String          @id @default(uuid())
-  text    String
-  quiz    Quiz            @relation(fields: [quizId], references: [id])
-  quizId  String
-  options Option[]
-  score   Int // Score for this question
-  tags    QuestionToTag[] // Many-to-many relationship with QuizTag through QuestionToTag
+model QuizQuestion {
+  id        String          @id @default(uuid())
+  text      String
+  quiz      Quiz            @relation(fields: [quizId], references: [id])
+  quizId    String
+  creatorId String
+  user      User            @relation(fields: [creatorId], references: [id])
+  options   QuizOption[]
+  score     Int?
+  position  Int?
+  tags      QuestionToTag[] // Many-to-many relationship with QuizTag through QuestionToTag
 }
 
-model Option {
-  id         String   @id @default(uuid())
+model QuizOption {
+  id         String       @id @default(uuid())
   text       String
   isCorrect  Boolean
-  question   Question @relation(fields: [questionId], references: [id])
+  question   QuizQuestion @relation(fields: [questionId], references: [id])
   questionId String
 }
 
@@ -210,8 +214,8 @@ model QuestionToTag {
   questionId String
   tagId      String
 
-  question Question @relation(fields: [questionId], references: [id])
-  tag      QuizTag  @relation(fields: [tagId], references: [id])
+  question QuizQuestion @relation(fields: [questionId], references: [id])
+  tag      QuizTag      @relation(fields: [tagId], references: [id])
 
   @@id([questionId, tagId])
 }

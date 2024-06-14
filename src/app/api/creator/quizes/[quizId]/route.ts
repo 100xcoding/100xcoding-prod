@@ -1,7 +1,10 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
-export async function GET(req: Request) {
+export async function GET(
+	req: Request,
+	{ params }: { params: { quizId: string } }
+) {
 	try {
 		const session = await auth();
 		if (!session) {
@@ -14,15 +17,20 @@ export async function GET(req: Request) {
 			return new NextResponse("Unauthorized", { status: 401 });
 		}
 		const user = session?.user;
-
-		const quizes = await db.quiz.findMany({
+		const { quizId } = params;
+		const quiz = await db.quiz.findUnique({
 			where: {
+				id: quizId,
 				creatorId: user.id,
 			},
+			include: {
+				questions: true,
+			},
 		});
-		return NextResponse.json(quizes);
+		// console.log("QUIZ-API ", quiz);
+		return NextResponse.json(quiz);
 	} catch (error) {
-		console.log("quizes-", error);
+		console.log("Quiz by id-", error);
 		return new NextResponse("Internal Error", { status: 500 });
 	}
 }

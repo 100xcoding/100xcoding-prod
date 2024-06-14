@@ -75,3 +75,39 @@ export function useCreatorQuizes() {
 		refreshCreatorQuizesData,
 	};
 }
+export function useCreatorQuizById(quizId: string) {
+	const cacheKey = `/creator/quizes/${quizId}`;
+	const { data, error } = useSWR(cacheKey, fetcher);
+	const refreshCreatorQuizData = async () => {
+		await mutate(cacheKey); // Trigger revalidation for the specific cache key
+	};
+	return {
+		data,
+		error,
+		refreshCreatorQuizData,
+	};
+}
+export function useQuizCategories() {
+	const cacheKey = "/creator/quizes/categories";
+	const { data, error } = useSWR(cacheKey, fetcher);
+	const refreshQuizCategoriesData = async () => {
+		await mutate(cacheKey); // Trigger revalidation for the specific cache key
+	};
+	return {
+		data,
+		error,
+		refreshQuizCategoriesData,
+	};
+}
+export function useCreatorQuizQuestionById(questionId: string, quizId: string) {
+	const cacheKey = `/creator/quizes/${quizId}/${questionId}`;
+	const { data, error } = useSWR(cacheKey, fetcher);
+	const refreshCreatorQuizQuestionData = async () => {
+		await mutate(cacheKey); // Trigger revalidation for the specific cache key
+	};
+	return {
+		data,
+		error,
+		refreshCreatorQuizQuestionData,
+	};
+}
