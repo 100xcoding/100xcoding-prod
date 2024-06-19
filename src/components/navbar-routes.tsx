@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { logo as Logo } from "./logo";
+import { Logo } from "./logo";
 import { ProfileMenu } from "./profile-menu";
 import { SignIn } from "@/components/sign-in";
 import { auth } from "@/auth";

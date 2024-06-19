@@ -1,14 +1,14 @@
 "use client";
 import { Challenge } from "@prisma/client";
 import { useCallback, useEffect, useState } from "react";
-import Editor from "./editor";
 import { Button } from "@/components/ui/button";
 import parse from "html-react-parser";
 
 import { Pencil } from "lucide-react";
-import { updateChallengeResourceAction } from "../../../_actions";
+import { updateChallengeResourceAction } from "../../_actions";
 import { useCreatorChallengeById } from "@/services/queries";
 import { toast } from "sonner";
+import Editor from "@/components/react-quil-editor";
 interface ResourceFormProps {
 	initialData: Challenge;
 	challengeId: string;

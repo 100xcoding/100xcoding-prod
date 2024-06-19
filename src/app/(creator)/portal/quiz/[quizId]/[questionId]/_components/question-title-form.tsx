@@ -1,12 +1,11 @@
 "use client";
-
-import Editor from "@/app/(creator)/creator/challenges/[challengeId]/_components/editor";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import { useCallback, useState } from "react";
 import { updateQuizQuestionTitleAction } from "../../../_actions";
 import { useCreatorQuizQuestionById } from "@/services/queries";
 import { toast } from "sonner";
+import Editor from "@/components/react-quil-editor";
 interface QuestionTitleFormProps {
 	initialData: {
 		text: string;
@@ -42,7 +41,7 @@ export const QuestionTitleForm = ({
 				toast.error(response?.message);
 			}
 		},
-		[refreshCreatorQuizQuestionData, questionId]
+		[refreshCreatorQuizQuestionData, questionId, content, quizId]
 	);
 	return (
 		<div className="mt-6 border dark:bg-muted rounded-md p-4">

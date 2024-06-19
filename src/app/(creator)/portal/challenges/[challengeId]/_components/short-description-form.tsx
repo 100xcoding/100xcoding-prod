@@ -16,23 +16,23 @@ import { useCallback, useMemo, useState } from 'react';
 import { ChallengeShortDescriptionSchema } from '@/schema/challenge-schema';
 import { ProfileFormSchema } from '@/schema';
 import { Pencil } from 'lucide-react';
-import { updateChallengeDescriptionAction } from '../../../_actions';
+import { updateChallengeDescriptionAction } from '../../_actions';
 import { toast } from 'sonner';
 import { useCreatorChallengeById } from '@/services/queries';
 interface ShortDescriptionFormProps {
-	initialData: Challenge;
-	challengeId: string;
+  initialData: Challenge;
+  challengeId: string;
 }
-export const ShortDescriptionForm = ({initialData,challengeId}:ShortDescriptionFormProps) => {
+export const ShortDescriptionForm = ({ initialData, challengeId }: ShortDescriptionFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const {refreshCreatorChallengeData} = useCreatorChallengeById(challengeId);
+  const { refreshCreatorChallengeData } = useCreatorChallengeById(challengeId);
 
   const toggleEdit = useCallback(() => setIsEditing((current) => !current), []);
   const form = useForm<z.infer<typeof ChallengeShortDescriptionSchema>>({
     resolver: zodResolver(ChallengeShortDescriptionSchema),
-    defaultValues: useMemo(()=>({
+    defaultValues: useMemo(() => ({
       description: initialData?.description || ""
-    }),[initialData]) 
+    }), [initialData])
   });
 
   const { isSubmitting, isValid } = form.formState;
@@ -40,13 +40,13 @@ export const ShortDescriptionForm = ({initialData,challengeId}:ShortDescriptionF
   const onSubmit = useCallback(async (values: z.infer<typeof ChallengeShortDescriptionSchema>) => {
     const response = await updateChallengeDescriptionAction(values, challengeId);
     if (response?.success) {
-        setIsEditing(false);
-        refreshCreatorChallengeData();
-        toast.success(response.message);
+      setIsEditing(false);
+      refreshCreatorChallengeData();
+      toast.success(response.message);
     } else {
-        toast.error(response?.message);
+      toast.error(response?.message);
     }
-}, [challengeId, refreshCreatorChallengeData]);
+  }, [challengeId, refreshCreatorChallengeData]);
   return (
     <div className="mt-6  dark:bg-muted rounded-md p-4">
       <div className="font-medium flex items-center justify-between">

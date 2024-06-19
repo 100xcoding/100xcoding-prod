@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { logo as Logo } from "./logo";
+import { Logo } from "./logo";
 import { FaYoutube } from "react-icons/fa6";
 import { BsInstagram } from "react-icons/bs";
 import { FaXTwitter } from "react-icons/fa6";

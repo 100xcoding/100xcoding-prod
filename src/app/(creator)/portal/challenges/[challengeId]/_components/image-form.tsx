@@ -15,7 +15,7 @@ import { Challenge } from "@prisma/client";
 import { Pencil } from "lucide-react";
 import React, { useCallback, useRef, useState } from "react";
 import { toast } from "sonner";
-import { updateChallengeImageAction } from "../../../_actions";
+import { updateChallengeImageAction } from "../../_actions";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 interface ImageFormProps {

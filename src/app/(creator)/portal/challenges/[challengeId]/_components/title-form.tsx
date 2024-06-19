@@ -10,19 +10,19 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { updateTitleChallengeAction } from "../../../_actions";
+import { updateTitleChallengeAction } from "../../_actions";
 import { toast } from "sonner";
 import { useCreatorChallengeById } from "@/services/queries";
 
 interface TitleFormProps {
     initialData: {
         title: string;
-        slug:string;
+        slug: string;
     };
     challengeId: string;
 }
 export const TitleForm = ({ initialData, challengeId }: TitleFormProps) => {
-    const {refreshCreatorChallengeData} = useCreatorChallengeById(challengeId);
+    const { refreshCreatorChallengeData } = useCreatorChallengeById(challengeId);
     const [isEditing, setIsEditing] = useState(false);
     const [slug, setSlug] = useState(initialData?.slug);
     const toggleEdit = useCallback(() => setIsEditing(current => !current), []);
@@ -65,8 +65,8 @@ export const TitleForm = ({ initialData, challengeId }: TitleFormProps) => {
         } else {
             toast.error(response?.message);
         }
-        
-    }, [slug, challengeId,refreshCreatorChallengeData]);
+
+    }, [slug, challengeId, refreshCreatorChallengeData]);
     return (
         <div className="mt-6  dark:bg-muted rounded-md p-4">
             <div className="font-medium flex items-center justify-between tracking-wide">
@@ -110,7 +110,7 @@ export const TitleForm = ({ initialData, challengeId }: TitleFormProps) => {
                                         />
                                     </FormControl>
                                     <FormDescription>
-                                    Title at least contains 10 characters!
+                                        Title at least contains 10 characters!
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -124,21 +124,21 @@ export const TitleForm = ({ initialData, challengeId }: TitleFormProps) => {
 							)}
 						/> */}
                         <FormItem>
-									<FormLabel>Title Slug</FormLabel>
-									<FormControl>
-										<Input
-											readOnly
-											// disabled={isSubmitting}
-											placeholder="e.g. 'create-review-component'"
-											// {...field}
-                                            value={slug}
-										/>
-									</FormControl>
-									<FormDescription>
-										Slug is auto generate based on your title.
-									</FormDescription>
-									<FormMessage />
-								</FormItem>
+                            <FormLabel>Title Slug</FormLabel>
+                            <FormControl>
+                                <Input
+                                    readOnly
+                                    // disabled={isSubmitting}
+                                    placeholder="e.g. 'create-review-component'"
+                                    // {...field}
+                                    value={slug}
+                                />
+                            </FormControl>
+                            <FormDescription>
+                                Slug is auto generate based on your title.
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
                         <div className="flex items-center gap-x-2">
                             <Button
                                 disabled={!isValid || isSubmitting}

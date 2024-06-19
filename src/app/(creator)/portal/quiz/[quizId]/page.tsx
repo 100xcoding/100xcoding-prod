@@ -12,7 +12,7 @@ import QuestionForm from "./_components/question-form";
 
 const QuizPage = ({ params }: { params: { quizId: string } }) => {
 	const { data } = useCreatorQuizById(params?.quizId);
-	console.log(data);
+	// console.log(data);
 	const { data: quizCategories } = useQuizCategories();
 	return (
 		<>

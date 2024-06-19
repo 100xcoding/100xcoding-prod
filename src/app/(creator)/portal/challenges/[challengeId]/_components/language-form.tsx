@@ -4,7 +4,7 @@ import { Combobox } from '@/components/ui/combo-box';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage, Form } from '@/components/ui/form';
 import { cn } from '@/lib/utils';
 import { ChallengeTechSchema } from '@/schema/challenge-schema';
-import {  useCreatorChallengeById } from '@/services/queries';
+import { useCreatorChallengeById } from '@/services/queries';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Challenge } from '@prisma/client';
 import { Pencil } from 'lucide-react';
@@ -12,7 +12,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { updateChallengeTechAction } from '../../../_actions';
+import { updateChallengeTechAction } from '../../_actions';
 interface LanguageFormProps {
     initialData: Challenge;
     challengeId: string;
@@ -20,7 +20,7 @@ interface LanguageFormProps {
 }
 
 export const LanguageForm = ({ initialData, challengeId, options }: LanguageFormProps) => {
-    const {refreshCreatorChallengeData} = useCreatorChallengeById(challengeId);
+    const { refreshCreatorChallengeData } = useCreatorChallengeById(challengeId);
     const [isEditing, setIsEditing] = useState(false);
     const toggleEdit = useCallback(() => setIsEditing(current => !current), []);
     const form = useForm<z.infer<typeof ChallengeTechSchema>>({
@@ -29,7 +29,7 @@ export const LanguageForm = ({ initialData, challengeId, options }: LanguageForm
             challengeTechId: initialData?.challengeTechId || "",
         }), [initialData])
     });
-    const {control,handleSubmit} = form;
+    const { control, handleSubmit } = form;
     const { isSubmitting, isValid } = form.formState;
     const onSubmit = useCallback(async (values: z.infer<typeof ChallengeTechSchema>) => {
         const response = await updateChallengeTechAction(values, challengeId);
@@ -67,13 +67,13 @@ export const LanguageForm = ({ initialData, challengeId, options }: LanguageForm
             </div>
             {!isEditing && <>
                 <p
-					className={cn(
-						"text-sm mt-2 capitalize",
-						!initialData?.challengeTechId && "text-slate-500 italic"
-					)}
-				>
-					{selectedOption?.label || "No Tech Stack"}
-				</p>
+                    className={cn(
+                        "text-sm mt-2 capitalize",
+                        !initialData?.challengeTechId && "text-slate-500 italic"
+                    )}
+                >
+                    {selectedOption?.label || "No Tech Stack"}
+                </p>
             </>}
             {isEditing && (
                 <Form {...form}>

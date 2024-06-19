@@ -19,10 +19,10 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { QuestionsList } from "./questions-list";
-import Editor from "@/app/(creator)/creator/challenges/[challengeId]/_components/editor";
 import { createQuizQuestionAction } from "../../_actions";
 import { useCreatorQuizById } from "@/services/queries";
 import axios from "axios";
+import Editor from "@/components/react-quil-editor";
 
 interface QuestionFormProps {
 	initialData: Quiz & { questions: QuizQuestion[] };
@@ -62,7 +62,7 @@ const QuestionForm = ({ initialData, quizId }: QuestionFormProps) => {
 				toast.error(response?.message);
 			}
 		},
-		[quizId, refreshCreatorQuizData]
+		[quizId, refreshCreatorQuizData, content]
 	);
 
 	const onReorder = async (updateData: { id: string; position: number }[]) => {

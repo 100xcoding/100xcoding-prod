@@ -1,6 +1,4 @@
 "use client";
-
-import Editor from "@/app/(creator)/creator/challenges/[challengeId]/_components/editor";
 import { Button } from "@/components/ui/button";
 import { useCreatorQuizQuestionById } from "@/services/queries";
 import { Quiz, QuizOption } from "@prisma/client";
@@ -11,9 +9,10 @@ import { createQuizQuestionOptionAction } from "../../../_actions";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { QuestionOptionsList } from "./question-options-list";
+import Editor from "@/components/react-quil-editor";
 
 interface QuestionOptionFormProps {
-	initialData: Quiz;
+	initialData: Quiz & QuizOption;
 	quizId: string;
 	questionId: string;
 }
@@ -50,7 +49,7 @@ export const QuestionOptionForm = ({
 				toast.error(response?.message);
 			}
 		},
-		[questionId, refreshCreatorQuizQuestionData]
+		[questionId, refreshCreatorQuizQuestionData, content, isCorrect]
 	);
 	return (
 		<div className="relative mt-6 border dark:bg-muted rounded-md p-4">

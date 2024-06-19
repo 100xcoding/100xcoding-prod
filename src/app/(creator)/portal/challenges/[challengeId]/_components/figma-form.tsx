@@ -19,7 +19,7 @@ import { useCallback, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { updateChallengeFigmaAction } from "../../../_actions";
+import { updateChallengeFigmaAction } from "../../_actions";
 import Link from "next/link";
 
 interface FigmaFormProps {

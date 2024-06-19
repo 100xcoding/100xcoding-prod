@@ -1,6 +1,6 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import { logo as Logo } from "./logo";
+import { Logo } from "./logo";
 
 import Link from "next/link";
 import { ProfileMenu } from "./profile-menu";
@@ -30,7 +30,7 @@ export const MobileSidebar = async () => {
                       key={route.id}
                       className="flex gap-4 items-center hover:border-b hover:border-white hover:scale-105 transition hover:text-white/85 "
                     >
-                      <span className="">{<route.symbol size={23}/>}</span>
+                      <span className="">{<route.symbol size={23} />}</span>
                       <li className="">{route.text}</li>
                     </Link>
                   );
