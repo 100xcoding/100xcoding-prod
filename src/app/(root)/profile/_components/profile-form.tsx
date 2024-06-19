@@ -47,7 +47,7 @@ const ProfileForm = () => {
 											disabled
 											placeholder="title"
 											className="w-full  text-lg tracking-wide font-poppins  dark:bg-input/10 dark:text-secondary dark:border-none  dark:placeholder:text-secondary/70 dark:ring-offset-transparent dark:focus-visible:ring-offset-[1px] dark:focus-visible:ring-1"
-											{...field}
+												{...field}
 										/>
 									</FormControl>
 									<FormMessage />
