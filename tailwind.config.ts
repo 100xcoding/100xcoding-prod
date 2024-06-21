@@ -1,6 +1,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 import { fontFamily } from "tailwindcss/defaultTheme";
 const colors = require("tailwindcss/colors");
+const svgToDataUri = require("mini-svg-data-uri");
 const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
@@ -17,6 +18,10 @@ function addVariablesForColors({ addBase, theme }: any) {
     ":root": newVars,
   });
 }
+
+function addSvgPatterns({ matchUtilities, theme }: any) {
+}
+
 const config = {
   darkMode: ["class"],
   content: [
@@ -92,10 +97,17 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        scroll:
+          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
     },
   },
@@ -103,6 +115,7 @@ const config = {
     require("tailwindcss-animate"),
     require("@tailwindcss/typography"),
     addVariablesForColors,
+    addSvgPatterns,
   ],
 } satisfies Config;
 

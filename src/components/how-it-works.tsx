@@ -9,7 +9,7 @@ export const HowItWorks = () => {
       <div className="flex flex-wrap gap-14 justify-center items-center">
         {workData.map((item) => (
           <div
-            className="w-[300px] md:w-[325px] lg:w-[340px] xl:w-[365px] h-auto md:h-[400px] px-5 py-10 rounded-2xl border-[1px] border-white flex flex-col  items-center shadow-md shadow-slate-200 justify-center"
+            className="w-[300px] md:w-[325px] lg:w-[340px] xl:w-[365px] h-auto md:h-[400px] px-5 py-10 rounded-2xl border-[1px] border-cyan-400 flex flex-col  items-center shadow-lg shadow-cyan-400 justify-center"
             key={item.id}
           >
             <span className="">{<item.icon size={60} />}</span>
