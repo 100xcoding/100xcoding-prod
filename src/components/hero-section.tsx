@@ -5,7 +5,7 @@ export const HeroSection = () => {
   return (
     <div className=''>
         <div className="w-full  text-center my-20">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-raleway font-bold tracking-wider w-full sm:w-[85%] xl:w-[70%] mx-auto space-y-4">Practice with projects who helps to improve coding skills!</h1>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-raleway font-bold tracking-wider w-full sm:w-[85%] xl:w-[70%] mx-auto ">Practice with projects who helps to improve coding skills!</h1>
             <p className="my-6 text-xl font-inter font-medium w-full sm:w-[70%] lg:w-[60%] mx-auto text-slate-300">Coding projects is the best way to learn and practice your skills and enhance your portfolio.</p>
             <div className="my-10">
                 <Link href={'/'}>
