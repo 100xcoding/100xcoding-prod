@@ -1,11 +1,10 @@
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { testimonialsData } from "@/constants";
 
-
 export const Testimonials = () => {
   return (
-    <div className="my-20  w-full dark:bg-transparent dark:bg-grid-white/[0.2] relative flex flex-col items-center justify-center overflow-hidden">
-      <h1 className="text-3xl md:text-4xl font-poppins font-extrabold tracking-wide text-center mb-14 z-10">
+    <div className="my-20  w-full  flex flex-col items-center justify-center overflow-hidden">
+      <h1 className="text-3xl md:text-5xl font-mono font-extrabold text-center mb-14 z-10">
         What Our Users Are Saying
       </h1>
       <div className="flex justify-center w-full overflow-hidden px-4 sm:px-6 lg:px-8">
