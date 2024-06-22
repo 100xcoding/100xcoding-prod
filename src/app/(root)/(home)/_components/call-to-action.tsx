@@ -1,4 +1,5 @@
-import { SignIn } from "./sign-in";
+import { SignIn } from "@/components/sign-in";
+
 
 export const CallToAction = () => {
   return (

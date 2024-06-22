@@ -1,5 +1,6 @@
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import { testimonialsData } from "@/constants";
-import { InfiniteMovingCards } from "./ui/infinite-moving-cards";
+
 
 export const Testimonials = () => {
   return (
