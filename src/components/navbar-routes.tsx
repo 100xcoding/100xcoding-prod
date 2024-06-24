@@ -9,6 +9,7 @@ export const NavbarRoutes = async () => {
   const user = await auth();
   return (
     <div className="md:flex justify-between items-center hidden py-1.5">
+      {/* TODO: REMOVE THE BACKGROUND  */}
       <div className="">
         <Link href="/">
           <Logo />

@@ -1,9 +1,9 @@
-import { CallToAction } from "@/components/call-to-action";
-import { FAQ } from "@/components/faq";
-import { HeroSection } from "@/components/hero-section";
-import { HowItWorks } from "@/components/how-it-works";
-import { Testimonials } from "@/components/testimonials";
-import React from "react";
+import { CallToAction } from "./_components/call-to-action";
+import { FAQ } from "./_components/faq";
+import { HeroSection } from "./_components/hero-section";
+import { HowItWorks } from "./_components/how-it-works";
+import { Testimonials } from "./_components/testimonials";
+
 
 const HomePage = () => {
   return (

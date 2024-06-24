@@ -4,7 +4,7 @@ import { NavbarRoutes } from "./navbar-routes";
 
 export const Navbar = () => {
 	return (
-		<nav className="py-2.5 bg-primary">
+		<nav className="py-2.5 bg-transparent">
 			<div className="container mx-auto">
 				<MobileSidebar />
 				<NavbarRoutes />
