@@ -4,6 +4,8 @@ import { ProfileImageForm } from "./_components/profile-image-form";
 import { SocialForm } from "./_components/social-form";
 
 const ProfilePage = async () => {
+	const session = await auth();
+	console.log(session);
 	return (
 		<div className="my-10">
 			<h1 className="text-center text-4xl font-poppins font-bold">Your Profile</h1>

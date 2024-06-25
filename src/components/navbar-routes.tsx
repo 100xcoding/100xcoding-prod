@@ -4,11 +4,12 @@ import { ProfileMenu } from "./profile-menu";
 import { SignIn } from "@/components/sign-in";
 import { auth } from "@/auth";
 import { navbarRoutes } from "@/constants";
+import { Button } from "./ui/button";
 
 export const NavbarRoutes = async () => {
   const user = await auth();
   return (
-    <div className="md:flex justify-between items-center hidden py-1.5">
+    <div className="md:flex justify-between items-center hidden py-1.5 ">
       {/* TODO: REMOVE THE BACKGROUND  */}
       <div className="">
         <Link href="/">
@@ -29,7 +30,9 @@ export const NavbarRoutes = async () => {
             );
           })}
         </ul>
-        {user ? <ProfileMenu /> : <SignIn />}
+        {user ? <ProfileMenu /> : <Button asChild className="text-base font-poppins tracking-wide px-5">
+          <Link href="/login">Login</Link>
+        </Button>}
       </div>
     </div>
   );

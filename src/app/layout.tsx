@@ -54,7 +54,7 @@ export default function RootLayout({
 			lang="en"
 			className="dark"
 		>
-			<body className={`${roboto.className}`}>
+			<body className={`${roboto.variable} ${inter.variable} ${poppins.variable} ${openSans.variable} ${lato.variable} ${raleway.variable}`}>
 				<Toaster
 					position="top-right"
 					closeButton
@@ -62,7 +62,7 @@ export default function RootLayout({
 				/>
 				<NextAuthProvider>
 					<SWRProvider>
-					{children}
+						{children}
 					</SWRProvider>
 				</NextAuthProvider>
 			</body>
