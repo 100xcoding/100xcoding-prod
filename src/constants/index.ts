@@ -64,7 +64,7 @@ export const workData = [
   },
   {
     id: 2,
-    title: "Find the challenge ",
+    title: "Find the Perfect Challenge ",
     description:
       "Choose the right challenge for you to start and convert the design into website.",
     icon: FaCode,
