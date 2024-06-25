@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const HeroSection = () => {
   return (
-    <div className="h-[40rem] w-full dark:bg-transparent dark:bg-grid-violet-400/[0.1] relative">
+    <div className="h-[42rem] w-full dark:bg-transparent dark:bg-grid-violet-400/[0.1] relative">
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       <div className="h-full container mx-auto flex flex-col-reverse md:flex-row justify-center items-center gap-10 md:gap-5 py-16 ">
         <div className="w-full md:w-[50%]  text-center z-30 text-base/10">
@@ -16,7 +16,7 @@ export const HeroSection = () => {
             Coding projects is the best way to learn and practice your skills
             and enhance your portfolio.
           </p>
-          <div className="my-10">
+          <div className="my-10 hover:scale-105 transition-all duration-300">
             <Link href={"/"}>
               <Button
                 borderRadius=".6rem"
