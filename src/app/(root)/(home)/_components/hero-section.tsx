@@ -20,7 +20,7 @@ export const HeroSection = () => {
           <Link href={"/"}>
             <Button
               borderRadius=".6rem"
-              className="inline-flex items-center justify-center font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-br from-violet-700 to-pink-700 via-purple-700 w-fit text-base uppercase hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 hover:shadow-lg active:from-violet-800 active:via-purple-800 active:to-pink-800 active:scale-95 transform transition-transform h-10 px-8 py-6 rounded-full"
+              className="inline-flex items-center justify-center font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-br from-indigo-700 to-pink-500 via-purple-600 w-fit text-base uppercase hover:from-violet-600 hover:via-purple-600 hover:to-pink-600 hover:shadow-lg active:from-violet-800 active:via-purple-800 active:to-pink-800 active:scale-95 transform transition-transform h-10 px-8 py-6 rounded-full"
             >
               Start Building now.
             </Button>

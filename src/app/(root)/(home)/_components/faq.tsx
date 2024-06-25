@@ -7,7 +7,7 @@ import {
 
 export function FAQ() {
   return (
-    <div className="my-20 bg-gray-950 opacity-85">
+    <div className="my-20">
       <h1 className="mb-14 text-center text-3xl md:text-5xl font-mono text-slate-200 font-extrabold">
         Frequently Asked Questions
       </h1>
