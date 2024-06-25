@@ -4,3 +4,9 @@ tsconfig.json
 package.json
 pnpm-lock.yaml
 tailwind.config.ts
+.next
+.cache
+public
+node_modules
+next-env.d.ts
+next.config.ts

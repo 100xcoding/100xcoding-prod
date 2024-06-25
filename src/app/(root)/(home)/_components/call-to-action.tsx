@@ -11,8 +11,8 @@ export const CallToAction = () => {
         </h1>
         <p className="my-12 text-lg font-poppins font-medium tracking-wide text-slate-400 w-full sm:w-[90%] md:w-[70%] lg:w-[50%] mx-auto leading-10">
           Join our community of passionate learners and start your journey
-          towards success. You'll gain the knowledge and confidence to reach
-          your goals.
+          towards success. You&apos;ll gain the knowledge and confidence to
+          reach your goals.
         </p>
         <div className="flex justify-center items-center mt-16">
           <SignIn className="" />

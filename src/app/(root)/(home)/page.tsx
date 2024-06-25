@@ -4,7 +4,6 @@ import { HeroSection } from "./_components/hero-section";
 import { HowItWorks } from "./_components/how-it-works";
 import { Testimonials } from "./_components/testimonials";
 
-
 const HomePage = () => {
   return (
     <div>

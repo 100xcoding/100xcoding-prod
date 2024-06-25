@@ -1,4 +1,4 @@
-import { Challenge } from '@prisma/client';
+import { Challenge } from "@prisma/client";
 import {
   Form,
   FormControl,
@@ -9,44 +9,56 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useCallback, useMemo, useState } from 'react';
-import { ChallengeShortDescriptionSchema } from '@/schema/challenge-schema';
-import { ProfileFormSchema } from '@/schema';
-import { Pencil } from 'lucide-react';
-import { updateChallengeDescriptionAction } from '../../_actions';
-import { toast } from 'sonner';
-import { useCreatorChallengeById } from '@/services/queries';
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useCallback, useMemo, useState } from "react";
+import { ChallengeShortDescriptionSchema } from "@/schema/challenge-schema";
+import { ProfileFormSchema } from "@/schema";
+import { Pencil } from "lucide-react";
+import { updateChallengeDescriptionAction } from "../../_actions";
+import { toast } from "sonner";
+import { useCreatorChallengeById } from "@/services/queries";
 interface ShortDescriptionFormProps {
   initialData: Challenge;
   challengeId: string;
 }
-export const ShortDescriptionForm = ({ initialData, challengeId }: ShortDescriptionFormProps) => {
+export const ShortDescriptionForm = ({
+  initialData,
+  challengeId,
+}: ShortDescriptionFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const { refreshCreatorChallengeData } = useCreatorChallengeById(challengeId);
 
   const toggleEdit = useCallback(() => setIsEditing((current) => !current), []);
   const form = useForm<z.infer<typeof ChallengeShortDescriptionSchema>>({
     resolver: zodResolver(ChallengeShortDescriptionSchema),
-    defaultValues: useMemo(() => ({
-      description: initialData?.description || ""
-    }), [initialData])
+    defaultValues: useMemo(
+      () => ({
+        description: initialData?.description || "",
+      }),
+      [initialData],
+    ),
   });
 
   const { isSubmitting, isValid } = form.formState;
 
-  const onSubmit = useCallback(async (values: z.infer<typeof ChallengeShortDescriptionSchema>) => {
-    const response = await updateChallengeDescriptionAction(values, challengeId);
-    if (response?.success) {
-      setIsEditing(false);
-      refreshCreatorChallengeData();
-      toast.success(response.message);
-    } else {
-      toast.error(response?.message);
-    }
-  }, [challengeId, refreshCreatorChallengeData]);
+  const onSubmit = useCallback(
+    async (values: z.infer<typeof ChallengeShortDescriptionSchema>) => {
+      const response = await updateChallengeDescriptionAction(
+        values,
+        challengeId,
+      );
+      if (response?.success) {
+        setIsEditing(false);
+        refreshCreatorChallengeData();
+        toast.success(response.message);
+      } else {
+        toast.error(response?.message);
+      }
+    },
+    [challengeId, refreshCreatorChallengeData],
+  );
   return (
     <div className="mt-6  dark:bg-muted rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
@@ -63,10 +75,12 @@ export const ShortDescriptionForm = ({ initialData, challengeId }: ShortDescript
         </Button>
       </div>
       {!isEditing && (
-        <p className={cn(
-          "text-sm mt-2",
-          !initialData?.description && "text-slate-500 italic"
-        )}>
+        <p
+          className={cn(
+            "text-sm mt-2",
+            !initialData?.description && "text-slate-500 italic",
+          )}
+        >
           {initialData?.description || "No description"}
         </p>
       )}
@@ -105,5 +119,5 @@ export const ShortDescriptionForm = ({ initialData, challengeId }: ShortDescript
         </Form>
       )}
     </div>
-  )
-}
+  );
+};

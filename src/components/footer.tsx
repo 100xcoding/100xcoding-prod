@@ -23,16 +23,16 @@ export const Footer = () => {
         </div>
         <div className="flex lg:justify-center items-center gap-5">
           <Link href={"/"}>
-            <FaXTwitter size={26}/>
+            <FaXTwitter size={26} />
           </Link>
           <Link href={"/"}>
-            <FaYoutube size={26}/>
+            <FaYoutube size={26} />
           </Link>
           <Link href={"/"}>
-            <BsInstagram size={26}/>
+            <BsInstagram size={26} />
           </Link>
           <Link href={"/"}>
-            <FaDiscord size={26}/>
+            <FaDiscord size={26} />
           </Link>
         </div>
       </div>

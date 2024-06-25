@@ -14,7 +14,11 @@ export function SignIn({ className = "" }) {
           <FaGithub className="text-2xl" />
         </span>
       </Button> */}
-      <Button type="submit" variant={'secondary'} className="w-full tracking-wide font-poppins flex items-center gap-4 text-base py-6">
+      <Button
+        type="submit"
+        variant={"secondary"}
+        className="w-full tracking-wide font-poppins flex items-center gap-4 text-base py-6"
+      >
         <FaGithub className="text-2xl" />
         Log in using GitHub
       </Button>

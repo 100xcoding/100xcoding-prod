@@ -30,9 +30,13 @@ export const NavbarRoutes = async () => {
             );
           })}
         </ul>
-        {user ? <ProfileMenu /> : <Button asChild className="text-base font-poppins tracking-wide px-5">
-          <Link href="/login">Login</Link>
-        </Button>}
+        {user ? (
+          <ProfileMenu />
+        ) : (
+          <Button asChild className="text-base font-poppins tracking-wide px-5">
+            <Link href="/login">Login</Link>
+          </Button>
+        )}
       </div>
     </div>
   );

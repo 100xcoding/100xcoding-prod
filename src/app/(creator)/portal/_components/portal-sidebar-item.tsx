@@ -6,52 +6,53 @@ import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 interface PortalSidebarItemProps {
-    icon: LucideIcon;
-    label: string;
-    href: string;
-};
+  icon: LucideIcon;
+  label: string;
+  href: string;
+}
 
 export const PortalSidebarItem = ({
-    icon: Icon,
-    label,
-    href,
+  icon: Icon,
+  label,
+  href,
 }: PortalSidebarItemProps) => {
-    const pathname = usePathname();
-    const router = useRouter();
+  const pathname = usePathname();
+  const router = useRouter();
 
-    const isActive =
-        (pathname === "/" && href === "/") ||
-        pathname === href ||
-        pathname?.startsWith(`${href}/`);
+  const isActive =
+    (pathname === "/" && href === "/") ||
+    pathname === href ||
+    pathname?.startsWith(`${href}/`);
 
-    const onClick = () => {
-        router.push(href);
-    }
-    return (
-        <button
-            onClick={onClick}
-            type="button"
-            className={cn(
-                "flex items-center gap-x-2 text-secondary-foreground tracking-wide font-[500] pl-6 transition-all hover:text-secondary-foreground/80 hover:bg-slate-300/20",
-                isActive && "text-primary-foreground bg-primary/20 hover:bg-primary/15 hover:text-primary-foreground"
-            )}
-        >
-            <div className="flex items-center gap-x-2 py-4">
-                <Icon
-                    size={22}
-                    className={cn(
-                        "text-secondary-foreground",
-                        isActive && "text-primary-foreground"
-                    )}
-                />
-                {label}
-            </div>
-            <div
-                className={cn(
-                    "ml-auto opacity-0 border-2 border-primary h-full transition-all",
-                    isActive && "opacity-100"
-                )}
-            />
-        </button>
-    )
-}
+  const onClick = () => {
+    router.push(href);
+  };
+  return (
+    <button
+      onClick={onClick}
+      type="button"
+      className={cn(
+        "flex items-center gap-x-2 text-secondary-foreground tracking-wide font-[500] pl-6 transition-all hover:text-secondary-foreground/80 hover:bg-slate-300/20",
+        isActive &&
+          "text-primary-foreground bg-primary/20 hover:bg-primary/15 hover:text-primary-foreground",
+      )}
+    >
+      <div className="flex items-center gap-x-2 py-4">
+        <Icon
+          size={22}
+          className={cn(
+            "text-secondary-foreground",
+            isActive && "text-primary-foreground",
+          )}
+        />
+        {label}
+      </div>
+      <div
+        className={cn(
+          "ml-auto opacity-0 border-2 border-primary h-full transition-all",
+          isActive && "opacity-100",
+        )}
+      />
+    </button>
+  );
+};

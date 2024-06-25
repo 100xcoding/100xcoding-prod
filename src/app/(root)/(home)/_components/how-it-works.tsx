@@ -13,10 +13,10 @@ export const HowItWorks = () => {
               item.id == 1
                 ? "bg-gradient-to-r from-violet-500 to-indigo-500"
                 : item.id == 2
-                ? "bg-gradient-to-r from-yellow-600 to-orange-500"
-                : item.id == 3
-                ? "bg-gradient-to-r from-teal-600 to-cyan-500"
-                : ""
+                  ? "bg-gradient-to-r from-yellow-600 to-orange-500"
+                  : item.id == 3
+                    ? "bg-gradient-to-r from-teal-600 to-cyan-500"
+                    : ""
             }`}
             key={item.id}
           >
