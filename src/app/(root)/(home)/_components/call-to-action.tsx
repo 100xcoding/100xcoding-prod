@@ -2,10 +2,10 @@ import { SignIn } from "@/components/sign-in";
 
 export const CallToAction = () => {
   return (
-    <div className="my-32  relative h-[32rem] opacity-90 rounded-3xl dark:bg-transparent dark:bg-grid-violet-400/[0.1] flex flex-col justify-center">
+    <div className="my-32  relative h-[42rem] md:h-[32rem] opacity-90 rounded-3xl dark:bg-transparent dark:bg-grid-violet-400/[0.1] flex flex-col justify-center py-10 md:py-0">
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-[#030712] bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_0.1%,black)]"></div>
-      <div className="text-center z-30 container mx-auto">
-        <h1 className="text-3xl md:text-4xl font-inter font-extrabold  sm:w-[90%] md:w-[80%] xl:w-[70%] mx-auto leading-7 text-white">
+      <div className="text-center z-30 container mx-auto ">
+        <h1 className="text-3xl md:text-4xl font-inter font-extrabold  sm:w-[90%] md:w-[80%] xl:w-[70%] mx-auto leading-[10rem] text-white ">
           Join 1000+ people building portfolio-worthy projects and unleash your
           potential.
         </h1>
