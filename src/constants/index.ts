@@ -83,36 +83,83 @@ export const testimonialsData = [
     quote:
       "This platform has been a game-changer for my frontend development skills. The variety of projects is amazing, and each one is designed to tackle different aspects of frontend development. It's helped me build a strong portfolio and gain confidence in my abilities.",
     name: "Alex Johnson",
-    title: "Web Developer",
+
+    // socialLink: FaLinkedin,
   },
   {
     quote:
       "I've tried many resources to improve my frontend skills, but this platform stands out. The projects are not only practical but also incredibly relevant to what employers are looking for. I've learned so much and feel well-prepared for real-world challenges.",
     name: "Samantha Lee",
-    title: "Frontend Developer",
+
+    // socialLink: FaLinkedin,
   },
   {
     quote:
       "The frontend projects available on this platform are simply fantastic. They range from beginner to advanced levels, allowing me to steadily improve my skills. The support and community are also wonderful, making my learning experience enjoyable and effective.",
     name: "Michael Chen",
-    title: "JavaScript Developer",
+
+    // socialLink: FaLinkedin,
   },
   {
     quote:
       "Using this platform has been an invaluable part of my development journey. The projects are thoughtfully designed to enhance your learning curve. I appreciate how each project addresses different frontend techniques and technologies, making me a more well-rounded developer.",
     name: "Emily Taylor",
-    title: "ReactJS Developer",
+
+    // socialLink: FaLinkedin,
   },
   {
     quote:
       "I love this platform! The frontend projects are exactly what I needed to practice and perfect my skills. The hands-on experience I've gained here is unparalleled, and it's reflected in the improvement of my coding abilities and my confidence in tackling complex problems.",
     name: "Chris Morales",
-    title: "Frontend Developer",
+    // socialLink: FaLinkedin,
   },
   {
     quote:
       "This platform offers an exceptional way to practice frontend development. The diversity and quality of the projects have been instrumental in my learning process. The practical experience and knowledge I've acquired have made a significant difference in my job readiness.",
     name: "Jessica Wong",
-    title: "Web Developer",
+    // socialLink: FaLinkedin,
+  },
+];
+
+export const challengeData = [
+  {
+    id: 1,
+    title: "Recipe Page",
+    description:
+      "Create a recipe page using HTML, CSS, and JavaScript. The page should include a list of recipes, a search bar, and a filter option.",
+    level: "Newbie",
+    design: "/image1.jpg",
+  },
+  {
+    id: 2,
+    title: "Weather App",
+    description:
+      "Build a weather app that displays the current weather conditions in a specific location. The app should show the temperature, humidity, and wind speed.",
+    level: "Junior",
+    design: "/image1.jpg",
+  },
+  {
+    id: 3,
+    title: "E-commerce Website",
+    description:
+      "Develop an e-commerce website that allows users to browse products, add items to their cart, and complete the purchase process. The site should be responsive and user-friendly.",
+    level: "Intermediate",
+    design: "/image1.jpg",
+  },
+  {
+    id: 4,
+    title: "Social Media Dashboard",
+    description:
+      "Design a social media dashboard that displays user activity, engagement metrics, and content performance. The dashboard should include graphs, charts, and data tables.",
+    level: "Advanced",
+    design: "/image1.jpg",
+  },
+  {
+    id: 5,
+    title: "Portfolio Website",
+    description:
+      "Create a personal portfolio website to showcase your projects, skills, and experience. The site should be visually appealing, easy to navigate, and responsive on all devices.",
+    level: "Expert",
+    design: "/image1.jpg",
   },
 ];

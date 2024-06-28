@@ -1,7 +1,9 @@
 "use client";
 
 import { cn } from "@/utils/cn";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { FaLinkedin } from "react-icons/fa";
 
 export const InfiniteMovingCards = ({
   items,
@@ -13,7 +15,7 @@ export const InfiniteMovingCards = ({
   items: {
     quote: string;
     name: string;
-    title: string;
+    socialLink: any;
   }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
@@ -88,28 +90,26 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item, idx) => (
           <div
-            className="w-[350px] max-w-full  flex-shrink-0  md:w-[450px] relative rounded-2xl bg-gradient-to-r from-pink-500 via-red-500 to-amber-500 p-[2px] overflow-hidden"
+            className="w-[350px] max-w-full  flex-shrink-0  md:w-[500px] relative rounded-2xl bg-gradient-to-r from-pink-500 via-red-500 to-amber-500 p-[2px] overflow-hidden"
             key={item.name}
           >
-            <li className="bg-slate-900 px-8 py-6 rounded-2xl">
+            <li className="bg-slate-900 px-8 py-6 rounded-2xl h-full">
               <blockquote className="rounded-2xl p-[1px]">
                 <div
                   aria-hidden="true"
                   className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
                 ></div>
+                <div className="relative z-20 mb-6 flex flex-row items-center justify-between">
+                  <span className=" text-sm leading-[1.6] text-gray-200  font-poppins font-medium">
+                    {item.name}
+                  </span>
+                  <Link href={"/"} className="">
+                    <FaLinkedin size={23} />
+                  </Link>
+                </div>
                 <span className=" relative z-20 text-sm leading-[1.6] text-gray-100 font-normal">
                   {item.quote}
                 </span>
-                <div className="relative z-20 mt-6 flex flex-row items-center">
-                  <span className="flex flex-col gap-1">
-                    <span className=" text-sm leading-[1.6] text-gray-400 font-normal">
-                      {item.name}
-                    </span>
-                    <span className=" text-sm leading-[1.6] text-gray-400 font-normal">
-                      {item.title}
-                    </span>
-                  </span>
-                </div>
               </blockquote>
             </li>
           </div>
