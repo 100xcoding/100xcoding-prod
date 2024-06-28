@@ -100,14 +100,14 @@ export const InfiniteMovingCards = ({
                   className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
                 ></div>
                 <div className="relative z-20 mb-6 flex flex-row items-center justify-between">
-                  <span className=" text-sm leading-[1.6] text-gray-200  font-poppins font-medium">
+                  <span className=" text-base leading-[1.6] text-gray-300  font-poppins font-medium">
                     {item.name}
                   </span>
                   <Link href={"/"} className="">
                     <FaLinkedin size={23} />
                   </Link>
                 </div>
-                <span className=" relative z-20 text-sm leading-[1.6] text-gray-100 font-normal">
+                <span className=" relative z-20 text-md leading-[1.6] text-gray-200 font-lato">
                   {item.quote}
                 </span>
               </blockquote>

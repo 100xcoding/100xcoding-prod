@@ -60,7 +60,7 @@ export const getSlug = (text: string) => {
 };
 
 export const formatterDescription = (description: string) => {
-  return description.length > 60
-    ? `${description.slice(0, 60)}...`
+  return description.length > 130
+    ? `${description.slice(0, 130)}...`
     : description;
 };
