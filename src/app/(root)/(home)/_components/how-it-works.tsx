@@ -9,7 +9,7 @@ export const HowItWorks = () => {
       <div className="flex flex-wrap gap-14 md:gap-8 justify-center items-center">
         {workData.map((item) => (
           <div
-            className={`w-[300px] xl:w-[340px]   h-auto md:h-[400px] px-5 py-10 rounded-2xl flex flex-col  items-center justify-center  ${
+            className={`w-[300px] xl:w-[360px]   h-auto md:h-[400px] px-5 py-10 rounded-2xl flex flex-col  items-center justify-center  ${
               item.id == 1
                 ? "bg-gradient-to-r from-violet-500 to-indigo-500"
                 : item.id == 2

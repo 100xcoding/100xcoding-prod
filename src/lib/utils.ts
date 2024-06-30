@@ -58,3 +58,9 @@ export const getSlug = (text: string) => {
     .replace(/^-+/, "") // Trim - from start of text
     .replace(/-+$/, ""); // Trim - from end of text
 };
+
+export const formatterDescription = (description: string) => {
+  return description.length > 130
+    ? `${description.slice(0, 130)}...`
+    : description;
+};
