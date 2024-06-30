@@ -10,7 +10,7 @@ const items = [
 const QuizPage = () => {
   return (
     <div className="py-10">
-      <div className="px-4 my-4">
+      <div className=" my-4">
         <QuizCategories items={items} />
       </div>
       <QuizList />

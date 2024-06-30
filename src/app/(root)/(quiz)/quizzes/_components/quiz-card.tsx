@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const QuizCard = () => {
   return (
-    <div className="p-4 border rounded-xl max-w-[360px] w-full space-y-4">
+    <div className="p-4   bg-[#17023A] border rounded-xl max-w-[360px] w-full space-y-4 ">
       <div className="">
         <Image
           src="https://images.unsplash.com/photo-1580894908361-967195033215?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -37,7 +37,7 @@ export const QuizCard = () => {
         <div className="flex items-center justify-between">
           <p>89+ members completed</p>
           <Link href="/">
-            <Play className="dark:bg-primary rounded-full p-2 w-10 h-10" />
+            <Play className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 rounded-full p-2 w-10 h-10" />
           </Link>
         </div>
       </div>

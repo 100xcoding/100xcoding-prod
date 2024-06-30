@@ -53,7 +53,7 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
   const [quiz, setQuiz] = useState(question);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [responses, setResponses] = useState([
-    { questionId: null, optionId: null },
+    { questionId: "", optionId: "" },
   ]);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [isActive, setIsActive] = useState(false);
@@ -71,13 +71,13 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
     );
     console.log(alreadyAnswered);
     if (alreadyAnswered) {
-      setSelectedAnswer(alreadyAnswered.optionId);
+      setSelectedAnswer(alreadyAnswered?.optionId!);
 
       let updatedResponse = responses.find(
         (response) => response.questionId === quiz[currentQuestionIndex].id,
       );
       if (updatedResponse) {
-        updatedResponse.optionId = selectedAnswer;
+        updatedResponse.optionId = selectedAnswer!;
       }
       const newResponse = [...responses, updatedResponse];
       setResponses(newResponse);
@@ -117,19 +117,19 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
     setIsActive(true);
   };
   return (
-    <div>
-      <div className="flex dark:bg-primary w-full justify-between px-4 py-3">
+    <div className="border">
+      <div className="flex bg-[#17023A]   w-full justify-between px-4 py-3">
         <h2>Title of Quiz</h2>
         <h3>Timimg</h3>
         <button>submit quiz</button>
       </div>
-      <section className="my-10 dark:bg-muted py-4 space-y-2 px-4 rounded-md">
+      <section className="my-10 bg-[#17023A]  py-4 space-y-2 px-4 rounded-md">
         <p>Question {currentQuestionIndex + 1} of 30</p>
         <h2 className="text-xl tracking-wide">
           {quiz[currentQuestionIndex].text}
         </h2>
       </section>
-      <section className="dark:bg-muted py-4 space-y-2 px-4 rounded-md flex flex-col gap-4">
+      <section className="bg-[#17023A]  py-4 space-y-2 px-4 rounded-md flex flex-col gap-4">
         {quiz[currentQuestionIndex].options.map((option) => (
           <QuizOption
             key={option.id}
@@ -143,11 +143,11 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
                 <QuizOption />
                 <QuizOption /> */}
       </section>
-      <section className="dark:bg-muted py-4 rounded-md px-4 flex justify-between my-10">
+      <section className="bg-[#17023A] py-4 rounded-md px-4 flex justify-between my-10">
         <Button
           disabled={currentQuestionIndex <= 0}
           onClick={handlePrevious}
-          variant={"outline"}
+          variant={"default"}
         >
           Prev
         </Button>
@@ -167,7 +167,7 @@ const QuizOption = ({ handleClick, option, selectedAnswer }: any) => {
   return (
     <button
       onClick={() => handleClick(option.id)}
-      className={`border rounded-md  py-3 text-left px-4 flex items-center gap-4 ${option.id === selectedAnswer ? "dark:border-primary dark:bg-primary" : "border-muted-foreground"} `}
+      className={`border rounded-md  py-3 text-left px-4 flex items-center gap-4 ${option.id === selectedAnswer ? "dark:border-primary dark:bg-primary" : "border-muted-foreground "} `}
     >
       <span className="dark:bg-secondary-foreground dark:text-muted rounded-full  px-3 py-1 block">
         1

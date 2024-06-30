@@ -31,8 +31,9 @@ export const QuizCategoryItem = ({ label, value }: QuizCategoryItemProps) => {
     <button
       onClick={onClick}
       className={cn(
-        "py-2 px-3 text-sm border border-slate-200 rounded-full flex items-center gap-x-1 hover:border-primary transition",
-        isSelected && "border-primary bg-primary/10 text-primary",
+        "py-2 px-3 text-sm tracking-wide font-inter border border-slate-200 rounded-full flex items-center gap-x-1 hover:border-primary transition",
+        isSelected &&
+          "bg-gradient-to-r from-green-400 to-blue-500  text-white border-none",
       )}
       type="button"
     >
