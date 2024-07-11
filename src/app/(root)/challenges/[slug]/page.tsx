@@ -25,12 +25,12 @@ const SingleChallenge = async ({
     <section className="container mx-auto p-3 my-10 space-y-8">
       {/* TODO: CARD 1 to show challenge */}
       <Card className="bg-[#17023A]">
-        <CardContent className="mt-4 flex justify-between items-center gap-24">
-          <div className="flex-1 space-y-6">
+        <CardContent className="mt-4 flex flex-col-reverse lg:flex-row justify-between items-center gap-6 lg:gap-24">
+          <div className="flex-1 space-y-4 md:space-y-6">
             <p className="dark:bg-primary max-w-max px-2 py-0.5 rounded-lg text-xs sm:text-sm font-raleway font-medium uppercase tracking-wider">
               {challenge.challengeCategory?.name}
             </p>
-            <h2 className="capitalize font-roboto text-4xl tracking-wider font-semibold">
+            <h2 className="capitalize font-roboto text-2xl md:text-4xl tracking-wider font-medium md:font-semibold">
               {challenge.title}
             </h2>
             <p className="font-inter text-sm md:text-lg text-slate-400">
@@ -38,7 +38,7 @@ const SingleChallenge = async ({
             </p>
             <Link
               href={"/"}
-              className="flex text-lg items-center gap-2 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 w-fit  px-4 py-2.5 rounded capitalize font-openSans tracking-wide font-medium"
+              className="flex text-base md:text-lg items-center gap-2 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 w-fit  px-4 py-2.5 rounded capitalize font-openSans tracking-wide font-medium"
             >
               start challenge
               <Play />
@@ -66,7 +66,7 @@ const SingleChallenge = async ({
         </CardContent>
       </Card>
       {/* TODO:Description */}
-      <div className="flex gap-4 ">
+      <div className="flex gap-4 flex-wrap lg:flex-nowrap">
         <Card className="bg-[#17023A]">
           <CardHeader>
             <h3 className="font-raleway font-semibold tracking-wide text-3xl">
