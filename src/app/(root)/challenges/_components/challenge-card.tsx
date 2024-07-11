@@ -1,25 +1,57 @@
-import { formatterDescription } from "@/lib/utils";
-export const ChallengeCard = ({ title, description, level, design }: any) => {
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { formatterDescription, getImageUrl } from "@/lib/utils";
+import { Challenge } from "@prisma/client";
+import Image from "next/image";
+import Link from "next/link";
+interface ChallengeCategory {
+  name: string;
+  id: string;
+  score: number;
+}
+interface ChallengeProps extends Challenge {
+  challengeCategory?: ChallengeCategory | null;
+}
+export const ChallengeCard = ({
+  title,
+  slug,
+  description,
+  image,
+  challengeCategory,
+}: ChallengeProps) => {
   return (
-    <div className="w-full md:w-[340px] lg:w-[420px] rounded-xl bg-[#17023A] md:h-[510px] p-3.5 border border-[#5a5461]">
-      <div className="w-full">
-        <div className="bg-gradient-to-b from-violet-400 to-pink-400 via-orange-300 p-5 rounded-lg">
-          <img
-            src={design}
+    <Card className="max-w-[320px] md:max-w-[360px] lg:max-w-[400px] rounded-lg  border bg-[#17023A]">
+      <CardHeader className="bg-gradient-to-b from-violet-400 to-pink-400 via-orange-300 p-5 rounded-t-lg">
+        <Link href={`/challenges/${slug}`}>
+          <Image
+            src={getImageUrl(image!)}
             alt={title}
-            className="object-cover hover:scale-105 duration-500 rounded-lg"
+            width={"500"}
+            height={"500"}
+            className="rounded-lg hover:scale-105 duration-500 ease-in-out"
           />
-        </div>
-      </div>
-      <div className="pt-4 pl-1">
-        <div className="flex font-lato text-lg font-medium    ">
-          <p className="dark:bg-primary p-1.5 rounded-lg">{level}</p>
-        </div>
-        <h1 className="font-raleway font-bold text-2xl my-5">{title}</h1>
-        <p className="font-poppins text-base text-muted-foreground">
-          {formatterDescription(description)}
+        </Link>
+      </CardHeader>
+      <CardContent className="mt-4 space-y-2 md:space-y-4">
+        <p className="dark:bg-primary max-w-max px-2 py-0.5 rounded-lg text-xs sm:text-sm font-raleway font-medium uppercase tracking-wider">
+          {challengeCategory?.name}
         </p>
-      </div>
-    </div>
+        <Link
+          href={`/challenges/${slug}`}
+          className="block hover:underline underline-offset-2 capitalize font-inter tracking-wider text-xl md:text-2xl lg:text-3xl font-bold"
+        >
+          {title}
+        </Link>
+        <p className="font-inter text-sm md:text-base text-slate-400">
+          {description}
+        </p>
+      </CardContent>
+    </Card>
   );
 };

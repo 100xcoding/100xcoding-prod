@@ -104,7 +104,7 @@ export const columns: ColumnDef<Challenge>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <Link href={`/creator/challenges/${id}`}>
+            <Link href={`/portal/challenges/${id}`}>
               <DropdownMenuItem>
                 <Pencil className="h-4 w-4 mr-2" />
                 Edit

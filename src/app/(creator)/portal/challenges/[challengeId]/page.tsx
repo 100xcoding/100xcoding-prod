@@ -16,6 +16,7 @@ import { LanguageForm } from "./_components/language-form";
 import { FigmaForm } from "./_components/figma-form";
 import { ImageForm } from "./_components/image-form";
 import { ResourceForm } from "./_components/resource-form";
+import { Actions } from "./_components/actions";
 
 const CreatorChallengePage = ({
   params,
@@ -41,11 +42,11 @@ const CreatorChallengePage = ({
               Complete all fields
             </span>
           </div>
-          {/* <Actions
-          disabled={!isComplete}
-          courseId={params.courseId}
-          isPublished={course?.isPublished!}
-        /> */}
+          <Actions
+            // disabled={!isComplete}
+            challengeId={params.challengeId}
+            isPublished={data?.isPublished!}
+          />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
           <div>
