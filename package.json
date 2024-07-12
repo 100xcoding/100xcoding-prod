@@ -18,7 +18,7 @@
     "@auth/prisma-adapter": "^2.1.0",
     "@aws-sdk/client-s3": "^3.588.0",
     "@aws-sdk/s3-request-presigner": "^3.588.0",
-    "@codesandbox/sandpack-react": "^2.14.0",
+    "@codesandbox/sandpack-react": "^2.18.0",
     "@hello-pangea/dnd": "^16.6.0",
     "@hookform/resolvers": "^3.4.2",
     "@monaco-editor/react": "^4.6.0",

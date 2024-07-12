@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/resizable";
 import { ChallengeDescription } from "../_components/challenge-description";
 import { useChallengeBySlug } from "@/services/queries";
+import { CustomSandpack } from "../_components/custom-sandpack";
 
 const PlaygroudSlug = ({ params: { slug } }: { params: { slug: string } }) => {
   // console.log(slug);
@@ -17,7 +18,7 @@ const PlaygroudSlug = ({ params: { slug } }: { params: { slug: string } }) => {
   const previewRef = useRef(null);
   const consoleRef = useRef(null);
   return (
-    <section className="container mx-auto">
+    <section className="px-5">
       <div className="relative grid grid-rows-[50px_minmax(0,_1fr)] grid-cols-1 h-screen xxl:max-w-screen-xxl mx-auto">
         <CodeEditorHeader
           descriptionRef={descriptionRef}
@@ -44,11 +45,11 @@ const PlaygroudSlug = ({ params: { slug } }: { params: { slug: string } }) => {
           </ResizablePanel>
           <ResizableHandle />
           <ResizablePanel className="row-start-2 row-end-3 flex-1">
-            {/* <CustomSandpack
-						previewRef={previewRef}
-						consoleRef={consoleRef}
-						solution={null}
-					/> */}
+            <CustomSandpack
+              previewRef={previewRef}
+              consoleRef={consoleRef}
+              solution={null}
+            />
           </ResizablePanel>
         </ResizablePanelGroup>
       </div>

@@ -21,8 +21,8 @@ importers:
         specifier: ^3.588.0
         version: 3.588.0
       '@codesandbox/sandpack-react':
-        specifier: ^2.14.0
-        version: 2.14.0(@lezer/common@1.2.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^2.18.0
+        version: 2.18.0(@lezer/common@1.2.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@hello-pangea/dnd':
         specifier: ^16.6.0
         version: 16.6.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -462,11 +462,11 @@ packages:
   '@codesandbox/nodebox@0.1.8':
     resolution: {integrity: sha512-2VRS6JDSk+M+pg56GA6CryyUSGPjBEe8Pnae0QL3jJF1mJZJVMDKr93gJRtBbLkfZN6LD/DwMtf+2L0bpWrjqg==}
 
-  '@codesandbox/sandpack-client@2.13.8':
-    resolution: {integrity: sha512-IjVlqfVK0fascNyUVH9hs5UZBx4KhKtyZyDrxdiDyQBtLmgESNaFWelAf4a/PX4gJp+H+WW6/iC6KzR7XtK//w==}
+  '@codesandbox/sandpack-client@2.18.0':
+    resolution: {integrity: sha512-KGNjKMAwaOkpRW2PbAzqjkYndgreM1aERlSJ1YpjWQRy6br72GiandWPFgdF8UpzwKNetkLUyuJ/XT12sehl4A==}
 
-  '@codesandbox/sandpack-react@2.14.0':
-    resolution: {integrity: sha512-JZvvAnNqmFUFpobS05G1NzYFNQ3TUiT+BU6oBc4VVZp/5A0PR/8OoD/v8sgp1zZV2OY5eDR2nEoyB902yWZBuA==}
+  '@codesandbox/sandpack-react@2.18.0':
+    resolution: {integrity: sha512-WYsezuoBFw5v4CS29fDib3tanU7JbZkydtXp3543PoczC4bJZztmVPjC2PgqG90VRjxXRv37UD7HClqqPL1aiw==}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
       react-dom: ^16.8.0 || ^17 || ^18
@@ -4324,15 +4324,16 @@ snapshots:
       outvariant: 1.4.0
       strict-event-emitter: 0.4.6
 
-  '@codesandbox/sandpack-client@2.13.8':
+  '@codesandbox/sandpack-client@2.18.0':
     dependencies:
       '@codesandbox/nodebox': 0.1.8
       buffer: 6.0.3
       dequal: 2.0.3
+      mime-db: 1.52.0
       outvariant: 1.4.0
       static-browser-server: 1.0.3
 
-  '@codesandbox/sandpack-react@2.14.0(@lezer/common@1.2.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@codesandbox/sandpack-react@2.18.0(@lezer/common@1.2.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@codemirror/autocomplete': 6.16.0(@codemirror/language@6.10.1)(@codemirror/state@6.4.1)(@codemirror/view@6.26.3)(@lezer/common@1.2.1)
       '@codemirror/commands': 6.5.0
@@ -4342,7 +4343,7 @@ snapshots:
       '@codemirror/language': 6.10.1
       '@codemirror/state': 6.4.1
       '@codemirror/view': 6.26.3
-      '@codesandbox/sandpack-client': 2.13.8
+      '@codesandbox/sandpack-client': 2.18.0
       '@lezer/highlight': 1.2.0
       '@react-hook/intersection-observer': 3.1.1(react@18.3.1)
       '@stitches/core': 1.2.8

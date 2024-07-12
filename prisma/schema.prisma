@@ -14,23 +14,24 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(cuid())
-  name          String?
-  email         String         @unique
-  emailVerified DateTime?
-  image         String?
-  username      String         @unique
-  role          String         @default("user")
-  accounts      Account[]
-  sessions      Session[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  profile       Profile?
-  socialLink    SocialLink?
-  challenge     Challenge[]
-  quiz          Quiz[]
-  quizAttempt   QuizAttempt[]
-  quizQuestions QuizQuestion[]
+  id                String              @id @default(cuid())
+  name              String?
+  email             String              @unique
+  emailVerified     DateTime?
+  image             String?
+  username          String              @unique
+  role              String              @default("user")
+  accounts          Account[]
+  sessions          Session[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  profile           Profile?
+  socialLink        SocialLink?
+  challenge         Challenge[]
+  quiz              Quiz[]
+  quizAttempt       QuizAttempt[]
+  quizQuestions     QuizQuestion[]
+  challengeSolution ChallengeSolution[]
 }
 
 model Account {
@@ -101,11 +102,11 @@ model SocialLink {
 }
 
 model Challenge {
-  id                  String             @id @default(uuid())
+  id                  String              @id @default(uuid())
   userId              String
   creatorId           String
   title               String
-  slug                String             @unique
+  slug                String              @unique
   challengeCategoryId String?
   description         String?
   task                String?
@@ -114,14 +115,32 @@ model Challenge {
   steps               String?
   challengeResourceId String?
   challengeTechId     String?
-  publish             Boolean            @default(false)
-  user                User               @relation(fields: [userId], references: [id])
-  challengeCategory   ChallengeCategory? @relation(fields: [challengeCategoryId], references: [id])
-  challengeTech       ChallengeTech?     @relation(fields: [challengeTechId], references: [id])
+  publish             Boolean             @default(false)
+  user                User                @relation(fields: [userId], references: [id])
+  challengeCategory   ChallengeCategory?  @relation(fields: [challengeCategoryId], references: [id])
+  challengeTech       ChallengeTech?      @relation(fields: [challengeTechId], references: [id])
   figmaDesktop        String?
   figmaMobile         String?
   image               String?
   resource            String?
+  challengeSolution   ChallengeSolution[]
+}
+
+model ChallengeSolution {
+  id          String    @id @default(uuid())
+  challengeId String
+  userId      String
+  htmlContent String
+  cssContent  String
+  jsContent   String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status      Boolean   @default(false)
+
+  @@index([challengeId])
+  @@index([userId])
 }
 
 model ChallengeCategory {
