@@ -111,3 +111,15 @@ export function useCreatorQuizQuestionById(questionId: string, quizId: string) {
     refreshCreatorQuizQuestionData,
   };
 }
+export function useChallengeBySlug(slug: string) {
+  const cacheKey = `/challenge/${slug}`;
+  const { data, error } = useSWR(cacheKey, fetcher);
+  const refreshChallengeBySlugData = async () => {
+    await mutate(cacheKey); // Trigger revalidation for the specific cache key
+  };
+  return {
+    data,
+    error,
+    refreshChallengeBySlugData,
+  };
+}

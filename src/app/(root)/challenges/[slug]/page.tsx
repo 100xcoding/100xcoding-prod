@@ -37,7 +37,7 @@ const SingleChallenge = async ({
               {challenge.description}
             </p>
             <Link
-              href={"/"}
+              href={`/playground/${challenge.slug}`}
               className="flex text-base md:text-lg items-center gap-2 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 w-fit  px-4 py-2.5 rounded capitalize font-openSans tracking-wide font-medium"
             >
               start challenge
