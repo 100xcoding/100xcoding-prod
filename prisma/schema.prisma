@@ -130,6 +130,7 @@ model ChallengeSolution {
   id          String    @id @default(uuid())
   challengeId String
   userId      String
+  slug        String    @unique
   htmlContent String
   cssContent  String
   jsContent   String

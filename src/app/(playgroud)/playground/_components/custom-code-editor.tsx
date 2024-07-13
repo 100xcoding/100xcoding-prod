@@ -5,6 +5,7 @@ import { SandpackStack, useSandpack } from "@codesandbox/sandpack-react";
 import { useEffect, useState } from "react";
 import { CustomTabs } from "./custom-tabs";
 import { EditorFooter } from "./editor-footer";
+import { useCurrentUser } from "@/hooks/use-current-user";
 export const getLanguageOfFile = (filePath: any) => {
   const extensionDotIndex = filePath.lastIndexOf(".");
   const extension = filePath.slice(extensionDotIndex + 1);
@@ -26,8 +27,9 @@ export const getLanguageOfFile = (filePath: any) => {
       return "";
   }
 };
-export const CustomCodeEditor = ({ playground, solution }: any) => {
+export const CustomCodeEditor = ({ playground, solution, slug }: any) => {
   const [isDirty, setIsDirty] = useState(false);
+  const user = useCurrentUser();
   const [activeFile, setActiveFile] = useState("/index.html");
   const { sandpack } = useSandpack();
   const { files, updateFile } = sandpack;
@@ -80,20 +82,23 @@ export const CustomCodeEditor = ({ playground, solution }: any) => {
             }}
           />
         </div>
-        {/* {user?.uid === solution?.userID && (
-					<EditorFooter
-						isCompleted={solution.completed}
-						playground={playground}
-						isDirty={isDirty}
-						setIsDirty={setIsDirty}
-					/>
-				)} */}
-        <EditorFooter
-          isCompleted={false}
-          playground={playground}
-          isDirty={isDirty}
-          setIsDirty={setIsDirty}
-        />
+        {user?.id === solution?.userId && (
+          <EditorFooter
+            isCompleted={solution.completed}
+            playground={playground}
+            isDirty={isDirty}
+            setIsDirty={setIsDirty}
+          />
+        )}
+        {!solution && (
+          <EditorFooter
+            isCompleted={false}
+            playground={playground}
+            isDirty={isDirty}
+            setIsDirty={setIsDirty}
+            slug={slug}
+          />
+        )}
       </SandpackStack>
     </div>
   );

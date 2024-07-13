@@ -7,16 +7,26 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { ChallengeDescription } from "../_components/challenge-description";
-import { useChallengeBySlug } from "@/services/queries";
+import {
+  useChallengeBySlug,
+  useChallengePublishSolutionBySlug,
+  useChallengeUnpublishSolutionBySlug,
+} from "@/services/queries";
 import { CustomSandpack } from "../_components/custom-sandpack";
+import { redirect, useSearchParams } from "next/navigation";
 
 const PlaygroudSlug = ({ params: { slug } }: { params: { slug: string } }) => {
-  // console.log(slug);
+  const searchParams = useSearchParams();
+  const solutionParams = searchParams.get("solution");
   const { data } = useChallengeBySlug(slug);
-  // console.log(data);
+  const { data: solutionData } = useChallengeUnpublishSolutionBySlug(slug);
+  const { data: solution } = useChallengePublishSolutionBySlug(slug);
   const descriptionRef = useRef(null);
   const previewRef = useRef(null);
   const consoleRef = useRef(null);
+  if (solutionParams && !solution) {
+    redirect("/");
+  }
   return (
     <section className="px-5">
       <div className="relative grid grid-rows-[50px_minmax(0,_1fr)] grid-cols-1 h-screen xxl:max-w-screen-xxl mx-auto">
@@ -48,7 +58,9 @@ const PlaygroudSlug = ({ params: { slug } }: { params: { slug: string } }) => {
             <CustomSandpack
               previewRef={previewRef}
               consoleRef={consoleRef}
-              solution={null}
+              solution={solution}
+              playground={solutionData}
+              slug={slug}
             />
           </ResizablePanel>
         </ResizablePanelGroup>

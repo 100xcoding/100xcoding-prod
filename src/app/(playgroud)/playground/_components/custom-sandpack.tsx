@@ -1,4 +1,3 @@
-import React from "react";
 import {
   SandpackProvider,
   SandpackLayout,
@@ -14,7 +13,40 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { CustomCodeEditor } from "./custom-code-editor";
-export const CustomSandpack = ({ previewRef, consoleRef, solution }: any) => {
+export const CustomSandpack = ({
+  previewRef,
+  consoleRef,
+  solution,
+  slug,
+  playground,
+}: any) => {
+  let SolutionFiles;
+  if (solution) {
+    SolutionFiles = {
+      "/index.html": {
+        code: solution?.htmlContent!,
+      },
+      "/index.js": {
+        code: solution?.jsContent!,
+      },
+      "/src/styles.css": {
+        code: solution?.cssContent,
+      },
+    };
+  } else if (playground) {
+    SolutionFiles = {
+      "/index.html": {
+        code: playground?.htmlContent!,
+      },
+      "/index.js": {
+        code: playground?.jsContent!,
+      },
+      "/src/styles.css": {
+        code: playground?.cssContent,
+      },
+    };
+  }
+
   return (
     <SandpackProvider
       template="vanilla"
@@ -33,20 +65,17 @@ export const CustomSandpack = ({ previewRef, consoleRef, solution }: any) => {
           size: "14px",
         },
       }}
-      files={FILES.demo}
+      files={SolutionFiles ? SolutionFiles : FILES.demo}
     >
       <SandpackLayout style={{ borderRadius: 0 }}>
         <div className="h-[calc(100vh-50px)] flex w-full gap-[1px]">
           <ResizablePanelGroup direction="horizontal">
             <ResizablePanel className="h-full w-full">
-              <CustomCodeEditor />
-              {/* <SandpackCodeEditor
-                                showTabs
-                                showLineNumbers={false}
-                                showInlineErrors
-                                wrapContent
-                                closableTabs
-                            /> */}
+              <CustomCodeEditor
+                slug={slug}
+                playground={playground}
+                solution={solution}
+              />
             </ResizablePanel>
             <ResizableHandle className="w-1 bg-gray-800 transition-colors hover:bg-gray-600" />
             <ResizablePanel
@@ -75,7 +104,7 @@ export const CustomSandpack = ({ previewRef, consoleRef, solution }: any) => {
                   ref={consoleRef}
                 >
                   <SandpackConsole
-                    // showResetConsoleButton
+                    showResetConsoleButton
                     style={{
                       height: "100%",
                     }}

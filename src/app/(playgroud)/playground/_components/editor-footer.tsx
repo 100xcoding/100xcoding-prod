@@ -1,5 +1,10 @@
 import { useSandpack } from "@codesandbox/sandpack-react";
 import { Button } from "@/components/ui/button";
+import {
+  createChallengeSolution,
+  publishChallengeSolution,
+  updateChallengeSolution,
+} from "../_actions";
 const filterVisibleFiles = (visibleFiles: any, files: any) => {
   const visibleFileSet = new Set(visibleFiles);
   return Object.keys(files)
@@ -14,6 +19,8 @@ export const EditorFooter = ({
   isCompleted,
   isDirty,
   setIsDirty,
+  slug,
+  solution,
 }: any) => {
   const { sandpack } = useSandpack();
   const { files, visibleFiles } = sandpack;
@@ -23,15 +30,16 @@ export const EditorFooter = ({
     const updatedData = {
       files: data,
     };
-    console.log(updatedData);
-    const datab: string = updatedData?.files["/index.html"]?.code!;
-    console.log("FILES", datab);
+
     if (playground) {
-      // await updatePlayground(playground?.id, updatedData);
-      console.log(playground);
+      // Update the data only
+      const result = await updateChallengeSolution(updatedData, slug);
+      console.log(result);
     } else {
+      // create solution record
       console.log(updatedData);
-      // await addSubCollectionDocumentWithCustomID(updatedData, "vanilla"); // TODO: change to dynamic
+      const result = await createChallengeSolution(updatedData, slug);
+      console.log(result);
     }
     setIsDirty(false);
   };
@@ -41,10 +49,10 @@ export const EditorFooter = ({
     };
     try {
       if (isDirty) {
-        // await handleSave();
+        await handleSave();
       }
-      // await updateSolution(id, updatedData);
-      console.log(updatedData);
+      const result = await publishChallengeSolution(slug);
+      console.log(result);
       setIsDirty(false);
       // if (!solutionResponse.error && !isCompleted) {
       // 	router.push({

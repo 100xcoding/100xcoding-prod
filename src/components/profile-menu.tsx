@@ -18,12 +18,10 @@ export const ProfileMenu = ({ data }: any) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="">
-          <Avatar>
-            <AvatarImage src={data?.image} />
-            <AvatarFallback>S</AvatarFallback>
-          </Avatar>
-        </div>
+        <Avatar>
+          <AvatarImage src={data?.image} />
+          <AvatarFallback>S</AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-44 md:w-52">
         <DropdownMenuGroup>
