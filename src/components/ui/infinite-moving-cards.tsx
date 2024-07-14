@@ -90,24 +90,24 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item, idx) => (
           <div
-            className="w-[350px] max-w-full  flex-shrink-0  md:w-[500px] relative rounded-2xl bg-gradient-to-r from-pink-500 via-red-500 to-amber-500 p-[2px] overflow-hidden"
+            className="w-[350px] max-w-full  flex-shrink-0  md:w-[500px] relative rounded-2xl bg-card bg-cover p-[2px] overflow-hidden"
             key={item.name}
           >
-            <li className="bg-slate-900 px-8 py-6 rounded-2xl h-full">
+            <li className=" px-8 py-6 rounded-2xl h-full">
               <blockquote className="rounded-2xl p-[1px]">
                 <div
                   aria-hidden="true"
                   className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
                 ></div>
                 <div className="relative z-20 mb-6 flex flex-row items-center justify-between">
-                  <span className=" text-base leading-[1.6] text-gray-300  font-poppins font-medium">
+                  <span className=" text-lg leading-[1.6] text-white  font-poppins font-medium tracking-wide">
                     {item.name}
                   </span>
-                  <Link href={"/"} className="">
+                  <Link href={"/"} className="text-white ">
                     <FaLinkedin size={23} />
                   </Link>
                 </div>
-                <span className=" relative z-20 text-md leading-[1.6] text-gray-200 font-lato">
+                <span className=" relative z-20 text-md leading-[1.6] text-dark-700 font-lato">
                   {item.quote}
                 </span>
               </blockquote>

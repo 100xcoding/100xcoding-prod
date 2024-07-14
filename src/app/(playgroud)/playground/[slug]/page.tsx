@@ -28,8 +28,8 @@ const PlaygroudSlug = ({ params: { slug } }: { params: { slug: string } }) => {
     redirect("/");
   }
   return (
-    <section className="px-5">
-      <div className="relative grid grid-rows-[50px_minmax(0,_1fr)] grid-cols-1 h-screen xxl:max-w-screen-xxl mx-auto">
+    <section className=" bg-dark-400 text-white">
+      <div className="relative grid grid-rows-[50px_minmax(0,_1fr)] grid-cols-1 gap-4 h-screen xxl:max-w-screen-xxl mx-auto">
         <CodeEditorHeader
           descriptionRef={descriptionRef}
           previewRef={previewRef}
@@ -42,7 +42,7 @@ const PlaygroudSlug = ({ params: { slug } }: { params: { slug: string } }) => {
           <ResizablePanel
             collapsible
             defaultSize={25}
-            className="w-80 border-t border-gray-600"
+            className="w-80 border-t border-green-500"
             ref={descriptionRef}
           >
             <ChallengeDescription

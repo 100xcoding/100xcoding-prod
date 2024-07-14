@@ -12,7 +12,13 @@ import NextAuthProvider from "../components/providers/nextauth-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { cn } from "@/lib/utils";
 
+import { Plus_Jakarta_Sans } from "next/font/google";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const fontSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-sans",
+});
 const roboto = Roboto({
   subsets: ["cyrillic"],
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -52,12 +58,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${roboto.variable} ${inter.variable} ${poppins.variable} ${openSans.variable} ${lato.variable} ${raleway.variable}`}
+        // className={`font-sans antialiased ${fontSans.variable} ${roboto.variable} ${inter.variable} ${poppins.variable} ${openSans.variable} ${lato.variable} ${raleway.variable}`}
+        className={cn("font-sans antialiased", fontSans.variable)}
       >
-        <Toaster position="top-right" closeButton richColors />
-        <NextAuthProvider>
-          <SWRProvider>{children}</SWRProvider>
-        </NextAuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          <Toaster position="top-right" closeButton richColors />
+          <NextAuthProvider>
+            <SWRProvider>{children}</SWRProvider>
+          </NextAuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

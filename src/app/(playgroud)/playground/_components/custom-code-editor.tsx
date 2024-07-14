@@ -59,7 +59,7 @@ export const CustomCodeEditor = ({ playground, solution, slug }: any) => {
         }}
       >
         <CustomTabs activeFile={activeFile} setActiveFile={setActiveFile} />
-        <div className="bg-[#1e1e1e] h-full relative">
+        <div className="bg-dark-300 h-full relative">
           <Editor
             width="100%"
             height="100%"
@@ -84,7 +84,7 @@ export const CustomCodeEditor = ({ playground, solution, slug }: any) => {
         </div>
         {user?.id === solution?.userId && (
           <EditorFooter
-            isCompleted={solution.completed}
+            isCompleted={solution?.status}
             playground={playground}
             isDirty={isDirty}
             setIsDirty={setIsDirty}

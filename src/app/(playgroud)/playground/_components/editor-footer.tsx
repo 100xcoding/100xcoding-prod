@@ -66,7 +66,7 @@ export const EditorFooter = ({
   };
   return (
     <div className="absolute bottom-0 left-0 right-0">
-      <div className="flex justify-end bg-gray-800 h-16 p-3 border-t border-gray-600">
+      <div className="flex justify-end bg-dark-400 h-16 p-3 border-t border-green-500">
         <Button
           className="font-semibold mr-2"
           variant="secondary"

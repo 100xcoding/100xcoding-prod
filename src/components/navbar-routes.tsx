@@ -23,7 +23,7 @@ export const NavbarRoutes = async () => {
               <Link
                 href={route.path}
                 key={route.id}
-                className="hover:border-b hover:border-white hover:scale-105 transition hover:text-white/85"
+                className="font-medium tracking-wide transition hover:text-green-500"
               >
                 {route.text}
               </Link>

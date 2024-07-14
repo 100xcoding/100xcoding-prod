@@ -24,7 +24,12 @@ function addSvgPatterns({ matchUtilities, theme }: any) {
     {
       "bg-grid": (value: any) => ({
         backgroundImage: `url("${svgToDataUri(
-          `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100" height="100" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+          `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+        )}")`,
+      }),
+      "bg-grid-sm": (value: any) => ({
+        backgroundImage: `url("${svgToDataUri(
+          `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
         )}")`,
       }),
       "bg-grid-small": (value: any) => ({
@@ -67,41 +72,76 @@ const config = {
         poppins: ["var(--font-poppins)", ...fontFamily.sans],
         lato: ["var(--font-lato)", ...fontFamily.sans],
         raleway: ["var(--font-raleway)", ...fontFamily.sans],
+        sans:["var(--font-sans)",...fontFamily.sans]
       },
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        green: {
+          500: "#24AE7C",
+          600: "#0D2A1F",
+        },
+        blue: {
+          500: "#79B5EC",
+          600: "#152432",
+        },
+        red: {
+          500: "#F37877",
+          600: "#3E1716",
+          700: "#F24E43",
+        },
+        light: {
+          200: "#E8E9E9",
+        },
+        dark: {
+          200: "#0D0F10",
+          300: "#131619",
+          400: "#1A1D21",
+          500: "#363A3D",
+          600: "#76828D",
+          700: "#ABB8C4",
+        },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
+          DEFAULT: "#24AE7C",
+          foreground: "#ffffff",
+        }
+      },
+      // colors: {
+      //   border: "hsl(var(--border))",
+      //   input: "hsl(var(--input))",
+      //   ring: "hsl(var(--ring))",
+      //   background: "hsl(var(--background))",
+      //   foreground: "hsl(var(--foreground))",
+        // primary: {
+        //   DEFAULT: "#24AE7C",
+        //   foreground: "#ffffff",
+        // },
+      //   secondary: {
+      //     DEFAULT: "hsl(var(--secondary))",
+      //     foreground: "hsl(var(--secondary-foreground))",
+      //   },
+      //   destructive: {
+      //     DEFAULT: "hsl(var(--destructive))",
+      //     foreground: "hsl(var(--destructive-foreground))",
+      //   },
+      //   muted: {
+      //     DEFAULT: "hsl(var(--muted))",
+      //     foreground: "hsl(var(--muted-foreground))",
+      //   },
+      //   accent: {
+      //     DEFAULT: "hsl(var(--accent))",
+      //     foreground: "hsl(var(--accent-foreground))",
+      //   },
+      //   popover: {
+      //     DEFAULT: "hsl(var(--popover))",
+      //     foreground: "hsl(var(--popover-foreground))",
+      //   },
+      //   card: {
+      //     DEFAULT: "hsl(var(--card))",
+      //     foreground: "hsl(var(--card-foreground))",
+      //   },
+      // },
+      backgroundImage: {
+        card: "url('/card-bg.png')",
+        cardLg: "url('/card-bg-lg.png')",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -136,6 +176,18 @@ const config = {
     require("@tailwindcss/typography"),
     addVariablesForColors,
     addSvgPatterns,
+    function ({ matchUtilities, theme }: any) {
+      matchUtilities(
+        {
+          "bg-dot-thick": (value: any) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="2.5"></circle></svg>`
+            )}")`,
+          }),
+        },
+        { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
+      );
+    },
   ],
 } satisfies Config;
 

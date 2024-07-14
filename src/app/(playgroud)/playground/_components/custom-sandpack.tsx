@@ -52,10 +52,10 @@ export const CustomSandpack = ({
       template="vanilla"
       theme={{
         colors: {
-          surface1: "#1F2937",
+          surface1: "#131619",
           surface2: "#4B5563",
           surface3: "#3b3b4f",
-          accent: "#A855F7",
+          accent: "#24AE7C",
           base: "#ffffff",
           disabled: "#858591",
           error: "#ffffff",
@@ -77,16 +77,16 @@ export const CustomSandpack = ({
                 solution={solution}
               />
             </ResizablePanel>
-            <ResizableHandle className="w-1 bg-gray-800 transition-colors hover:bg-gray-600" />
+            <ResizableHandle className="w-1 bg-dark-200 transition-colors hover:bg-gray-600" />
             <ResizablePanel
-              className="border-l border-gray-600"
+              className="border-l border-green-500"
               collapsible={true}
               ref={previewRef}
             >
               <ResizablePanelGroup direction="vertical">
                 <ResizablePanel
                   defaultSize={50}
-                  className="border-b border-gray-600"
+                  className="border-b border-green-500"
                 >
                   <SandpackPreview
                     showNavigator
@@ -96,7 +96,7 @@ export const CustomSandpack = ({
                     }}
                   />
                 </ResizablePanel>
-                <ResizableHandle className="h-[0.25rem] bg-gray-800 transition-colors hover:bg-gray-600" />
+                <ResizableHandle className="h-[0.25rem] bg-dark-200 transition-colors hover:bg-gray-600" />
 
                 <ResizablePanel
                   defaultSize={30}

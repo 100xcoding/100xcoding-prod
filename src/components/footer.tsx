@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { Logo } from "./logo";
 import { FaYoutube } from "react-icons/fa6";
@@ -7,7 +6,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaDiscord } from "react-icons/fa";
 export const Footer = () => {
   return (
-    <footer className=" bg-[#110327] bg-opacity-65 border-[#6665E5]/30 border-t py-2  px-2.5">
+    <footer className="bg-dark-400 text-white  py-2  px-2.5">
       <div className="container mx-auto flex flex-col lg:flex-row justify-between lg:items-center gap-7 md:gap-1">
         <Link href={"/"} className="">
           <Logo />

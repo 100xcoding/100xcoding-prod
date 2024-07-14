@@ -20,7 +20,7 @@ export const ProfileMenu = ({ data }: any) => {
       <DropdownMenuTrigger>
         <Avatar>
           <AvatarImage src={data?.image} />
-          <AvatarFallback>S</AvatarFallback>
+          <AvatarFallback className="bg-green-500 ">S</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-44 md:w-52">

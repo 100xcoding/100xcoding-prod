@@ -9,8 +9,8 @@ export const CodeEditorHeader = ({
   consoleRef,
 }: any) => {
   return (
-    <nav className="row-start-1 row-end-2 px-2 py-2 bg-gray-900">
-      <div className="flex justify-between items-center">
+    <nav className="row-start-1 row-end-2 px-4 pt-3 h-16 bg-dark-300 ">
+      <div className="flex justify-between items-center w-full">
         <Link
           href="/"
           className="text-white flex items-center space-x-1 uppercase text-center font-bold text-lg"
@@ -20,7 +20,11 @@ export const CodeEditorHeader = ({
           <Logo />
         </Link>
         <div className="flex items-center  space-x-4">
-          <Button asChild className="" variant={"outline"}>
+          <Button
+            asChild
+            className="border border-green-500 rounded px-6 "
+            variant={"outline"}
+          >
             <Link href={"/challenges"}>Exit</Link>
           </Button>
           <ProfileMenu />

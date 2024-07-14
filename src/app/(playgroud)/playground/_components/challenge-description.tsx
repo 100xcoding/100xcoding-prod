@@ -15,9 +15,9 @@ export const ChallengeDescription = ({
   resource: string;
 }) => {
   return (
-    <div className="bg-gray-800 h-full px-4 py-2 overflow-y-auto no-scrollbar">
-      <h1 className="font-bold text-xl text-white mb-2">{title}</h1>
-      <p className="text-sm text-gray-300 mb-4">{description}</p>
+    <div className="bg-dark-400 h-full px-4 py-2 overflow-y-auto remove-scrollbar">
+      <h1 className="font-bold text-xl text-white mb-2 capitalize ">{title}</h1>
+      <p className="text-sm text-dark-700 mb-4">{description}</p>
       <div className="relative aspect-[4/3]">
         <Image
           src={getImageUrl(image!)}
