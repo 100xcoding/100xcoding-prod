@@ -54,7 +54,7 @@ export const AboutForm = ({ initialData, challengeId }: AboutFormProps) => {
       </div>
       {!isEditing && (
         <>
-          <div className="prose dark:prose-h1:text-primary-foreground">
+          <div className="prose prose-a:text-green-500 prose-headings:text-white text-white ">
             {parse(initialData?.about || "")}
           </div>
         </>

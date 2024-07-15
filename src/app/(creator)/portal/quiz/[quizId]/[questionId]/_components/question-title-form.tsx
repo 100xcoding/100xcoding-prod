@@ -6,6 +6,8 @@ import { updateQuizQuestionTitleAction } from "../../../_actions";
 import { useCreatorQuizQuestionById } from "@/services/queries";
 import { toast } from "sonner";
 import Editor from "@/components/react-quil-editor";
+import parse from "html-react-parser";
+
 interface QuestionTitleFormProps {
   initialData: {
     text: string;
@@ -58,7 +60,13 @@ export const QuestionTitleForm = ({
           )}
         </Button>
       </div>
-      {!isEditing && <p className="text-sm mt-2">{initialData?.text}</p>}
+      {!isEditing && (
+        <div className="text-sm mt-2">
+          <div className="prose prose-a:text-green-500 prose-headings:text-white text-white ">
+            {parse(initialData?.text || "")}
+          </div>
+        </div>
+      )}
       {isEditing && (
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <Editor value={content} setValue={setContent} />

@@ -174,6 +174,7 @@ const config = {
   plugins: [
     require("tailwindcss-animate"),
     require("@tailwindcss/typography"),
+    
     addVariablesForColors,
     addSvgPatterns,
     function ({ matchUtilities, theme }: any) {

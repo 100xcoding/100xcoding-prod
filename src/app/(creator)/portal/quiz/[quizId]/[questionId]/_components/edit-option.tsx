@@ -60,7 +60,9 @@ export const EditOption = ({
   }, [initialData]);
   return (
     <Dialog>
-      <DialogTrigger>Open</DialogTrigger>
+      <DialogTrigger className="bg-blue-600 text-blue-500 px-6 py-2 rounded-full">
+        Open
+      </DialogTrigger>
       <DialogContent className="portal-form-box">
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
