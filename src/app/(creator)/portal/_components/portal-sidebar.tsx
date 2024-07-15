@@ -4,7 +4,7 @@ import { PortalSidebarRoutes } from "./portal-sidebar-routes";
 
 export const PortalSidebar = () => {
   return (
-    <div className="h-full border-r flex flex-col overflow-y-auto dark:bg-background  shadow-sm">
+    <div className="h-full  flex flex-col overflow-y-auto bg-dark-400  shadow-lg text-white">
       <div className="p-4">
         <Logo />
       </div>

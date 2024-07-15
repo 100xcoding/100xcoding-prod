@@ -64,7 +64,7 @@ export function DataTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-sm bg-dark-400 ring-offset-dark-400 text-white  focus-visible:ring-green-500 border-none"
         />
         <Link href="/portal/quiz/create">
           <Button>
@@ -73,11 +73,11 @@ export function DataTable<TData, TValue>({
           </Button>
         </Link>
       </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
+      <div className="overflow-hidden text-white rounded-lg border border-dark-400 shadow-lg">
+        <Table className="shad-table">
+          <TableHeader className="bg-dark-200">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className="shad-table-row-header">
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
@@ -97,6 +97,7 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  className="shad-table-row"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
@@ -127,6 +128,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
+          className="shad-gray-btn"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
@@ -135,6 +137,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
+          className="shad-gray-btn"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >

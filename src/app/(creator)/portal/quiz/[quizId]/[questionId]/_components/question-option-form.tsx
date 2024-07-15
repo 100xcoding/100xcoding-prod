@@ -22,7 +22,6 @@ export const QuestionOptionForm = ({
   quizId,
   questionId,
 }: QuestionOptionFormProps) => {
-  // console.log(initialData);
   const [isCreating, setIsCreating] = useState(false);
   const [content, setContent] = useState<string>("");
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
@@ -52,10 +51,10 @@ export const QuestionOptionForm = ({
     [questionId, refreshCreatorQuizQuestionData, content, isCorrect],
   );
   return (
-    <div className="relative mt-6 border dark:bg-muted rounded-md p-4">
+    <div className="relative mt-6 portal-form-box p-4">
       <div className="font-medium flex items-center justify-between">
         Quiz Questions
-        <Button onClick={toggleCreating} variant="ghost">
+        <Button onClick={toggleCreating}>
           {isCreating ? (
             <>Cancel</>
           ) : (

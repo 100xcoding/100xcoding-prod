@@ -58,7 +58,7 @@ export const TitleForm = ({ initialData, quizId }: TitleFormProps) => {
     [quizId, refreshCreatorQuizData],
   );
   return (
-    <div className="mt-6  dark:bg-muted rounded-md p-4">
+    <div className="mt-6 portal-form-box  p-4">
       <div className="font-medium flex items-center justify-between tracking-wide">
         Quiz title
         <Button onClick={toggleEdit} variant="ghost" className="cursor-pointer">
@@ -92,6 +92,7 @@ export const TitleForm = ({ initialData, quizId }: TitleFormProps) => {
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
+                      className="portal-input"
                       placeholder="e.g. 'javascript quiz'"
                       {...field}
                     />

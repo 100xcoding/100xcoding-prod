@@ -44,7 +44,7 @@ export const QuestionTitleForm = ({
     [refreshCreatorQuizQuestionData, questionId, content, quizId],
   );
   return (
-    <div className="mt-6 border dark:bg-muted rounded-md p-4">
+    <div className="mt-6 portal-form-box p-4">
       <div className="font-medium flex items-center justify-between">
         Question text
         <Button onClick={toggleEdit} variant="ghost">

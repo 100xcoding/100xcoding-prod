@@ -8,10 +8,7 @@ export const PortalMobileSidebar = () => {
       <SheetTrigger className="md:hidden pr-4 hover:opacity-75 transition">
         <Menu />
       </SheetTrigger>
-      <SheetContent
-        side="left"
-        className="p-0 dark:bg-muted-foreground border border-primary"
-      >
+      <SheetContent side="left" className="p-0 bg-dark-400">
         <PortalSidebar />
       </SheetContent>
     </Sheet>

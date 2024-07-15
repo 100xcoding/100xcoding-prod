@@ -58,7 +58,7 @@ export const DurationForm = ({ initialData, quizId }: DurationFormProps) => {
     [quizId, refreshCreatorQuizData],
   );
   return (
-    <div className="mt-6  dark:bg-muted rounded-md p-4">
+    <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between tracking-wide">
         Quiz duration
         <Button onClick={toggleEdit} variant="ghost" className="cursor-pointer">
@@ -93,6 +93,7 @@ export const DurationForm = ({ initialData, quizId }: DurationFormProps) => {
                     <Input
                       type="number"
                       disabled={isSubmitting}
+                      className="portal-input"
                       placeholder="e.g. '1'"
                       {...field}
                       onChange={(e) => field.onChange(parseInt(e.target.value))}

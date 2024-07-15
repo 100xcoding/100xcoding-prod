@@ -61,7 +61,7 @@ export const EditOption = ({
   return (
     <Dialog>
       <DialogTrigger>Open</DialogTrigger>
-      <DialogContent>
+      <DialogContent className="portal-form-box">
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <form onSubmit={handleSubmit} className="space-y-4 mt-4">

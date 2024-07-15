@@ -18,12 +18,9 @@ export const QuestionOptionsList = ({
   const onEdit = (id: string) => {};
   console.log(initialData);
   return (
-    <div className="mt-6 border dark:bg-muted  rounded-md p-4">
+    <div className="mt-6 portal-form-box p-4">
       {initialData?.map((option) => (
-        <div
-          className="flex items-center w-full border rounded-xl"
-          key={option.id}
-        >
+        <div className="flex items-center w-full  rounded-xl" key={option.id}>
           {/* <div
 						className={cn(
 							"px-2 py-3 border-r border-r-slate-200 hover:bg-slate-300 rounded-l-md transition"

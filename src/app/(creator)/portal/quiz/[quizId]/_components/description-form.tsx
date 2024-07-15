@@ -61,7 +61,7 @@ export const DescriptionForm = ({
     [quizId, refreshCreatorQuizData],
   );
   return (
-    <div className="mt-6  dark:bg-muted rounded-md p-4">
+    <div className="mt-6 portal-form-box p-4">
       <div className="font-medium flex items-center justify-between tracking-wide">
         Quiz description
         <Button onClick={toggleEdit} variant="ghost" className="cursor-pointer">
@@ -94,6 +94,7 @@ export const DescriptionForm = ({
                   <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Textarea
+                      className="portal-input"
                       disabled={isSubmitting}
                       placeholder="e.g. 'javascript quiz'"
                       {...field}
