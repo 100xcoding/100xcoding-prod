@@ -117,33 +117,35 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
     setIsActive(true);
   };
   return (
-    <div className="border">
-      <div className="flex bg-[#17023A]   w-full justify-between px-4 py-3">
+    <div className="container mx-auto text-white my-10">
+      <div className="flex bg-dark-400   w-full justify-between items-center px-4 py-3">
         <h2>Title of Quiz</h2>
         <h3>Timimg</h3>
-        <button>submit quiz</button>
+        <Button
+          variant={"secondary"}
+          className="bg-red-600 text-red-500 tracking-wide capitalize"
+        >
+          Submit quiz
+        </Button>
       </div>
-      <section className="my-10 bg-[#17023A]  py-4 space-y-2 px-4 rounded-md">
+      <section className="my-10 bg-dark-500  py-4 space-y-2 px-4 rounded-md">
         <p>Question {currentQuestionIndex + 1} of 30</p>
         <h2 className="text-xl tracking-wide">
           {quiz[currentQuestionIndex].text}
         </h2>
       </section>
-      <section className="bg-[#17023A]  py-4 space-y-2 px-4 rounded-md flex flex-col gap-4">
-        {quiz[currentQuestionIndex].options.map((option) => (
+      <section className="bg-dark-400  py-4 space-y-2 px-4 rounded-md flex flex-col gap-4">
+        {quiz[currentQuestionIndex].options.map((option, ind) => (
           <QuizOption
             key={option.id}
             handleClick={handleClick}
             option={option}
             selectedAnswer={selectedAnswer}
+            ind={ind}
           />
         ))}
-
-        {/* <QuizOption />
-                <QuizOption />
-                <QuizOption /> */}
       </section>
-      <section className="bg-[#17023A] py-4 rounded-md px-4 flex justify-between my-10">
+      <section className="bg-dark-500 py-4 rounded-md px-4 flex justify-between my-10">
         <Button
           disabled={currentQuestionIndex <= 0}
           onClick={handlePrevious}
@@ -163,14 +165,14 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
 };
 
 export default QuizPage;
-const QuizOption = ({ handleClick, option, selectedAnswer }: any) => {
+const QuizOption = ({ handleClick, option, selectedAnswer, ind }: any) => {
   return (
     <button
       onClick={() => handleClick(option.id)}
-      className={`border rounded-md  py-3 text-left px-4 flex items-center gap-4 ${option.id === selectedAnswer ? "dark:border-primary dark:bg-primary" : "border-muted-foreground "} `}
+      className={`border border-dark-500 rounded-md  py-3 text-left px-4 flex items-center gap-4 ${option.id === selectedAnswer ? "bg-green-600 text-green-500 border-none" : "border border-dark-500"} `}
     >
-      <span className="dark:bg-secondary-foreground dark:text-muted rounded-full  px-3 py-1 block">
-        1
+      <span className="bg-dark-200 rounded-full  px-3 py-1 block">
+        {ind + 1}
       </span>
       <span className="block">{option.text}</span>
     </button>

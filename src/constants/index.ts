@@ -22,7 +22,7 @@ export const navbarRoutes = [
   },
   {
     id: 4,
-    path: "/",
+    path: "/quizzes",
     text: "Quizzes",
   },
 ];

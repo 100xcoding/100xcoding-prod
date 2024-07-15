@@ -8,8 +8,10 @@ import {
 } from "@/components/ui/card";
 import { formatterDescription, getImageUrl } from "@/lib/utils";
 import { Challenge } from "@prisma/client";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 interface ChallengeCategory {
   name: string;
   id: string;

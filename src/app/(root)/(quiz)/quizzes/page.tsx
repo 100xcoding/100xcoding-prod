@@ -9,7 +9,7 @@ const items = [
 ];
 const QuizPage = () => {
   return (
-    <div className="py-10">
+    <div className="py-10 container mx-auto text-white">
       <div className=" my-4">
         <QuizCategories items={items} />
       </div>
