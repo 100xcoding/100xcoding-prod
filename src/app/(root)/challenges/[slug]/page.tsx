@@ -25,8 +25,8 @@ const SingleChallenge = async ({
     <section className="container mx-auto p-3 my-10 space-y-8">
       {/* TODO: CARD 1 to show challenge */}
       <Card className="bg-cardLg bg-no-repeat bg-cover shadow-lg w-full text-white border-none rounded-3xl ">
-        <CardHeader className="flex flex-col-reverse lg:flex-row justify-between items-center gap-6 lg:gap-24">
-          <div className="flex-1 space-y-4 md:space-y-6">
+        <CardHeader className="flex  flex-col-reverse lg:flex-row justify-between items-center gap-6 lg:gap-24 ">
+          <div className="flex-1 space-y-4 md:space-y-6 pt-4">
             <p className="bg-green-600 rounded-full text-green-400 w-fit px-4 py-2  text-xs xl:text-sm  font-semibold leading-[16px] uppercase tracking-widest">
               {challenge.challengeCategory?.name}
             </p>

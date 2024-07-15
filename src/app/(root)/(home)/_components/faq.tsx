@@ -18,7 +18,7 @@ export function FAQ() {
       >
         <AccordionItem
           value="item-1"
-          className="bg-blue-600 px-10 rounded-full border-none text-blue-500"
+          className="bg-dark-500 px-10 rounded-full border-none text-white"
         >
           <AccordionTrigger className=" text-bsae md:text-xl">
             How do I sign up?
@@ -30,7 +30,7 @@ export function FAQ() {
         </AccordionItem>
         <AccordionItem
           value="item-2"
-          className="bg-blue-600 px-10 rounded-full border-none text-blue-500"
+          className="bg-dark-500 px-10 rounded-full border-none text-white"
         >
           <AccordionTrigger className=" text-bsae md:text-xl">
             How do I sign up?
@@ -42,7 +42,7 @@ export function FAQ() {
         </AccordionItem>
         <AccordionItem
           value="item-3"
-          className="bg-blue-600 px-10 rounded-full border-none text-blue-500"
+          className="bg-dark-500 px-10 rounded-full border-none text-white"
         >
           <AccordionTrigger className=" text-bsae md:text-xl">
             How do I sign up?
@@ -54,7 +54,7 @@ export function FAQ() {
         </AccordionItem>
         <AccordionItem
           value="item-4"
-          className="bg-blue-600 px-10 rounded-full border-none text-blue-500"
+          className="bg-dark-500 px-10 rounded-full border-none text-white"
         >
           <AccordionTrigger className=" text-bsae md:text-xl">
             How do I sign up?

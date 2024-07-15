@@ -14,7 +14,7 @@ export const ShowWebsite = ({ solution, slug }: any) => {
   const [view, setView] = useState(1);
   return (
     <div className="mt-4  mx-auto w-full">
-      <div className="w-full border border-gray-700 border-b-0 bg-gray-800 flex items-center justify-between rounded-t-lg p-3">
+      <div className="w-full border border-gray-700 border-b-0 bg-blue-600 flex items-center justify-between rounded-t-lg p-3">
         <div className="w-15">
           <span className="w-3 h-3 rounded-full inline-block bg-red-500"></span>
           <span className="w-3 h-3 rounded-full bg-yellow-400 inline-block mx-2"></span>
@@ -25,14 +25,14 @@ export const ShowWebsite = ({ solution, slug }: any) => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <button
-                  className="flex items-center text-gray-400 border border-gray-600 bg-gray-700 transition hover:text-white hover:bg-gray-800 focus:outline-none p-2 mr-2 rounded-lg"
+                  className="flex items-center text-blue-500 border border-blue-500 bg-blue-600 transition hover:text-blue-500  focus:outline-none p-2 mr-2 rounded-lg hover:bg-blue-600"
                   onClick={() => setView(1)}
                 >
                   <MonitorCheck size={"18"} />
                 </button>
               </TooltipTrigger>
-              <TooltipContent>
-                <p>Add to library</p>
+              <TooltipContent className="bg-green-600 text-green-500 border-green-500">
+                <p>Desktop View</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
@@ -40,14 +40,14 @@ export const ShowWebsite = ({ solution, slug }: any) => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <button
-                  className="flex items-center text-gray-400 border border-gray-600 bg-gray-700 transition hover:text-white hover:bg-gray-800 focus:outline-none p-2 mr-2 rounded-lg"
+                  className="flex items-center text-blue-500 border border-blue-500 bg-blue-600 transition hover:text-blue-500  focus:outline-none p-2 mr-2 rounded-lg hover:bg-blue-600"
                   onClick={() => setView(2)}
                 >
                   <Smartphone size={"18"} />
                 </button>
               </TooltipTrigger>
-              <TooltipContent>
-                <p>Add to library</p>
+              <TooltipContent className="bg-green-600 text-green-500 border-green-500">
+                <p>Mobile View</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
@@ -59,13 +59,13 @@ export const ShowWebsite = ({ solution, slug }: any) => {
                 <Link
                   target="_blank"
                   href={`/playground/${slug}?solution=true`}
-                  className="flex items-center text-gray-400 border border-gray-600 bg-gray-700 transition hover:text-white hover:bg-gray-800 focus:outline-none p-2 mr-2 rounded-lg"
+                  className="flex items-center text-blue-500 border border-blue-500 bg-blue-600 transition hover:text-blue-500  focus:outline-none p-2 mr-2 rounded-lg hover:bg-blue-600"
                 >
                   <Code size="18" />
                 </Link>
               </TooltipTrigger>
-              <TooltipContent>
-                <p>Add to library</p>
+              <TooltipContent className="bg-green-600 text-green-500 border-green-500">
+                <p>View Code</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>

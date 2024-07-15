@@ -33,8 +33,8 @@ export const SolutionCard = ({
 }: SolutionCardProps) => {
   // console.log(user);
   return (
-    <Card className="max-w-[320px] md:max-w-[360px] lg:max-w-[400px] rounded-lg  border bg-[#17023A]">
-      <CardHeader className="bg-gradient-to-b from-violet-400 to-pink-400 via-orange-300 p-5 rounded-t-lg">
+    <Card className="max-w-[320px] md:max-w-[360px] lg:max-w-[400px] rounded-2xl  border-none  text-white bg-card bg-cover shadow-lg">
+      <CardHeader>
         <Link href={`/solutions/${challenge?.slug}`}>
           <Image
             src={getImageUrl(challenge?.image!)}
@@ -45,17 +45,17 @@ export const SolutionCard = ({
           />
         </Link>
       </CardHeader>
-      <CardContent className="mt-4 space-y-2 md:space-y-4">
-        <p className="dark:bg-primary max-w-max px-2 py-0.5 rounded-lg text-xs sm:text-sm font-raleway font-medium uppercase tracking-wider">
+      <CardContent className="space-y-2 md:space-y-4">
+        <p className="bg-green-600 rounded-full text-green-400 w-fit px-4 py-2  text-xs xl:text-sm  font-semibold leading-[16px] uppercase tracking-widest">
           {challenge?.challengeCategory?.name}
         </p>
         <Link
           href={`/solutions/${challenge?.slug}`}
-          className="block hover:underline underline-offset-2 capitalize font-inter tracking-wider text-xl md:text-2xl lg:text-3xl font-bold"
+          className="block hover:underline underline-offset-2 capitalize  tracking-wider text-xl md:text-2xl lg:text-3xl font-bold"
         >
           {challenge?.title}
         </Link>
-        <p className="font-inter text-sm md:text-base text-slate-400">
+        <p className=" text-sm md:text-base text-dark-700 tracking-wide leading-[1.6rem!important]">
           {challenge?.description}
         </p>
       </CardContent>

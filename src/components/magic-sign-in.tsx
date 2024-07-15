@@ -48,7 +48,7 @@ export function MagicSignIn() {
               <FormLabel className="text-base font-raleway ">Email</FormLabel>
               <FormControl>
                 <Input
-                  className="bg-[#110327] ring-offset-[#110327] focus-visible:ring-[#6665E5] border-none py-6 text-base"
+                  className="bg-dark-400 ring-offset-green-500  focus-visible:ring-green-500 border-none py-6 text-base"
                   placeholder="Enter your email"
                   {...field}
                 />
@@ -65,15 +65,5 @@ export function MagicSignIn() {
         </Button>
       </form>
     </Form>
-    // <form
-    //     action={async (formData) => {
-    //         "use server"
-    //         await signIn("resend", formData)
-    //     }}
-    // >
-    //     <Input type="email" name="email" placeholder="Enter email..." />
-    //     {/* <input type="text" name="email" placeholder="Email" /> */}
-    //     <Button type="submit" className="w-full">Signin with Resend</Button>
-    // </form>
   );
 }

@@ -5,13 +5,13 @@ import Link from "next/link";
 
 const LoginPage = () => {
   return (
-    <div className="bg-[#110327]">
-      <div className="container mx-auto h-screen">
-        <div className="flex items-center justify-center gap-10 h-full ">
-          <div className="bg-[#17023A] lg:w-[40%] w-[500px]  p-6 rounded-xl shadow-xl">
+    <div className="bg-dark-300 text-white flex max-h-screen h-screen">
+      <div className="container my-auto ">
+        <div className="sub-container max-w-[496px] mx-auto">
+          <div className="bg-card bg-cover shadow-lg p-6 rounded-xl">
             <Link
               href="/"
-              className="text-center block tracking-wide text-4xl font-bold font-raleway mt-4 mb-6"
+              className="text-center block tracking-wider text-4xl font-bold  mt-4 mb-6"
             >
               iKnowCode
             </Link>
@@ -23,7 +23,7 @@ const LoginPage = () => {
             <div className="space-y-4">
               <SignIn />
               <div className="text-center relative after:bg-white after:absolute after:top-1/2 after:left-0 after:w-full after:h-[2px] after:z-0">
-                <span className="relative z-10 inline-block bg-[#17023A] px-4 my-2">
+                <span className="relative z-10 inline-block bg-[#1F2527] px-4 my-2">
                   OR
                 </span>
               </div>
@@ -40,17 +40,16 @@ const LoginPage = () => {
               </Link>
             </small>
           </div>
-          <div className="hidden lg:block lg:w-[60%]   h-full relative">
-            <Image
-              src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              fill
-              className="object-cover"
-              // placeholder="blur"
-              alt="poster"
-            />
-          </div>
         </div>
       </div>
+      <Image
+        src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        width={1000}
+        height={1000}
+        className="object-cover max-w-[70%] w-full hidden md:block "
+        // placeholder="blur"
+        alt="poster"
+      />
     </div>
   );
 };

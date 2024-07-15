@@ -1,4 +1,3 @@
-import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,30 +13,32 @@ import { MdLogout } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
 import { SignOut } from "@/components/sign-out";
-export const ProfileMenu = ({ data }: any) => {
+export const ProfileMenu = ({ user }: any) => {
+  console.log(user);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
-          <AvatarImage src={data?.image} />
-          <AvatarFallback className="bg-green-500 ">S</AvatarFallback>
+          <AvatarImage src={user?.image} />
+          <AvatarFallback className="bg-green-600 text-green-500 uppercase text-xl font-semibold">
+            {user?.name.slice(0, 1)}
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-44 md:w-52">
+      <DropdownMenuContent className="w-44 md:w-52 border-none bg-dark-400 text-white">
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Link href={"/profile"} className="flex gap-3 items-center text-lg">
               <FaUser size={21} />
-              <span>Profile</span>
+              <p>Profile</p>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="bg-green-500" />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
             <div className="flex gap-3 items-center cursor-pointer text-lg">
               <MdLogout size={21} />
-              {/* <span>Logout</span> */}
               <SignOut />
             </div>
           </DropdownMenuItem>
