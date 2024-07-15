@@ -44,7 +44,7 @@ export const ResourceForm = ({
     setContent(initialData?.resource || "");
   }, [initialData]);
   return (
-    <div className="mt-6  dark:bg-muted rounded-md p-4">
+    <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between tracking-wide">
         Resources the Challenge
         <Button onClick={toggleEdit} variant="ghost" className="cursor-pointer">

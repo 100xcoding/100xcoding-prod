@@ -39,10 +39,10 @@ const CreateQuizPage = () => {
     }
   };
   return (
-    <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
+    <div className="max-w-5xl text-white mx-auto flex md:items-center md:justify-center h-full p-6">
       <div>
         <h1 className="text-2xl">Name the quiz</h1>
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-dark-700">
           What would you like to name a quiz? Don&apos;t worry, you can change
           this later.
         </p>
@@ -59,6 +59,7 @@ const CreateQuizPage = () => {
                   <FormLabel>Quiz title</FormLabel>
                   <FormControl>
                     <Input
+                      className="portal-input"
                       // disabled={isSubmitting}
                       placeholder="e.g. 'javascript array quiz '"
                       {...field}
@@ -72,7 +73,7 @@ const CreateQuizPage = () => {
               )}
             />
             <div className="flex items-center gap-x-2">
-              <Link href="/">
+              <Link href="/portal/quiz">
                 <Button type="button" variant="ghost">
                   Cancel
                 </Button>

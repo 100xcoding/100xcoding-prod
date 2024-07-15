@@ -62,8 +62,9 @@ export const Actions = ({ challengeId, isPublished }: ActionsProps) => {
       <Button
         onClick={onClick}
         disabled={isLoading || isPublished}
-        variant="outline"
+        variant="secondary"
         size="sm"
+        className="bg-green-600 text-green-400 tracking-wider text-base "
       >
         {isPublished ? "Unpublish" : "Publish"}
       </Button>

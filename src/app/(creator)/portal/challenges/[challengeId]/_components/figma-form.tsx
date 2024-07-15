@@ -68,7 +68,7 @@ export const FigmaForm = ({ initialData, challengeId }: FigmaFormProps) => {
   // 	allowfullscreen
   // ></iframe>
   return (
-    <div className="mt-6  dark:bg-muted rounded-md p-4">
+    <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between">
         Challenge Figma URLs
         <Button onClick={toggleEdit} variant="ghost">
@@ -121,6 +121,7 @@ export const FigmaForm = ({ initialData, challengeId }: FigmaFormProps) => {
                       disabled={isSubmitting}
                       placeholder="e.g. ''"
                       {...field}
+                      className="portal-input"
                     />
                   </FormControl>
                   <FormMessage />
@@ -138,6 +139,7 @@ export const FigmaForm = ({ initialData, challengeId }: FigmaFormProps) => {
                       disabled={isSubmitting}
                       placeholder="e.g. ''"
                       {...field}
+                      className="portal-input"
                     />
                   </FormControl>
                   <FormMessage />

@@ -84,7 +84,12 @@ export const columns: ColumnDef<Challenge>[] = [
       const isPublished = row.getValue("publish") || false;
 
       return (
-        <Badge className={cn("bg-slate-500", isPublished && "bg-sky-700")}>
+        <Badge
+          className={cn(
+            "bg-red-600 text-red-500",
+            isPublished && "bg-green-600 text-green-500",
+          )}
+        >
           {isPublished ? "Published" : "Draft"}
         </Badge>
       );
@@ -103,9 +108,9 @@ export const columns: ColumnDef<Challenge>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="bg-dark-400 text-white">
             <Link href={`/portal/challenges/${id}`}>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
                 <Pencil className="h-4 w-4 mr-2" />
                 Edit
               </DropdownMenuItem>

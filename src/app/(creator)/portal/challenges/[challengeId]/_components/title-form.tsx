@@ -81,7 +81,7 @@ export const TitleForm = ({ initialData, challengeId }: TitleFormProps) => {
     [slug, challengeId, refreshCreatorChallengeData],
   );
   return (
-    <div className="mt-6  dark:bg-muted rounded-md p-4">
+    <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between tracking-wide">
         Challenge title & slug
         <Button onClick={toggleEdit} variant="ghost" className="cursor-pointer">
@@ -118,6 +118,7 @@ export const TitleForm = ({ initialData, challengeId }: TitleFormProps) => {
                       disabled={isSubmitting}
                       placeholder="e.g. 'Advanced web development'"
                       {...field}
+                      className="portal-input"
                     />
                   </FormControl>
                   <FormDescription>
@@ -139,10 +140,12 @@ export const TitleForm = ({ initialData, challengeId }: TitleFormProps) => {
               <FormControl>
                 <Input
                   readOnly
+                  disabled
                   // disabled={isSubmitting}
                   placeholder="e.g. 'create-review-component'"
                   // {...field}
                   value={slug}
+                  className="portal-input"
                 />
               </FormControl>
               <FormDescription>

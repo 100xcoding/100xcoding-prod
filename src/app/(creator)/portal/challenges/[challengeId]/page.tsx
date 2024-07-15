@@ -33,7 +33,7 @@ const CreatorChallengePage = ({
       <Banner label="This course is unpublished. It will not be visible to the students." />
     )} */}
 
-      <div className="p-6">
+      <div className="p-6 text-white">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-y-2">
             <h1 className="text-2xl font-medium">Course setup</h1>

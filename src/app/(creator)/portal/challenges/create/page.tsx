@@ -47,10 +47,10 @@ const CreateChallenge = () => {
     }
   };
   return (
-    <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
+    <div className="max-w-5xl text-white mx-auto flex md:items-center md:justify-center h-full p-6">
       <div>
         <h1 className="text-2xl">Name the challenge</h1>
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-dark-700">
           What would you like to name a challenge? Don&apos;t worry, you can
           change this later.
         </p>
@@ -70,6 +70,7 @@ const CreateChallenge = () => {
                       // disabled={isSubmitting}
                       placeholder="e.g. 'Create review component'"
                       {...field}
+                      className="portal-input"
                     />
                   </FormControl>
                   <FormDescription>
@@ -88,6 +89,7 @@ const CreateChallenge = () => {
                   <FormControl>
                     <Input
                       readOnly
+                      className="portal-input"
                       // disabled={isSubmitting}
                       placeholder="e.g. 'create-review-component'"
                       {...field}
@@ -101,7 +103,7 @@ const CreateChallenge = () => {
               )}
             />
             <div className="flex items-center gap-x-2">
-              <Link href="/">
+              <Link href="/portal/challenges">
                 <Button type="button" variant="ghost">
                   Cancel
                 </Button>
