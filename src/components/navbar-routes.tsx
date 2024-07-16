@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./logo";
 import { ProfileMenu } from "./profile-menu";
-import { SignIn } from "@/components/sign-in";
 import { auth } from "@/auth";
 import { navbarRoutes } from "@/constants";
 import { Button } from "./ui/button";
@@ -10,7 +9,6 @@ export const NavbarRoutes = async () => {
   const user = await auth();
   return (
     <div className="md:flex justify-between items-center hidden py-1.5 ">
-      {/* TODO: REMOVE THE BACKGROUND  */}
       <div className="">
         <Link href="/">
           <Logo />
@@ -30,6 +28,11 @@ export const NavbarRoutes = async () => {
             );
           })}
         </ul>
+        {user?.user?.role == "creator" && (
+          <Button asChild>
+            <Link href="/portal/challenges">Portal</Link>
+          </Button>
+        )}
         {user ? (
           <ProfileMenu user={user?.user} />
         ) : (
