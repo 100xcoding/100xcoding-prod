@@ -51,71 +51,97 @@ const question = [
 ];
 const QuizPage = ({ params }: { params: { quizId: string } }) => {
   const [quiz, setQuiz] = useState(question);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [responses, setResponses] = useState([
-    { questionId: "", optionId: "" },
-  ]);
-  const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [isActive, setIsActive] = useState(false);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+  const [responses, setResponses] = useState<{ [key: string]: string }>({}); // const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  // const [responses, setResponses] = useState([
+  //   { questionId: "", optionId: "" },
+  // ]);
+  // const [selectedAnswer, setSelectedAnswer] = useState("");
+  // const [isActive, setIsActive] = useState(false);
   const handleNext = () => {
-    setIsActive(false);
-    if (quiz.length == currentQuestionIndex) {
-      return;
-    }
-    // if (!selectedAnswer) {
-    //     return;
-    // }
-    setCurrentQuestionIndex((prev) => prev + 1);
-    const alreadyAnswered = responses.find(
-      (response) => response.questionId === quiz[currentQuestionIndex].id,
-    );
-    console.log(alreadyAnswered);
-    if (alreadyAnswered) {
-      setSelectedAnswer(alreadyAnswered?.optionId!);
-
-      let updatedResponse = responses.find(
-        (response) => response.questionId === quiz[currentQuestionIndex].id,
-      );
-      if (updatedResponse) {
-        updatedResponse.optionId = selectedAnswer!;
-      }
-      const newResponse = [...responses, updatedResponse];
-      setResponses(newResponse);
-    } else {
-      setSelectedAnswer("");
-      const newResponse = [
-        ...responses,
-        {
-          questionId: quiz[currentQuestionIndex].id,
-          optionId: selectedAnswer,
-        },
-      ];
-      setResponses(newResponse);
-    }
-
-    // console.log(currentQuestionIndex);
+    setCurrentQuestionIndex((prev) => Math.min(prev + 1, quiz.length - 1));
   };
+  // const handleNext = () => {
+  //   setIsActive(false);
+  //   if (quiz.length == currentQuestionIndex) {
+  //     return;
+  //   }
+  //   setCurrentQuestionIndex((prev) => prev + 1);
+  //   const alreadyAnswered = responses.find(
+  //     (response) => response.questionId === quiz[currentQuestionIndex].id,
+  //   );
+  //   console.log(alreadyAnswered);
+  //   if (alreadyAnswered) {
+  //     setSelectedAnswer(alreadyAnswered?.optionId!);
+
+  //     let updatedResponse = responses.find(
+  //       (response) => response.questionId === quiz[currentQuestionIndex].id,
+  //     );
+  //     if (updatedResponse) {
+  //       updatedResponse.optionId = selectedAnswer!;
+  //     }
+  //     const newResponse = [...responses, updatedResponse];
+  //     setResponses(newResponse);
+  //   } else {
+  //     setSelectedAnswer("");
+  //     const newResponse = [
+  //       ...responses,
+  //       {
+  //         questionId: quiz[currentQuestionIndex].id,
+  //         optionId: selectedAnswer,
+  //       },
+  //     ];
+  //     setResponses(newResponse);
+  //   }
+
+  //   // console.log(currentQuestionIndex);
+  // };
   const handlePrevious = () => {
-    if (currentQuestionIndex < 0) {
-      return;
-    }
-    setCurrentQuestionIndex((prev) => prev - 1);
-    console.log(currentQuestionIndex);
-    console.log(responses);
-    const alreadyAnswered = responses.find(
-      (response) => response.questionId == quiz[currentQuestionIndex - 1].id,
-    );
-    console.log(alreadyAnswered);
-    if (alreadyAnswered) {
-      setSelectedAnswer(alreadyAnswered.optionId);
+    setCurrentQuestionIndex((prev) => Math.max(prev - 1, 0));
+  };
+  // const handlePrevious = () => {
+  //   if (currentQuestionIndex < 0) {
+  //     return;
+  //   }
+  //   setCurrentQuestionIndex((prev) => prev - 1);
+  //   console.log(currentQuestionIndex);
+  //   console.log(responses);
+  //   const alreadyAnswered = responses.find(
+  //     (response) => response.questionId == quiz[currentQuestionIndex - 1].id,
+  //   );
+  //   console.log(alreadyAnswered);
+  //   if (alreadyAnswered) {
+  //     setSelectedAnswer(alreadyAnswered.optionId);
+  //   }
+  // };
+  const handleSubmit = () => {
+    console.log("Submitted responses:", responses);
+    // Handle form submission logic here
+  };
+  // const handleClick = (id: string) => {
+  //   console.log("option-id", id);
+  //   setSelectedAnswer(id);
+  //   setIsActive(true);
+  // };
+  // const handleClick = (optionId: string) => {
+  //   setResponses((prevResponses) => ({
+  //     ...prevResponses,
+  //     [quiz[currentQuestionIndex].id]: optionId,
+  //   }));
+  // };
+  const handleClick = (optionId: string) => {
+    const currentQuestionId = quiz[currentQuestionIndex]?.id;
+    if (currentQuestionId) {
+      setResponses((prevResponses) => ({
+        ...prevResponses,
+        [currentQuestionId]: optionId,
+      }));
     }
   };
-  const handleSubmit = () => {};
-  const handleClick = (id: string) => {
-    console.log("option-id", id);
-    setSelectedAnswer(id);
-    setIsActive(true);
-  };
+  const currentQuestion = quiz[currentQuestionIndex];
+  const selectedAnswer = currentQuestion?.id
+    ? responses[currentQuestion.id]
+    : "";
   return (
     <div className="container mx-auto text-white my-10">
       <div className="flex bg-dark-400   w-full justify-between items-center px-4 py-3">
