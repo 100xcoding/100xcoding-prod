@@ -17,6 +17,7 @@ import { FigmaForm } from "./_components/figma-form";
 import { ImageForm } from "./_components/image-form";
 import { ResourceForm } from "./_components/resource-form";
 import { Actions } from "./_components/actions";
+import { AuthorForm } from "./_components/author-form";
 
 const CreatorChallengePage = ({
   params,
@@ -85,7 +86,9 @@ const CreatorChallengePage = ({
                 <IconBadge icon={ListChecks} />
                 {/* <h2 className="text-xl">Course chapters</h2> */}
               </div>
+
               <ShortDescriptionForm initialData={data} challengeId={data?.id} />
+              <AuthorForm initialData={data} challengeId={data?.id} />
               <LanguageForm
                 initialData={data}
                 challengeId={data?.id}

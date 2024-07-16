@@ -4,6 +4,7 @@ import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { getErrorMessage } from "@/lib/utils";
 import {
+  ChallengeAuthorSchema,
   ChallengeCategorySchema,
   ChallengeFigmaSchema,
   ChallengeShortDescriptionSchema,
@@ -19,6 +20,7 @@ type ChallengeDescriptionInput = z.infer<
 >;
 type ChallengeTechInput = z.infer<typeof ChallengeTechSchema>;
 type ChallengeFigmaInput = z.infer<typeof ChallengeFigmaSchema>;
+type ChallengeAuthorInput = z.infer<typeof ChallengeAuthorSchema>;
 export async function createChallengeAction(data: ChallengeInput) {
   try {
     const session = await auth();
@@ -205,6 +207,7 @@ export async function updateChallengeAboutAction(
     };
   }
 }
+
 export async function updateChallengeTechAction(
   data: ChallengeTechInput,
   challengeId: string,
@@ -268,6 +271,43 @@ export async function updateChallengeFigmaAction(
       return {
         success: true,
         message: "Challenge figma URL updated Successfully!",
+      };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
+export async function updateChallengeAuthorAction(
+  data: ChallengeAuthorInput,
+  challengeId: string,
+) {
+  try {
+    const session = await auth();
+    if (!session || !session.user || session.user.role !== "creator") {
+      redirect("/?msg='sign-in first' ");
+    }
+    const result = ChallengeAuthorSchema.safeParse(data);
+    if (result.error) {
+      return { success: false, error: result.error.format() };
+    }
+    if (result.success) {
+      const challenge = await db.challenge.update({
+        where: {
+          id: challengeId,
+          creatorId: session.user.id,
+        },
+        data: {
+          authorName: result.data.authorName,
+          authorProfile: result.data.authorProfile,
+        },
+      });
+      return {
+        success: true,
+        message: "Challenge author updated Successfully!",
       };
     }
   } catch (error) {

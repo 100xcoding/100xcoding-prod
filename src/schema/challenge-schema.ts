@@ -18,3 +18,7 @@ export const ChallengeFigmaSchema = z.object({
   figmaDesktop: z.string().min(1),
   figmaMobile: z.string().min(1),
 });
+export const ChallengeAuthorSchema = z.object({
+  authorName: z.string().optional(),
+  authorProfile: z.string().optional(),
+});
