@@ -22,8 +22,9 @@ export const DeleteComment = ({ id }: { id: string }) => {
       onClick={() => deleteComment(id)}
       className="bg-red-600 text-red-500"
       variant={"secondary"}
+      size={"sm"}
     >
-      <Trash2 size={20} />
+      <Trash2 size={18} />
     </Button>
   );
 };

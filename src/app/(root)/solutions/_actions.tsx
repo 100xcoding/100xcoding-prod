@@ -103,3 +103,41 @@ export async function deleteSolutionFeedback(id: string) {
     };
   }
 }
+export async function addCommentLike(commentId: string) {
+  try {
+    const session = await auth();
+    if (!session || !session.user || session.user.role !== "creator") {
+      redirect("/?msg='sign-in first' ");
+    }
+    const existingLike = await db.commentLike.findUnique({
+      where: {
+        commentId_userId: {
+          commentId: commentId,
+          userId: session?.user?.id,
+        },
+      },
+    });
+    if (existingLike) {
+      return {
+        success: false,
+        message: "already liked!",
+      };
+    }
+    const newLike = await db.commentLike.create({
+      data: {
+        userId: session?.user?.id,
+        commentId: commentId,
+      },
+    });
+    return {
+      success: true,
+      message: "liked Successfully!",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}

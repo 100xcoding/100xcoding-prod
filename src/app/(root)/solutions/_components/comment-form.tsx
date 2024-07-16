@@ -94,7 +94,7 @@ export const CommentForm = ({ slug, initialData, edit }: CommentFormProps) => {
                 type="submit"
                 variant={"default"}
               >
-                Add
+                Add feedback
               </Button>
             )}
             {edit && (

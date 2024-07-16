@@ -26,8 +26,9 @@ export const CommentEdit = async ({
         <Button
           variant="outline"
           className="bg-blue-600 border-none text-blue-400"
+          size={"sm"}
         >
-          <Pencil />
+          <Pencil size={18} />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-dark-200 text-white border-none">

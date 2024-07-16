@@ -33,6 +33,7 @@ model User {
   quizQuestions     QuizQuestion[]
   challengeSolution ChallengeSolution[]
   comments          Comment[]
+  commentLikes      CommentLike[]
 }
 
 model Account {
@@ -157,8 +158,22 @@ model Comment {
   updatedAt             DateTime          @updatedAt
   challengeSolution     ChallengeSolution @relation(fields: [challengeSolutionSlug], references: [slug], onDelete: Cascade)
   user                  User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes                 CommentLike[]
 
   @@index([challengeSolutionSlug])
+  @@index([userId])
+}
+
+model CommentLike {
+  id        String   @id @default(uuid())
+  commentId String
+  userId    String
+  createdAt DateTime @default(now())
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([commentId, userId]) // Ensures a user can like a comment only once
+  @@index([commentId])
   @@index([userId])
 }
 
