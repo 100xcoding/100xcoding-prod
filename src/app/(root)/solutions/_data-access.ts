@@ -67,3 +67,57 @@ export async function getChallengeSolution(slug: string) {
     };
   }
 }
+export async function getComments(slug: string) {
+  try {
+    const comments = await db.comment.findMany({
+      where: {
+        challengeSolutionSlug: slug,
+      },
+      include: {
+        user: {
+          select: {
+            username: true,
+            image: true,
+          },
+        },
+      },
+    });
+    return {
+      success: true,
+      comments,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
+export async function getComment(id: string) {
+  try {
+    const comment = await db.comment.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        user: {
+          select: {
+            username: true,
+            image: true,
+          },
+        },
+      },
+    });
+    return {
+      success: true,
+      comment,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}

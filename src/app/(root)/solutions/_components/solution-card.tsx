@@ -65,10 +65,8 @@ export const SolutionCard = ({
           <AvatarFallback>{(user?.name).slice(0, 1)}</AvatarFallback>
         </Avatar>
         <div className="">
-          <h4 className="font-roboto text-lg">{user?.name}</h4>
-          <p className="font-roboto text-slate-400">
-            {moment(updatedAt).fromNow()}
-          </p>
+          <h4 className=" text-lg">{user?.name}</h4>
+          <p className=" text-slate-400">{moment(updatedAt).fromNow()}</p>
         </div>
       </CardFooter>
     </Card>

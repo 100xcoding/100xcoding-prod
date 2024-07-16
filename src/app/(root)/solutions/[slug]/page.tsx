@@ -6,6 +6,9 @@ import { getImageUrl } from "@/lib/utils";
 import { ShowWebsite } from "../_components/show-website";
 import { Suspense } from "react";
 import { Loader2 } from "@/components/loader2";
+import { CommentForm } from "../_components/comment-form";
+import { CommentList } from "../_components/comment-list";
+import { Button } from "@/components/ui/button";
 
 const SingleSolution = async ({
   params: { slug },
@@ -54,6 +57,14 @@ const SingleSolution = async ({
           <ShowWebsite solution={solution} slug={slug} />
         </div>
       </Suspense>
+      <div className="my-6 text-white bg-dark-500 p-4 rounded-md space-y-4">
+        <div className="flex justify-between items-center">
+          <p className="capitalize font-semibold text-3xl">Feedback</p>
+          <Button>Add a Feedback</Button>
+        </div>
+        <CommentForm slug={slug} />
+        <CommentList slug={slug} />
+      </div>
     </section>
   );
 };

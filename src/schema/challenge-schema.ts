@@ -22,3 +22,6 @@ export const ChallengeAuthorSchema = z.object({
   authorName: z.string().optional(),
   authorProfile: z.string().optional(),
 });
+export const ChallengeSolutionCommentSchema = z.object({
+  content: z.string().min(20),
+});

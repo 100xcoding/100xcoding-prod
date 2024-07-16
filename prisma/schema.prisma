@@ -32,6 +32,7 @@ model User {
   quizAttempt       QuizAttempt[]
   quizQuestions     QuizQuestion[]
   challengeSolution ChallengeSolution[]
+  comments          Comment[]
 }
 
 model Account {
@@ -141,8 +142,23 @@ model ChallengeSolution {
   challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   status      Boolean   @default(false)
+  comments    Comment[]
 
   @@index([challengeId])
+  @@index([userId])
+}
+
+model Comment {
+  id                    String            @id @default(uuid())
+  challengeSolutionSlug String
+  userId                String
+  content               String
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  challengeSolution     ChallengeSolution @relation(fields: [challengeSolutionSlug], references: [slug], onDelete: Cascade)
+  user                  User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([challengeSolutionSlug])
   @@index([userId])
 }
 
