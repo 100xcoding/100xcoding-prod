@@ -5,11 +5,14 @@ import {
   publishChallengeSolution,
   updateChallengeSolution,
 } from "../_actions";
-const filterVisibleFiles = (visibleFiles: any, files: any) => {
+interface Files {
+  [key: string]: any; // You can replace `any` with a more specific type if you know it
+}
+const filterVisibleFiles = (visibleFiles: string[], files: Files): Files => {
   const visibleFileSet = new Set(visibleFiles);
   return Object.keys(files)
     .filter((file) => visibleFileSet.has(file))
-    .reduce((obj, key) => {
+    .reduce<Files>((obj, key) => {
       obj[key] = files[key];
       return obj;
     }, {});

@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useCreatorQuizQuestionById } from "@/services/queries";
-import { Quiz, QuizOption } from "@prisma/client";
 import { PlusCircle } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
@@ -10,13 +9,56 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { QuestionOptionsList } from "./question-options-list";
 import Editor from "@/components/react-quil-editor";
+import { Quiz, QuizQuestion, QuizOption } from "@prisma/client";
+// interface QuizOption {
+//   id: string;
+//   text: string;
+//   isCorrect: boolean;
+//   questionId: string;
+// }
+
+// interface QuizQuestion {
+//   id: string;
+//   text: string;
+//   quizId: string;
+//   creatorId: string;
+//   options: QuizOption[];
+//   score?: number;
+//   position?: number;
+// }
+
+// interface Quiz {
+//   id: string;
+//   title: string;
+//   description: string | null;
+//   creatorId: string;
+//   duration: number | null;
+//   quizCategoryId: string | null;
+//   image: string | null;
+//   createdAt: Date;
+//   updatedAt: Date;
+//   isPublished: boolean;
+// }
+// interface InitialData {
+//   quiz: Quiz;
+//   question: QuizQuestion;
+// }
+// interface QuestionOptionFormProps {
+//   initialData: InitialData;
+//   quizId: string;
+//   questionId: string;
+// }
+type QuizWithQuestions = Quiz & {
+  questions: (QuizQuestion & {
+    options: QuizOption[];
+  })[];
+};
 
 interface QuestionOptionFormProps {
-  initialData: Quiz & QuizOption;
+  initialData: QuizWithQuestions;
   quizId: string;
   questionId: string;
 }
-
 export const QuestionOptionForm = ({
   initialData,
   quizId,
@@ -88,16 +130,17 @@ export const QuestionOptionForm = ({
         <div
           className={cn(
             "text-sm mt-2",
-            !initialData?.options?.length && "text-slate-500 italic",
+            !initialData?.questions?.[0]?.options?.length &&
+              "text-slate-500 italic",
           )}
         >
-          {!initialData?.options?.length && "No options"}
+          {!initialData?.questions?.[0]?.options?.length && "No options"}
           <QuestionOptionsList
             // onEdit={onEdit}
             // onReorder={onReorder}
             quizId={quizId}
             questionId={questionId}
-            initialData={initialData?.options! || []}
+            initialData={initialData?.questions?.[0]?.options || []}
           />
         </div>
       )}
