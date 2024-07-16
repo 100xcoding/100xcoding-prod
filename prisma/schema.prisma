@@ -123,6 +123,8 @@ model Challenge {
   figmaMobile         String?
   image               String?
   resource            String?
+  authorName          String?
+  authorProfile       String?
   challengeSolution   ChallengeSolution[]
 }
 
