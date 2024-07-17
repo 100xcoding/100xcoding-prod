@@ -1,4 +1,8 @@
-import { Challenge, ChallengeSolution } from "@prisma/client";
+import {
+  PrismaClient,
+  Challenge as PrismaChallenge,
+  ChallengeCategory as PrismaChallengeCategory,
+} from "@prisma/client";
 import moment from "moment";
 import {
   Card,
@@ -12,19 +16,30 @@ import { formatterDescription, getImageUrl } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-interface ChallengeCategory {
-  name: string;
-  id: string;
-  score: number;
-}
-
-interface SolutionCardProps extends ChallengeSolution {
+// interface ChallengeCategory {
+//   name: string;
+//   id: string;
+//   score: number;
+// }
+type Challenge = PrismaChallenge & {
+  challengeCategory?: PrismaChallengeCategory | null;
+};
+// interface SolutionCardProps {
+//   challenge: Challenge;
+//   user: {
+//     name: string;
+//     image: string | null;
+//   };
+//   updatedAt: Date;
+//   challengeCategory?: ChallengeCategory | null;
+// }
+interface SolutionCardProps {
   challenge: Challenge;
   user: {
-    name: string;
+    name: string | null;
     image: string | null;
   };
-  challengeCategory?: ChallengeCategory | null;
+  updatedAt: Date;
 }
 export const SolutionCard = ({
   challenge,
@@ -61,8 +76,8 @@ export const SolutionCard = ({
       </CardContent>
       <CardFooter className="flex items-center gap-4">
         <Avatar className="h-12 w-12 object-cover">
-          <AvatarImage src={user?.image!} alt={user.name} />
-          <AvatarFallback>{(user?.name).slice(0, 1)}</AvatarFallback>
+          <AvatarImage src={user?.image!} alt={user?.name!} />
+          <AvatarFallback>{user?.name!.slice(0, 1)}</AvatarFallback>
         </Avatar>
         <div className="">
           <h4 className=" text-lg">{user?.name}</h4>

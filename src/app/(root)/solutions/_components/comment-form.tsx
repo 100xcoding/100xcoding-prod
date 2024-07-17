@@ -17,22 +17,33 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { AddSolutionFeedback, updateSolutionFeedback } from "../_actions";
 import { toast } from "sonner";
-import { CommentList } from "./comment-list";
-import { Comment } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { DialogTrigger } from "@/components/ui/dialog";
-interface CommentFormProps extends Comment {
-  user: {
+import { Comment } from "@prisma/client";
+// interface Comment {
+//   id: string;
+//   challengeSolutionSlug: string;
+//   userId: string;
+//   content: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+// }
+
+interface CommentFormProps {
+  slug: string;
+  initialData?: Comment | null;
+  edit?: boolean;
+  user?: {
     username: string;
     image?: string;
   };
 }
-interface CommentFormProps {
-  slug: string;
-  initialData?: Comment;
-  edit?: boolean;
-}
-export const CommentForm = ({ slug, initialData, edit }: CommentFormProps) => {
+
+export const CommentForm: React.FC<CommentFormProps> = ({
+  slug,
+  initialData,
+  edit,
+}) => {
   const form = useForm<z.infer<typeof ChallengeSolutionCommentSchema>>({
     resolver: zodResolver(ChallengeSolutionCommentSchema),
     defaultValues: useMemo(

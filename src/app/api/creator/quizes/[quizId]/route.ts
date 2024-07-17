@@ -5,6 +5,7 @@ export async function GET(
   req: Request,
   { params }: { params: { quizId: string } },
 ) {
+  const { quizId } = params;
   try {
     const session = await auth();
     if (!session) {
@@ -17,7 +18,7 @@ export async function GET(
       return new NextResponse("Unauthorized", { status: 401 });
     }
     const user = session?.user;
-    const { quizId } = params;
+
     const quiz = await db.quiz.findUnique({
       where: {
         id: quizId,
