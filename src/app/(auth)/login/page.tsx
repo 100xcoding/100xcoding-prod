@@ -1,9 +1,16 @@
+"use client";
 import { MagicSignIn } from "@/components/magic-sign-in";
 import { SignIn } from "@/components/sign-in";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 const LoginPage = () => {
+  const seacrhParams = useSearchParams();
+  const message = seacrhParams.get("msg");
+  if (message) {
+    toast.error(message);
+  }
   return (
     <div className="bg-dark-300 text-white flex max-h-screen h-screen">
       <div className="container my-auto ">

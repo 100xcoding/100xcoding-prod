@@ -59,7 +59,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   secret: Env.AUTH_SECRET,
   pages: {
-    signIn: "/",
+    signIn: "/login",
+    signOut: "/",
     verifyRequest: "/verification",
   },
   providers: [
@@ -68,6 +69,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: Env.AUTH_GITHUB_SECRET,
       allowDangerousEmailAccountLinking: true,
       profile(profile) {
+        console.log("PROFILE USER", profile);
         return {
           role: "user",
           email: profile.email,
@@ -117,7 +119,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const username = await generateUniqueUsername(user.email);
           await db.user.create({
             data: {
-              name: user.name,
+              name: user?.name ? user?.name : username,
               email: user.email,
               image: user.image,
               username,
@@ -147,6 +149,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user = token.user as AdapterUser;
       }
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) return url;
+      return baseUrl;
     },
   },
 });

@@ -2,10 +2,13 @@ import { auth } from "@/auth";
 import ProfileForm from "./_components/profile-form";
 import { ProfileImageForm } from "./_components/profile-image-form";
 import { SocialForm } from "./_components/social-form";
+import { redirect } from "next/navigation";
 
 const ProfilePage = async () => {
   const session = await auth();
-  console.log(session);
+  if (!session) {
+    redirect("/login?msg='Login First!'");
+  }
   return (
     <div className="my-10">
       <h1 className="text-center text-4xl font-poppins font-bold">

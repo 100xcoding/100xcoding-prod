@@ -20,7 +20,7 @@ export const ProfileMenu = ({ user }: any) => {
         <Avatar>
           <AvatarImage src={user?.image} />
           <AvatarFallback className="bg-green-600 text-green-500 uppercase text-xl font-semibold">
-            {user?.name.slice(0, 1)}
+            {user?.name ? user?.name?.slice(0, 1) : "C"}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
