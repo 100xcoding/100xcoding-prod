@@ -13,12 +13,13 @@ const LoginPage = () => {
               href="/"
               className="text-center block tracking-wider text-4xl font-bold  mt-4 mb-6"
             >
-              iKnowCode
+              100xCoding
             </Link>
             <p className="text-center text-lg mb-6">
               Welcome 👋
               <br />
-              Login to unlock access to iKnowCode!
+              Login to unlock access to{" "}
+              <span className="font-bold">100xCoding!</span>
             </p>
             <div className="space-y-4">
               <SignIn />

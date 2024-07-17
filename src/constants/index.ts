@@ -83,31 +83,37 @@ export const testimonialsData = [
     quote:
       "This platform has been a game-changer for my frontend development skills. The variety of projects is amazing, and each one is designed to tackle different aspects of frontend development. It's helped me build a strong portfolio and gain confidence in my abilities.",
     name: "Alex Johnson",
+    socialLink: "",
   },
   {
     quote:
       "I've tried many resources to improve my frontend skills, but this platform stands out. The projects are not only practical but also incredibly relevant to what employers are looking for. I've learned so much and feel well-prepared for real-world challenges.",
     name: "Samantha Lee",
+    socialLink: "",
   },
   {
     quote:
       "The frontend projects available on this platform are simply fantastic. They range from beginner to advanced levels, allowing me to steadily improve my skills. The support and community are also wonderful, making my learning experience enjoyable and effective.",
     name: "Michael Chen",
+    socialLink: "",
   },
   {
     quote:
       "Using this platform has been an invaluable part of my development journey. The projects are thoughtfully designed to enhance your learning curve. I appreciate how each project addresses different frontend techniques and technologies, making me a more well-rounded developer.",
     name: "Emily Taylor",
+    socialLink: "",
   },
   {
     quote:
       "I love this platform! The frontend projects are exactly what I needed to practice and perfect my skills. The hands-on experience I've gained here is unparalleled, and it's reflected in the improvement of my coding abilities and my confidence in tackling complex problems.",
     name: "Chris Morales",
+    socialLink: "",
   },
   {
     quote:
       "This platform offers an exceptional way to practice frontend development. The diversity and quality of the projects have been instrumental in my learning process. The practical experience and knowledge I've acquired have made a significant difference in my job readiness.",
     name: "Jessica Wong",
+    socialLink: "",
   },
 ];
 

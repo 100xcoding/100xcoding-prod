@@ -76,7 +76,7 @@ export const InfiniteMovingCards = ({
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)] ",
+        "scroller relative z-20  max-w-7xl overflow-hidden  md:[mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)] ",
         className,
       )}
     >
@@ -90,7 +90,7 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item, idx) => (
           <div
-            className="w-[350px] max-w-full  flex-shrink-0  md:w-[500px] relative rounded-2xl bg-card bg-cover p-[2px] overflow-hidden"
+            className="w-[280px] max-w-full  flex-shrink-0  md:w-[500px] relative rounded-2xl bg-card bg-cover p-[2px] overflow-hidden"
             key={item.name}
           >
             <li className=" px-8 py-6 rounded-2xl h-full">
@@ -100,14 +100,17 @@ export const InfiniteMovingCards = ({
                   className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
                 ></div>
                 <div className="relative z-20 mb-6 flex flex-row items-center justify-between">
-                  <span className=" text-lg leading-[1.6] text-white  font-poppins font-medium tracking-wide">
+                  <span className="text-base md:text-lg leading-[1.6] text-white   font-medium tracking-wide">
                     {item.name}
                   </span>
-                  <Link href={"/"} className="text-white ">
+                  <Link
+                    href={item?.socialLink ? item?.socialLink : ""}
+                    className="text-white "
+                  >
                     <FaLinkedin size={23} />
                   </Link>
                 </div>
-                <span className=" relative z-20 text-md leading-[1.6] text-dark-700 font-lato">
+                <span className=" relative z-20 text-sm md:text-base leading-[1.6] text-dark-700 font-lato">
                   {item.quote}
                 </span>
               </blockquote>

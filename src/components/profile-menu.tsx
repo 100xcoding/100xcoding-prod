@@ -14,7 +14,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { SignOut } from "@/components/sign-out";
 export const ProfileMenu = ({ user }: any) => {
-  console.log(user);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
