@@ -2,11 +2,12 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { getErrorMessage } from "@/lib/utils";
-import { ProfileFormSchema } from "@/schema";
+import { ProfileFormSchema, SocialLinkModalSchema } from "@/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 type Inputs = z.infer<typeof ProfileFormSchema>;
+type SocialInput = z.infer<typeof SocialLinkModalSchema>;
 export async function updateProfileAction(data: Inputs) {
   try {
     const session = await auth();
@@ -38,8 +39,8 @@ export async function updateProfileAction(data: Inputs) {
 }
 export async function updateProfileImageAction(fileName: string) {
   const session = await auth();
-  if (!session || !session.user || session.user.role !== "user") {
-    redirect("/?msg='sign-in first' ");
+  if (!session || !session.user) {
+    redirect("/login?msg='Login first!' ");
   }
   if (!fileName) {
     return {
@@ -120,7 +121,7 @@ export async function updateProfileImageAction(fileName: string) {
 
 export async function updateProfileResumeAction(fileName: string) {
   const session = await auth();
-  if (!session || !session.user || session.user.role !== "user") {
+  if (!session || !session.user) {
     redirect("/?msg='sign-in first' ");
   }
   if (!fileName) {
@@ -165,6 +166,39 @@ export async function updateProfileResumeAction(fileName: string) {
         message: "Resume Upload Successfully!",
       };
     }
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "Something went wrong, Try again!",
+      err: getErrorMessage(error),
+    };
+  }
+}
+
+export async function addSocialLink(data: SocialInput) {
+  const session = await auth();
+  if (!session || !session.user) {
+    redirect("/login?msg='Login first!' ");
+  }
+  const result = SocialLinkModalSchema.safeParse(data);
+  if (result.error) {
+    return { success: false, error: result.error.format() };
+  }
+  try {
+    const newuser = await db.userSocialLink.create({
+      data: {
+        userId: session?.user?.id,
+        socialLinkTypeId: data?.socialLinkId,
+        url: data?.socialLink,
+      },
+    });
+    revalidatePath("/profile");
+    return {
+      success: true,
+      data: "",
+      message: "added successfully",
+    };
   } catch (error) {
     console.log(error);
     return {
