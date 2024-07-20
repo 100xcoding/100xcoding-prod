@@ -22,6 +22,7 @@ const codeforcesProfileUrlRegex =
 const linkedInProfileUrlRegex =
   /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9-_%]+\/?$/;
 export const ProfileFormSchema = z.object({
+  name: z.string(),
   title: z.string().optional(),
   bio: z.string().optional(),
   website: z.string().optional(),
