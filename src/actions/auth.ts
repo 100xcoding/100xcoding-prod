@@ -3,11 +3,11 @@ import { signOut, signIn } from "@/auth";
 
 export async function signout() {
   await signOut({
-    redirectTo: "/login",
+    redirectTo: "/",
   });
 }
 export async function signin() {
-  await signIn("github", { redirectTo: "/" });
+  await signIn("github");
 }
 export async function magicLinkSignIn(formData: FormData) {
   await signIn("resend", formData);

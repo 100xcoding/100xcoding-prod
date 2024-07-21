@@ -208,3 +208,25 @@ export async function updateProfileResumeAction(fileName: string) {
 //     };
 //   }
 // }
+export async function getUser() {
+  try {
+    const session = await auth();
+    if (!session || !session.user) {
+      redirect("/login?msg='Login first!' ");
+    }
+    const user = await db.user.findUnique({
+      where: { id: session?.user?.id },
+    });
+    return {
+      success: true,
+      user,
+      message: "Successfully!",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Something went wrong, Try again!",
+      err: getErrorMessage(error),
+    };
+  }
+}

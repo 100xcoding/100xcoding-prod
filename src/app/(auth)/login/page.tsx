@@ -4,13 +4,16 @@ import { SignIn } from "@/components/sign-in";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { toast } from "sonner";
 const LoginPage = () => {
   const seacrhParams = useSearchParams();
   const message = seacrhParams.get("msg");
-  if (message) {
-    toast.error(message);
-  }
+  useEffect(() => {
+    if (message) {
+      toast.error(message);
+    }
+  }, [message]);
   return (
     <div className="bg-dark-300 text-white flex max-h-screen h-screen">
       <div className="container my-auto ">

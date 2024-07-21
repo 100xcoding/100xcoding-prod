@@ -9,6 +9,7 @@ import { db } from "./lib/db";
 import { CustomUser } from "./types";
 import Resend from "next-auth/providers/resend";
 import { randomBytes } from "crypto";
+import { authSendRequest } from "./lib/authSendRequest";
 
 // Utility function to generate a unique username
 const generateUniqueUsername = async (email: string) => {
@@ -69,7 +70,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: Env.AUTH_GITHUB_SECRET,
       allowDangerousEmailAccountLinking: true,
       profile(profile) {
-        console.log("PROFILE USER", profile);
         return {
           role: "user",
           email: profile.email,
@@ -80,8 +80,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
     Resend({
-      apiKey: Env.RESEND_API_KEY,
+      server: Env.RESEND_API_KEY,
       from: "test@codify.siddhantjain.co.in",
+      sendVerificationRequest(params) {
+        authSendRequest(params);
+      },
     }),
   ],
   callbacks: {
@@ -151,7 +154,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
     async redirect({ url, baseUrl }) {
-      if (url.startsWith(baseUrl)) return url;
+      // if (url.startsWith(baseUrl)) return url;
+      // return baseUrl;
+      const redirectUrl = new URL(url, baseUrl).searchParams.get("redirect");
+
+      if (redirectUrl) return `${baseUrl}${redirectUrl}`;
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
   },

@@ -69,7 +69,7 @@ export const SocialModal = ({ initialData }: SocialModalProps) => {
           Add Social Links
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px] md:max-w-[625px] bg-dark-200 text-white border-none">
+      <DialogContent className="sm:max-w-[525px] md:max-w-[625px] bg-dark-200 text-white border-none remove-scrollbar overflow-y-scroll max-h-screen">
         <DialogHeader>
           <DialogTitle>Add Social Links</DialogTitle>
           <DialogDescription></DialogDescription>

@@ -11,6 +11,7 @@ import {
 import { EditProfileForm } from "./edit-profile-form";
 import { getProfile } from "../_data-access";
 import { EditProfilePhoto } from "./edit-profile-photo";
+import { MdEdit } from "react-icons/md";
 export const EditProfileModal = async () => {
   const { user } = await getProfile();
   // console.log(user);
@@ -22,9 +23,10 @@ export const EditProfileModal = async () => {
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="text-green-500  border-green-500 rounded-full"
+          className="text-green-500 lg:flex lg:items-center lg:gap-2 border-green-500 rounded-full"
         >
-          Edit Profile
+          <MdEdit size={22} />
+          <span className="hidden lg:block">Edit Profile</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px] remove-scrollbar overflow-y-scroll max-h-screen bg-dark-200 text-white border-none">

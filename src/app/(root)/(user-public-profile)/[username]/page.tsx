@@ -20,7 +20,7 @@ import {
   SiGeeksforgeeks,
 } from "react-icons/si";
 import { IconType } from "react-icons";
-
+import { IoMdShare } from "react-icons/io";
 interface SocialLink {
   id: string;
   userId: string;
@@ -82,8 +82,8 @@ const UserPublicProfile = async ({
       <Card className="w-full bg-dark-500 border-dark-600 border-opacity-50 my-2 rounded-xl shadow-lg overflow-hidden">
         <CardHeader className="bg-gradient-to-r from-green-400 to-blue-500 h-[200px]"></CardHeader>
         <div className="px-4 pb-4">
-          <div className="flex items-center  justify-between relative">
-            <div className="">
+          <div className="flex flex-col md:flex-row md:items-center  justify-between relative">
+            <div className="w-full">
               <div className="-translate-y-1/2">
                 <Image
                   alt="profile"
@@ -97,13 +97,24 @@ const UserPublicProfile = async ({
                   className="rounded-full  object-cover aspect-square w-[200px] h-[200px] "
                 />
               </div>
-              <div className="-mt-20">
-                <h2 className="text-4xl font-bold tracking-wider">
+
+              <div className="-mt-28 md:-mt-20">
+                <div className="lg:hidden space-x-4  flex items-center justify-end">
+                  <Button className="rounded-full">
+                    {" "}
+                    <IoMdShare size={22} />{" "}
+                    <span className="hidden lg:inline-block">Share</span>
+                  </Button>
+                  {session?.user?.id === user?.id && <EditProfileModal />}
+                </div>
+                <h2 className="text-2xl md:text-4xl font-bold tracking-wider">
                   {user?.name}
                 </h2>
-                <h5 className="text-lg text-dark-700">@{user?.username}</h5>
+                <h5 className="textsm md:text-lg text-dark-700">
+                  @{user?.username}
+                </h5>
                 {user?.profile?.title ? (
-                  <p className="mt-4 text-xl font-medium tracking-wide">
+                  <p className="mt-4 text-lg md:text-xl font-medium tracking-wide">
                     {user?.profile?.title}
                   </p>
                 ) : (
@@ -113,8 +124,12 @@ const UserPublicProfile = async ({
                 )}
               </div>
             </div>
-            <div className="space-x-4">
-              <Button>Share</Button>
+            <div className="hidden   items-center lg:flex space-x-4">
+              <Button className="rounded-full lg:flex lg:items-center lg:gap-2">
+                {" "}
+                <IoMdShare size={22} />{" "}
+                <span className="hidden lg:block">Share</span>
+              </Button>
               {session?.user?.id === user?.id && <EditProfileModal />}
             </div>
           </div>
