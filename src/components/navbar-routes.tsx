@@ -36,7 +36,7 @@ export const NavbarRoutes = async () => {
         {user ? (
           <ProfileMenu user={user?.user} />
         ) : (
-          <Button asChild className="text-base font-poppins tracking-wide px-5">
+          <Button asChild className="text-base  tracking-wide px-5">
             <Link href="/login">Login</Link>
           </Button>
         )}

@@ -34,6 +34,7 @@ model User {
   challengeSolution ChallengeSolution[]
   comments          Comment[]
   commentLikes      CommentLike[]
+  socialLinks       UserSocialLink[]
 }
 
 model Account {
@@ -84,6 +85,25 @@ model Profile {
   profileImage String?
   resume       String? @unique
   user         User    @relation(fields: [userId], references: [id])
+}
+
+model SocialLinkType {
+  id    String           @id @default(uuid())
+  name  String           @unique
+  icon  String           @unique
+  links UserSocialLink[]
+}
+
+model UserSocialLink {
+  id               String         @id @default(uuid())
+  userId           String
+  socialLinkTypeId String
+  url              String
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  socialLinkType   SocialLinkType @relation(fields: [socialLinkTypeId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([socialLinkTypeId])
 }
 
 model SocialLink {

@@ -10,9 +10,6 @@ export async function GET(req: Request) {
     if (!session?.user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-    if (session?.user?.role !== "user") {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
     const user = session?.user;
 
     const profile = await db.user.findUnique({

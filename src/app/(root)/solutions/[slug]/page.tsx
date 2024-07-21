@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardHeader } from "@/components/ui/card";
 import { getChallengeSolution } from "../_data-access";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import { Loader2 } from "@/components/loader2";
 import { CommentForm } from "../_components/comment-form";
 import { CommentList } from "../_components/comment-list";
 import { Button } from "@/components/ui/button";
+import { auth } from "@/auth";
 
 const SingleSolution = async ({
   params: { slug },
@@ -17,6 +18,7 @@ const SingleSolution = async ({
 }) => {
   const { solution } = await getChallengeSolution(slug);
   // console.log(solution);
+  const session = await auth();
   return (
     <section className="container mx-auto mt-4 ">
       <Suspense fallback={<Loader2 />}>
@@ -60,10 +62,20 @@ const SingleSolution = async ({
       <div className="my-6 text-white bg-dark-500 p-4 rounded-md space-y-4">
         <div className="flex justify-between items-center">
           <p className="capitalize font-semibold text-3xl">Feedback</p>
-          <Button>Add a Feedback</Button>
+          {!session?.user && (
+            <Button asChild>
+              <Link href={`/login?redirect=/solutions/${slug}`}>
+                Add a Feedback
+              </Link>
+            </Button>
+          )}
         </div>
-        <CommentForm slug={slug} />
-        <CommentList slug={slug} />
+        {session?.user && (
+          <>
+            <CommentForm slug={slug} />
+            <CommentList slug={slug} />
+          </>
+        )}
       </div>
     </section>
   );

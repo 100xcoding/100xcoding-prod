@@ -7,7 +7,7 @@ export async function signout() {
   });
 }
 export async function signin() {
-  await signIn("github", { redirectTo: "/" });
+  await signIn("github");
 }
 export async function magicLinkSignIn(formData: FormData) {
   await signIn("resend", formData);

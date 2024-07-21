@@ -22,21 +22,22 @@ const codeforcesProfileUrlRegex =
 const linkedInProfileUrlRegex =
   /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9-_%]+\/?$/;
 export const ProfileFormSchema = z.object({
-  title: z
-    .string()
-    .max(30, {
-      message: "Title can upto 30 characters long.",
-    })
-    .optional(),
-  bio: z
-    .string()
-    .max(100, {
-      message: "Bio can upto 100 characters long.",
-    })
-    .optional(),
-  website: z.string().url().optional(),
+  name: z.string(),
+  title: z.string().optional(),
+  bio: z.string().optional(),
+  website: z.string().optional(),
   email: z.string().email(),
   username: z.string().toLowerCase(),
+  profileImage: z.custom<File[]>().optional(),
+  resume: z.custom<File[]>().optional(),
+});
+export const SocialLinkModalSchema = z.object({
+  socialLinkId: z.string({
+    required_error: "Please select a type.",
+  }),
+  socialLink: z.string().url({
+    message: "Enter a valid url",
+  }),
 });
 export const SocialLinkFormSchema = z.object({
   github: z

@@ -42,7 +42,8 @@ export const TypewriterEffect = ({
         },
       );
     }
-  }, [isInView, animate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isInView]);
 
   const renderWords = () => {
     return (
