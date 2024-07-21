@@ -1,5 +1,5 @@
+import { MagicMail } from "@/emails/MagicMail";
 import { resend } from "./resend";
-import MagicMail from "@/emails/MagicMail";
 
 export async function authSendRequest(params: any) {
   const { identifier: to, provider, url, theme } = params;
@@ -29,7 +29,7 @@ export async function authSendRequest(params: any) {
       to: to,
       subject: `Log in to ${host}`,
       text: text({ url, host }),
-      html: html({ url, host, theme }),
+      html: MagicMail({ url, host, theme }),
     });
     // console.log(data);
     return { success: true, data };
