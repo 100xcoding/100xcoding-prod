@@ -17,6 +17,9 @@ const ChallengesPage = async ({
   const { challenges, metadata } = await getChallenges({ take, skip });
   // console.log(metadata);
   // await new Promise(resolve => setTimeout(resolve, 3000))
+  if (!metadata) {
+    return;
+  }
   return (
     <div className="container p-3 my-10 mx-auto ">
       <Suspense fallback={<Loader2 />}>

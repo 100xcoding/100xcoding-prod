@@ -1,13 +1,13 @@
 type PaginationProps = {
   page?: string;
-  totalPages: number;
-  hasNextPage: boolean;
+  totalPages: number | undefined;
+  hasNextPage: boolean | undefined;
 };
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export const Pagination = (props: PaginationProps) => {
-  const { page = 1, totalPages, hasNextPage } = props;
+  const { page = 1, totalPages = 1, hasNextPage } = props;
 
   const currentPage = Math.min(Math.max(Number(page), 1), totalPages);
   // const getPagesToShow = () => {
