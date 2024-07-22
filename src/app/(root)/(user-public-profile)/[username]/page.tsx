@@ -1,3 +1,7 @@
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Profile ",
+};
 import {
   Card,
   CardContent,
@@ -100,7 +104,7 @@ const UserPublicProfile = async ({
 
               <div className="-mt-28 md:-mt-20">
                 <div className="lg:hidden space-x-4  flex items-center justify-end">
-                  <Button className="rounded-full">
+                  <Button className="rounded-full" aria-label="share">
                     {" "}
                     <IoMdShare size={22} />{" "}
                     <span className="hidden lg:inline-block">Share</span>
@@ -125,7 +129,10 @@ const UserPublicProfile = async ({
               </div>
             </div>
             <div className="hidden   items-center lg:flex space-x-4">
-              <Button className="rounded-full lg:flex lg:items-center lg:gap-2">
+              <Button
+                className="rounded-full lg:flex lg:items-center lg:gap-2"
+                aria-label="share"
+              >
                 {" "}
                 <IoMdShare size={22} />{" "}
                 <span className="hidden lg:block">Share</span>
@@ -153,6 +160,7 @@ const UserPublicProfile = async ({
           <div className="flex items-center gap-3">
             {user?.profile?.website && (
               <Link
+                aria-label="website-url"
                 href={user?.profile?.website}
                 className="bg-blue-600 p-1  text-blue-200 rounded-full w-10 text-2xl h-10 items-center flex justify-center"
               >
@@ -174,6 +182,7 @@ const UserPublicProfile = async ({
         <CardContent className="px-4">
           {user?.profile?.resume ? (
             <Link
+              aria-label="resume"
               href={getImageUrl(user?.profile?.resume!)}
               className="text-blue-500 underline"
             >
@@ -192,6 +201,7 @@ export default UserPublicProfile;
 const LinkCard = ({ url, icon: Icon }: any) => {
   return (
     <Link
+      aria-label={Icon}
       href={url}
       className="bg-blue-600 p-1  text-blue-200 rounded-full w-10 text-2xl h-10 items-center flex justify-center"
     >

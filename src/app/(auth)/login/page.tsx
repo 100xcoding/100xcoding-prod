@@ -20,6 +20,7 @@ const LoginPage = () => {
         <div className="sub-container max-w-[496px] mx-auto">
           <div className="bg-card bg-cover shadow-lg p-6 rounded-xl">
             <Link
+              aria-label="100xcoding"
               href="/"
               className="text-center block tracking-wider text-4xl font-bold  mt-4 mb-6"
             >
@@ -42,11 +43,19 @@ const LoginPage = () => {
             </div>
             <small className="block text-center mt-6 px-6">
               By clicking &#34;{"Login"}&#34; above, you agree to our{" "}
-              <Link className="text-[#6665E5] " href="/">
+              <Link
+                aria-label="terms-of-service"
+                className="text-[#6665E5] "
+                href="/"
+              >
                 Terms of service
               </Link>{" "}
               and acknowledge our{" "}
-              <Link className="text-[#6665E5]" href="/">
+              <Link
+                aria-label="privacy-policy"
+                className="text-[#6665E5]"
+                href="/"
+              >
                 Privacy Policy.
               </Link>
             </small>

@@ -50,7 +50,10 @@ export const SolutionCard = ({
   return (
     <Card className="max-w-[320px] md:max-w-[360px] lg:max-w-[400px] rounded-2xl  border-none  text-white bg-card bg-cover shadow-lg">
       <CardHeader>
-        <Link href={`/solutions/${challenge?.slug}`}>
+        <Link
+          href={`/solutions/${challenge?.slug}`}
+          aria-label="solution-image"
+        >
           <Image
             src={getImageUrl(challenge?.image!)}
             alt={challenge?.title}
@@ -65,6 +68,7 @@ export const SolutionCard = ({
           {challenge?.challengeCategory?.name}
         </p>
         <Link
+          aria-label="solution title"
           href={`/solutions/${challenge?.slug}`}
           className="block hover:underline underline-offset-2 capitalize  tracking-wider text-xl md:text-2xl lg:text-3xl font-bold"
         >

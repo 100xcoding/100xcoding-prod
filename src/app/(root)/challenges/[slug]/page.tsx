@@ -4,20 +4,51 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { getChallenge } from "../_data-access";
+import { getAllChallenges, getChallenge } from "../_data-access";
 import Link from "next/link";
 import Image from "next/image";
 import { getImageUrl } from "@/lib/utils";
 import { Play } from "lucide-react";
-import { Suspense } from "react";
+import { Suspense, cache } from "react";
 import { Loader2 } from "@/components/loader2";
+import { Metadata } from "next";
+interface AllChallengeIdType {
+  id: string;
+}
+export const revalidate = 60 * 60 * 24;
+export async function generateStaticParams() {
+  const { challenges }: any = await getAllChallenges();
+  return challenges?.map(({ slug }: { slug: string }) => ({ slug }));
+}
+// manual cache
+const getChallengeCache = cache(async (slug: string) => {
+  return await getChallenge(slug);
+});
 
+export async function generateMetadata({
+  params: { slug },
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const { challenge } = await getChallengeCache(slug);
+  return {
+    title: challenge?.title,
+    description: challenge?.description,
+    openGraph: {
+      images: [
+        {
+          url: getImageUrl(challenge?.image!),
+        },
+      ],
+    },
+  };
+}
 const SingleChallenge = async ({
   params: { slug },
 }: {
   params: { slug: string };
 }) => {
-  const { challenge } = await getChallenge(slug);
+  const { challenge } = await getChallengeCache(slug);
   if (!challenge) {
     return;
   }
@@ -37,6 +68,7 @@ const SingleChallenge = async ({
                 {challenge.description}
               </p>
               <Link
+                aria-label="start-challenge"
                 href={`/playground/${challenge.slug}`}
                 className="flex text-base md:text-lg items-center gap-2  w-fit  px-4 py-2.5 rounded-lg bg-blue-600 text-blue-400 capitalize font-openSans tracking-wide font-medium"
               >
@@ -91,6 +123,7 @@ const SingleChallenge = async ({
               </CardContent>
               <CardFooter>
                 <Link
+                  aria-label="join discord"
                   href={"/"}
                   className="flex text-base md:text-lg items-center gap-2  w-fit  px-4 py-2.5 rounded-lg bg-blue-600 text-blue-400 capitalize  tracking-wide font-medium"
                 >

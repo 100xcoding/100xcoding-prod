@@ -19,6 +19,7 @@ export const DeleteComment = ({ id }: { id: string }) => {
   };
   return (
     <Button
+      aria-label="delete comment"
       onClick={() => deleteComment(id)}
       className="bg-red-600 text-red-500"
       variant={"secondary"}

@@ -138,7 +138,7 @@ export const EditProfileForm = ({ initialData }: EditProfileForm) => {
           )}
         />
         <DialogTrigger asChild>
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" aria-label="save changes">
             Save changes
           </Button>
         </DialogTrigger>

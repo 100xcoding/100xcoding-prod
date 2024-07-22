@@ -61,6 +61,7 @@ export function MagicSignIn() {
           )}
         />
         <Button
+          aria-label="Log in using magic link"
           type="submit"
           disabled={isLoading}
           className="w-full tracking-wider font-poppins  capitalize py-6 text-base"

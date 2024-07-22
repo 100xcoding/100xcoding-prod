@@ -100,7 +100,9 @@ export const EditProfilePhoto = ({ initialData }: EditProfilePhotoProps) => {
             </div>
           </div>
           <DialogTrigger asChild className=" flex mt-2 justify-center">
-            <Button type="submit">Upload Image</Button>
+            <Button type="submit" aria-label="upload image">
+              Upload Image
+            </Button>
           </DialogTrigger>
         </form>
       </Form>

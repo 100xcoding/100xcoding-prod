@@ -81,7 +81,9 @@ export const EditOption = ({
                 Mark as Correct option
               </label>
             </div>
-            <Button type="submit">Create</Button>
+            <Button type="submit" aria-label="create">
+              Create
+            </Button>
           </form>
           <DialogDescription></DialogDescription>
         </DialogHeader>

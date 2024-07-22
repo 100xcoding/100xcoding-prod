@@ -54,6 +54,7 @@ export const Pagination = (props: PaginationProps) => {
   return (
     <div className="flex items-center justify-center space-x-6 text-black">
       <Link
+        aria-label="prev"
         className={cn(
           "rounded-md border border-gray-300 px-3 py-2 text-sm font-medium hover:bg-gray-50",
           currentPage === 1 ? "pointer-events-none bg-gray-100" : "",
@@ -70,6 +71,7 @@ export const Pagination = (props: PaginationProps) => {
         {pages.map((p, i) => (
           <Link
             key={p}
+            aria-label={`${p}`}
             className={cn(
               "relative inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-gray-50",
               p === currentPage ? "pointer-events-none bg-gray-100" : "",
@@ -84,6 +86,7 @@ export const Pagination = (props: PaginationProps) => {
       </nav>
 
       <Link
+        aria-label="next"
         className={cn(
           "rounded-md border border-gray-300 px-3 py-2 text-sm font-medium hover:bg-gray-50",
           !hasNextPage ? "pointer-events-none bg-gray-100" : "",

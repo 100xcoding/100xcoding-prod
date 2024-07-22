@@ -12,7 +12,11 @@ const VerificationPage = () => {
           A sign in link has been sent to <br /> your email address.
           <br /> via
         </p>
-        <Link href="/" className=" font-bold text-2xl block pt-6">
+        <Link
+          aria-label="100xcoding"
+          href="/"
+          className=" font-bold text-2xl block pt-6"
+        >
           100xCoding.com
         </Link>
       </div>

@@ -63,3 +63,25 @@ export async function getChallenge(slug: string) {
     };
   }
 }
+export async function getAllChallenges() {
+  try {
+    const challenges = await db.challenge.findMany({
+      where: {
+        publish: true,
+      },
+      select: {
+        slug: true,
+      },
+    });
+    return {
+      success: true,
+      challenges,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}

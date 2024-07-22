@@ -96,7 +96,7 @@ export const QuestionOptionForm = ({
     <div className="relative mt-6 portal-form-box p-4">
       <div className="font-medium flex items-center justify-between">
         Quiz Questions
-        <Button onClick={toggleCreating}>
+        <Button onClick={toggleCreating} aria-label="add a option">
           {isCreating ? (
             <>Cancel</>
           ) : (
@@ -123,7 +123,9 @@ export const QuestionOptionForm = ({
               Mark as Correct option
             </label>
           </div>
-          <Button type="submit">Create</Button>
+          <Button type="submit" aria-label="create">
+            Create
+          </Button>
         </form>
       )}
       {!isCreating && (

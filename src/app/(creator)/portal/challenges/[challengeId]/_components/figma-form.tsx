@@ -71,7 +71,7 @@ export const FigmaForm = ({ initialData, challengeId }: FigmaFormProps) => {
     <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between">
         Challenge Figma URLs
-        <Button onClick={toggleEdit} variant="ghost">
+        <Button onClick={toggleEdit} variant="ghost" aria-label="edit figma">
           {isEditing ? (
             <>Cancel</>
           ) : (
@@ -85,6 +85,7 @@ export const FigmaForm = ({ initialData, challengeId }: FigmaFormProps) => {
       {!isEditing && (
         <>
           <Link
+            aria-label="figma src"
             className={cn(
               "text-sm mt-2 underline block",
               !initialData?.figmaDesktop && "text-slate-500 italic",
@@ -94,6 +95,7 @@ export const FigmaForm = ({ initialData, challengeId }: FigmaFormProps) => {
             {initialData?.figmaDesktop ? "Figma Desktop Src" : "No Src URL"}
           </Link>
           <Link
+            aria-label="figma-src"
             className={cn(
               "text-sm mt-2 underline block",
               !initialData?.figmaMobile && "text-slate-500 italic",
@@ -151,6 +153,7 @@ export const FigmaForm = ({ initialData, challengeId }: FigmaFormProps) => {
                 disabled={!isValid || isSubmitting}
                 type="submit"
                 variant={"default"}
+                aria-label="submit"
               >
                 Save
               </Button>

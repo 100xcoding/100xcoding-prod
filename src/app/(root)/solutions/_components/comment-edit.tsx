@@ -24,6 +24,7 @@ export const CommentEdit = async ({
     <Dialog>
       <DialogTrigger asChild>
         <Button
+          aria-label="edit"
           variant="outline"
           className="bg-blue-600 border-none text-blue-400"
           size={"sm"}

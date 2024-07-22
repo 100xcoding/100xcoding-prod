@@ -66,7 +66,7 @@ export const AuthorForm = ({ initialData, challengeId }: AuthorFormProps) => {
     <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between">
         Challenge Author Details
-        <Button onClick={toggleEdit} variant="ghost">
+        <Button onClick={toggleEdit} variant="ghost" aria-label="Edit author">
           {isEditing ? (
             <>Cancel</>
           ) : (
@@ -81,6 +81,7 @@ export const AuthorForm = ({ initialData, challengeId }: AuthorFormProps) => {
         <>
           <p className="text-sm mt-2">{initialData?.authorName}</p>
           <Link
+            aria-label="author-profile-url"
             className={cn(
               "text-sm mt-2 underline block",
               !initialData?.authorProfile && "text-slate-500 italic",
@@ -138,6 +139,7 @@ export const AuthorForm = ({ initialData, challengeId }: AuthorFormProps) => {
                 disabled={!isValid || isSubmitting}
                 type="submit"
                 variant={"default"}
+                aria-label="save"
               >
                 Save
               </Button>

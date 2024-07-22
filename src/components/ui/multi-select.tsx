@@ -134,6 +134,7 @@ export const MultiSelect = React.forwardRef<
       <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
         <PopoverTrigger asChild>
           <Button
+            aria-label="select"
             ref={ref}
             {...props}
             onClick={handleTogglePopover}

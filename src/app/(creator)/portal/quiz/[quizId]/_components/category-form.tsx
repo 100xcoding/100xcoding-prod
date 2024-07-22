@@ -71,7 +71,7 @@ export const CategoryForm = ({
     <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between">
         Challenge category
-        <Button onClick={toggleEdit} variant="ghost">
+        <Button onClick={toggleEdit} variant="ghost" aria-label="edit category">
           {isEditing ? (
             <>Cancel</>
           ) : (
@@ -108,7 +108,11 @@ export const CategoryForm = ({
               )}
             />
             <div className="flex items-center gap-x-2">
-              <Button disabled={!isValid || isSubmitting} type="submit">
+              <Button
+                disabled={!isValid || isSubmitting}
+                type="submit"
+                aria-label="save"
+              >
                 Save
               </Button>
             </div>

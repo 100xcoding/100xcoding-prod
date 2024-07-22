@@ -19,6 +19,7 @@ export const EditResumeModal = async () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button
+          aria-label="edit resume"
           variant="outline"
           className="text-green-500  border-green-500 rounded-full"
         >

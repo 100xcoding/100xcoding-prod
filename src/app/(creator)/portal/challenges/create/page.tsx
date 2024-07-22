@@ -103,12 +103,13 @@ const CreateChallenge = () => {
               )}
             />
             <div className="flex items-center gap-x-2">
-              <Link href="/portal/challenges">
-                <Button type="button" variant="ghost">
+              <Link href="/portal/challenges" aria-label="cancel">
+                <Button type="button" variant="ghost" aria-label="cancel">
                   Cancel
                 </Button>
               </Link>
               <Button
+                aria-label="continue"
                 type="submit"
                 // disabled={isSubmitting}
               >

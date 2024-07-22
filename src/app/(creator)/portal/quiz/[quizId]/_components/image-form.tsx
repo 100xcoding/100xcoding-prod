@@ -84,7 +84,7 @@ export const ImageForm = ({ initialData, quizId }: ImageFormProps) => {
     <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between">
         Quiz image
-        <Button onClick={toggleEdit} variant="ghost">
+        <Button onClick={toggleEdit} variant="ghost" aria-label="edit image">
           {isEditing ? (
             <>Cancel</>
           ) : (
@@ -122,7 +122,7 @@ export const ImageForm = ({ initialData, quizId }: ImageFormProps) => {
               onChange={handleProfileImageChange}
               className="hidden"
             />
-            <Button asChild>
+            <Button asChild aria-label="upload image">
               <span>Upload Image</span>
             </Button>
           </Label>

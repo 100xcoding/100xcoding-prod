@@ -35,6 +35,7 @@ const SingleSolution = async ({
                 {solution?.challenge.description}
               </p>
               <Link
+                aria-label="solution"
                 href={`/playground/${solution?.challenge.slug}`}
                 className="flex text-base md:text-lg items-center gap-2  w-fit  px-4 py-2.5 rounded-lg bg-green-500 capitalize font-openSans tracking-wide font-medium"
               >
@@ -63,8 +64,11 @@ const SingleSolution = async ({
         <div className="flex justify-between items-center">
           <p className="capitalize font-semibold text-3xl">Feedback</p>
           {!session?.user && (
-            <Button asChild>
-              <Link href={`/login?redirect=/solutions/${slug}`}>
+            <Button asChild aria-label="add a feedback">
+              <Link
+                aria-label="add a feedback"
+                href={`/login?redirect=/solutions/${slug}`}
+              >
                 Add a Feedback
               </Link>
             </Button>

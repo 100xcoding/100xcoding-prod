@@ -13,6 +13,7 @@ export const CustomTabs = ({ activeFile, setActiveFile }: any) => {
     <div className="flex space-x-3 p-2 border-b border-gray-600 overflow-y-auto">
       {visibleFiles.map((name) => (
         <button
+          aria-label="get files"
           key={name}
           className={` ${name === activeFile ? "text-purple-500" : "text-white"}`}
           onClick={() => setActiveFile(name)}

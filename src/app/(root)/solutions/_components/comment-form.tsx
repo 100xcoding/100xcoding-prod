@@ -101,6 +101,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
           <div className="flex items-center gap-x-2">
             {!edit && (
               <Button
+                aria-label="add a feedback"
                 disabled={!isValid || isSubmitting}
                 type="submit"
                 variant={"default"}
@@ -111,6 +112,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
             {edit && (
               <DialogTrigger asChild>
                 <Button
+                  aria-label="save changes"
                   disabled={!isValid || isSubmitting}
                   type="submit"
                   variant={"default"}

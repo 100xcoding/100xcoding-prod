@@ -10,7 +10,7 @@ export const NavbarRoutes = async () => {
   return (
     <div className="md:flex justify-between items-center hidden py-1.5 ">
       <div className="">
-        <Link href="/">
+        <Link aria-label="100xcoding logo" href="/">
           <Logo />
         </Link>
       </div>
@@ -19,6 +19,7 @@ export const NavbarRoutes = async () => {
           {navbarRoutes.map((route) => {
             return (
               <Link
+                aria-label={route.text}
                 href={route.path}
                 key={route.id}
                 className="font-medium tracking-wide transition hover:text-green-500"
@@ -29,15 +30,23 @@ export const NavbarRoutes = async () => {
           })}
         </ul>
         {user?.user?.role == "creator" && (
-          <Button asChild>
-            <Link href="/portal/challenges">Portal</Link>
+          <Button asChild aria-label="portal">
+            <Link aria-label="portal" href="/portal/challenges">
+              Portal
+            </Link>
           </Button>
         )}
         {user ? (
           <ProfileMenu user={user?.user} />
         ) : (
-          <Button asChild className="text-base  tracking-wide px-5">
-            <Link href="/login">Login</Link>
+          <Button
+            asChild
+            className="text-base  tracking-wide px-5"
+            aria-label="login"
+          >
+            <Link aria-label="login" href="/login">
+              Login
+            </Link>
           </Button>
         )}
       </div>

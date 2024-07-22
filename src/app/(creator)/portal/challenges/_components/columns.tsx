@@ -22,6 +22,7 @@ export const columns: ColumnDef<Challenge>[] = [
       return (
         <Button
           variant="ghost"
+          aria-label="title"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Title
@@ -35,6 +36,7 @@ export const columns: ColumnDef<Challenge>[] = [
     header: ({ column }: any) => {
       return (
         <Button
+          aria-label="slug"
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
@@ -73,6 +75,7 @@ export const columns: ColumnDef<Challenge>[] = [
       return (
         <Button
           variant="ghost"
+          aria-label="published"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Published
@@ -103,13 +106,17 @@ export const columns: ColumnDef<Challenge>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-4 w-8 p-0">
+            <Button
+              aria-label="open-menu"
+              variant="ghost"
+              className="h-4 w-8 p-0"
+            >
               <span className="sr-only">Open menu</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="bg-dark-400 text-white">
-            <Link href={`/portal/challenges/${id}`}>
+            <Link href={`/portal/challenges/${id}`} aria-label="edit">
               <DropdownMenuItem className="cursor-pointer">
                 <Pencil className="h-4 w-4 mr-2" />
                 Edit

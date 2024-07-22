@@ -71,6 +71,7 @@ export const EditorFooter = ({
     <div className="absolute bottom-0 left-0 right-0">
       <div className="flex justify-end bg-dark-400 h-16 p-3 border-t border-green-500">
         <Button
+          aria-label="save"
           className="font-semibold mr-2"
           variant="secondary"
           size="lg"
@@ -80,6 +81,7 @@ export const EditorFooter = ({
           Save
         </Button>
         <Button
+          aria-label="mark as complete"
           className="font-semibold"
           // variant="primary"
           size="sm"

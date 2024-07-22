@@ -22,9 +22,9 @@ export const HowItWorks = () => {
             key={item.id}
           >
             <span className="">{<item.icon size={60} />}</span>
-            <h3 className="text-3xl font-bold font-openSans my-4 text-center tracking-wide">
+            <h2 className="text-3xl font-bold font-openSans my-4 text-center tracking-wide">
               {item.title}
-            </h3>
+            </h2>
             <p className="text-lg font-medium font-poppins text-center text-slate-100">
               {item.description}
             </p>

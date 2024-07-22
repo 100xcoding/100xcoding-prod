@@ -68,7 +68,12 @@ export const LanguageForm = ({
     <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between tracking-wide">
         Challenge Tech Stack
-        <Button onClick={toggleEdit} variant="ghost" className="cursor-pointer">
+        <Button
+          onClick={toggleEdit}
+          variant="ghost"
+          className="cursor-pointer"
+          aria-label="edit title"
+        >
           {isEditing ? (
             <>Cancel</>
           ) : (
@@ -107,7 +112,11 @@ export const LanguageForm = ({
               )}
             />
             <div className="flex items-center gap-x-2">
-              <Button disabled={!isValid || isSubmitting} type="submit">
+              <Button
+                disabled={!isValid || isSubmitting}
+                type="submit"
+                aria-label="save"
+              >
                 Save
               </Button>
             </div>

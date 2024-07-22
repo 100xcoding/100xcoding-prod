@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
-import { MdLogout } from "react-icons/md";
 import Link from "next/link";
 import { SignOut } from "@/components/sign-out";
 import { getUser } from "@/actions/update-profile-action";
@@ -18,7 +17,7 @@ export const ProfileMenu = async ({ user }: any) => {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
-          <AvatarImage src={user?.image} />
+          <AvatarImage src={user?.image} alt="profile-picture" />
           <AvatarFallback className="bg-green-600 text-green-500 uppercase text-xl font-semibold">
             {user?.name ? user?.name?.slice(0, 1) : "C"}
           </AvatarFallback>
@@ -28,6 +27,7 @@ export const ProfileMenu = async ({ user }: any) => {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Link
+              area-label="profile"
               href={`/${userData?.username}`}
               className="flex gap-3 items-center text-lg"
             >

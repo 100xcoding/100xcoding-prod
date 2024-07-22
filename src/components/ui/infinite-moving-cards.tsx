@@ -23,7 +23,7 @@ export const InfiniteMovingCards = ({
   className?: string;
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const scrollerRef = React.useRef<HTMLUListElement>(null);
+  const scrollerRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     addAnimation();
@@ -80,7 +80,7 @@ export const InfiniteMovingCards = ({
         className,
       )}
     >
-      <ul
+      <div
         ref={scrollerRef}
         className={cn(
           " flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap ",
@@ -89,7 +89,7 @@ export const InfiniteMovingCards = ({
         )}
       >
         {items.map((item, idx) => (
-          <div
+          <ul
             className="w-[280px] max-w-full  flex-shrink-0  md:w-[500px] relative rounded-2xl bg-card bg-cover p-[2px] overflow-hidden"
             key={item.name}
           >
@@ -104,6 +104,7 @@ export const InfiniteMovingCards = ({
                     {item.name}
                   </span>
                   <Link
+                    aria-label="linkedin- profile"
                     href={item?.socialLink ? item?.socialLink : ""}
                     className="text-white "
                   >
@@ -115,9 +116,9 @@ export const InfiniteMovingCards = ({
                 </span>
               </blockquote>
             </li>
-          </div>
+          </ul>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
