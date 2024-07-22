@@ -12,6 +12,9 @@ import { Play } from "lucide-react";
 import { Suspense, cache } from "react";
 import { Loader2 } from "@/components/loader2";
 import { Metadata } from "next";
+import parse from "html-react-parser";
+import { FaDiscord } from "react-icons/fa";
+
 interface AllChallengeIdType {
   id: string;
 }
@@ -70,7 +73,7 @@ const SingleChallenge = async ({
               <Link
                 aria-label="start-challenge"
                 href={`/playground/${challenge.slug}`}
-                className="flex text-base md:text-lg items-center gap-2  w-fit  px-4 py-2.5 rounded-lg bg-blue-600 text-blue-400 capitalize font-openSans tracking-wide font-medium"
+                className="flex text-base md:text-lg items-center gap-2  w-fit  px-4 py-2.5 rounded-lg bg-green-500 text-white capitalize font-openSans tracking-wide font-medium"
               >
                 start challenge
                 <Play />
@@ -96,26 +99,34 @@ const SingleChallenge = async ({
             ></iframe>
           </CardContent>
         </Card>
-        <div className="flex gap-4 flex-wrap lg:flex-nowrap">
-          <Card className="bg-cover shadow-lg text-white border-none bg-card rounded-2xl">
+        <div className="flex gap-4 flex-wrap lg:flex-nowrap w-full">
+          <Card className="bg-cover shadow-lg text-white border-none bg-card rounded-2xl min-w-max">
             <CardHeader>
-              <h3 className=" font-semibold tracking-wide text-3xl">📝Brief</h3>
+              <h3 className="font-semibold tracking-wide text-3xl">📝Brief</h3>
             </CardHeader>
-            <CardContent>{challenge.about}</CardContent>
+            <CardContent>
+              <div className="prose w-full prose-a:text-green-500 prose-headings:text-white text-white ">
+                {parse(challenge.about || "")}
+              </div>
+            </CardContent>
           </Card>
-          <div className="space-y-4">
+          <div className="space-y-4 ">
             <Card className="bg-cover shadow-lg text-white border-none bg-card rounded-2xl">
               <CardHeader>
-                <h3>💡 Resources</h3>
+                <h3 className="text-xl">💡Resources</h3>
               </CardHeader>
-              <CardContent>{challenge.resource}</CardContent>
+              <CardContent>
+                <div className="prose prose-a:text-green-500 prose-headings:text-white text-white ">
+                  {parse(challenge.resource || " ")}
+                </div>
+              </CardContent>
             </Card>
             <Card className="bg-cover shadow-lg text-white border-none bg-card rounded-2xl">
               <CardHeader>
-                <h3>Get Involved with the Community</h3>
+                <h3 className="text-xl">Get Involved with the Community</h3>
               </CardHeader>
               <CardContent>
-                <p>
+                <p className="text-base text-dark-700">
                   Join our Discord community and share your solutions with
                   others. Ask questions and get answers from the fellow
                   developers, help others and get involved with the community.
@@ -125,10 +136,10 @@ const SingleChallenge = async ({
                 <Link
                   aria-label="join discord"
                   href={"/"}
-                  className="flex text-base md:text-lg items-center gap-2  w-fit  px-4 py-2.5 rounded-lg bg-blue-600 text-blue-400 capitalize  tracking-wide font-medium"
+                  className="flex text-base md:text-lg items-center gap-2  w-fit  px-4 py-2.5 rounded-lg bg-[#5865F2] text-white capitalize  tracking-wide font-medium"
                 >
                   join discord
-                  <Play />
+                  <FaDiscord />
                 </Link>
               </CardFooter>
             </Card>

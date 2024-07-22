@@ -69,11 +69,11 @@ export const EditorFooter = ({
   };
   return (
     <div className="absolute bottom-0 left-0 right-0">
-      <div className="flex justify-end bg-dark-400 h-16 p-3 border-t border-green-500">
+      <div className="flex justify-end bg-dark-400 h-[5rem] p-3 border-t border-green-500">
         <Button
           aria-label="save"
           className="font-semibold mr-2"
-          variant="secondary"
+          variant="outline"
           size="lg"
           onClick={handleSave}
           // loading={playgroundResponse.isPending}
@@ -84,7 +84,7 @@ export const EditorFooter = ({
           aria-label="mark as complete"
           className="font-semibold"
           // variant="primary"
-          size="sm"
+
           onClick={handleSubmit}
           // loading={solutionResponse.isPending}
         >

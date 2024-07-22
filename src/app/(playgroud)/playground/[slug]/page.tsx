@@ -24,8 +24,11 @@ const PlaygroudSlug = ({ params: { slug } }: { params: { slug: string } }) => {
   const descriptionRef = useRef(null);
   const previewRef = useRef(null);
   const consoleRef = useRef(null);
-  if (solutionParams && !solution) {
+  if (!solutionParams) {
     redirect("/");
+  }
+  if (!solution) {
+    return <div>not found</div>;
   }
   return (
     <section className=" bg-dark-400 text-white">
@@ -50,11 +53,14 @@ const PlaygroudSlug = ({ params: { slug } }: { params: { slug: string } }) => {
               description={data?.description}
               title={data?.title}
               about={data?.about}
-              resource={data?.about}
+              resource={data?.resource}
             />
           </ResizablePanel>
           <ResizableHandle />
-          <ResizablePanel className="row-start-2 row-end-3 flex-1">
+          <ResizablePanel
+            defaultSize={75}
+            className="row-start-2 row-end-3 flex-1"
+          >
             <CustomSandpack
               previewRef={previewRef}
               consoleRef={consoleRef}

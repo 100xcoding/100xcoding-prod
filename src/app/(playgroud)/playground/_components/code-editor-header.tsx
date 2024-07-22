@@ -30,7 +30,7 @@ export const CodeEditorHeader = ({
               Exit
             </Link>
           </Button>
-          <ProfileMenu />
+          {/* <ProfileMenu /> */}
         </div>
       </div>
     </nav>

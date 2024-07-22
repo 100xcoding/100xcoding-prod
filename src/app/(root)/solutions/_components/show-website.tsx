@@ -60,7 +60,7 @@ export const ShowWebsite = ({ solution, slug }: any) => {
               <TooltipTrigger asChild>
                 <Link
                   aria-label="show code"
-                  target="_blank"
+                  // target="_blank"
                   href={`/playground/${slug}?solution=true`}
                   className="flex items-center text-blue-500 border border-blue-500 bg-blue-600 transition hover:text-blue-500  focus:outline-none p-2 mr-2 rounded-lg hover:bg-blue-600"
                 >

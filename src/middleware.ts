@@ -17,14 +17,21 @@ export default async function middleware(req: NextRequest) {
   );
   // console.log("middleware");
   if (!session && isProtected) {
+    console.log("middleware-1");
+
     return NextResponse.redirect(new URL("/login?msg='Login first!'", req.url));
   }
   if (session && isLoginRoute) {
+    console.log("middleware-2");
     return NextResponse.redirect(new URL("/", req.url));
   }
   if (isCreatorRoute && session?.user?.role !== "creator") {
+    console.log("middleware-3");
     return NextResponse.redirect(new URL("/", req.url));
   }
+  // if (session && isProtected) {
+  //   return NextResponse.next();
+  // }
 }
 export const config = {
   matcher: [
