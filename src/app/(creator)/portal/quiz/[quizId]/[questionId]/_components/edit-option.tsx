@@ -37,7 +37,7 @@ export const EditOption = ({
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
-      console.log(content);
+      // console.log(content);
       const response = await updateQuizQuestionOptionAction(
         content,
         isCorrect,

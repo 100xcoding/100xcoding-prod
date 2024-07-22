@@ -17,7 +17,7 @@ export async function updateProfile(data: Inputs) {
     if (result.error) {
       return { success: false, error: result.error.format() };
     }
-    console.log(result);
+    // console.log(result);
     // console.log(profileImage);
     await db.user.update({
       where: {
@@ -69,7 +69,7 @@ export async function addSocialLink(data: SocialInput) {
     redirect("/login?msg='Login first!' ");
   }
   const result = SocialLinkFormSchema.safeParse(data);
-  console.log(result);
+  // console.log(result);
   if (result.error) {
     return { success: false, error: result.error.format() };
   }
@@ -79,7 +79,7 @@ export async function addSocialLink(data: SocialInput) {
         userId: session?.user?.id,
       },
     });
-    console.log(isSocialLink);
+    // console.log(isSocialLink);
     if (isSocialLink) {
       await db.socialLink.update({
         where: {
@@ -103,7 +103,7 @@ export async function addSocialLink(data: SocialInput) {
       message: "added successfully",
     };
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return {
       success: false,
       message: "Something went wrong, Try again!",

@@ -27,7 +27,7 @@ export async function GET(
 
     return NextResponse.json(challenge);
   } catch (error) {
-    console.log("Challenge by id-", error);
+    // console.log("Challenge by id-", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

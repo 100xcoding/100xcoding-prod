@@ -5,7 +5,7 @@ export async function GET() {
     const categories = await db.quizCategory.findMany({});
     return NextResponse.json(categories);
   } catch (error) {
-    console.log("Quiz categories -", error);
+    // console.log("Quiz categories -", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

@@ -17,7 +17,7 @@ export const QuestionOptionsList = ({
   questionId,
 }: QuestionOptionsListProps) => {
   const onEdit = (id: string) => {};
-  console.log(initialData);
+  // console.log(initialData);
   return (
     <div className="mt-6 portal-form-box p-4 space-y-3">
       {initialData?.map((option) => (

@@ -4,6 +4,7 @@ import { ProfileMenu } from "./profile-menu";
 import { auth } from "@/auth";
 import { navbarRoutes } from "@/constants";
 import { Button } from "./ui/button";
+import { NavbarItem } from "./navbar-item";
 
 export const NavbarRoutes = async () => {
   const user = await auth();
@@ -17,16 +18,7 @@ export const NavbarRoutes = async () => {
       <div className="flex items-center gap-10">
         <ul className="flex gap-7 items-center text-lg">
           {navbarRoutes.map((route) => {
-            return (
-              <Link
-                aria-label={route.text}
-                href={route.path}
-                key={route.id}
-                className="font-medium tracking-wide transition hover:text-green-500"
-              >
-                {route.text}
-              </Link>
-            );
+            return <NavbarItem key={route.id} {...route} />;
           })}
         </ul>
         {user?.user?.role == "creator" && (

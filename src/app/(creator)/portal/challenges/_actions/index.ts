@@ -347,7 +347,7 @@ export async function updateChallengeImageAction(
       message: "Image Upload Successfully!",
     };
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return {
       success: false,
       message: "Something went wrong, Try again!",

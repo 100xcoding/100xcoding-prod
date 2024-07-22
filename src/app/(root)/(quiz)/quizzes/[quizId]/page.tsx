@@ -115,7 +115,7 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
   //   }
   // };
   const handleSubmit = () => {
-    console.log("Submitted responses:", responses);
+    // console.log("Submitted responses:", responses);
     // Handle form submission logic here
   };
   // const handleClick = (id: string) => {

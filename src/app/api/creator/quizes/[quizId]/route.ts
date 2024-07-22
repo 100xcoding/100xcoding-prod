@@ -31,7 +31,7 @@ export async function GET(
     // console.log("QUIZ-API ", quiz);
     return NextResponse.json(quiz);
   } catch (error) {
-    console.log("Quiz by id-", error);
+    // console.log("Quiz by id-", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

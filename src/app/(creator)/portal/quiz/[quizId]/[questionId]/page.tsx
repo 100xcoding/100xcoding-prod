@@ -13,7 +13,7 @@ const QuizQuestionPage = ({
   params: { quizId: string; questionId: string };
 }) => {
   const { data } = useCreatorQuizQuestionById(params.questionId, params.quizId);
-  console.log(data);
+  // console.log(data);
   return (
     <>
       {/* {!course?.isPublished && (

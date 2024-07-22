@@ -32,7 +32,7 @@ export const EditProfilePhoto = ({ initialData }: EditProfilePhotoProps) => {
     resolver: zodResolver(FormSchema),
   });
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+    // console.log(data);
     if (data?.profileImage) {
       const profile = data?.profileImage[0];
       const fileNameWithDate = appendDateToFileName(profile.name);

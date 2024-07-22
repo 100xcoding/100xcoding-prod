@@ -15,7 +15,7 @@ export default async function middleware(req: NextRequest) {
   const isLoginRoute = login.some((route) =>
     req.nextUrl.pathname.startsWith(route),
   );
-  console.log("middleware");
+  // console.log("middleware");
   if (!session && isProtected) {
     return NextResponse.redirect(new URL("/login?msg='Login first!'", req.url));
   }

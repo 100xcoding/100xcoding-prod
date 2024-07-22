@@ -15,16 +15,16 @@ export const navbarRoutes = [
     path: "/solutions",
     text: "Solutions",
   },
-  {
-    id: 3,
-    path: "/",
-    text: "Blog",
-  },
-  {
-    id: 4,
-    path: "/quizzes",
-    text: "Quizzes",
-  },
+  // {
+  //   id: 3,
+  //   path: "/",
+  //   text: "Blog",
+  // },
+  // {
+  //   id: 4,
+  //   path: "/quizzes",
+  //   text: "Quizzes",
+  // },
 ];
 
 export const mobileNavbarRoutes = [
@@ -40,18 +40,18 @@ export const mobileNavbarRoutes = [
     text: "Solutions",
     symbol: HiCodeBracketSquare,
   },
-  {
-    id: 3,
-    path: "/",
-    text: "Blog",
-    symbol: GrResources,
-  },
-  {
-    id: 4,
-    path: "/",
-    text: "Quizzes",
-    symbol: MdQuiz,
-  },
+  // {
+  //   id: 3,
+  //   path: "/",
+  //   text: "Blog",
+  //   symbol: GrResources,
+  // },
+  // {
+  //   id: 4,
+  //   path: "/",
+  //   text: "Quizzes",
+  //   symbol: MdQuiz,
+  // },
 ];
 
 export const workData = [

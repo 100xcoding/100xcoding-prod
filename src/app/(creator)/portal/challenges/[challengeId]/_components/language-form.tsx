@@ -48,7 +48,7 @@ export const LanguageForm = ({
   const onSubmit = useCallback(
     async (values: z.infer<typeof ChallengeTechSchema>) => {
       const response = await updateChallengeTechAction(values, challengeId);
-      console.log(response);
+      // console.log(response);
       if (response?.success) {
         setIsEditing(false);
         refreshCreatorChallengeData();

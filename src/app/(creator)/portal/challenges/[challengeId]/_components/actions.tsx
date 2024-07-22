@@ -29,7 +29,7 @@ export const Actions = ({ challengeId, isPublished }: ActionsProps) => {
 
       router.refresh();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error("Something went wrong");
     } finally {
       setIsLoading(false);

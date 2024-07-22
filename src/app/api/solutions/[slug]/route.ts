@@ -23,7 +23,7 @@ export async function GET(
     // console.log("QUIZ-API ", quiz);
     return NextResponse.json(solution);
   } catch (error) {
-    console.log("Challenge solution By Slug-", error);
+    // console.log("Challenge solution By Slug-", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

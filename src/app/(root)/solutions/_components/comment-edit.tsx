@@ -19,7 +19,7 @@ export const CommentEdit = async ({
   id: string;
 }) => {
   const { comment } = await getComment(id);
-  console.log(comment);
+  // console.log(comment);
   return (
     <Dialog>
       <DialogTrigger asChild>

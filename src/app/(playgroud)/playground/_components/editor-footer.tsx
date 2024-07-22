@@ -37,12 +37,12 @@ export const EditorFooter = ({
     if (playground) {
       // Update the data only
       const result = await updateChallengeSolution(updatedData, slug);
-      console.log(result);
+      // console.log(result);
     } else {
       // create solution record
-      console.log(updatedData);
+      // console.log(updatedData);
       const result = await createChallengeSolution(updatedData, slug);
-      console.log(result);
+      // console.log(result);
     }
     setIsDirty(false);
   };
@@ -55,7 +55,7 @@ export const EditorFooter = ({
         await handleSave();
       }
       const result = await publishChallengeSolution(slug);
-      console.log(result);
+      // console.log(result);
       setIsDirty(false);
       // if (!solutionResponse.error && !isCompleted) {
       // 	router.push({
@@ -64,7 +64,7 @@ export const EditorFooter = ({
       // 	});
       // }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   return (
