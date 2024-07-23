@@ -106,7 +106,7 @@ export const CustomSandpack = ({
                   <SandpackConsole
                     showResetConsoleButton
                     style={{
-                      height: "100%",
+                      height: "95%",
                     }}
                   />
                 </ResizablePanel>

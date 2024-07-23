@@ -167,8 +167,8 @@ export const FILES = {
     "/src/styles.css": {
       code: "body {\n  font-family: sans-serif;\n  background-color: #1F2937;\n  text-align: center;\n  color: white;\n  padding-top: 64px;\n}\n\nbutton {\n  background-color: #4F46E5;\n  transition: background-color 0.3s ease;\n  color: white;\n  padding: 12px;\n  border: none;\n  border-radius: 6px;\n  font-weight: semi-bold;\n  cursor: pointer;\n  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);\n}\n\nbutton:hover {\n  background-color: #4338CA;\n}\n",
     },
-    // "/src/index.js": {
-    //   code: 'import "./styles.css";\n\nconst button = document.querySelector("button")\nconst level = document.querySelector("#level")\n  \nbutton.addEventListener("click" , () => {\n  level.innerText++\n})\n',
-    // },
+    "/index.js": {
+      code: 'import "./styles.css";\n\nconst button = document.querySelector("button")\nconst level = document.querySelector("#level")\n  \nbutton.addEventListener("click" , () => {\n  level.innerText++\n})\n',
+    },
   },
 };
