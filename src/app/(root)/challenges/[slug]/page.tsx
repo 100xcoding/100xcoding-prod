@@ -14,6 +14,7 @@ import { Loader2 } from "@/components/loader2";
 import { Metadata } from "next";
 import parse from "html-react-parser";
 import { FaDiscord } from "react-icons/fa";
+import { notFound } from "next/navigation";
 
 interface AllChallengeIdType {
   id: string;
@@ -53,7 +54,7 @@ const SingleChallenge = async ({
 }) => {
   const { challenge } = await getChallengeCache(slug);
   if (!challenge) {
-    return;
+    notFound();
   }
   return (
     <section className="container mx-auto p-3 my-10 space-y-8">

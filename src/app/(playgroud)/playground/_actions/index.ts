@@ -8,10 +8,10 @@ export async function createChallengeSolution(data: any, slug: string) {
   try {
     const session = await auth();
     if (!session || !session.user || !session.user.id) {
-      redirect("/?msg='sign-in first' ");
+      redirect("/login?msg='sign-in first' ");
     }
     if (!data || !slug) {
-      return { success: false, message: "something went wrong" };
+      return { success: false, message: "Data missing" };
     }
     const challenge = await db.challenge.findUnique({
       where: {
@@ -30,12 +30,13 @@ export async function createChallengeSolution(data: any, slug: string) {
       data: {
         userId: session?.user?.id!,
         challengeId: challenge?.id!,
-        slug: slug,
+        slug: slug.concat(session?.user?.id),
         htmlContent: data.files["/index.html"]?.code!,
         jsContent: data.files["/index.js"]?.code!,
         cssContent: data.files["/src/styles.css"]?.code!,
       },
     });
+    console.log(solution);
     return { success: true, message: "saved successfully!" };
   } catch (error) {
     return {
@@ -49,7 +50,7 @@ export async function updateChallengeSolution(data: any, slug: string) {
   try {
     const session = await auth();
     if (!session || !session.user || !session.user.id) {
-      redirect("/?msg='sign-in first' ");
+      redirect("/login?msg='sign-in first' ");
     }
     if (!data || !slug) {
       return { success: false, message: "something went wrong" };
@@ -64,7 +65,7 @@ export async function updateChallengeSolution(data: any, slug: string) {
       return { success: false, message: "invalid challenge" };
     }
     const challengeSolution = await db.challengeSolution.update({
-      where: { slug },
+      where: { slug: slug.concat(session?.user?.id) },
       data: {
         htmlContent: data.files["/index.html"]?.code!,
         jsContent: data.files["/index.js"]?.code!,
@@ -114,7 +115,7 @@ export async function publishChallengeSolution(slug: string) {
       return { success: false, message: "invalid challenge" };
     }
     await db.challengeSolution.update({
-      where: { slug },
+      where: { slug: slug.concat(session?.user?.id) },
       data: {
         status: true,
       },

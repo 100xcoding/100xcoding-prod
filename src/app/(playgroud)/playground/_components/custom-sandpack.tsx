@@ -19,8 +19,10 @@ export const CustomSandpack = ({
   solution,
   slug,
   playground,
+  isSolution,
 }: any) => {
   let SolutionFiles;
+
   if (solution) {
     SolutionFiles = {
       "/index.html": {
@@ -46,7 +48,7 @@ export const CustomSandpack = ({
       },
     };
   }
-
+  console.log(SolutionFiles);
   return (
     <SandpackProvider
       template="vanilla"
@@ -65,7 +67,7 @@ export const CustomSandpack = ({
           size: "14px",
         },
       }}
-      files={SolutionFiles ? SolutionFiles : FILES.demo}
+      files={playground ? SolutionFiles : solution ? SolutionFiles : FILES.demo}
     >
       <SandpackLayout style={{ borderRadius: 0 }}>
         <div className="h-[calc(100vh-50px)] flex w-full gap-[1px]">
@@ -75,6 +77,7 @@ export const CustomSandpack = ({
                 slug={slug}
                 playground={playground}
                 solution={solution}
+                isSolution={isSolution}
               />
             </ResizablePanel>
             <ResizableHandle className="w-1 bg-dark-200 transition-colors hover:bg-gray-600" />

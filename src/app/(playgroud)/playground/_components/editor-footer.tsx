@@ -5,6 +5,7 @@ import {
   publishChallengeSolution,
   updateChallengeSolution,
 } from "../_actions";
+import { toast } from "sonner";
 interface Files {
   [key: string]: any; // You can replace `any` with a more specific type if you know it
 }
@@ -38,13 +39,25 @@ export const EditorFooter = ({
       // Update the data only
       const result = await updateChallengeSolution(updatedData, slug);
       // console.log(result);
+      if (result?.success) {
+        toast.success("Saved Successfully!");
+        setIsDirty(false);
+      } else {
+        toast.error(result?.err);
+        setIsDirty(true);
+      }
     } else {
       // create solution record
-      // console.log(updatedData);
       const result = await createChallengeSolution(updatedData, slug);
-      // console.log(result);
+      if (result?.success) {
+        toast.success("Saved Successfully!");
+        setIsDirty(false);
+      } else {
+        setIsDirty(true);
+        toast.error(result?.message);
+        toast.error(result?.err);
+      }
     }
-    setIsDirty(false);
   };
   const handleSubmit = async () => {
     const updatedData = {
@@ -55,6 +68,12 @@ export const EditorFooter = ({
         await handleSave();
       }
       const result = await publishChallengeSolution(slug);
+      if (result?.success) {
+        toast.success("Challenge completed successfully!");
+      } else {
+        toast.error(result?.err);
+        toast.error(result?.message);
+      }
       // console.log(result);
       setIsDirty(false);
       // if (!solutionResponse.error && !isCompleted) {
@@ -68,7 +87,7 @@ export const EditorFooter = ({
     }
   };
   return (
-    <div className="absolute bottom-0 left-0 right-0">
+    <div className="absolute bottom-0 left-0 right-0   z-50">
       <div className="flex justify-end bg-dark-400 h-[5rem] p-3 border-t border-green-500">
         <Button
           aria-label="save"

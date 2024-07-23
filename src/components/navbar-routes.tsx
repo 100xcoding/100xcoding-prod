@@ -9,7 +9,7 @@ import { NavbarItem } from "./navbar-item";
 export const NavbarRoutes = async () => {
   const user = await auth();
   return (
-    <div className="md:flex justify-between items-center hidden py-1.5 ">
+    <div className="md:flex justify-between items-center hidden py-1 ">
       <div className="">
         <Link aria-label="100xcoding logo" href="/">
           <Logo />
