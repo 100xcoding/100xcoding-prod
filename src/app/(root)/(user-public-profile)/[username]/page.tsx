@@ -46,12 +46,16 @@ type IconMap = {
 import { TbWorld } from "react-icons/tb";
 import { EditResumeModal } from "../_components/edit-resume-modal";
 import { auth } from "@/auth";
+import { notFound, redirect } from "next/navigation";
 const UserPublicProfile = async ({
   params,
 }: {
   params: { username: string };
 }) => {
   const { user } = await getPublicProfile(params?.username);
+  if (!user) {
+    notFound();
+  }
   const session = await auth();
   const iconMap: IconMap = {
     github: FaGithub,
@@ -82,7 +86,7 @@ const UserPublicProfile = async ({
         }))
     : [];
   return (
-    <section className="mx-auto container text-white">
+    <section className="mx-auto container text-white my-2">
       <Card className="w-full bg-dark-500 border-dark-600 border-opacity-50 my-2 rounded-xl shadow-lg overflow-hidden">
         <CardHeader className="bg-gradient-to-r from-green-400 to-blue-500 h-[200px]"></CardHeader>
         <div className="px-4 pb-4">
