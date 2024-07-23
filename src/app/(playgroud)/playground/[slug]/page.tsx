@@ -59,7 +59,6 @@ const PlaygroudSlug = async ({
               solution={null}
               playground={solution}
               slug={slug}
-              isSolution={false}
             />
           </ResizablePanel>
         </ResizablePanelGroup>

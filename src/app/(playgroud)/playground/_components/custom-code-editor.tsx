@@ -27,12 +27,7 @@ export const getLanguageOfFile = (filePath: any) => {
       return "";
   }
 };
-export const CustomCodeEditor = ({
-  playground,
-  solution,
-  slug,
-  isSolution,
-}: any) => {
+export const CustomCodeEditor = ({ playground, solution, slug }: any) => {
   const [isDirty, setIsDirty] = useState(false);
   const user = useCurrentUser();
   const [activeFile, setActiveFile] = useState("/index.html");
