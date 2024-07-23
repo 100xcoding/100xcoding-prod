@@ -17,8 +17,9 @@ const SingleSolution = async ({
   params: { slug: string };
 }) => {
   const { solution } = await getChallengeSolution(slug);
-  // console.log(solution);
   const session = await auth();
+  console.log(session);
+  console.log(solution);
   return (
     <section className="container mx-auto mt-4 ">
       <Suspense fallback={<Loader2 />}>
@@ -35,14 +36,15 @@ const SingleSolution = async ({
                 {solution?.challenge.description}
               </p>
               <Link
-                href={`/playground/${solution?.challenge.slug}`}
+                aria-label="solution"
+                href={`/solutions`}
                 className="flex text-base md:text-lg items-center gap-2  w-fit  px-4 py-2.5 rounded-lg bg-green-500 capitalize font-openSans tracking-wide font-medium"
               >
                 Explore more
                 {/* <Play /> */}
               </Link>
             </div>
-            <div className=" border   ">
+            <div className="    ">
               <Image
                 src={getImageUrl(solution?.challenge?.image!)}
                 width={"500"}
@@ -63,8 +65,11 @@ const SingleSolution = async ({
         <div className="flex justify-between items-center">
           <p className="capitalize font-semibold text-3xl">Feedback</p>
           {!session?.user && (
-            <Button asChild>
-              <Link href={`/login?redirect=/solutions/${slug}`}>
+            <Button asChild aria-label="add a feedback">
+              <Link
+                aria-label="add a feedback"
+                href={`/login?redirect=/solutions/${slug}`}
+              >
                 Add a Feedback
               </Link>
             </Button>

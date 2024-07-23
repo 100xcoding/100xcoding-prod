@@ -32,7 +32,7 @@ export const EditProfilePhoto = ({ initialData }: EditProfilePhotoProps) => {
     resolver: zodResolver(FormSchema),
   });
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+    // console.log(data);
     if (data?.profileImage) {
       const profile = data?.profileImage[0];
       const fileNameWithDate = appendDateToFileName(profile.name);
@@ -100,7 +100,9 @@ export const EditProfilePhoto = ({ initialData }: EditProfilePhotoProps) => {
             </div>
           </div>
           <DialogTrigger asChild className=" flex mt-2 justify-center">
-            <Button type="submit">Upload Image</Button>
+            <Button type="submit" aria-label="upload image">
+              Upload Image
+            </Button>
           </DialogTrigger>
         </form>
       </Form>

@@ -69,6 +69,7 @@ export const EditResume = ({ initialData }: EditResumeProps) => {
             {initialData && (
               <div className="bg-dark-400 w-full flex items-center justify-center py-5 rounded-lg">
                 <Link
+                  aria-label="resume"
                   href={getImageUrl(initialData!)}
                   className="underline text-green-500"
                 >
@@ -97,7 +98,7 @@ export const EditResume = ({ initialData }: EditResumeProps) => {
             </div>
           </div>
           <DialogTrigger asChild>
-            <Button type="submit" className="w-full mt-4">
+            <Button type="submit" className="w-full mt-4" aria-label="upload">
               Upload
             </Button>
           </DialogTrigger>

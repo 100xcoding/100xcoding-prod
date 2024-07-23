@@ -18,7 +18,10 @@ export const MobileSidebar = async () => {
           {session?.user && <ProfileMenu user={session?.user} />}
         </div>
         <Sheet>
-          <SheetTrigger className="md:hidden  hover:opacity-75 transition flex gap-6 items-center">
+          <SheetTrigger
+            aria-label="menu"
+            className="md:hidden  hover:opacity-75 transition flex gap-6 items-center"
+          >
             <Menu size={28} />
           </SheetTrigger>
           <SheetContent className="bg-dark-200 text-white border-green-500">
@@ -27,6 +30,7 @@ export const MobileSidebar = async () => {
                 {mobileNavbarRoutes.map((route) => {
                   return (
                     <Link
+                      aria-label={route.text}
                       href={route.path}
                       key={route.id}
                       className="flex gap-4 items-center font-medium tracking-wide transition hover:text-green-500"
@@ -39,10 +43,15 @@ export const MobileSidebar = async () => {
               </ul>
               {!session?.user && (
                 <Button
+                  aria-label="Get Started"
                   asChild
                   className="text-base w-full  tracking-wide px-5"
                 >
-                  <Link href="/login" className="block w-full">
+                  <Link
+                    aria-label="login"
+                    href="/login"
+                    className="block w-full"
+                  >
                     Get Started 🚀
                   </Link>
                 </Button>

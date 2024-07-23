@@ -1,3 +1,7 @@
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Solutions ",
+};
 import { SolutionCard } from "./_components/solution-card";
 import { getChallengeSolutions } from "./_data-access";
 

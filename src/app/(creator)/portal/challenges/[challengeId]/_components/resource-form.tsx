@@ -47,7 +47,12 @@ export const ResourceForm = ({
     <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between tracking-wide">
         Resources the Challenge
-        <Button onClick={toggleEdit} variant="ghost" className="cursor-pointer">
+        <Button
+          onClick={toggleEdit}
+          variant="ghost"
+          className="cursor-pointer"
+          aria-label="edit resources"
+        >
           {isEditing ? (
             "Cancel"
           ) : (
@@ -68,7 +73,9 @@ export const ResourceForm = ({
       {isEditing && (
         <form className="space-y-4" onSubmit={handleSubmit}>
           <Editor value={content} setValue={setContent} />
-          <Button type="submit">Save</Button>
+          <Button type="submit" aria-label="save">
+            Save
+          </Button>
         </form>
       )}
     </div>

@@ -49,7 +49,7 @@ export const QuestionTitleForm = ({
     <div className="mt-6 portal-form-box p-4">
       <div className="font-medium flex items-center justify-between">
         Question text
-        <Button onClick={toggleEdit} variant="ghost">
+        <Button onClick={toggleEdit} variant="ghost" aria-label="edit title">
           {isEditing ? (
             <>Cancel</>
           ) : (
@@ -70,7 +70,9 @@ export const QuestionTitleForm = ({
       {isEditing && (
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <Editor value={content} setValue={setContent} />
-          <Button type="submit">Create</Button>
+          <Button type="submit" aria-label="create">
+            Create
+          </Button>
         </form>
       )}
     </div>

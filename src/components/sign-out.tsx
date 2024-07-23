@@ -15,6 +15,7 @@ export function SignOut() {
   return (
     <form onSubmit={handleSubmit}>
       <Button
+        aria-label="sign out"
         variant={"secondary"}
         className="w-full bg-red-600 text-red-500 space-x-4"
         type="submit"

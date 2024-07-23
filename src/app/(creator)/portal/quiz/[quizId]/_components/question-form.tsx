@@ -93,7 +93,11 @@ const QuestionForm = ({ initialData, quizId }: QuestionFormProps) => {
       )}
       <div className="font-medium flex items-center justify-between">
         Quiz Questions
-        <Button onClick={toggleCreating} variant="ghost">
+        <Button
+          onClick={toggleCreating}
+          variant="ghost"
+          aria-label="add a question"
+        >
           {isCreating ? (
             <>Cancel</>
           ) : (
@@ -107,7 +111,9 @@ const QuestionForm = ({ initialData, quizId }: QuestionFormProps) => {
       {isCreating && (
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <Editor value={content} setValue={setContent} />
-          <Button type="submit">Create</Button>
+          <Button type="submit" aria-label="create">
+            Create
+          </Button>
         </form>
       )}
       {!isCreating && (

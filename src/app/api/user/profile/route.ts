@@ -24,7 +24,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(profile);
   } catch (error) {
-    console.log("PROFILE-", error);
+    // console.log("PROFILE-", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

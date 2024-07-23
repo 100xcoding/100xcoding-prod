@@ -37,7 +37,7 @@ export const EditOption = ({
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
-      console.log(content);
+      // console.log(content);
       const response = await updateQuizQuestionOptionAction(
         content,
         isCorrect,
@@ -81,7 +81,9 @@ export const EditOption = ({
                 Mark as Correct option
               </label>
             </div>
-            <Button type="submit">Create</Button>
+            <Button type="submit" aria-label="create">
+              Create
+            </Button>
           </form>
           <DialogDescription></DialogDescription>
         </DialogHeader>

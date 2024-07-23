@@ -36,7 +36,7 @@ export async function PUT(
     }
     return NextResponse.json("Success", { status: 200 });
   } catch (error) {
-    console.log("Reorder quiz question-", error);
+    // console.log("Reorder quiz question-", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

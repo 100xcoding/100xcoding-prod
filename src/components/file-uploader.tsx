@@ -61,6 +61,7 @@ export const FileUploader = ({
         ) : (
           <div className="bg-dark-400 w-full flex items-center justify-center py-5 rounded-lg">
             <Link
+              aria-label="file-uploader"
               target="_blank"
               href={convertFileToUrl(files[0])}
               className="underline text-green-500"

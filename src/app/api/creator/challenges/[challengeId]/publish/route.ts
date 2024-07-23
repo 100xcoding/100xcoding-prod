@@ -52,7 +52,7 @@ export async function PATCH(
     });
     return NextResponse.json(publishedChallenge);
   } catch (error) {
-    console.log("Challenge publish", error);
+    // console.log("Challenge publish", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

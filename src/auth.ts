@@ -8,9 +8,12 @@ import Env from "./lib/env";
 import { db } from "./lib/db";
 import { CustomUser } from "./types";
 import Resend from "next-auth/providers/resend";
-import { randomBytes } from "crypto";
 import { authSendRequest } from "./lib/authSendRequest";
-
+const generateRandomSuffix = () => {
+  const timestamp = Date.now().toString(36); // Convert current timestamp to base36
+  const randomNum = Math.floor(Math.random() * 1000).toString(36); // Generate a random number and convert to base36
+  return `${timestamp}${randomNum}`;
+};
 // Utility function to generate a unique username
 const generateUniqueUsername = async (email: string) => {
   let username = email.split("@")[0];
@@ -25,7 +28,7 @@ const generateUniqueUsername = async (email: string) => {
     });
 
     if (existingUser) {
-      uniqueUsername = `${username}_${randomBytes(3).toString("hex")}`;
+      uniqueUsername = `${username}_${generateRandomSuffix()}`;
       attempt++;
     } else {
       isUnique = true;

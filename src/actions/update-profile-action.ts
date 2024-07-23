@@ -85,7 +85,7 @@ export async function updateProfileImageAction(fileName: string) {
       };
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return {
       success: false,
       message: "Something went wrong, Try again!",
@@ -167,7 +167,7 @@ export async function updateProfileResumeAction(fileName: string) {
       };
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return {
       success: false,
       message: "Something went wrong, Try again!",

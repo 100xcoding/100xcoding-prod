@@ -34,7 +34,6 @@ model User {
   challengeSolution ChallengeSolution[]
   comments          Comment[]
   commentLikes      CommentLike[]
-  socialLinks       UserSocialLink[]
 }
 
 model Account {
@@ -63,9 +62,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model VerificationToken {
@@ -79,31 +77,12 @@ model VerificationToken {
 model Profile {
   id           String  @id @default(uuid())
   userId       String  @unique
-  title        String?
+  title        String? @db.VarChar(255)
   bio          String?
   website      String?
   profileImage String?
   resume       String? @unique
   user         User    @relation(fields: [userId], references: [id])
-}
-
-model SocialLinkType {
-  id    String           @id @default(uuid())
-  name  String           @unique
-  icon  String           @unique
-  links UserSocialLink[]
-}
-
-model UserSocialLink {
-  id               String         @id @default(uuid())
-  userId           String
-  socialLinkTypeId String
-  url              String
-  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  socialLinkType   SocialLinkType @relation(fields: [socialLinkTypeId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-  @@index([socialLinkTypeId])
 }
 
 model SocialLink {
@@ -131,11 +110,7 @@ model Challenge {
   slug                String              @unique
   challengeCategoryId String?
   description         String?
-  task                String?
   about               String?
-  requirements        String?
-  steps               String?
-  challengeResourceId String?
   challengeTechId     String?
   publish             Boolean             @default(false)
   user                User                @relation(fields: [userId], references: [id])

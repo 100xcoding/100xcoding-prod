@@ -15,6 +15,7 @@ export function SignIn() {
   return (
     <form onSubmit={handleSubmit}>
       <Button
+        aria-label="Log in using GitHub"
         type="submit"
         variant={"secondary"}
         disabled={isLoading}

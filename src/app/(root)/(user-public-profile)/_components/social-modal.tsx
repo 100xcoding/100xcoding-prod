@@ -50,7 +50,7 @@ export const SocialModal = ({ initialData }: SocialModalProps) => {
   });
   const onSubmit = async (data: z.infer<typeof SocialLinkFormSchema>) => {
     const result = await addSocialLink(data);
-    console.log(result);
+    // console.log(result);
     if (result.success) {
       router.refresh();
       toast.success("Added Successfully!");
@@ -63,6 +63,7 @@ export const SocialModal = ({ initialData }: SocialModalProps) => {
     <Dialog>
       <DialogTrigger asChild>
         <Button
+          aria-label="add social links"
           variant={"outline"}
           className="text-green-500  border-green-500 rounded-full"
         >
@@ -271,7 +272,9 @@ export const SocialModal = ({ initialData }: SocialModalProps) => {
               </div>
 
               <DialogTrigger asChild>
-                <Button type="submit">Save changes</Button>
+                <Button type="submit" aria-label="save changes">
+                  Save changes
+                </Button>
               </DialogTrigger>
             </form>
           </Form>

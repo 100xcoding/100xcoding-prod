@@ -22,6 +22,7 @@ export const EditProfileModal = async () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button
+          aria-label="edit profile"
           variant="outline"
           className="text-green-500 lg:flex lg:items-center lg:gap-2 border-green-500 rounded-full"
         >

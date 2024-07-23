@@ -29,7 +29,7 @@ export const Actions = ({ challengeId, isPublished }: ActionsProps) => {
 
       router.refresh();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
@@ -56,8 +56,13 @@ export const Actions = ({ challengeId, isPublished }: ActionsProps) => {
 
   return (
     <div className="flex items-center gap-x-2">
-      <Button asChild variant={"link"}>
-        <Link href={`/creator/draft/${challengeId}`}>Check Page View</Link>
+      <Button asChild variant={"link"} aria-label="Check Page View">
+        <Link
+          aria-label="Check Page View"
+          href={`/creator/draft/${challengeId}`}
+        >
+          Check Page View
+        </Link>
       </Button>
       <Button
         onClick={onClick}
@@ -65,6 +70,7 @@ export const Actions = ({ challengeId, isPublished }: ActionsProps) => {
         variant="secondary"
         size="sm"
         className="bg-green-600 text-green-400 tracking-wider text-base "
+        aria-label="publish/unpublish"
       >
         {isPublished ? "Unpublish" : "Publish"}
       </Button>

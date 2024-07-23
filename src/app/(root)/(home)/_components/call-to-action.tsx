@@ -54,6 +54,7 @@ export const CallToAction = async () => {
         <div className="z-30 flex items-center justify-center mt-10">
           {session?.user ? (
             <Link
+              aria-label="take-challenge"
               href="/login"
               className="bg-green-500 text-white w-fit px-6 py-2 text-lg rounded-full font-medium tracking-wide "
             >
@@ -61,6 +62,7 @@ export const CallToAction = async () => {
             </Link>
           ) : (
             <Link
+              aria-label="login"
               href="/login"
               className="bg-green-500 text-white w-fit px-6 py-2 text-lg rounded-full font-medium tracking-wide "
             >

@@ -87,7 +87,7 @@ export const ImageForm = ({ initialData, challengeId }: ImageFormProps) => {
     <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between">
         Challenge image
-        <Button onClick={toggleEdit} variant="ghost">
+        <Button onClick={toggleEdit} variant="ghost" aria-label="edit image">
           {isEditing ? (
             <>Cancel</>
           ) : (
@@ -133,7 +133,7 @@ export const ImageForm = ({ initialData, challengeId }: ImageFormProps) => {
               onChange={handleProfileImageChange}
               className="hidden text-lg tracking-wide font-poppins  dark:bg-input/10 dark:text-secondary dark:border-none  dark:placeholder:text-secondary/70 dark:ring-offset-transparent dark:focus-visible:ring-offset-[1px] dark:focus-visible:ring-1"
             />
-            <Button asChild>
+            <Button asChild aria-label="upload - image">
               <span>Upload Image</span>
             </Button>
           </Label>

@@ -63,7 +63,11 @@ export const ShortDescriptionForm = ({
     <div className="mt-6  portal-form-box p-4">
       <div className="font-medium flex items-center justify-between">
         Challenge description
-        <Button onClick={toggleEdit} variant="ghost">
+        <Button
+          onClick={toggleEdit}
+          variant="ghost"
+          aria-label="edit description"
+        >
           {isEditing ? (
             <>Cancel</>
           ) : (
@@ -112,6 +116,7 @@ export const ShortDescriptionForm = ({
                 disabled={!isValid || isSubmitting}
                 type="submit"
                 variant={"default"}
+                aria-label="save"
               >
                 Save
               </Button>

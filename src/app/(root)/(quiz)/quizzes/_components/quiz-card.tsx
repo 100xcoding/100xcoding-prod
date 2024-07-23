@@ -36,7 +36,7 @@ export const QuizCard = () => {
         </h5>
         <div className="flex items-center justify-between">
           <p>89+ members completed</p>
-          <Link href="/">
+          <Link href="/" aria-label="take-quiz">
             <Play className="bg-green-500  rounded-full p-2 w-10 h-10" />
           </Link>
         </div>
