@@ -47,15 +47,20 @@ import { TbWorld } from "react-icons/tb";
 import { EditResumeModal } from "../_components/edit-resume-modal";
 import { auth } from "@/auth";
 import { notFound, redirect } from "next/navigation";
+import { LinkCard } from "../_components/link-card";
+import { SolutionCard } from "../../solutions/_components/solution-card";
 const UserPublicProfile = async ({
   params,
 }: {
   params: { username: string };
 }) => {
-  const { user } = await getPublicProfile(params?.username);
+  const { user, userPublishChallenges } = await getPublicProfile(
+    params?.username,
+  );
   if (!user) {
     notFound();
   }
+  console.log(userPublishChallenges);
   const session = await auth();
   const iconMap: IconMap = {
     github: FaGithub,
@@ -98,7 +103,7 @@ const UserPublicProfile = async ({
                   src={
                     user?.profile?.profileImage
                       ? getImageUrl(user?.profile?.profileImage!)
-                      : ""
+                      : "https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
                   }
                   width={200}
                   height={200}
@@ -197,19 +202,18 @@ const UserPublicProfile = async ({
           )}
         </CardContent>
       </Card>
+      {/* TODO: Solved Challenges */}
+      <Card className="w-full bg-dark-500 border-none my-2 rounded-xl shadow-lg overflow-hidden px-4 py-4">
+        <h4 className="text-xl">Projects Publish</h4>
+      </Card>
+      <div className="flex flex-wrap gap-8 justify-center md:justify-start">
+        {userPublishChallenges &&
+          userPublishChallenges.map((solution) => (
+            <SolutionCard key={solution.id} {...solution} />
+          ))}
+      </div>
     </section>
   );
 };
 
 export default UserPublicProfile;
-const LinkCard = ({ url, icon: Icon }: any) => {
-  return (
-    <Link
-      aria-label={Icon}
-      href={url}
-      className="bg-blue-600 p-1  text-blue-200 rounded-full w-10 text-2xl h-10 items-center flex justify-center"
-    >
-      <Icon />
-    </Link>
-  );
-};

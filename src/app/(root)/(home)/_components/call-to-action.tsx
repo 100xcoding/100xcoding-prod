@@ -6,16 +6,16 @@ export const CallToAction = async () => {
   const session = await auth();
   const words = [
     {
-      text: "Join 1000+",
+      text: "Join a",
     },
     {
-      text: "people building",
+      text: "Community of",
     },
     {
-      text: "portfolio-worthy",
+      text: "Innovators,",
     },
     {
-      text: "projects",
+      text: "Elevate Your Skills",
     },
   ];
   const words2 = [
@@ -31,7 +31,7 @@ export const CallToAction = async () => {
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center  bg-dark-300  [mask-image:radial-gradient(ellipse_at_center,transparent_10%,#0D0F10)]"></div>
       <div className="container mx-auto text-white py-10 flex flex-col justify-center">
         <p className="text-center text-white z-30 text-[1.6rem] tracking-wider font-semibold md:hidden">
-          Join 1000+ people building portfolio-worthy projects and unleash your
+          Join a Community of Innovators, Elevate Your Skills and unleash your
           potential.
         </p>
         <div className="hidden md:block z-30">
@@ -46,10 +46,16 @@ export const CallToAction = async () => {
             className="text-xl md:text-4xl lg:text-5xl justify-center -mt-4"
           />
         </div>
-        <p className=" mt-4 text-sm md:text-lg  font-medium tracking-wide text-dark-700 w-full sm:w-[90%] md:w-[70%] text-center mx-auto ">
-          Join our community of passionate learners and start your journey
+        <p className=" mt-4 text-sm md:text-lg  font-medium tracking-wide text-dark-700 w-full sm:w-[90%] md:w-[75%] text-center mx-auto ">
+          {/* Join our community of passionate learners and start your journey
           towards success. You&apos;ll gain the knowledge and confidence to
-          reach your goals.
+          reach your goals. */}
+          Engage with our thriving community of passionate learners and begin
+          your journey to excellence.{" "}
+          <span className="hidden lg:inline-block">
+            Acquire the skills and confidence to achieve your ambitions and
+            create standout projects for your portfolio.
+          </span>
         </p>
         <div className="z-30 flex items-center justify-center mt-10">
           {session?.user ? (

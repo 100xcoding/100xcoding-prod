@@ -16,6 +16,19 @@ export async function getPublicProfile(username: string) {
         socialLink: true,
       },
     });
+    const userPublishChallenges = await db.challengeSolution.findMany({
+      where: {
+        userId: user?.id,
+      },
+      include: {
+        user: true,
+        challenge: {
+          include: {
+            challengeCategory: true,
+          },
+        },
+      },
+    });
     if (!user) {
       return {
         success: false,
@@ -25,6 +38,7 @@ export async function getPublicProfile(username: string) {
     return {
       success: true,
       user,
+      userPublishChallenges,
       message: "success",
     };
   } catch (error) {

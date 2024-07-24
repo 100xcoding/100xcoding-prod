@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { faqs } from "@/constants";
 
 export function FAQ() {
   return (
@@ -12,58 +13,23 @@ export function FAQ() {
         Frequently Asked Questions
       </h1>
       <Accordion
-        type="single"
-        collapsible
-        className="w-full sm:w-[90%] md:w-[65%] lg:[55%] xl:[45%] space-y-4  mx-auto px-2"
+        type="multiple"
+        className="w-full sm:w-[90%] md:w-[65%] lg:[55%] xl:[45%] space-y-4  mx-auto px-2 "
       >
-        <AccordionItem
-          value="item-1"
-          className="bg-dark-500 px-10 rounded-full border-none text-white"
-        >
-          <AccordionTrigger className=" text-bsae md:text-xl">
-            How do I sign up?
-          </AccordionTrigger>
-          <AccordionContent className="text-base md:text-lg">
-            To sign up, click on the &apos;Log in with GitHub&apos; button in
-            the navigation menu to login with your GitHub account.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem
-          value="item-2"
-          className="bg-dark-500 px-10 rounded-full border-none text-white"
-        >
-          <AccordionTrigger className=" text-bsae md:text-xl">
-            How do I sign up?
-          </AccordionTrigger>
-          <AccordionContent className="text-base md:text-lg">
-            To sign up, click on the &apos;Log in with GitHub&apos; button in
-            the navigation menu to login with your GitHub account.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem
-          value="item-3"
-          className="bg-dark-500 px-10 rounded-full border-none text-white"
-        >
-          <AccordionTrigger className=" text-bsae md:text-xl">
-            How do I sign up?
-          </AccordionTrigger>
-          <AccordionContent className="text-base md:text-lg">
-            To sign up, click on the &apos;Log in with GitHub&apos; button in
-            the navigation menu to login with your GitHub account.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem
-          value="item-4"
-          className="bg-dark-500 px-10 rounded-full border-none text-white"
-        >
-          <AccordionTrigger className=" text-bsae md:text-xl">
-            How do I sign up?
-          </AccordionTrigger>
-          <AccordionContent className="text-base md:text-lg">
-            To sign up, click on the &apos;Log in with GitHub&apos; button in
-            the navigation menu to login with your GitHub account.
-          </AccordionContent>
-        </AccordionItem>
+        {faqs.map((faq) => (
+          <AccordionItem
+            key={faq.id}
+            value={`${faq.id}`}
+            className="bg-dark-500 px-10 rounded-xl border-none text-white/80"
+          >
+            <AccordionTrigger className="text-left  text-bsae md:text-xl">
+              {faq.question}
+            </AccordionTrigger>
+            <AccordionContent className="text-base md:text-lg text-white">
+              {faq.answer}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
       </Accordion>
     </div>
   );

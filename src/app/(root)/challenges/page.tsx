@@ -18,9 +18,6 @@ const ChallengesPage = async ({
   const skip = (pageNumber - 1) * take;
   const { challenges, metadata } = await getChallenges({ take, skip });
   // await new Promise(resolve => setTimeout(resolve, 3000))
-  if (!metadata) {
-    return;
-  }
   return (
     <div className="container p-3 my-10 mx-auto flex justify-between gap-10 flex-col min-h-[80vh]">
       <Suspense fallback={<Loader2 />}>
@@ -30,7 +27,7 @@ const ChallengesPage = async ({
               <ChallengeCard key={challenge.id} {...challenge} />
             ))}
         </div>
-        <Pagination {...metadata} />
+        {metadata && metadata?.totalPages > 1 && <Pagination {...metadata} />}
       </Suspense>
     </div>
   );
