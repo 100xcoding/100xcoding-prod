@@ -29,19 +29,19 @@ export const ProfileMenu = async ({ user }: any) => {
             <Link
               area-label="profile"
               href={`/${userData?.username}`}
-              className="flex gap-3 items-center text-lg"
+              className="flex gap-3 items-center "
             >
               <FaUser size={21} />
-              <p>Profile</p>
+              <div className="text-base">
+                <p className="">Profile</p>
+                <p className="text-xs">{user?.email}</p>
+              </div>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator className="bg-green-500 " />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild className="">
-            {/* <div className="flex gap-3 items-center cursor-pointer text-lg">
-              <MdLogout size={21} />
-            </div> */}
             <SignOut />
           </DropdownMenuItem>
         </DropdownMenuGroup>

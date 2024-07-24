@@ -9,7 +9,7 @@ import { Button } from "./ui/button";
 export const MobileSidebar = async () => {
   const session = await auth();
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center gap-6">
       <div className="md:hidden">
         <Logo />
       </div>

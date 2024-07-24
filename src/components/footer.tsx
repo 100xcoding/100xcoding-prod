@@ -12,7 +12,8 @@ export const Footer = () => {
           <Logo />
         </Link>
         <div className="flex lg:items-center gap-4 flex-col lg:flex-row text-slate-200">
-          <p className="">© 2024 codebits. All rights reserved </p>
+          <p className="">© 2024 100xCoding.com </p>
+          <p> All rights reserved</p>
           <Link
             aria-label="privacy policy"
             href={"/"}

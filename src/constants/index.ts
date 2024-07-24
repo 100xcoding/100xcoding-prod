@@ -59,21 +59,21 @@ export const workData = [
     id: 1,
     title: "Sign up for free in seconds",
     description:
-      "Connect your GitHub account using Login button. You will instantly have access to all the challenges available.",
+      "Create an account quickly and easily to start exploring all the available challenges.",
     icon: GoShieldLock,
   },
   {
     id: 2,
     title: "Find the Perfect Challenge ",
     description:
-      "Choose the right challenge for you to start and convert the design into website.",
+      "Start your web development mastery by picking the perfect design challenge and building it.",
     icon: FaCode,
   },
   {
     id: 3,
     title: "Share your solution",
     description:
-      "After completing the challenge, you can share the solution with the community and get feedback from the team members and improve your skills.",
+      "Submit your completed projects and receive valuable feedback from the community to enhance your abilities.",
     icon: IoShareSocialSharp,
   },
 ];
@@ -116,7 +116,38 @@ export const testimonialsData = [
     socialLink: "",
   },
 ];
-
+export const faqs = [
+  {
+    id: 1,
+    question: "What is 100xcoding and what does it offer?",
+    answer:
+      "100x Coding is a platform designed to help you improve your coding skills. It offers a variety of coding challenges across different difficulty levels to help you practice and learn new concepts.",
+  },
+  {
+    id: 2,
+    question: "What difficulty levels do the coding challenges have?",
+    answer:
+      "100xCoding offers challenges in three main difficulty levels: Beginner, Intermediate, and Advanced. This allows you to find challenges that match your current skill level and gradually progress as you learn.",
+  },
+  {
+    id: 3,
+    question: "Are there hints or solutions available for the challenges?",
+    answer:
+      "Don't get discouraged if you hit a roadblock on a challenge! We also provide links to helpful resources like tutorials and articles to solidify your understanding. Stuck and need a different perspective? Additionally, we have a Discord server, where you can connect with the 100x Coding community there for further guidance and support.",
+  },
+  {
+    id: 4,
+    question: "Can I skip challenges or do I have to complete them in order?",
+    answer:
+      "ou can skip challenges if you prefer, but it's generally recommended to work through them in order. This will ensure you build a strong foundation in core concepts before moving on to more advanced topics.",
+  },
+  {
+    id: 5,
+    question: "How can I submit my code and see if it works?",
+    answer:
+      "Each challenge includes a code editor for writing your solution. Once your challenge is completed and published, community members will provide feedback on your code based on the challenge.",
+  },
+];
 export const challengeData = [
   {
     id: 1,
