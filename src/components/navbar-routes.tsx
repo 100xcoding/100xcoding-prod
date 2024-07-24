@@ -16,11 +16,11 @@ export const NavbarRoutes = async () => {
         </Link>
       </div>
       <div className="flex items-center gap-10">
-        <ul className="flex gap-7 items-center text-lg">
+        <div className="flex gap-7 items-center text-lg">
           {navbarRoutes.map((route) => {
             return <NavbarItem key={route.id} {...route} />;
           })}
-        </ul>
+        </div>
         {user?.user?.role == "creator" && (
           <Button asChild aria-label="portal">
             <Link aria-label="portal" href="/portal/challenges">
