@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       "Master front-end development by building real-world projects. Enhance your HTML, CSS, and JavaScript skills through hands-on challenges crafted with professional designs.",
     description:
       "Boost your front-end development skills with 100xCoding. Tackle real-world projects and master HTML, CSS, and JavaScript through hands-on challenges designed with professional standards.",
-    images: ["/src/app/opengraph-image.png"],
+    images: ["/opengraph-image.png"],
   },
   metadataBase: new URL("https://100xcoding.com"),
 };
