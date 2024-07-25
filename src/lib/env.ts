@@ -10,5 +10,6 @@ class Env {
   static BUCKET_NAME: string = process.env.BUCKET_NAME!;
   static NEXT_PUBLIC_BUCKET_URL: string = process.env.NEXT_PUBLIC_BUCKET_URL!;
   static RESEND_API_KEY: string = process.env.RESEND_API_KEY!;
+  static GTM_ID: string = process.env.GTM_ID!;
 }
 export default Env;

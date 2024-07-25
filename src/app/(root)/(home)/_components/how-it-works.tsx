@@ -3,8 +3,8 @@ import { workData } from "@/constants";
 
 export const HowItWorks = () => {
   return (
-    <div className="my-20">
-      <h1 className=" mb-14 text-center text-3xl md:text-4xl  text-slate-200 font-extrabold ">
+    <div className="mb-10">
+      <h1 className=" mb-10 text-center text-3xl md:text-5xl  text-slate-200 font-extrabold ">
         How It Works?
       </h1>
       <div className="flex flex-wrap gap-14 md:gap-8 justify-center items-center">
