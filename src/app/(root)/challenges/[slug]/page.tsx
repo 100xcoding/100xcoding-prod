@@ -39,6 +39,8 @@ export async function generateMetadata({
     title: challenge?.title,
     description: challenge?.description,
     openGraph: {
+      title: challenge?.title,
+      description: challenge?.description!,
       images: [
         {
           url: getImageUrl(challenge?.image!),
