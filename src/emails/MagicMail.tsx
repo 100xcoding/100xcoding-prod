@@ -1,6 +1,6 @@
 export function MagicMail(params: { url: string; host: string; theme: any }) {
   const { url, host, theme } = params;
-  console.log(host, url);
+  // console.log(host, url);
   const escapedHost = host.replace(/\./g, "&#8203;.");
 
   const brandColor = theme.brandColor || "#346df1";

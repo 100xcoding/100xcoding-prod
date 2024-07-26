@@ -105,7 +105,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         });
         const userNameCheck = await db.user.findUnique({
           where: {
-            username: profile?.username,
+            username: profile?.login,
           },
         });
         if (!existingUser) {

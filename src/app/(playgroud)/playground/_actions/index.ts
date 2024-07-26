@@ -36,7 +36,7 @@ export async function createChallengeSolution(data: any, slug: string) {
         cssContent: data.files["/src/styles.css"]?.code!,
       },
     });
-    console.log(solution);
+    // console.log(solution);
     return { success: true, message: "saved successfully!" };
   } catch (error) {
     return {
