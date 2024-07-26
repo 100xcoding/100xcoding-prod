@@ -1,13 +1,14 @@
+import Env from "@/lib/env";
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = Env.NEXT_PUBLIC_URL;
   return {
     rules: {
       userAgent: "*",
-      allow: "/",
+      allow: ["/", "/challenges", "/solutions"],
       disallow: "/portal",
     },
-    // TODO:fix the sidemapURL
-    sitemap: "/sitemap.xml",
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
