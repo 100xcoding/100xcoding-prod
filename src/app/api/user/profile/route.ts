@@ -10,9 +10,6 @@ export async function GET(req: Request) {
     if (!session?.user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-    if (session?.user?.role !== "user") {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
     const user = session?.user;
 
     const profile = await db.user.findUnique({
@@ -27,7 +24,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(profile);
   } catch (error) {
-    console.log("PROFILE-", error);
+    // console.log("PROFILE-", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

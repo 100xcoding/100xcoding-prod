@@ -24,7 +24,10 @@ export const CommentList = async ({ slug }: { slug: string }) => {
             >
               <div className="flex flex-row  gap-4 items-start md:items-center ">
                 <Avatar className="md:w-16 md:h-16">
-                  <AvatarImage src={comment?.user?.image || ""} />
+                  <AvatarImage
+                    src={comment?.user?.image || ""}
+                    alt="user-profile"
+                  />
                   <AvatarFallback className="bg-green-600 text-green-500 uppercase text-xl font-semibold">
                     {comment?.user?.username?.slice(0, 1)}
                   </AvatarFallback>
@@ -42,13 +45,13 @@ export const CommentList = async ({ slug }: { slug: string }) => {
                 </div>
               </div>
               <div className="space-x-4  my-2 flex">
-                {session?.user && (
+                {/* {session?.user && (
                   <CommentLike
                     commentId={comment?.id}
                     userHasLiked={comment?.userHasLiked}
                     count={comment?.likeCount}
                   />
-                )}
+                )} */}
                 {session?.user?.id == comment?.userId && (
                   <CommentEdit slug={slug} id={comment?.id} />
                 )}

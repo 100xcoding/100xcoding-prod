@@ -121,22 +121,22 @@ export const QuillToolbar = () => (
       </select>
     </span>
     <span className="ql-formats">
-      <button className="ql-bold" />
-      <button className="ql-italic" />
-      <button className="ql-underline" />
-      <button className="ql-strike" />
+      <button aria-label="bold" className="ql-bold" />
+      <button aria-label="italic" className="ql-italic" />
+      <button aria-label="underline" className="ql-underline" />
+      <button aria-label="strike" className="ql-strike" />
     </span>
     <span className="ql-formats">
-      <button className="ql-list" value="ordered" />
-      <button className="ql-list" value="bullet" />
-      <button className="ql-indent" value="-1" />
-      <button className="ql-indent" value="+1" />
+      <button aria-label="list" className="ql-list" value="ordered" />
+      <button aria-label="bullet" className="ql-list" value="bullet" />
+      <button aria-label="indent" className="ql-indent" value="-1" />
+      <button aria-label="+1" className="ql-indent" value="+1" />
     </span>
     <span className="ql-formats">
-      <button className="ql-script" value="super" />
-      <button className="ql-script" value="sub" />
-      <button className="ql-blockquote" />
-      <button className="ql-direction" />
+      <button aria-label="super" className="ql-script" value="super" />
+      <button aria-label="sub" className="ql-script" value="sub" />
+      <button aria-label="blockquote" className="ql-blockquote" />
+      <button aria-label="direction" className="ql-direction" />
     </span>
     <span className="ql-formats">
       <select className="ql-align" />
@@ -144,20 +144,20 @@ export const QuillToolbar = () => (
       <select className="ql-background" />
     </span>
     <span className="ql-formats">
-      <button className="ql-link" />
-      <button className="ql-image" />
-      <button className="ql-video" />
+      <button aria-label="link" className="ql-link" />
+      <button aria-label="image" className="ql-image" />
+      <button aria-label="video" className="ql-video" />
     </span>
     <span className="ql-formats">
-      <button className="ql-formula" />
-      <button className="ql-code-block" />
-      <button className="ql-clean" />
+      <button aria-label="formula" className="ql-formula" />
+      <button aria-label="code-block" className="ql-code-block" />
+      <button className="ql-clean" aria-label="clean" />
     </span>
     <span className="ql-formats">
-      <button className="ql-undo">
+      <button className="ql-undo" aria-label="undo">
         <CustomUndo />
       </button>
-      <button className="ql-redo">
+      <button className="ql-redo" aria-label="redo">
         <CustomRedo />
       </button>
     </span>

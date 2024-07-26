@@ -2,44 +2,45 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { getErrorMessage } from "@/lib/utils";
-import { ProfileFormSchema } from "@/schema";
+import { ProfileFormSchema, SocialLinkModalSchema } from "@/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 type Inputs = z.infer<typeof ProfileFormSchema>;
-export async function updateProfileAction(data: Inputs) {
-  try {
-    const session = await auth();
-    if (!session || !session.user || session.user.role !== "user") {
-      redirect("/?msg='sign-in first' ");
-    }
-    const result = ProfileFormSchema.safeParse(data);
-    if (result.error) {
-      return { success: false, error: result.error.format() };
-    }
-    if (result.success) {
-      const profileData = await db.profile.update({
-        where: {
-          userId: session.user.id,
-        },
-        data: {
-          ...result?.data,
-        },
-      });
-      return { success: true, data: profileData };
-    }
-  } catch (error) {
-    return {
-      success: false,
-      err: getErrorMessage(error),
-    };
-  }
-  //TODO: Add Revalidate function
-}
+type SocialInput = z.infer<typeof SocialLinkModalSchema>;
+// export async function updateProfileAction(data: Inputs) {
+//   try {
+//     const session = await auth();
+//     if (!session || !session.user || session.user.role !== "user") {
+//       redirect("/?msg='sign-in first' ");
+//     }
+//     const result = ProfileFormSchema.safeParse(data);
+//     if (result.error) {
+//       return { success: false, error: result.error.format() };
+//     }
+//     if (result.success) {
+//       const profileData = await db.profile.update({
+//         where: {
+//           userId: session.user.id,
+//         },
+//         data: {
+//           ...result?.data,
+//         },
+//       });
+//       return { success: true, data: profileData };
+//     }
+//   } catch (error) {
+//     return {
+//       success: false,
+//       err: getErrorMessage(error),
+//     };
+//   }
+//   //TODO: Add Revalidate function
+// }
 export async function updateProfileImageAction(fileName: string) {
   const session = await auth();
-  if (!session || !session.user || session.user.role !== "user") {
-    redirect("/?msg='sign-in first' ");
+  if (!session || !session.user) {
+    redirect("/login?msg='Login first!' ");
   }
   if (!fileName) {
     return {
@@ -61,7 +62,7 @@ export async function updateProfileImageAction(fileName: string) {
           profileImage: fileName,
         },
       });
-      revalidatePath("/profile");
+      // revalidatePath("/profile");
       return {
         success: true,
         data: createProfile.profileImage,
@@ -76,7 +77,7 @@ export async function updateProfileImageAction(fileName: string) {
           profileImage: fileName,
         },
       });
-      revalidatePath("/profile");
+      // revalidatePath("/profile");
       return {
         success: true,
         data: updateprofile.profileImage,
@@ -84,7 +85,7 @@ export async function updateProfileImageAction(fileName: string) {
       };
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return {
       success: false,
       message: "Something went wrong, Try again!",
@@ -120,7 +121,7 @@ export async function updateProfileImageAction(fileName: string) {
 
 export async function updateProfileResumeAction(fileName: string) {
   const session = await auth();
-  if (!session || !session.user || session.user.role !== "user") {
+  if (!session || !session.user) {
     redirect("/?msg='sign-in first' ");
   }
   if (!fileName) {
@@ -166,7 +167,62 @@ export async function updateProfileResumeAction(fileName: string) {
       };
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    return {
+      success: false,
+      message: "Something went wrong, Try again!",
+      err: getErrorMessage(error),
+    };
+  }
+}
+
+// export async function addSocialLink(data: SocialInput) {
+//   const session = await auth();
+//   if (!session || !session.user) {
+//     redirect("/login?msg='Login first!' ");
+//   }
+//   const result = SocialLinkModalSchema.safeParse(data);
+//   if (result.error) {
+//     return { success: false, error: result.error.format() };
+//   }
+//   try {
+//     const newuser = await db.userSocialLink.create({
+//       data: {
+//         userId: session?.user?.id,
+//         socialLinkTypeId: data?.socialLinkId,
+//         url: data?.socialLink,
+//       },
+//     });
+//     revalidatePath("/profile");
+//     return {
+//       success: true,
+//       data: "",
+//       message: "added successfully",
+//     };
+//   } catch (error) {
+//     console.log(error);
+//     return {
+//       success: false,
+//       message: "Something went wrong, Try again!",
+//       err: getErrorMessage(error),
+//     };
+//   }
+// }
+export async function getUser() {
+  try {
+    const session = await auth();
+    if (!session || !session.user) {
+      redirect("/login?msg='Login first!' ");
+    }
+    const user = await db.user.findUnique({
+      where: { id: session?.user?.id },
+    });
+    return {
+      success: true,
+      user,
+      message: "Successfully!",
+    };
+  } catch (error) {
     return {
       success: false,
       message: "Something went wrong, Try again!",

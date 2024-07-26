@@ -29,6 +29,7 @@ export const PortalSidebarItem = ({
   };
   return (
     <button
+      aria-label={label}
       onClick={onClick}
       type="button"
       className={cn(

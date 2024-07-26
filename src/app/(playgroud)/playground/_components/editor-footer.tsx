@@ -5,6 +5,8 @@ import {
   publishChallengeSolution,
   updateChallengeSolution,
 } from "../_actions";
+import { toast } from "sonner";
+import { useState } from "react";
 interface Files {
   [key: string]: any; // You can replace `any` with a more specific type if you know it
 }
@@ -27,8 +29,10 @@ export const EditorFooter = ({
 }: any) => {
   const { sandpack } = useSandpack();
   const { files, visibleFiles } = sandpack;
+  const [loading, setLoading] = useState(false);
   const handleSave = async () => {
     if (!isDirty) return;
+    setLoading(true);
     const data = filterVisibleFiles(visibleFiles, files);
     const updatedData = {
       files: data,
@@ -37,25 +41,45 @@ export const EditorFooter = ({
     if (playground) {
       // Update the data only
       const result = await updateChallengeSolution(updatedData, slug);
-      console.log(result);
+      // console.log(result);
+      if (result?.success) {
+        toast.info("Saved Successfully, now you can also publish this");
+        setIsDirty(false);
+      } else {
+        toast.error(result?.err);
+        setIsDirty(true);
+      }
     } else {
       // create solution record
-      console.log(updatedData);
       const result = await createChallengeSolution(updatedData, slug);
-      console.log(result);
+      if (result?.success) {
+        toast.info("Saved Successfully, now you can also publish this");
+        setIsDirty(false);
+      } else {
+        setIsDirty(true);
+        toast.error(result?.message);
+        toast.error(result?.err);
+      }
     }
-    setIsDirty(false);
+    setLoading(false);
   };
   const handleSubmit = async () => {
     const updatedData = {
       completed: !isCompleted,
     };
     try {
+      setLoading(true);
       if (isDirty) {
         await handleSave();
       }
       const result = await publishChallengeSolution(slug);
-      console.log(result);
+      if (result?.success) {
+        toast.success("Challenge published successfully!");
+      } else {
+        toast.error(result?.err);
+        toast.error(result?.message);
+      }
+      // console.log(result);
       setIsDirty(false);
       // if (!solutionResponse.error && !isCompleted) {
       // 	router.push({
@@ -63,16 +87,18 @@ export const EditorFooter = ({
       // 		query: { submit: true },
       // 	});
       // }
+      setLoading(false);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   return (
-    <div className="absolute bottom-0 left-0 right-0">
-      <div className="flex justify-end bg-dark-400 h-16 p-3 border-t border-green-500">
+    <div className="absolute bottom-0 left-0 right-0   z-50">
+      <div className="flex justify-end bg-dark-400 h-[5rem] p-3 border-t border-green-500">
         <Button
+          aria-label="save"
           className="font-semibold mr-2"
-          variant="secondary"
+          variant="outline"
           size="lg"
           onClick={handleSave}
           // loading={playgroundResponse.isPending}
@@ -80,9 +106,11 @@ export const EditorFooter = ({
           Save
         </Button>
         <Button
-          className="font-semibold"
+          aria-label="save & publish"
+          className="font-semibold capitalize"
+          disabled={loading}
           // variant="primary"
-          size="sm"
+
           onClick={handleSubmit}
           // loading={solutionResponse.isPending}
         >
@@ -99,7 +127,7 @@ export const EditorFooter = ({
 					) : (
 						"Mark as complete"
 					)} */}
-          Mark as Complete
+          save & publish
         </Button>
       </div>
     </div>

@@ -1,5 +1,3 @@
-"use client";
-import { useRef } from "react";
 import { CodeEditorHeader } from "../_components/code-editor-header";
 import {
   ResizableHandle,
@@ -7,33 +5,30 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { ChallengeDescription } from "../_components/challenge-description";
-import {
-  useChallengeBySlug,
-  useChallengePublishSolutionBySlug,
-  useChallengeUnpublishSolutionBySlug,
-} from "@/services/queries";
 import { CustomSandpack } from "../_components/custom-sandpack";
-import { redirect, useSearchParams } from "next/navigation";
-
-const PlaygroudSlug = ({ params: { slug } }: { params: { slug: string } }) => {
-  const searchParams = useSearchParams();
-  const solutionParams = searchParams.get("solution");
-  const { data } = useChallengeBySlug(slug);
-  const { data: solutionData } = useChallengeUnpublishSolutionBySlug(slug);
-  const { data: solution } = useChallengePublishSolutionBySlug(slug);
-  const descriptionRef = useRef(null);
-  const previewRef = useRef(null);
-  const consoleRef = useRef(null);
-  if (solutionParams && !solution) {
-    redirect("/");
+import { getChallenge, getUnpublishSolutionBySlug } from "../_data-access";
+import { Warning } from "../_components/warning";
+import { notFound } from "next/navigation";
+const PlaygroudSlug = async ({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) => {
+  const { challenge } = await getChallenge(slug);
+  const { solution } = await getUnpublishSolutionBySlug(slug);
+  if (!challenge) {
+    notFound();
   }
   return (
     <section className=" bg-dark-400 text-white">
+      {solution?.status && (
+        <Warning status={solution?.status} slug={solution?.slug} />
+      )}
       <div className="relative grid grid-rows-[50px_minmax(0,_1fr)] grid-cols-1 gap-4 h-screen xxl:max-w-screen-xxl mx-auto">
         <CodeEditorHeader
-          descriptionRef={descriptionRef}
-          previewRef={previewRef}
-          consoleRef={consoleRef}
+          descriptionRef={null}
+          previewRef={null}
+          consoleRef={null}
         />
         <ResizablePanelGroup
           className="flex h-full justify-between row-start-2 row-end-3"
@@ -43,23 +38,26 @@ const PlaygroudSlug = ({ params: { slug } }: { params: { slug: string } }) => {
             collapsible
             defaultSize={25}
             className="w-80 border-t border-green-500"
-            ref={descriptionRef}
+            ref={null}
           >
             <ChallengeDescription
-              image={data?.image}
-              description={data?.description}
-              title={data?.title}
-              about={data?.about}
-              resource={data?.about}
+              image={challenge?.image!}
+              description={challenge?.description!}
+              title={challenge?.title}
+              about={challenge?.about!}
+              resource={challenge?.resource!}
             />
           </ResizablePanel>
-          <ResizableHandle />
-          <ResizablePanel className="row-start-2 row-end-3 flex-1">
+          <ResizableHandle withHandle />
+          <ResizablePanel
+            defaultSize={75}
+            className="row-start-2 row-end-3 flex-1"
+          >
             <CustomSandpack
-              previewRef={previewRef}
-              consoleRef={consoleRef}
-              solution={solution}
-              playground={solutionData}
+              previewRef={null}
+              consoleRef={null}
+              solution={null}
+              playground={solution}
               slug={slug}
             />
           </ResizablePanel>

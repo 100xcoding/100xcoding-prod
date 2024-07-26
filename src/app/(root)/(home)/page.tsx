@@ -1,15 +1,13 @@
 import { CallToAction } from "./_components/call-to-action";
 import { FAQ } from "./_components/faq";
-import { HeroSection } from "./_components/hero-section";
 import { HowItWorks } from "./_components/how-it-works";
-import { Testimonials } from "./_components/testimonials";
+import { Hero } from "./_components/hero";
 
 const HomePage = () => {
   return (
     <div>
-      <HeroSection />
+      <Hero />
       <HowItWorks />
-      <Testimonials />
       <CallToAction />
       <FAQ />
     </div>

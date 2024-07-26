@@ -23,7 +23,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(challenges);
   } catch (error) {
-    console.log("Challenges-", error);
+    // console.log("Challenges-", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

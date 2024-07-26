@@ -15,7 +15,7 @@ export async function AddSolutionFeedback(
 ) {
   try {
     const session = await auth();
-    if (!session || !session.user || session.user.role !== "creator") {
+    if (!session || !session.user) {
       redirect("/?msg='sign-in first' ");
     }
     const result = ChallengeSolutionCommentSchema.safeParse(data);
@@ -49,7 +49,7 @@ export async function updateSolutionFeedback(
 ) {
   try {
     const session = await auth();
-    if (!session || !session.user || session.user.role !== "creator") {
+    if (!session || !session.user) {
       redirect("/?msg='sign-in first' ");
     }
     const result = ChallengeSolutionCommentSchema.safeParse(data);
@@ -82,7 +82,7 @@ export async function updateSolutionFeedback(
 export async function deleteSolutionFeedback(id: string) {
   try {
     const session = await auth();
-    if (!session || !session.user || session.user.role !== "creator") {
+    if (!session || !session.user) {
       redirect("/?msg='sign-in first' ");
     }
     await db.comment.delete({
@@ -106,7 +106,7 @@ export async function deleteSolutionFeedback(id: string) {
 export async function addCommentLike(commentId: string) {
   try {
     const session = await auth();
-    if (!session || !session.user || session.user.role !== "creator") {
+    if (!session || !session.user) {
       redirect("/?msg='sign-in first' ");
     }
     const existingLike = await db.commentLike.findUnique({

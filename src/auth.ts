@@ -1,15 +1,19 @@
 import NextAuth, { Account, Profile } from "next-auth";
 import GitHub from "next-auth/providers/github";
+import Discord from "next-auth/providers/discord";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient, User } from "@prisma/client";
 import { JWT } from "next-auth/jwt";
 import { Adapter, AdapterUser } from "next-auth/adapters";
 import Env from "./lib/env";
 import { db } from "./lib/db";
 import { CustomUser } from "./types";
 import Resend from "next-auth/providers/resend";
-import { randomBytes } from "crypto";
-
+import { authSendRequest } from "./lib/authSendRequest";
+const generateRandomSuffix = () => {
+  const timestamp = Date.now().toString(36); // Convert current timestamp to base36
+  const randomNum = Math.floor(Math.random() * 1000).toString(36); // Generate a random number and convert to base36
+  return `${timestamp}${randomNum}`;
+};
 // Utility function to generate a unique username
 const generateUniqueUsername = async (email: string) => {
   let username = email.split("@")[0];
@@ -24,7 +28,7 @@ const generateUniqueUsername = async (email: string) => {
     });
 
     if (existingUser) {
-      uniqueUsername = `${username}_${randomBytes(3).toString("hex")}`;
+      uniqueUsername = `${username}_${generateRandomSuffix()}`;
       attempt++;
     } else {
       isUnique = true;
@@ -59,7 +63,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   secret: Env.AUTH_SECRET,
   pages: {
-    signIn: "/",
+    signIn: "/login",
+    signOut: "/",
     verifyRequest: "/verification",
   },
   providers: [
@@ -77,9 +82,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         };
       },
     }),
+    Discord({
+      authorization: { params: { scope: "guilds+join identify" } },
+      clientId: Env.AUTH_DISCORD_ID,
+      clientSecret: Env.AUTH_DISCORD_SECRET,
+      allowDangerousEmailAccountLinking: true,
+    }),
     Resend({
-      apiKey: Env.RESEND_API_KEY,
+      server: Env.RESEND_API_KEY,
       from: "test@codify.siddhantjain.co.in",
+      sendVerificationRequest(params) {
+        authSendRequest(params);
+      },
     }),
   ],
   callbacks: {
@@ -89,8 +103,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const existingUser = await db.user.findUnique({
           where: { email: profile.email },
         });
+        const userNameCheck = await db.user.findUnique({
+          where: {
+            username: profile?.login,
+          },
+        });
         if (!existingUser) {
-          const username = await generateUniqueUsername(profile.email);
+          const username = userNameCheck
+            ? await generateUniqueUsername(profile.email)
+            : profile?.username;
           await db.user.create({
             data: {
               name: profile.name,
@@ -117,7 +138,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const username = await generateUniqueUsername(user.email);
           await db.user.create({
             data: {
-              name: user.name,
+              name: user?.name ? user?.name : username,
               email: user.email,
               image: user.image,
               username,
@@ -129,6 +150,37 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             data: {
               name: user.name,
               image: user.image,
+            },
+          });
+        }
+      } else if (account.provider == "discord") {
+        // GitHub provider sign-in logic
+        const existingUser = await db.user.findUnique({
+          where: { email: profile.email },
+        });
+        const userNameCheck = await db.user.findUnique({
+          where: {
+            username: profile?.username,
+          },
+        });
+        if (!existingUser) {
+          const username = userNameCheck
+            ? await generateUniqueUsername(profile.email)
+            : profile?.username;
+          await db.user.create({
+            data: {
+              name: profile.name,
+              email: profile.email,
+              image: profile.image_url,
+              username: profile.username,
+            },
+          });
+        } else {
+          await db.user.update({
+            where: { email: profile.email },
+            data: {
+              name: profile.name,
+              image: profile.image_url,
             },
           });
         }
@@ -147,6 +199,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user = token.user as AdapterUser;
       }
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      // if (url.startsWith(baseUrl)) return url;
+      // return baseUrl;
+      const redirectUrl = new URL(url, baseUrl).searchParams.get("redirect");
+
+      if (redirectUrl) return `${baseUrl}${redirectUrl}`;
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
     },
   },
 });

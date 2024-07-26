@@ -41,7 +41,12 @@ export const AboutForm = ({ initialData, challengeId }: AboutFormProps) => {
     <div className="mt-6 portal-form-box p-4">
       <div className="font-medium flex items-center justify-between tracking-wide">
         About the Challenge
-        <Button onClick={toggleEdit} variant="ghost" className="cursor-pointer">
+        <Button
+          aria-label={"edit"}
+          onClick={toggleEdit}
+          variant="ghost"
+          className="cursor-pointer"
+        >
           {isEditing ? (
             "Cancel"
           ) : (
@@ -62,7 +67,9 @@ export const AboutForm = ({ initialData, challengeId }: AboutFormProps) => {
       {isEditing && (
         <form className="space-y-4" onSubmit={handleSubmit}>
           <Editor value={content} setValue={setContent} />
-          <Button type="submit">Save</Button>
+          <Button type="submit" aria-label="submit">
+            Save
+          </Button>
         </form>
       )}
     </div>

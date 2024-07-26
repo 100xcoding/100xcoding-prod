@@ -175,7 +175,7 @@ export async function updateQuizImageAction(fileName: string, quizId: string) {
       message: "Image Upload Successfully!",
     };
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return {
       success: false,
       message: "Something went wrong, Try again!",

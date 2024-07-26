@@ -14,20 +14,23 @@ export const CodeEditorHeader = ({
         <Link
           href="/"
           className="text-white flex items-center space-x-1 uppercase text-center font-bold text-lg"
-          aria-label="FrontendPro logo"
-          title="FrontendPro homepage"
+          aria-label="100xcoding logo"
+          title="100xcoding homepage"
         >
           <Logo />
         </Link>
         <div className="flex items-center  space-x-4">
           <Button
+            aria-label="exit"
             asChild
             className="border border-green-500 rounded px-6 "
             variant={"outline"}
           >
-            <Link href={"/challenges"}>Exit</Link>
+            <Link href={"/challenges"} aria-label="exit">
+              Exit
+            </Link>
           </Button>
-          <ProfileMenu />
+          {/* <ProfileMenu /> */}
         </div>
       </div>
     </nav>

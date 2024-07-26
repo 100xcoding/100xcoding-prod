@@ -111,39 +111,3 @@ export function useCreatorQuizQuestionById(questionId: string, quizId: string) {
     refreshCreatorQuizQuestionData,
   };
 }
-export function useChallengeBySlug(slug: string) {
-  const cacheKey = `/challenge/${slug}`;
-  const { data, error } = useSWR(cacheKey, fetcher);
-  const refreshChallengeBySlugData = async () => {
-    await mutate(cacheKey); // Trigger revalidation for the specific cache key
-  };
-  return {
-    data,
-    error,
-    refreshChallengeBySlugData,
-  };
-}
-export function useChallengeUnpublishSolutionBySlug(slug: string) {
-  const cacheKey = `/challengeSolution/${slug}`;
-  const { data, error } = useSWR(cacheKey, fetcher);
-  const refreshChallengeUnpublishSolutionBySlugData = async () => {
-    await mutate(cacheKey); // Trigger revalidation for the specific cache key
-  };
-  return {
-    data,
-    error,
-    refreshChallengeUnpublishSolutionBySlugData,
-  };
-}
-export function useChallengePublishSolutionBySlug(slug: string) {
-  const cacheKey = `/solutions/${slug}`;
-  const { data, error } = useSWR(cacheKey, fetcher);
-  const refreshChallengePublishSolutionBySlugData = async () => {
-    await mutate(cacheKey); // Trigger revalidation for the specific cache key
-  };
-  return {
-    data,
-    error,
-    refreshChallengePublishSolutionBySlugData,
-  };
-}

@@ -29,36 +29,9 @@ export const ChallengeCard = ({
 }: ChallengeProps) => {
   return (
     <>
-      {/* <div className="flex text-white flex-1 flex-col gap-6 rounded-2xl bg-cover p-6 shadow-lg bg-card max-w-[320px] md:max-w-[360px] lg:max-w-[400px]">
-        <div className="">
-          <Link href={`/challenges/${slug}`}>
-            <Image
-              src={getImageUrl(image!)}
-              alt={title}
-              width={"500"}
-              height={"500"}
-              className="rounded-lg hover:scale-105 duration-500 ease-in-out"
-            />
-          </Link>
-        </div>
-        <div className="mt-4 space-y-2 md:space-y-4">
-          <p className="bg-primary max-w-max px-2 py-0.5 rounded-lg text-xs sm:text-sm font-raleway font-medium uppercase tracking-wider">
-            {challengeCategory?.name}
-          </p>
-          <Link
-            href={`/challenges/${slug}`}
-            className="block hover:underline underline-offset-2 capitalize  tracking-wider text-xl md:text-2xl lg:text-3xl font-bold"
-          >
-            {title}
-          </Link>
-          <p className=" text-sm md:text-base text-dark-700">
-            {description}
-          </p>
-        </div>
-      </div> */}
       <Card className="max-w-[320px] md:max-w-[360px] lg:max-w-[400px] rounded-2xl  border-none  text-white bg-card bg-cover shadow-lg">
         <CardHeader>
-          <Link href={`/challenges/${slug}`}>
+          <Link aria-label={slug} href={`/challenges/${slug}`}>
             <Image
               src={getImageUrl(image!)}
               alt={title}
@@ -73,6 +46,7 @@ export const ChallengeCard = ({
             {challengeCategory?.name}
           </p>
           <Link
+            aria-label={slug}
             href={`/challenges/${slug}`}
             className="block hover:underline underline-offset-2 capitalize  tracking-wider text-xl md:text-2xl lg:text-3xl font-bold"
           >

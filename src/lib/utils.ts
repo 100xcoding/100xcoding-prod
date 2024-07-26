@@ -5,6 +5,8 @@ import Env from "./env";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+export const convertFileToUrl = (file: File) => URL.createObjectURL(file);
+
 export const getErrorMessage = (error: unknown): string => {
   let message: string;
   if (error instanceof Error) {
@@ -35,7 +37,7 @@ export function checkFileSize(fileSize: number, maxSizeInMB: number) {
 }
 export function appendDateToFileName(fileName: string): string {
   const currentDate = new Date();
-  const formattedDate = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
+  const formattedDate = currentDate.toISOString(); // Format: YYYY-MM-DD
   const extensionIndex = fileName.lastIndexOf(".");
   if (extensionIndex !== -1) {
     const baseName = fileName.slice(0, extensionIndex);

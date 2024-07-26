@@ -6,7 +6,6 @@ import { Button } from "./ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,6 +13,8 @@ import {
 } from "@/components/ui/form";
 import { z } from "zod";
 import { magicLinkSignIn } from "@/actions/auth";
+import { useState } from "react";
+import { ClipLoader } from "react-spinners";
 const formSchema = z.object({
   email: z
     .string()
@@ -30,7 +31,9 @@ export function MagicSignIn() {
       email: "",
     },
   });
+  const [isLoading, setIsLoading] = useState(false);
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
     const formData = new FormData();
     Object.keys(values).forEach((key) => {
       formData.append(key, values[key as keyof FormSchema]);
@@ -45,7 +48,7 @@ export function MagicSignIn() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-base font-raleway ">Email</FormLabel>
+              <FormLabel className="text-base ">Email</FormLabel>
               <FormControl>
                 <Input
                   className="bg-dark-400 ring-offset-green-500  focus-visible:ring-green-500 border-none py-6 text-base"
@@ -58,10 +61,16 @@ export function MagicSignIn() {
           )}
         />
         <Button
+          aria-label="Log in using magic link"
           type="submit"
+          disabled={isLoading}
           className="w-full tracking-wider font-poppins  capitalize py-6 text-base"
         >
-          Log in using magic link
+          {isLoading ? (
+            <ClipLoader color="#ffffff" />
+          ) : (
+            "Log in using magic link"
+          )}
         </Button>
       </form>
     </Form>

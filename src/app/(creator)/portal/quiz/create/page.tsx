@@ -73,13 +73,14 @@ const CreateQuizPage = () => {
               )}
             />
             <div className="flex items-center gap-x-2">
-              <Link href="/portal/quiz">
-                <Button type="button" variant="ghost">
+              <Link href="/portal/quiz" aria-label="cancel">
+                <Button type="button" variant="ghost" aria-label="cancel">
                   Cancel
                 </Button>
               </Link>
               <Button
                 type="submit"
+                aria-label="continue"
                 // disabled={isSubmitting}
               >
                 Continue

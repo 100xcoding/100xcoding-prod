@@ -29,6 +29,7 @@ export const QuizCategoryItem = ({ label, value }: QuizCategoryItemProps) => {
   };
   return (
     <button
+      aria-label={label}
       onClick={onClick}
       className={cn(
         "py-2 px-3 text-sm tracking-wider  border border-slate-200 rounded-full flex items-center gap-x-1 hover:border-primary transition",

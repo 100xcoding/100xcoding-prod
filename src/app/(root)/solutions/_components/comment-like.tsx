@@ -23,7 +23,11 @@ export const CommentLike = ({
     }
   };
   return (
-    <button onClick={handleLike} className="flex items-center gap-1">
+    <button
+      onClick={handleLike}
+      className="flex items-center gap-1"
+      aria-label="like"
+    >
       {userHasLiked ? (
         <AiFillLike size={30} className="text-green-500" />
       ) : (

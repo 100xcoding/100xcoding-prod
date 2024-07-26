@@ -62,9 +62,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model VerificationToken {
@@ -78,7 +77,7 @@ model VerificationToken {
 model Profile {
   id           String  @id @default(uuid())
   userId       String  @unique
-  title        String?
+  title        String? @db.VarChar(255)
   bio          String?
   website      String?
   profileImage String?
@@ -111,11 +110,7 @@ model Challenge {
   slug                String              @unique
   challengeCategoryId String?
   description         String?
-  task                String?
   about               String?
-  requirements        String?
-  steps               String?
-  challengeResourceId String?
   challengeTechId     String?
   publish             Boolean             @default(false)
   user                User                @relation(fields: [userId], references: [id])

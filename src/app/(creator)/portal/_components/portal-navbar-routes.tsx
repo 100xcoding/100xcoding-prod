@@ -6,8 +6,8 @@ import React from "react";
 export const PortalNavbarRoutes = () => {
   return (
     <div className="flex gap-x-2 ml-auto">
-      <Link href="/">
-        <Button variant="ghost">
+      <Link href="/" aria-label="exit">
+        <Button variant="ghost" aria-label="exit">
           <LogOut className="h-4 w-4 mr-2" />
           Exit
         </Button>

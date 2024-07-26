@@ -19,7 +19,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(tech);
   } catch (error) {
-    console.log("categories -", error);
+    // console.log("categories -", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

@@ -197,4 +197,10 @@
   .portal-input {
     @apply text-white bg-dark-400 ring-offset-dark-400   focus-visible:ring-green-500 border-none;
   }
+  .profile-input {
+    @apply text-white shadow-lg text-base bg-dark-500 ring-offset-dark-400   focus-visible:ring-green-500 border-none;
+  }
+  .file-upload {
+    @apply text-base flex cursor-pointer w-full  flex-col items-center justify-center gap-3 rounded-md border border-dashed border-dark-500 bg-dark-400 p-5;
+  }
 }

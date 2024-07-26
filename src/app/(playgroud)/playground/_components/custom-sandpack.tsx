@@ -21,6 +21,7 @@ export const CustomSandpack = ({
   playground,
 }: any) => {
   let SolutionFiles;
+
   if (solution) {
     SolutionFiles = {
       "/index.html": {
@@ -46,7 +47,6 @@ export const CustomSandpack = ({
       },
     };
   }
-
   return (
     <SandpackProvider
       template="vanilla"
@@ -65,7 +65,7 @@ export const CustomSandpack = ({
           size: "14px",
         },
       }}
-      files={SolutionFiles ? SolutionFiles : FILES.demo}
+      files={playground ? SolutionFiles : solution ? SolutionFiles : FILES.demo}
     >
       <SandpackLayout style={{ borderRadius: 0 }}>
         <div className="h-[calc(100vh-50px)] flex w-full gap-[1px]">
@@ -77,7 +77,10 @@ export const CustomSandpack = ({
                 solution={solution}
               />
             </ResizablePanel>
-            <ResizableHandle className="w-1 bg-dark-200 transition-colors hover:bg-gray-600" />
+            <ResizableHandle
+              withHandle
+              className="w-1 bg-dark-200 transition-colors hover:bg-gray-600"
+            />
             <ResizablePanel
               className="border-l border-green-500"
               collapsible={true}
@@ -96,7 +99,10 @@ export const CustomSandpack = ({
                     }}
                   />
                 </ResizablePanel>
-                <ResizableHandle className="h-[0.25rem] bg-dark-200 transition-colors hover:bg-gray-600" />
+                <ResizableHandle
+                  withHandle
+                  className="h-[0.25rem] bg-dark-200 transition-colors hover:bg-gray-600"
+                />
 
                 <ResizablePanel
                   defaultSize={30}
@@ -106,7 +112,7 @@ export const CustomSandpack = ({
                   <SandpackConsole
                     showResetConsoleButton
                     style={{
-                      height: "100%",
+                      height: "95%",
                     }}
                   />
                 </ResizablePanel>

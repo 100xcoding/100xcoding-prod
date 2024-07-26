@@ -115,7 +115,7 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
   //   }
   // };
   const handleSubmit = () => {
-    console.log("Submitted responses:", responses);
+    // console.log("Submitted responses:", responses);
     // Handle form submission logic here
   };
   // const handleClick = (id: string) => {
@@ -148,6 +148,7 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
         <h2>Title of Quiz</h2>
         <h3>Timimg</h3>
         <Button
+          aria-label="submit quiz"
           variant={"secondary"}
           className="bg-red-600 text-red-500 tracking-wide capitalize"
         >
@@ -173,6 +174,7 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
       </section>
       <section className="bg-dark-500 py-4 rounded-md px-4 flex justify-between my-10">
         <Button
+          aria-label="previous"
           disabled={currentQuestionIndex <= 0}
           onClick={handlePrevious}
           variant={"default"}
@@ -180,6 +182,7 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
           Prev
         </Button>
         <Button
+          aria-label="next"
           disabled={quiz.length - 1 == currentQuestionIndex}
           onClick={handleNext}
         >
@@ -194,6 +197,7 @@ export default QuizPage;
 const QuizOption = ({ handleClick, option, selectedAnswer, ind }: any) => {
   return (
     <button
+      aria-label={option.text}
       onClick={() => handleClick(option.id)}
       className={`border border-dark-500 rounded-md  py-3 text-left px-4 flex items-center gap-4 ${option.id === selectedAnswer ? "bg-green-600 text-green-500 border-none" : "border border-dark-500"} `}
     >

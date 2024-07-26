@@ -26,10 +26,11 @@ export const Combobox = ({ options, value, onChange }: ComboboxProps) => {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
+          aria-label="open"
+          // variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between capitalize"
+          className="w-full justify-between capitalize bg-dark-500 text-white"
         >
           {value
             ? options?.find((option) => option.value === value)?.label
@@ -37,7 +38,7 @@ export const Combobox = ({ options, value, onChange }: ComboboxProps) => {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
+      <PopoverContent className="w-full p-0 text-white border-none bg-dark-500">
         <Command>
           <CommandInput placeholder="Search option..." />
           <CommandEmpty>No option found.</CommandEmpty>

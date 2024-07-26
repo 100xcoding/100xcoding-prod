@@ -66,8 +66,8 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm bg-dark-400 ring-offset-dark-400 text-white  focus-visible:ring-green-500 border-none"
         />
-        <Link href="/portal/challenges/create">
-          <Button>
+        <Link href="/portal/challenges/create" aria-label="new-challenge">
+          <Button aria-label=" New challenge">
             <PlusCircle className="h-4 w-4 mr-2" />
             New challenge
           </Button>
@@ -126,6 +126,7 @@ export function DataTable<TData, TValue>({
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
+          aria-label="Previous"
           variant="outline"
           size="sm"
           className="shad-gray-btn"
@@ -135,6 +136,7 @@ export function DataTable<TData, TValue>({
           Previous
         </Button>
         <Button
+          aria-label="Next"
           variant="outline"
           size="sm"
           className="shad-gray-btn"

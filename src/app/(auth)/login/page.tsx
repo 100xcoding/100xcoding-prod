@@ -1,27 +1,41 @@
+"use client";
+import { DiscordSignIn } from "@/components/discord-sign-in";
 import { MagicSignIn } from "@/components/magic-sign-in";
 import { SignIn } from "@/components/sign-in";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { toast } from "sonner";
 const LoginPage = () => {
+  const seacrhParams = useSearchParams();
+  const message = seacrhParams.get("msg");
+  useEffect(() => {
+    if (message) {
+      toast.error(message);
+    }
+  }, [message]);
   return (
     <div className="bg-dark-300 text-white flex max-h-screen h-screen">
       <div className="container my-auto ">
         <div className="sub-container max-w-[496px] mx-auto">
           <div className="bg-card bg-cover shadow-lg p-6 rounded-xl">
             <Link
+              aria-label="100xcoding"
               href="/"
               className="text-center block tracking-wider text-4xl font-bold  mt-4 mb-6"
             >
-              iKnowCode
+              100xCoding
             </Link>
             <p className="text-center text-lg mb-6">
               Welcome 👋
               <br />
-              Login to unlock access to iKnowCode!
+              Login to unlock access to{" "}
+              <span className="font-bold">100xCoding!</span>
             </p>
             <div className="space-y-4">
               <SignIn />
+              <DiscordSignIn />
               <div className="text-center relative after:bg-white after:absolute after:top-1/2 after:left-0 after:w-full after:h-[2px] after:z-0">
                 <span className="relative z-10 inline-block bg-[#1F2527] px-4 my-2">
                   OR
@@ -31,11 +45,19 @@ const LoginPage = () => {
             </div>
             <small className="block text-center mt-6 px-6">
               By clicking &#34;{"Login"}&#34; above, you agree to our{" "}
-              <Link className="text-[#6665E5] " href="/">
+              <Link
+                aria-label="terms-of-service"
+                className="text-[#6665E5] "
+                href="/"
+              >
                 Terms of service
               </Link>{" "}
               and acknowledge our{" "}
-              <Link className="text-[#6665E5]" href="/">
+              <Link
+                aria-label="privacy-policy"
+                className="text-[#6665E5]"
+                href="/"
+              >
                 Privacy Policy.
               </Link>
             </small>

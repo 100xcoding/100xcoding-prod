@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardHeader } from "@/components/ui/card";
 import { getChallengeSolution } from "../_data-access";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,6 +9,8 @@ import { Loader2 } from "@/components/loader2";
 import { CommentForm } from "../_components/comment-form";
 import { CommentList } from "../_components/comment-list";
 import { Button } from "@/components/ui/button";
+import { auth } from "@/auth";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const SingleSolution = async ({
   params: { slug },
@@ -16,7 +18,7 @@ const SingleSolution = async ({
   params: { slug: string };
 }) => {
   const { solution } = await getChallengeSolution(slug);
-  // console.log(solution);
+  const session = await auth();
   return (
     <section className="container mx-auto mt-4 ">
       <Suspense fallback={<Loader2 />}>
@@ -33,20 +35,20 @@ const SingleSolution = async ({
                 {solution?.challenge.description}
               </p>
               <Link
-                href={`/playground/${solution?.challenge.slug}`}
+                aria-label="solution"
+                href={`/solutions`}
                 className="flex text-base md:text-lg items-center gap-2  w-fit  px-4 py-2.5 rounded-lg bg-green-500 capitalize font-openSans tracking-wide font-medium"
               >
                 Explore more
-                {/* <Play /> */}
+                <FaArrowRightLong size={22} />
               </Link>
             </div>
-            <div className=" border   ">
+            <div className="    ">
               <Image
                 src={getImageUrl(solution?.challenge?.image!)}
                 width={"500"}
                 height={"500"}
                 alt={solution?.challenge?.title!}
-                className=" "
               />
             </div>
           </CardHeader>
@@ -60,10 +62,23 @@ const SingleSolution = async ({
       <div className="my-6 text-white bg-dark-500 p-4 rounded-md space-y-4">
         <div className="flex justify-between items-center">
           <p className="capitalize font-semibold text-3xl">Feedback</p>
-          <Button>Add a Feedback</Button>
+          {!session?.user && (
+            <Button asChild aria-label="add a feedback">
+              <Link
+                aria-label="add a feedback"
+                href={`/login?redirect=/solutions/${slug}`}
+              >
+                Add a Feedback
+              </Link>
+            </Button>
+          )}
         </div>
-        <CommentForm slug={slug} />
-        <CommentList slug={slug} />
+        {session?.user && (
+          <>
+            <CommentForm slug={slug} />
+            <CommentList slug={slug} />
+          </>
+        )}
       </div>
     </section>
   );

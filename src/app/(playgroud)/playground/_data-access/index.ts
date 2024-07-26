@@ -27,21 +27,46 @@ export async function getChallenge(slug: string) {
     };
   }
 }
-export async function getSolutionBySlug(slug: string) {
+// export async function getSolutionBySlug(slug: string) {
+//   const session = await auth();
+//   console.log(session);
+//   if (!session || !session.user || !session.user.id) {
+//     redirect("/?msg='sign-in first' ");
+//   }
+//   try {
+//     const challenge = await db.challengeSolution.findUnique({
+//       where: {
+//         slug: slug,
+//         userId: session?.user.id!,
+//       },
+//     });
+//     return {
+//       success: true,
+//       challenge,
+//     };
+//   } catch (error) {
+//     return {
+//       success: false,
+//       err: getErrorMessage(error),
+//       message: "Something went wrong",
+//     };
+//   }
+// }
+export async function getUnpublishSolutionBySlug(slug: string) {
   const session = await auth();
   if (!session || !session.user || !session.user.id) {
-    redirect("/?msg='sign-in first' ");
+    redirect("/login?msg='sign-in first' ");
   }
   try {
-    const challenge = await db.challengeSolution.findUnique({
+    const solution = await db.challengeSolution.findUnique({
       where: {
-        slug: slug,
+        slug: slug.concat(session?.user.id),
         userId: session?.user.id!,
       },
     });
     return {
       success: true,
-      challenge,
+      solution,
     };
   } catch (error) {
     return {
@@ -51,3 +76,6 @@ export async function getSolutionBySlug(slug: string) {
     };
   }
 }
+// export async function checkIsCompletedByUuser(params:type) {
+
+// }

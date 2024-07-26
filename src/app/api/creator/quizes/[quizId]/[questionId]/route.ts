@@ -32,7 +32,7 @@ export async function GET(
     // console.log("QUIZ-API ", quiz);
     return NextResponse.json(question);
   } catch (error) {
-    console.log("Question  by id-", error);
+    // console.log("Question  by id-", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

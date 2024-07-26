@@ -8,29 +8,38 @@ export const Footer = () => {
   return (
     <footer className="bg-dark-400 text-white  py-2  px-2.5">
       <div className="container mx-auto flex flex-col lg:flex-row justify-between lg:items-center gap-7 md:gap-1">
-        <Link href={"/"} className="">
+        <Link aria-label="100xcoding logo" href={"/"} className="">
           <Logo />
         </Link>
         <div className="flex lg:items-center gap-4 flex-col lg:flex-row text-slate-200">
-          <p className="">© 2024 codebits. All rights reserved </p>
-          <Link href={"/"} className="hover:underline">
+          <p className="">© 2024 100xCoding.com </p>
+          <p> All rights reserved</p>
+          <Link
+            aria-label="privacy policy"
+            href={"/"}
+            className="hover:underline"
+          >
             Privacy Policy
           </Link>
-          <Link href={"/"} className="hover:underline">
+          <Link
+            aria-label="Terms of use"
+            href={"/"}
+            className="hover:underline"
+          >
             Terms of use
           </Link>
         </div>
         <div className="flex lg:justify-center items-center gap-5">
-          <Link href={"/"}>
+          <Link aria-label="twitter" href={"/"}>
             <FaXTwitter size={26} />
           </Link>
-          <Link href={"/"}>
+          <Link href={"/"} aria-label="youtube">
             <FaYoutube size={26} />
           </Link>
-          <Link href={"/"}>
+          <Link href={"/"} aria-label="instagram">
             <BsInstagram size={26} />
           </Link>
-          <Link href={"/"}>
+          <Link href={"/"} aria-label="discord">
             <FaDiscord size={26} />
           </Link>
         </div>

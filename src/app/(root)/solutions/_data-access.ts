@@ -71,7 +71,7 @@ export async function getChallengeSolution(slug: string) {
 }
 export async function getComments(slug: string) {
   const session = await auth();
-  if (!session || !session.user || session.user.role !== "creator") {
+  if (!session || !session.user) {
     redirect("/?msg='sign-in first' ");
   }
   try {
