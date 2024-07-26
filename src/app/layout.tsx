@@ -18,6 +18,16 @@ export const metadata: Metadata = {
     default: "100xCoding.com",
     template: "%s - 100xCoding",
   },
+  keywords: [
+    "Front-End Development",
+    "Web Development Challenges",
+    "Coding Projects",
+    "Developer Learning Platform",
+    "Real-World Coding Challenges",
+    "Enhance Coding Skills",
+    "Programming Challenges",
+    "Interactive Coding Exercises",
+  ],
   description:
     "Boost your front-end development skills with 100xCoding. Tackle real-world projects and master HTML, CSS, and JavaScript through hands-on challenges designed with professional standards.",
   twitter: {
@@ -25,9 +35,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "Master front-end development by building real-world projects. Enhance your HTML, CSS, and JavaScript skills through hands-on challenges crafted with professional designs.",
+      "Accelerate Your Coding Journey with 100xCoding Developer Challenges",
     description:
-      "Boost your front-end development skills with 100xCoding. Tackle real-world projects and master HTML, CSS, and JavaScript through hands-on challenges designed with professional standards.",
+      "Elevate Your Development Skills with 100xCoding. Tackle Real-World Projects and Enhance Your Coding Expertise through Professional-Standard Challenges Designed for Developers of All Levels.",
     images: ["/opengraph-image.png"],
   },
   metadataBase: new URL(Env.NEXT_PUBLIC_URL),
