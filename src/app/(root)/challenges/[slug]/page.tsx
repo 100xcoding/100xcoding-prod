@@ -47,6 +47,16 @@ export async function generateMetadata({
         },
       ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: challenge?.title,
+      description: challenge?.description!,
+      images: [
+        {
+          url: getImageUrl(challenge?.image!),
+        },
+      ],
+    },
   };
 }
 const SingleChallenge = async ({

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
       "Boost your front-end development skills with 100xCoding. Tackle real-world projects and master HTML, CSS, and JavaScript through hands-on challenges designed with professional standards.",
     images: ["/opengraph-image.png"],
   },
-  metadataBase: new URL("https://100xcoding.com"),
+  metadataBase: new URL(Env.NEXT_PUBLIC_URL),
 };
 import { Toaster } from "sonner";
 import SWRProvider from "@/components/providers/swr-provider";
