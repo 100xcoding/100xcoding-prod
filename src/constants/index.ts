@@ -193,13 +193,13 @@ export const challengeData = [
 export const FILES = {
   demo: {
     "/index.html": {
-      code: '<!DOCTYPE html>\n<html>\n\n<head>\n  <title>FrontendPro Sandbox</title>\n  <meta charset="UTF-8" />\n</head>\n\n<body>\n  <h1 id="app">Become a Pro in Frontend Dev with FrontendPro.dev! 🚀</h1>\n  <button>Increase Your Skill Level: <span id="level">0</span></button>\n  <script src="src/index.js"></script>\n</body>\n\n</html>',
+      code: '<!DOCTYPE html>\n<html>\n\n<head>\n  <title>100xcoding Sandbox</title>\n  <meta charset="UTF-8" />\n</head>\n\n<body>\n  <h1>Accelerate Your Coding Journey with 100xCoding Developer Challenges 🚀</h1>\n \n  <script src="src/index.js"></script>\n</body>\n\n</html>',
     },
     "/src/styles.css": {
-      code: "body {\n  font-family: sans-serif;\n  background-color: #1F2937;\n  text-align: center;\n  color: white;\n  padding-top: 64px;\n}\n\nbutton {\n  background-color: #4F46E5;\n  transition: background-color 0.3s ease;\n  color: white;\n  padding: 12px;\n  border: none;\n  border-radius: 6px;\n  font-weight: semi-bold;\n  cursor: pointer;\n  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);\n}\n\nbutton:hover {\n  background-color: #4338CA;\n}\n",
+      code: "body {\n  font-family: sans-serif;\n  background-color: #1F2937;\n  text-align: center;\n  color: white;\n  padding-top: 64px;\n}\n",
     },
     "/index.js": {
-      code: 'import "./styles.css";\n\nconst button = document.querySelector("button")\nconst level = document.querySelector("#level")\n  \nbutton.addEventListener("click" , () => {\n  level.innerText++\n})\n',
+      code: 'import "./styles.css";\n\n',
     },
   },
 };

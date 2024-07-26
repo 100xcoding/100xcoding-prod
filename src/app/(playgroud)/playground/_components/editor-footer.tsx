@@ -6,6 +6,7 @@ import {
   updateChallengeSolution,
 } from "../_actions";
 import { toast } from "sonner";
+import { useState } from "react";
 interface Files {
   [key: string]: any; // You can replace `any` with a more specific type if you know it
 }
@@ -28,8 +29,10 @@ export const EditorFooter = ({
 }: any) => {
   const { sandpack } = useSandpack();
   const { files, visibleFiles } = sandpack;
+  const [loading, setLoading] = useState(false);
   const handleSave = async () => {
     if (!isDirty) return;
+    setLoading(true);
     const data = filterVisibleFiles(visibleFiles, files);
     const updatedData = {
       files: data,
@@ -40,7 +43,7 @@ export const EditorFooter = ({
       const result = await updateChallengeSolution(updatedData, slug);
       // console.log(result);
       if (result?.success) {
-        toast.success("Saved Successfully!");
+        toast.info("Saved Successfully, now you can also publish this");
         setIsDirty(false);
       } else {
         toast.error(result?.err);
@@ -50,7 +53,7 @@ export const EditorFooter = ({
       // create solution record
       const result = await createChallengeSolution(updatedData, slug);
       if (result?.success) {
-        toast.success("Saved Successfully!");
+        toast.info("Saved Successfully, now you can also publish this");
         setIsDirty(false);
       } else {
         setIsDirty(true);
@@ -58,18 +61,20 @@ export const EditorFooter = ({
         toast.error(result?.err);
       }
     }
+    setLoading(false);
   };
   const handleSubmit = async () => {
     const updatedData = {
       completed: !isCompleted,
     };
     try {
+      setLoading(true);
       if (isDirty) {
         await handleSave();
       }
       const result = await publishChallengeSolution(slug);
       if (result?.success) {
-        toast.success("Challenge completed successfully!");
+        toast.success("Challenge published successfully!");
       } else {
         toast.error(result?.err);
         toast.error(result?.message);
@@ -82,6 +87,7 @@ export const EditorFooter = ({
       // 		query: { submit: true },
       // 	});
       // }
+      setLoading(false);
     } catch (error) {
       // console.log(error);
     }
@@ -100,8 +106,9 @@ export const EditorFooter = ({
           Save
         </Button>
         <Button
-          aria-label="mark as complete"
-          className="font-semibold"
+          aria-label="save & publish"
+          className="font-semibold capitalize"
+          disabled={loading}
           // variant="primary"
 
           onClick={handleSubmit}
@@ -120,7 +127,7 @@ export const EditorFooter = ({
 					) : (
 						"Mark as complete"
 					)} */}
-          Mark as Complete
+          save & publish
         </Button>
       </div>
     </div>

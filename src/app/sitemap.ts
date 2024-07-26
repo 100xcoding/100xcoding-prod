@@ -17,6 +17,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}`,
       lastModified: new Date(),
     },
+    {
+      url: `${baseUrl}/login`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/challenges`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/solutions`,
+      lastModified: new Date(),
+    },
     ...challengesUrls,
     //TODO:add solutions urls
     // add dynamic pages data
