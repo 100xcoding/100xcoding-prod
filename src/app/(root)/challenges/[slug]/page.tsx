@@ -22,7 +22,7 @@ interface AllChallengeIdType {
 export const revalidate = 60 * 60 * 24;
 export async function generateStaticParams() {
   const { challenges }: any = await getAllChallenges();
-  return challenges?.map(({ slug }: { slug: string }) => ({ slug }));
+  return challenges?.map(({ slug }: { slug: string }) => ({ slug })) ?? [];
 }
 // manual cache
 const getChallengeCache = cache(async (slug: string) => {
