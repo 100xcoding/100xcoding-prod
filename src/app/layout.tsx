@@ -4,7 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import NextAuthProvider from "../components/providers/nextauth-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { cn } from "@/lib/utils";
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 const fontSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -53,6 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={cn("font-sans antialiased", fontSans.variable)}>
+        <SpeedInsights />
         <ThemeProvider attribute="class" defaultTheme="dark">
           <Toaster position="top-right" closeButton richColors />
           <NextAuthProvider>
