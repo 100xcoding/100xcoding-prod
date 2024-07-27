@@ -1,6 +1,10 @@
-export function MagicMail(params: { url: string; host: string; theme: any }) {
-  const { url, host, theme } = params;
-  console.log(host, url);
+export function MagicMail(params: {
+  url: string;
+  host: string;
+  theme: any;
+  publicUrl: string;
+}) {
+  const { url, host, theme, publicUrl } = params;
   const escapedHost = host.replace(/\./g, "&#8203;.");
 
   const brandColor = theme.brandColor || "#346df1";
@@ -20,7 +24,7 @@ export function MagicMail(params: { url: string; host: string; theme: any }) {
     <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" style="max-width:37.5em;margin:0 auto;padding:20px 25px 48px;background-image:url(&quot;/email-logo.svg&quot;);background-position:bottom;background-repeat:no-repeat, no-repeat">
       <tbody>
         <tr style="width:100%">
-          <td><img alt="100xcoding.com" height="48" src="${`${host}/email-logo.svg`}" style="display:block;outline:none;border:none;text-decoration:none" width="48" />
+          <td><img alt="100xcoding.com" height="48" src="${`${publicUrl}/email-logo.svg`}" style="display:block;outline:none;border:none;text-decoration:none" width="48" />
             <h1 style="font-size:28px;font-weight:bold;margin-top:48px">We're excited to have you join the 100xcoding community!</h1>
             <p style="font-size:18px;font-weight:500;margin-top:28px">To get started, please click the link below to sign in.</p>
             <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" style="margin:24px 0">

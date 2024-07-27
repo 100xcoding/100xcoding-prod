@@ -48,7 +48,7 @@ const PlaygroudSlug = async ({
               resource={challenge?.resource!}
             />
           </ResizablePanel>
-          <ResizableHandle />
+          <ResizableHandle withHandle />
           <ResizablePanel
             defaultSize={75}
             className="row-start-2 row-end-3 flex-1"

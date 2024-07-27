@@ -109,33 +109,6 @@ export const CustomCodeEditor = ({ playground, solution, slug }: any) => {
             slug={slug}
           />
         )}
-        {/* {user?.id === solution?.userId ? (
-          <EditorFooter
-            isCompleted={solution?.status}
-            playground={playground}
-            isDirty={isDirty}
-            setIsDirty={setIsDirty}
-          />)
-          : null
-        } */}
-        {/* {
-          !isSolution && <EditorFooter
-            isCompleted={false}
-            playground={playground}
-            isDirty={isDirty}
-            setIsDirty={setIsDirty}
-            slug={slug}
-          />
-        } */}
-        {/* {!solution && (
-          <EditorFooter
-            isCompleted={false}
-            playground={playground}
-            isDirty={isDirty}
-            setIsDirty={setIsDirty}
-            slug={slug}
-          />
-        )} */}
       </SandpackStack>
     </div>
   );

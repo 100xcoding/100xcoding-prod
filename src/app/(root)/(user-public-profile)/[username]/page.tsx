@@ -60,7 +60,7 @@ const UserPublicProfile = async ({
   if (!user) {
     notFound();
   }
-  console.log(userPublishChallenges);
+  // console.log(userPublishChallenges);
   const session = await auth();
   const iconMap: IconMap = {
     github: FaGithub,

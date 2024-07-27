@@ -10,6 +10,7 @@ import { CommentForm } from "../_components/comment-form";
 import { CommentList } from "../_components/comment-list";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const SingleSolution = async ({
   params: { slug },
@@ -18,8 +19,6 @@ const SingleSolution = async ({
 }) => {
   const { solution } = await getChallengeSolution(slug);
   const session = await auth();
-  console.log(session);
-  console.log(solution);
   return (
     <section className="container mx-auto mt-4 ">
       <Suspense fallback={<Loader2 />}>
@@ -41,7 +40,7 @@ const SingleSolution = async ({
                 className="flex text-base md:text-lg items-center gap-2  w-fit  px-4 py-2.5 rounded-lg bg-green-500 capitalize font-openSans tracking-wide font-medium"
               >
                 Explore more
-                {/* <Play /> */}
+                <FaArrowRightLong size={22} />
               </Link>
             </div>
             <div className="    ">
@@ -50,7 +49,6 @@ const SingleSolution = async ({
                 width={"500"}
                 height={"500"}
                 alt={solution?.challenge?.title!}
-                className=" "
               />
             </div>
           </CardHeader>

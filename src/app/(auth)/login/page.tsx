@@ -1,4 +1,5 @@
 "use client";
+import { DiscordSignIn } from "@/components/discord-sign-in";
 import { MagicSignIn } from "@/components/magic-sign-in";
 import { SignIn } from "@/components/sign-in";
 import Image from "next/image";
@@ -34,6 +35,7 @@ const LoginPage = () => {
             </p>
             <div className="space-y-4">
               <SignIn />
+              <DiscordSignIn />
               <div className="text-center relative after:bg-white after:absolute after:top-1/2 after:left-0 after:w-full after:h-[2px] after:z-0">
                 <span className="relative z-10 inline-block bg-[#1F2527] px-4 my-2">
                   OR

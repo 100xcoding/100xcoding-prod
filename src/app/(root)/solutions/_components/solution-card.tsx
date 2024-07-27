@@ -80,7 +80,9 @@ export const SolutionCard = ({
       <CardFooter className="flex items-center gap-4">
         <Avatar className="h-12 w-12 object-cover">
           <AvatarImage src={user?.image!} alt={user?.name!} />
-          <AvatarFallback>{user?.name!.slice(0, 1)}</AvatarFallback>
+          <AvatarFallback className="capitalize text-xl font-bold">
+            {user?.name!.slice(0, 1)}
+          </AvatarFallback>
         </Avatar>
         <div className="">
           <h4 className=" text-lg">{user?.name}</h4>

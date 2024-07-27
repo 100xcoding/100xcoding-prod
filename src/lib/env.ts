@@ -12,5 +12,7 @@ class Env {
   static RESEND_API_KEY: string = process.env.RESEND_API_KEY!;
   static GTM_ID: string = process.env.GTM_ID!;
   static NEXT_PUBLIC_URL: string = process.env.NEXT_PUBLIC_URL!;
+  static AUTH_DISCORD_ID: string = process.env.AUTH_DISCORD_ID!;
+  static AUTH_DISCORD_SECRET: string = process.env.AUTH_DISCORD_SECRET!;
 }
 export default Env;

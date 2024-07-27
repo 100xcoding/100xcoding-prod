@@ -1,5 +1,6 @@
 import { MagicMail } from "@/emails/MagicMail";
 import { resend } from "./resend";
+import Env from "./env";
 
 export async function authSendRequest(params: any) {
   const { identifier: to, provider, url, theme } = params;
@@ -29,7 +30,7 @@ export async function authSendRequest(params: any) {
       to: to,
       subject: `Log in to ${host}`,
       text: text({ url, host }),
-      html: MagicMail({ url, host, theme }),
+      html: MagicMail({ url, host, theme, publicUrl: Env.NEXT_PUBLIC_URL! }),
     });
     // console.log(data);
     return { success: true, data };

@@ -1,7 +1,7 @@
 import NextAuth, { Account, Profile } from "next-auth";
 import GitHub from "next-auth/providers/github";
+import Discord from "next-auth/providers/discord";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient, User } from "@prisma/client";
 import { JWT } from "next-auth/jwt";
 import { Adapter, AdapterUser } from "next-auth/adapters";
 import Env from "./lib/env";
@@ -82,6 +82,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         };
       },
     }),
+    Discord({
+      authorization: { params: { scope: "guilds+join identify" } },
+      clientId: Env.AUTH_DISCORD_ID,
+      clientSecret: Env.AUTH_DISCORD_SECRET,
+      allowDangerousEmailAccountLinking: true,
+    }),
     Resend({
       server: Env.RESEND_API_KEY,
       from: "test@codify.siddhantjain.co.in",
@@ -97,8 +103,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const existingUser = await db.user.findUnique({
           where: { email: profile.email },
         });
+        const userNameCheck = await db.user.findUnique({
+          where: {
+            username: profile?.login,
+          },
+        });
         if (!existingUser) {
-          const username = await generateUniqueUsername(profile.email);
+          const username = userNameCheck
+            ? await generateUniqueUsername(profile.email)
+            : profile?.login;
           await db.user.create({
             data: {
               name: profile.name,
@@ -137,6 +150,37 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             data: {
               name: user.name,
               image: user.image,
+            },
+          });
+        }
+      } else if (account.provider == "discord") {
+        // GitHub provider sign-in logic
+        const existingUser = await db.user.findUnique({
+          where: { email: profile.email },
+        });
+        const userNameCheck = await db.user.findUnique({
+          where: {
+            username: profile?.username,
+          },
+        });
+        if (!existingUser) {
+          const username = userNameCheck
+            ? await generateUniqueUsername(profile.email)
+            : profile?.username;
+          await db.user.create({
+            data: {
+              name: profile.name,
+              email: profile.email,
+              image: profile.image_url,
+              username: profile.username,
+            },
+          });
+        } else {
+          await db.user.update({
+            where: { email: profile.email },
+            data: {
+              name: profile.name,
+              image: profile.image_url,
             },
           });
         }

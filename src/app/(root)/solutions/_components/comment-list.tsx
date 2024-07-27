@@ -45,13 +45,13 @@ export const CommentList = async ({ slug }: { slug: string }) => {
                 </div>
               </div>
               <div className="space-x-4  my-2 flex">
-                {session?.user && (
+                {/* {session?.user && (
                   <CommentLike
                     commentId={comment?.id}
                     userHasLiked={comment?.userHasLiked}
                     count={comment?.likeCount}
                   />
-                )}
+                )} */}
                 {session?.user?.id == comment?.userId && (
                   <CommentEdit slug={slug} id={comment?.id} />
                 )}

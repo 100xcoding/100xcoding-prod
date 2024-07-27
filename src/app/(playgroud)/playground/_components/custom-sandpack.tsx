@@ -77,7 +77,10 @@ export const CustomSandpack = ({
                 solution={solution}
               />
             </ResizablePanel>
-            <ResizableHandle className="w-1 bg-dark-200 transition-colors hover:bg-gray-600" />
+            <ResizableHandle
+              withHandle
+              className="w-1 bg-dark-200 transition-colors hover:bg-gray-600"
+            />
             <ResizablePanel
               className="border-l border-green-500"
               collapsible={true}
@@ -96,7 +99,10 @@ export const CustomSandpack = ({
                     }}
                   />
                 </ResizablePanel>
-                <ResizableHandle className="h-[0.25rem] bg-dark-200 transition-colors hover:bg-gray-600" />
+                <ResizableHandle
+                  withHandle
+                  className="h-[0.25rem] bg-dark-200 transition-colors hover:bg-gray-600"
+                />
 
                 <ResizablePanel
                   defaultSize={30}
