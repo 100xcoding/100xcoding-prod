@@ -111,7 +111,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (!existingUser) {
           const username = userNameCheck
             ? await generateUniqueUsername(profile.email)
-            : profile?.username;
+            : profile?.login;
           await db.user.create({
             data: {
               name: profile.name,
