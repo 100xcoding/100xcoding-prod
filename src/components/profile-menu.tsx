@@ -16,8 +16,12 @@ export const ProfileMenu = async ({ user }: any) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar>
-          <AvatarImage src={user?.image} alt="profile-picture" />
+        <Avatar className="w-14 h-14">
+          <AvatarImage
+            src={user?.image}
+            alt="profile-picture"
+            className="object-contain"
+          />
           <AvatarFallback className="bg-green-600 text-green-500 uppercase text-xl font-semibold">
             {user?.name ? user?.name?.slice(0, 1) : "C"}
           </AvatarFallback>
