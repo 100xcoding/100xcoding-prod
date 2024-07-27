@@ -26,6 +26,12 @@ const nextConfig = {
 				port: "",
 				pathname: "/**",
 			},
+			{
+				protocol: "https",
+				hostname: "images.100xcoding.com",
+				port: "",
+				pathname: "/**",
+			},
 		],
 	},
 	experimental:{
