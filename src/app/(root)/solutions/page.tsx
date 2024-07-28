@@ -7,7 +7,6 @@ import { getChallengeSolutions } from "./_data-access";
 
 const SolutionsPage = async () => {
   const { solutions } = await getChallengeSolutions();
-  // console.log(solutions);
   return (
     <section className="container p-3 my-10 mx-auto ">
       <div className="flex flex-wrap gap-8 justify-center md:justify-start">

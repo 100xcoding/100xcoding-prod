@@ -1,14 +1,11 @@
 import { Metadata } from "next";
-export const metadata: Metadata = {
-  title: "Profile ",
-};
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { getPublicProfile } from "../_data-access";
+import { getAllProfiles, getPublicProfile } from "../_data-access";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { getImageUrl } from "@/lib/utils";
@@ -49,18 +46,61 @@ import { auth } from "@/auth";
 import { notFound, redirect } from "next/navigation";
 import { LinkCard } from "../_components/link-card";
 import { SolutionCard } from "../../solutions/_components/solution-card";
+import { cache } from "react";
+
+export const revalidate = 60 * 60 * 24;
+export async function generateStaticParams() {
+  const { users } = await getAllProfiles();
+  return (
+    users?.map(({ username }: { username: string }) => ({ username })) ?? []
+  );
+}
+// manual cache
+const getPublicProfileCache = cache(async (username: string) => {
+  return await getPublicProfile(username);
+});
+export async function generateMetadata({
+  params: { username },
+}: {
+  params: { username: string };
+}): Promise<Metadata> {
+  const { user } = await getPublicProfileCache(username);
+  return {
+    title: `${user?.name ?? ""} | 100xcoding`,
+    description: user?.profile?.title ?? "User Tagline",
+    openGraph: {
+      title: `${user?.name ?? ""} | 100xcoding`,
+      description: user?.profile?.title ?? "User Tagline",
+      images: [
+        {
+          url: getImageUrl(user?.profile?.profileImage!),
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${user?.name ?? ""} | 100xcoding`,
+      description: user?.profile?.title ?? "User Tagline",
+      images: [
+        {
+          url: getImageUrl(user?.profile?.profileImage!),
+        },
+      ],
+    },
+  };
+}
+
 const UserPublicProfile = async ({
   params,
 }: {
   params: { username: string };
 }) => {
-  const { user, userPublishChallenges } = await getPublicProfile(
+  const { user, userPublishChallenges } = await getPublicProfileCache(
     params?.username,
   );
   if (!user) {
     notFound();
   }
-  // console.log(userPublishChallenges);
   const session = await auth();
   const iconMap: IconMap = {
     github: FaGithub,

@@ -76,22 +76,26 @@ export async function getProfile() {
     };
   }
 }
-// export async function getSocialTypes() {
-//   try {
-//     const session = await auth();
-//     if (!session || !session.user) {
-//       redirect("/login?msg='Login first!' ");
-//     }
-//     const socialLinkTypes = await db.socialLinkType.findMany({});
-//     return {
-//       success: true,
-//       socialLinkTypes,
-//     };
-//   } catch (error) {
-//     return {
-//       success: false,
-//       err: getErrorMessage(error),
-//       message: "Something went wrong",
-//     };
-//   }
-// }
+
+export async function getAllProfiles() {
+  try {
+    const users = await db.user.findMany({
+      include: {
+        profile: true,
+        socialLink: true,
+      },
+    });
+
+    return {
+      success: true,
+      users,
+      message: "success",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Something went wrong, Try again!",
+      err: getErrorMessage(error),
+    };
+  }
+}
