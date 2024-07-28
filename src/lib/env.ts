@@ -14,5 +14,6 @@ class Env {
   static NEXT_PUBLIC_URL: string = process.env.NEXT_PUBLIC_URL!;
   static AUTH_DISCORD_ID: string = process.env.AUTH_DISCORD_ID!;
   static AUTH_DISCORD_SECRET: string = process.env.AUTH_DISCORD_SECRET!;
+  static RESEND_EMAIL: string = process.env.RESEND_EMAIL!;
 }
 export default Env;

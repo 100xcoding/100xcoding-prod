@@ -90,7 +90,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
     Resend({
       server: Env.RESEND_API_KEY,
-      from: "test@codify.siddhantjain.co.in",
+      from: Env.RESEND_EMAIL,
       sendVerificationRequest(params) {
         authSendRequest(params);
       },
