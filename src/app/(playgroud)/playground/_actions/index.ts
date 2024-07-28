@@ -50,7 +50,7 @@ export async function updateChallengeSolution(data: any, slug: string) {
   try {
     const session = await auth();
     if (!session || !session.user || !session.user.id) {
-      redirect("/login?msg='sign-in first' ");
+      redirect("/login?msg=sign-in first ");
     }
     if (!data || !slug) {
       return { success: false, message: "something went wrong" };
@@ -61,11 +61,23 @@ export async function updateChallengeSolution(data: any, slug: string) {
         publish: true,
       },
     });
+    let solutionSlug = null;
     if (!challenge) {
-      return { success: false, message: "invalid challenge" };
+      const challengeAgain = await db.challenge.findUnique({
+        where: {
+          slug: slug.slice(0, -session?.user?.id.length),
+          publish: true,
+        },
+      });
+      if (!challengeAgain) {
+        return { success: false, message: "invalid challenge" };
+      }
+      solutionSlug = slug;
     }
     const challengeSolution = await db.challengeSolution.update({
-      where: { slug: slug.concat(session?.user?.id) },
+      where: {
+        slug: solutionSlug ? solutionSlug : slug.concat(session?.user?.id),
+      },
       data: {
         htmlContent: data.files["/index.html"]?.code!,
         jsContent: data.files["/index.js"]?.code!,
@@ -89,6 +101,7 @@ export async function updateChallengeSolution(data: any, slug: string) {
     //   });
     return { success: true, message: "updated successfully!" };
   } catch (error) {
+    console.log(error);
     return {
       success: false,
       err: getErrorMessage(error),

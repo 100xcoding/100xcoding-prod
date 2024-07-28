@@ -7,6 +7,7 @@ import {
 } from "../_actions";
 import { toast } from "sonner";
 import { useState } from "react";
+import { Loader2 } from "@/components/loader2";
 interface Files {
   [key: string]: any; // You can replace `any` with a more specific type if you know it
 }
@@ -38,7 +39,7 @@ export const EditorFooter = ({
       files: data,
     };
 
-    if (playground) {
+    if (playground || isCompleted) {
       // Update the data only
       const result = await updateChallengeSolution(updatedData, slug);
       // console.log(result);
@@ -101,33 +102,17 @@ export const EditorFooter = ({
           variant="outline"
           size="lg"
           onClick={handleSave}
-          // loading={playgroundResponse.isPending}
+          disabled={loading}
         >
-          Save
+          {loading ? <Loader2 /> : "Save"}
         </Button>
         <Button
           aria-label="save & publish"
           className="font-semibold capitalize"
-          disabled={loading}
-          // variant="primary"
-
+          disabled={loading || isCompleted}
           onClick={handleSubmit}
-          // loading={solutionResponse.isPending}
         >
-          {/* {isCompleted ? (
-						<>
-							{!solutionResponse.isPending && (
-								<Icons.Check
-									size={18}
-									className="mr-2 -ml-1"
-								/>
-							)}
-							Completed
-						</>
-					) : (
-						"Mark as complete"
-					)} */}
-          save & publish
+          {loading ? <Loader2 /> : "Save & Publish"}
         </Button>
       </div>
     </div>

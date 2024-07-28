@@ -115,7 +115,7 @@ const TermsPage = () => {
           <h2 className="text-xl font-semibold">10. Contact Information</h2>
           <p>
             If you have any questions about these terms and conditions, please
-            contact us at [Your Contact Information].
+            contact us at admin@100xcoding.com.
           </p>
         </div>
       </div>

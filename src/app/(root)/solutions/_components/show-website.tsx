@@ -11,9 +11,10 @@ import { useState } from "react";
 import { WebsitePreview } from "./webiste-preview";
 
 export const ShowWebsite = ({ solution, slug }: any) => {
+  const siteView = ["w-96 mx-auto", "w-full"];
   const [view, setView] = useState(1);
   return (
-    <div className="mt-4  mx-auto w-full">
+    <div className={`mt-4 ${siteView[view]}`}>
       <div className="w-full border border-gray-700 border-b-0 bg-blue-600 flex items-center justify-between rounded-t-lg p-3">
         <div className="w-15">
           <span className="w-3 h-3 rounded-full inline-block bg-red-500"></span>
@@ -43,7 +44,7 @@ export const ShowWebsite = ({ solution, slug }: any) => {
                 <button
                   aria-label="mobile view"
                   className="flex items-center text-blue-500 border border-blue-500 bg-blue-600 transition hover:text-blue-500  focus:outline-none p-2 mr-2 rounded-lg hover:bg-blue-600"
-                  onClick={() => setView(2)}
+                  onClick={() => setView(0)}
                 >
                   <Smartphone size={"18"} />
                 </button>
@@ -74,7 +75,7 @@ export const ShowWebsite = ({ solution, slug }: any) => {
           </TooltipProvider>
         </div>
       </div>
-      <div className="relative border border-gray-700 rounded-b-lg h-screen overflow-hidden">
+      <div className="relative border  border-gray-700 rounded-b-lg h-[80vh] overflow-hidden">
         <WebsitePreview solution={solution} />
       </div>
     </div>
