@@ -1,23 +1,63 @@
 import { Card, CardHeader } from "@/components/ui/card";
-import { getChallengeSolution } from "../_data-access";
+import { getChallengeSolution, getChallengeSolutions } from "../_data-access";
 import Link from "next/link";
 import Image from "next/image";
 import { getImageUrl } from "@/lib/utils";
 import { ShowWebsite } from "../_components/show-website";
-import { Suspense } from "react";
+import { cache, Suspense } from "react";
 import { Loader2 } from "@/components/loader2";
 import { CommentForm } from "../_components/comment-form";
 import { CommentList } from "../_components/comment-list";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { Metadata } from "next";
 
+export const revalidate = 60 * 60 * 24;
+export async function generateStaticParams() {
+  const { solutions } = await getChallengeSolutions();
+  return solutions?.map(({ slug }: { slug: string }) => ({ slug })) ?? [];
+}
+// manual cache
+const getSolutionCache = cache(async (slug: string) => {
+  return await getChallengeSolution(slug);
+});
+export async function generateMetadata({
+  params: { slug },
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const { solution } = await getSolutionCache(slug);
+  return {
+    title: solution?.challenge?.title,
+    description: solution?.challenge?.description,
+    openGraph: {
+      title: solution?.challenge?.title,
+      description: solution?.challenge?.description!,
+      images: [
+        {
+          url: getImageUrl(solution?.challenge?.image!),
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: solution?.challenge?.title,
+      description: solution?.challenge?.description!,
+      images: [
+        {
+          url: getImageUrl(solution?.challenge?.image!),
+        },
+      ],
+    },
+  };
+}
 const SingleSolution = async ({
   params: { slug },
 }: {
   params: { slug: string };
 }) => {
-  const { solution } = await getChallengeSolution(slug);
+  const { solution } = await getSolutionCache(slug);
   const session = await auth();
   return (
     <section className="container mx-auto mt-4 ">
