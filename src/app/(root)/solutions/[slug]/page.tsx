@@ -29,7 +29,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { solution } = await getSolutionCache(slug);
   return {
-    title: solution?.challenge?.title,
+    title: `${solution?.challenge?.title} - Solution`,
     description: solution?.challenge?.description,
     openGraph: {
       title: solution?.challenge?.title,
