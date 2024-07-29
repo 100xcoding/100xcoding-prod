@@ -2,8 +2,14 @@ import { Footer } from "@/components/footer";
 import React from "react";
 import { PortalNavbar } from "./_components/portal-navbar";
 import { PortalSidebar } from "./_components/portal-sidebar";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
-const PortalLayout = ({ children }: { children: React.ReactNode }) => {
+const PortalLayout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await auth();
+  if (session?.user?.role !== "creator") {
+    redirect("/");
+  }
   return (
     <div className="flex flex-col min-h-screen bg-dark-300">
       <div className="h-[75px] md:pl-56 fixed inset-y-0 w-full z-50">

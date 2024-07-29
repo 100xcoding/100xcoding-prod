@@ -8,12 +8,17 @@ import { ChallengeDescription } from "../_components/challenge-description";
 import { CustomSandpack } from "../_components/custom-sandpack";
 import { getChallenge, getUnpublishSolutionBySlug } from "../_data-access";
 import { Warning } from "../_components/warning";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { auth } from "@/auth";
 const PlaygroudSlug = async ({
   params: { slug },
 }: {
   params: { slug: string };
 }) => {
+  const session = await auth();
+  if (session?.user) {
+    redirect("/login?msg=Login First");
+  }
   const { challenge } = await getChallenge(slug);
   const { solution } = await getUnpublishSolutionBySlug(slug);
   if (!challenge) {

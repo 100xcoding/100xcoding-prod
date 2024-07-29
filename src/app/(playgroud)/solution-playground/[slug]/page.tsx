@@ -7,12 +7,18 @@ import { CodeEditorHeader } from "../../playground/_components/code-editor-heade
 import { getChallengeSolutionBySlug } from "../_data-access";
 import { ChallengeDescription } from "../../playground/_components/challenge-description";
 import { CustomSandpack } from "../../playground/_components/custom-sandpack";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 const SolutionPlayground = async ({
   params: { slug },
 }: {
   params: { slug: string };
 }) => {
+  const session = await auth();
+  if (session?.user) {
+    redirect("/login?msg=Login First");
+  }
   const { solution } = await getChallengeSolutionBySlug(slug);
   // console.log(solution);
   return (
