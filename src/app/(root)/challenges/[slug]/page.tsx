@@ -111,6 +111,20 @@ const SingleChallenge = async ({
               src={challenge.figmaDesktop!}
             ></iframe>
           </CardContent>
+          {challenge?.authorName && (
+            <CardFooter className="px-4 py-1">
+              <p className="text-sm">
+                CreatedBy: {challenge?.authorName}{" "}
+                <Link
+                  href={challenge?.authorProfile!}
+                  className="underline ml-4 text-green-500"
+                  target="_blank"
+                >
+                  View Profile
+                </Link>
+              </p>
+            </CardFooter>
+          )}
         </Card>
         <div className="flex gap-4 flex-wrap lg:flex-nowrap w-full">
           <Card className="bg-cover shadow-lg text-white border-none bg-card rounded-2xl min-w-max">

@@ -16,14 +16,14 @@ export const Footer = () => {
           <p> All rights reserved</p>
           <Link
             aria-label="privacy policy"
-            href={"/"}
+            href={"/privacy-policy"}
             className="hover:underline"
           >
             Privacy Policy
           </Link>
           <Link
             aria-label="Terms of use"
-            href={"/"}
+            href={"/terms"}
             className="hover:underline"
           >
             Terms of use
@@ -33,10 +33,16 @@ export const Footer = () => {
           <Link aria-label="twitter" href={"/"}>
             <FaXTwitter size={26} />
           </Link>
-          <Link href={"/"} aria-label="youtube">
+          <Link
+            href={"https://www.youtube.com/@100xcoding"}
+            aria-label="youtube"
+          >
             <FaYoutube size={26} />
           </Link>
-          <Link href={"/"} aria-label="instagram">
+          <Link
+            href={"https://www.instagram.com/100xcoding"}
+            aria-label="instagram"
+          >
             <BsInstagram size={26} />
           </Link>
           <Link href={"/"} aria-label="discord">

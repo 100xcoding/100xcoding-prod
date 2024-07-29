@@ -47,6 +47,7 @@ import { notFound, redirect } from "next/navigation";
 import { LinkCard } from "../_components/link-card";
 import { SolutionCard } from "../../solutions/_components/solution-card";
 import { cache } from "react";
+import { SocialShare } from "../_components/social-share";
 
 export const revalidate = 60 * 60 * 24;
 export async function generateStaticParams() {
@@ -66,10 +67,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { user } = await getPublicProfileCache(username);
   return {
-    title: `${user?.name ?? ""} | 100xcoding`,
+    title: `${user?.name ?? ""} `,
     description: user?.profile?.title ?? "User Tagline",
     openGraph: {
-      title: `${user?.name ?? ""} | 100xcoding`,
+      title: `${user?.name ?? ""} `,
       description: user?.profile?.title ?? "User Tagline",
       images: [
         {
@@ -79,7 +80,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${user?.name ?? ""} | 100xcoding`,
+      title: `${user?.name ?? ""} `,
       description: user?.profile?.title ?? "User Tagline",
       images: [
         {
@@ -153,11 +154,11 @@ const UserPublicProfile = async ({
 
               <div className="-mt-28 md:-mt-20">
                 <div className="lg:hidden space-x-4  flex items-center justify-end">
-                  <Button className="rounded-full" aria-label="share">
+                  {/* <Button className="rounded-full" aria-label="share">
                     {" "}
                     <IoMdShare size={22} />{" "}
                     <span className="hidden lg:inline-block">Share</span>
-                  </Button>
+                  </Button> */}
                   {session?.user?.id === user?.id && <EditProfileModal />}
                 </div>
                 <h2 className="text-2xl md:text-4xl font-bold tracking-wider">
@@ -178,14 +179,15 @@ const UserPublicProfile = async ({
               </div>
             </div>
             <div className="hidden   items-center lg:flex space-x-4">
-              <Button
+              {/* <Button
                 className="rounded-full lg:flex lg:items-center lg:gap-2"
                 aria-label="share"
               >
                 {" "}
                 <IoMdShare size={22} />{" "}
                 <span className="hidden lg:block">Share</span>
-              </Button>
+              </Button> */}
+              {/* <SocialShare /> */}
               {session?.user?.id === user?.id && <EditProfileModal />}
             </div>
           </div>

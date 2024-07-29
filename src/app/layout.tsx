@@ -16,7 +16,7 @@ const fontSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: {
     default: "100xCoding.com",
-    template: "%s - 100xCoding",
+    template: "%s | 100xCoding",
   },
   keywords: [
     "Front-End Development",
@@ -34,10 +34,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   openGraph: {
-    title:
-      "Accelerate Your Coding Journey with 100xCoding Developer Challenges",
+    title: "Accelerate Your Coding Journey with 100xCoding Challenges",
     description:
-      "Elevate Your Development Skills with 100xCoding. Tackle Real-World Projects and Enhance Your Coding Expertise through Professional-Standard Challenges Designed for Developers of All Levels.",
+      "Tackle Real-World Projects and Enhance Your Coding Expertise through Professional-Standard Challenges Designed for Developers of All Levels.",
     images: ["/opengraph-image.png"],
   },
   metadataBase: new URL(Env.NEXT_PUBLIC_URL),
