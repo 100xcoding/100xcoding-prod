@@ -7,7 +7,7 @@ import {
 import { getAllChallenges, getChallenge } from "../_data-access";
 import Link from "next/link";
 import Image from "next/image";
-import { getImageUrl } from "@/lib/utils";
+import { cn, getImageUrl } from "@/lib/utils";
 import { Play } from "lucide-react";
 import { Suspense, cache } from "react";
 import { Loader2 } from "@/components/loader2";
@@ -15,7 +15,12 @@ import { Metadata } from "next";
 import parse from "html-react-parser";
 import { FaDiscord } from "react-icons/fa";
 import { notFound } from "next/navigation";
-
+const challengesCategoryIds = [
+  "2bed94f6-379c-4dd6-b021-50d1b5926696",
+  "ffd31115-a78f-43a3-86fd-83f24dc467d2",
+  "24019dd4-31a6-4ae8-8863-e0998c6ebf23",
+  "23cc9c69-28a7-469d-a33e-b36e68129322",
+];
 interface AllChallengeIdType {
   id: string;
 }
@@ -68,13 +73,32 @@ const SingleChallenge = async ({
   if (!challenge) {
     notFound();
   }
+  const getColorClass = (index: number) => {
+    const colors = [
+      "bg-blue-700 text-sky-100",
+      "bg-fuchsia-700 text-fuchsia-200",
+      "bg-green-700 text-green-200",
+      "bg-red-800 text-red-200",
+    ];
+    return colors[index % colors.length];
+  };
+  const index = challengesCategoryIds.indexOf(
+    challenge?.challengeCategory?.id!,
+  );
   return (
     <section className="container mx-auto p-3 my-10 space-y-8">
       <Suspense fallback={<Loader2 />}>
         <Card className="bg-cardLg bg-no-repeat bg-cover shadow-lg w-full text-white border-none rounded-3xl ">
           <CardHeader className="flex  flex-col-reverse lg:flex-row justify-between items-center gap-6 lg:gap-24 ">
             <div className="flex-1 space-y-4 md:space-y-6 pt-4">
-              <p className="bg-green-600 rounded-full text-green-400 w-fit px-4 py-2  text-xs xl:text-sm  font-semibold leading-[16px] uppercase tracking-widest">
+              <p
+                className={cn(
+                  " rounded-full  w-fit px-4 py-2  text-xs xl:text-base  font-bold leading-[16px] uppercase tracking-widest",
+                  challengesCategoryIds.includes(
+                    challenge?.challengeCategory?.id!,
+                  ) && getColorClass(index),
+                )}
+              >
                 {challenge.challengeCategory?.name}
               </p>
               <h2 className="capitalize text-2xl md:text-4xl tracking-wider font-medium md:font-semibold">

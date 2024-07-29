@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const Hero = () => {
   return (
-    <section className="h-full w-full  bg-dark-300  dark:bg-grid-white/[0.2] bg-grid-green-500/[0.15]  relative">
+    <section className="h-full w-full  bg-dark-300   bg-grid-green-500/[0.2] relative">
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center  bg-dark-300  [mask-image:radial-gradient(ellipse_at_center,transparent_10%,#0D0F10)]"></div>
       <div className="flex  flex-col items-center justify-center pb-10 md:pb-10 pt-7 md:pt-14  text-white  h-full max-h-screen container mx-auto">
         <p className="bg-blue-600 text-blue-400 font-semibold tracking-wider text-base md:text-lg capitalize rounded-full w-fit px-6 py-2 z-30  mb-4 md:mb-0">
