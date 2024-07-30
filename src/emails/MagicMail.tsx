@@ -45,7 +45,7 @@ export function MagicMail(params: {
               </tbody>
             </table>
             <p style="font-size:16px;line-height:26px;margin:16px 0">Best,<br />- 100xcoding Team</p>
-            <hr style="width:100%;border:none;border-top:1px solid #eaeaea;border-color:#dddddd;margin-top:48px" /><img height="32" src="https://www.100xcoding.com/email-logo.svg" style="display:block;outline:none;border:none;text-decoration:none;-webkit-filter:grayscale(100%);filter:grayscale(100%);margin:20px 0" width="32" />
+            <hr style="width:100%;border:none;border-top:1px solid #eaeaea;border-color:#dddddd;margin-top:48px" /><img height="32" src="https://100xcoding.com/email-logo.svg" style="display:block;outline:none;border:none;text-decoration:none;-webkit-filter:grayscale(100%);filter:grayscale(100%);margin:20px 0" width="32" />
             <p style="font-size:12px;line-height:24px;margin:16px 0;color:#8898aa;margin-left:4px">100xcoding.com</p>
             
           </td>
