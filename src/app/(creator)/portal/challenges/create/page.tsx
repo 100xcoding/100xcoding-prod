@@ -19,7 +19,9 @@ import React from "react";
 import { getSlug } from "@/lib/utils";
 import { createChallengeAction } from "../_actions";
 import { toast } from "sonner";
+import { redirect, useRouter } from "next/navigation";
 const CreateChallenge = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof CreateChallengeSchema>>({
     resolver: zodResolver(CreateChallengeSchema),
     defaultValues: {
@@ -42,6 +44,7 @@ const CreateChallenge = () => {
     const response = await createChallengeAction(values);
     if (response?.success) {
       toast.success(response.message);
+      router.push("/portal/challenges");
     } else {
       toast.error(response?.message);
     }
