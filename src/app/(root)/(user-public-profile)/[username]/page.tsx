@@ -49,7 +49,7 @@ import { SolutionCard } from "../../solutions/_components/solution-card";
 import { cache } from "react";
 import { SocialShare } from "../_components/social-share";
 
-export const revalidate = 60 * 60 * 24;
+// export const revalidate = 60 * 60 * 24;
 export async function generateStaticParams() {
   const { users } = await getAllProfiles();
   return (

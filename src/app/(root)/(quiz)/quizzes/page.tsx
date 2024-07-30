@@ -10,10 +10,13 @@ const items = [
 const QuizPage = () => {
   return (
     <div className="py-10 container mx-auto text-white">
-      <div className=" my-4">
+      {/* <div className=" my-4">
         <QuizCategories items={items} />
       </div>
-      <QuizList />
+      <QuizList /> */}
+      <h2 className="text-green-500 font-bold text-4xl tracking-wider text-center">
+        Coming Soon
+      </h2>
     </div>
   );
 };

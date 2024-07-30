@@ -144,7 +144,7 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
     : "";
   return (
     <div className="container mx-auto text-white my-10">
-      <div className="flex bg-dark-400   w-full justify-between items-center px-4 py-3">
+      {/* <div className="flex bg-dark-400   w-full justify-between items-center px-4 py-3">
         <h2>Title of Quiz</h2>
         <h3>Timimg</h3>
         <Button
@@ -188,7 +188,10 @@ const QuizPage = ({ params }: { params: { quizId: string } }) => {
         >
           Next
         </Button>
-      </section>
+      </section> */}
+      <h2 className="text-green-500 font-bold text-4xl tracking-wider text-center">
+        Coming Soon
+      </h2>
     </div>
   );
 };
