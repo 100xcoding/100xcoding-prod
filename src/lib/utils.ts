@@ -66,3 +66,18 @@ export const formatterDescription = (description: string) => {
     ? `${description.slice(0, 130)}...`
     : description;
 };
+export const challengesCategoryNames = [
+  "Starter",
+  "Learner",
+  "Skilled",
+  "Master",
+];
+export const challengeCategoryColorClass = (index: number) => {
+  const colors = [
+    "bg-blue-700 text-sky-100",
+    "bg-fuchsia-700 text-fuchsia-200",
+    "bg-green-700 text-green-200",
+    "bg-red-800 text-red-200",
+  ];
+  return colors[index % colors.length];
+};
