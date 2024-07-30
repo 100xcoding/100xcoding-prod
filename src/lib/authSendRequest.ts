@@ -28,7 +28,7 @@ export async function authSendRequest(params: any) {
     const data = await resend.emails.send({
       from: provider.from,
       to: to,
-      subject: `Log in to ${host}`,
+      subject: `Log in to 100xcoding.com`,
       text: text({ url, host }),
       html: MagicMail({ url, host, theme, publicUrl: Env.NEXT_PUBLIC_URL! }),
     });

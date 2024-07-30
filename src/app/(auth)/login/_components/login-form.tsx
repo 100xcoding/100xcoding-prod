@@ -168,7 +168,7 @@ export const LoginForm = () => {
               <Link
                 aria-label="terms-of-service"
                 className="text-[#6665E5] "
-                href="/"
+                href="/terms"
               >
                 Terms of service
               </Link>{" "}
@@ -176,7 +176,7 @@ export const LoginForm = () => {
               <Link
                 aria-label="privacy-policy"
                 className="text-[#6665E5]"
-                href="/"
+                href="/privacy-policy"
               >
                 Privacy Policy.
               </Link>

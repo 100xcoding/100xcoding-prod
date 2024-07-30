@@ -100,12 +100,13 @@ const SingleSolution = async ({
                 <FaArrowRightLong size={22} />
               </Link>
             </div>
-            <div className="    ">
+            <div>
               <Image
                 src={getImageUrl(solution?.challenge?.image!)}
                 width={"500"}
                 height={"500"}
                 alt={solution?.challenge?.title!}
+                className="rounded-xl"
               />
             </div>
           </CardHeader>

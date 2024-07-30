@@ -112,7 +112,7 @@ const SingleChallenge = async ({
                 width={"500"}
                 height={"500"}
                 alt={challenge?.title}
-                className=" "
+                className="rounded-xl "
               />
             </div>
           </CardHeader>
