@@ -90,7 +90,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
     Resend({
       server: Env.RESEND_API_KEY,
-      from: Env.RESEND_EMAIL,
+      from: `100xCoding <${Env.RESEND_EMAIL}>`,
       sendVerificationRequest(params) {
         authSendRequest(params);
       },
