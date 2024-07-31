@@ -31,7 +31,7 @@ export function MagicMail(params: {
     <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" style="max-width:37.5em;margin:0 auto;padding:20px 25px 48px;background-image:url(&quot;/email-logo.svg&quot;);background-position:bottom;background-repeat:no-repeat, no-repeat">
       <tbody>
         <tr style="width:100%">
-          <td><img alt="100xcoding.com" height="100" src="https://www.100xcoding.com/email-logo.svg" style="display:block;outline:none;border:none;text-decoration:none" width="100" />
+          <td><img alt="100xcoding.com" height="100" src="https://www.100xcoding.com/email.png" style="display:block;outline:none;border:none;text-decoration:none" width="100" />
             <h1 style="font-size:28px;font-weight:bold;margin-top:48px">We're excited to have you join the 100xcoding community!</h1>
             <p style="font-size:18px;font-weight:500;margin-top:28px">To get started, please click the link below to sign in.</p>
             <table align="center" width="100%" border="0" cellPadding="0" cellSpacing="0" role="presentation" style="margin:24px 0">
@@ -45,7 +45,7 @@ export function MagicMail(params: {
               </tbody>
             </table>
             <p style="font-size:16px;line-height:26px;margin:16px 0">Best,<br />- 100xcoding Team</p>
-            <hr style="width:100%;border:none;border-top:1px solid #eaeaea;border-color:#dddddd;margin-top:48px" /><img height="32" src="https://100xcoding.com/email-logo.svg" style="display:block;outline:none;border:none;text-decoration:none;-webkit-filter:grayscale(100%);filter:grayscale(100%);margin:20px 0" width="32" />
+            <hr style="width:100%;border:none;border-top:1px solid #eaeaea;border-color:#dddddd;margin-top:48px" /><img height="32" src="https://100xcoding.com/email.png" style="display:block;outline:none;border:none;text-decoration:none;-webkit-filter:grayscale(100%);filter:grayscale(100%);margin:20px 0" width="32" />
             <p style="font-size:12px;line-height:24px;margin:16px 0;color:#8898aa;margin-left:4px">100xcoding.com</p>
             
           </td>
