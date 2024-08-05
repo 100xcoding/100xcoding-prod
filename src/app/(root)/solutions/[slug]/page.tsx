@@ -19,10 +19,10 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { Metadata } from "next";
 
 // export const revalidate = 60 * 60 * 24;
-export async function generateStaticParams() {
-  const { solutions } = await getChallengeSolutions();
-  return solutions?.map(({ slug }: { slug: string }) => ({ slug })) ?? [];
-}
+// export async function generateStaticParams() {
+//   const { solutions } = await getChallengeSolutions();
+//   return solutions?.map(({ slug }: { slug: string }) => ({ slug })) ?? [];
+// }
 // manual cache
 const getSolutionCache = cache(async (slug: string) => {
   return await getChallengeSolution(slug);
