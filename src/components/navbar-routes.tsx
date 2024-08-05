@@ -1,13 +1,14 @@
+"use client";
 import Link from "next/link";
 import { Logo } from "./logo";
 import { ProfileMenu } from "./profile-menu";
-import { auth } from "@/auth";
 import { navbarRoutes } from "@/constants";
 import { Button } from "./ui/button";
 import { NavbarItem } from "./navbar-item";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
-export const NavbarRoutes = async () => {
-  const user = await auth();
+export const NavbarRoutes = () => {
+  const user = useCurrentUser();
   return (
     <div className="hidden md:flex items-center gap- w-full z-30 py-2 justify-around">
       <div className="z-30">
@@ -19,7 +20,7 @@ export const NavbarRoutes = async () => {
         {navbarRoutes.map((route) => {
           return <NavbarItem key={route.id} {...route} />;
         })}
-        {user?.user?.role == "creator" && (
+        {user?.role == "creator" && (
           <Button asChild aria-label="portal" className="z-30">
             <Link aria-label="portal" href="/portal/challenges">
               Portal
@@ -27,7 +28,7 @@ export const NavbarRoutes = async () => {
           </Button>
         )}
         {user ? (
-          <ProfileMenu user={user?.user} />
+          <ProfileMenu />
         ) : (
           <Button
             asChild

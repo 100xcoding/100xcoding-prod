@@ -1,3 +1,4 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,15 +11,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { SignOut } from "@/components/sign-out";
-import { getUser } from "@/actions/update-profile-action";
-export const ProfileMenu = async ({ user }: any) => {
-  const { user: userData } = await getUser();
+import { useProfile } from "@/services/queries";
+import { useCurrentUser } from "@/hooks/use-current-user";
+export const ProfileMenu = () => {
+  const user = useCurrentUser();
+  const { data } = useProfile();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar className="w-14 h-14">
           <AvatarImage
-            src={user?.image}
+            src={user?.image!}
             alt="profile-picture"
             className="object-contain"
           />
@@ -32,7 +35,7 @@ export const ProfileMenu = async ({ user }: any) => {
           <DropdownMenuItem>
             <Link
               area-label="profile"
-              href={`/${userData?.username}`}
+              href={`/${data?.username}`}
               className="flex gap-3 items-center "
             >
               <FaUser size={21} />

@@ -1,9 +1,10 @@
-import { auth } from "@/auth";
+"use client";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import { useCurrentUser } from "@/hooks/use-current-user";
 import Link from "next/link";
 
-export const CallToAction = async () => {
-  const session = await auth();
+export const CallToAction = () => {
+  const user = useCurrentUser();
   const words = [
     {
       text: "Join a",
@@ -47,9 +48,6 @@ export const CallToAction = async () => {
           />
         </div>
         <p className=" mt-4 text-sm md:text-lg  font-medium tracking-wide text-dark-700 w-full sm:w-[90%] md:w-[75%] text-center mx-auto ">
-          {/* Join our community of passionate learners and start your journey
-          towards success. You&apos;ll gain the knowledge and confidence to
-          reach your goals. */}
           Engage with our thriving community of passionate learners and begin
           your journey to excellence.{" "}
           <span className="hidden lg:inline-block">
@@ -58,7 +56,7 @@ export const CallToAction = async () => {
           </span>
         </p>
         <div className="z-30 flex items-center justify-center mt-10">
-          {session?.user ? (
+          {user ? (
             <Link
               aria-label="take-challenge"
               href="/login"

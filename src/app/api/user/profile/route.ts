@@ -18,7 +18,6 @@ export async function GET(req: Request) {
       },
       include: {
         profile: true,
-        socialLink: true,
       },
     });
 

@@ -1,13 +1,16 @@
+"use client";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { Logo } from "./logo";
 import Link from "next/link";
 import { ProfileMenu } from "./profile-menu";
-import { auth } from "@/auth";
+// import { auth } from "@/auth";
 import { mobileNavbarRoutes } from "@/constants";
 import { Button } from "./ui/button";
-export const MobileSidebar = async () => {
-  const session = await auth();
+import { useCurrentUser } from "@/hooks/use-current-user";
+export const MobileSidebar = () => {
+  // const session = await auth();
+  const user = useCurrentUser();
   return (
     <div className="flex justify-between items-center gap-6 py-3 px-2 z-30">
       <Sheet>
@@ -37,7 +40,7 @@ export const MobileSidebar = async () => {
                 );
               })}
             </ul>
-            {!session?.user && (
+            {!user && (
               <Button
                 aria-label="Get Started"
                 asChild
@@ -55,9 +58,7 @@ export const MobileSidebar = async () => {
         <Logo />
       </div>
       <div className="flex gap-4 items-center">
-        <div className="md:hidden">
-          {session?.user && <ProfileMenu user={session?.user} />}
-        </div>
+        <div className="md:hidden">{user && <ProfileMenu />}</div>
       </div>
     </div>
   );
