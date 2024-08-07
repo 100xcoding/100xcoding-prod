@@ -1,11 +1,11 @@
 import { Card, CardHeader } from "@/components/ui/card";
-import { getChallengeSolution, getChallengeSolutions } from "../_data-access";
 import Link from "next/link";
 import Image from "next/image";
 import {
   challengeCategoryColorClass,
   challengesCategoryNames,
   cn,
+  getErrorMessage,
   getImageUrl,
 } from "@/lib/utils";
 import { ShowWebsite } from "../_components/show-website";
@@ -17,7 +17,72 @@ import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Metadata } from "next";
-
+import { db } from "@/lib/db";
+async function getChallengeSolutions() {
+  try {
+    const solutions = await db.challengeSolution.findMany({
+      where: {
+        status: true,
+      },
+      include: {
+        challenge: {
+          include: {
+            challengeCategory: true,
+          },
+        },
+        user: {
+          select: {
+            name: true,
+            image: true,
+          },
+        },
+      },
+    });
+    return {
+      success: true,
+      solutions,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
+async function getChallengeSolution(slug: string) {
+  try {
+    const solution = await db.challengeSolution.findUnique({
+      where: {
+        status: true,
+        slug,
+      },
+      include: {
+        challenge: {
+          include: {
+            challengeCategory: true,
+          },
+        },
+        user: {
+          select: {
+            name: true,
+            image: true,
+          },
+        },
+      },
+    });
+    return {
+      success: true,
+      solution,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
 // export const revalidate = 60 * 60 * 24;
 // export async function generateStaticParams() {
 //   const { solutions } = await getChallengeSolutions();

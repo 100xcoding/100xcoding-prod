@@ -3,8 +3,40 @@ export const metadata: Metadata = {
   title: "Solutions ",
 };
 import { SolutionCard } from "./_components/solution-card";
-import { getChallengeSolutions } from "./_data-access";
-
+import { db } from "@/lib/db";
+import { getErrorMessage } from "@/lib/utils";
+async function getChallengeSolutions() {
+  try {
+    const solutions = await db.challengeSolution.findMany({
+      where: {
+        status: true,
+      },
+      include: {
+        challenge: {
+          include: {
+            challengeCategory: true,
+          },
+        },
+        user: {
+          select: {
+            name: true,
+            image: true,
+          },
+        },
+      },
+    });
+    return {
+      success: true,
+      solutions,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
 const SolutionsPage = async () => {
   const { solutions } = await getChallengeSolutions();
   return (

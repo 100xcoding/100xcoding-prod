@@ -2,15 +2,41 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Pencil } from "lucide-react";
 import { CommentForm } from "./comment-form";
-import { getComment } from "../_data-access";
+import { getErrorMessage } from "@/lib/utils";
+import { db } from "@/lib/db";
+async function getComment(id: string) {
+  try {
+    const comment = await db.comment.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        user: {
+          select: {
+            username: true,
+            image: true,
+          },
+        },
+      },
+    });
+    return {
+      success: true,
+      comment,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
 export const CommentEdit = async ({
   slug,
   id,
