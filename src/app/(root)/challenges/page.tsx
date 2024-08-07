@@ -3,10 +3,41 @@ export const metadata: Metadata = {
   title: "Challenges",
 };
 import { ChallengeCard } from "./_components/challenge-card";
-import { getChallenges } from "./_data-access";
+// import { getChallenges } from "./_data-access";
+async function getChallenges({ take, skip }: { take: number; skip: number }) {
+  try {
+    const challenges = await db.challenge.findMany({
+      where: {
+        publish: true,
+      },
+      take,
+      skip,
+      include: {
+        challengeCategory: true,
+      },
+    });
+    const total = await db.challenge.count();
+    return {
+      success: true,
+      challenges,
+      metadata: {
+        hasNextPage: skip + take < total,
+        totalPages: Math.ceil(total / take),
+      },
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
 import { Suspense } from "react";
 import { Loader2 } from "@/components/loader2";
 import { Pagination } from "@/components/pagination";
+import { db } from "@/lib/db";
+import { getErrorMessage } from "@/lib/utils";
 const PAGE_SIZE = 8;
 const ChallengesPage = async ({
   searchParams,

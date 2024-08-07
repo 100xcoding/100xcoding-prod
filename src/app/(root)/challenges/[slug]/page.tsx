@@ -4,13 +4,13 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { getAllChallenges, getChallenge } from "../_data-access";
 import Link from "next/link";
 import Image from "next/image";
 import {
   challengeCategoryColorClass,
   challengesCategoryNames,
   cn,
+  getErrorMessage,
   getImageUrl,
 } from "@/lib/utils";
 import { Play } from "lucide-react";
@@ -20,6 +20,52 @@ import { Metadata } from "next";
 import parse from "html-react-parser";
 import { FaDiscord } from "react-icons/fa";
 import { notFound } from "next/navigation";
+import { db } from "@/lib/db";
+async function getChallenge(slug: string) {
+  try {
+    const challenge = await db.challenge.findUnique({
+      where: {
+        publish: true,
+        slug: slug,
+      },
+      include: {
+        challengeCategory: true,
+      },
+    });
+    return {
+      success: true,
+      challenge,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
+async function getAllChallenges() {
+  try {
+    const challenges = await db.challenge.findMany({
+      where: {
+        publish: true,
+      },
+      select: {
+        slug: true,
+      },
+    });
+    return {
+      success: true,
+      challenges,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
 interface AllChallengeIdType {
   id: string;
 }

@@ -1,7 +1,30 @@
 import Env from "@/lib/env";
+import { db } from "@/lib/db";
+import { getErrorMessage } from "@/lib/utils";
 import { MetadataRoute } from "next";
-import { getAllChallenges } from "./(root)/challenges/_data-access";
 import { getChallengeSolutions } from "./(root)/solutions/_data-access";
+async function getAllChallenges() {
+  try {
+    const challenges = await db.challenge.findMany({
+      where: {
+        publish: true,
+      },
+      select: {
+        slug: true,
+      },
+    });
+    return {
+      success: true,
+      challenges,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = Env.NEXT_PUBLIC_URL;
