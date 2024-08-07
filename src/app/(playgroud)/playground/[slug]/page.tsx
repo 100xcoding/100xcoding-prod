@@ -6,10 +6,35 @@ import {
 } from "@/components/ui/resizable";
 import { ChallengeDescription } from "../_components/challenge-description";
 import { CustomSandpack } from "../_components/custom-sandpack";
-import { getChallenge, getUnpublishSolutionBySlug } from "../_data-access";
+import { getUnpublishSolutionBySlug } from "../_data-access";
 import { Warning } from "../_components/warning";
 import { notFound, redirect } from "next/navigation";
 import { auth } from "@/auth";
+import { db } from "@/lib/db";
+import { getErrorMessage } from "@/lib/utils";
+async function getChallenge(slug: string) {
+  try {
+    const challenge = await db.challenge.findUnique({
+      where: {
+        publish: true,
+        slug: slug,
+      },
+      include: {
+        challengeCategory: true,
+      },
+    });
+    return {
+      success: true,
+      challenge,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
 const PlaygroudSlug = async ({
   params: { slug },
 }: {

@@ -5,10 +5,9 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { getAllProfiles, getPublicProfile } from "../_data-access";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { getImageUrl } from "@/lib/utils";
+import { getErrorMessage, getImageUrl } from "@/lib/utils";
 import Link from "next/link";
 import { EditProfileModal } from "../_components/edit-profile-modal";
 import { SocialModal } from "../_components/social-modal";
@@ -48,7 +47,73 @@ import { LinkCard } from "../_components/link-card";
 import { SolutionCard } from "../../solutions/_components/solution-card";
 import { cache } from "react";
 import { SocialShare } from "../_components/social-share";
+import { db } from "@/lib/db";
+async function getAllProfiles() {
+  try {
+    const users = await db.user.findMany({
+      include: {
+        profile: true,
+        socialLink: true,
+      },
+    });
 
+    return {
+      success: true,
+      users,
+      message: "success",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Something went wrong, Try again!",
+      err: getErrorMessage(error),
+    };
+  }
+}
+async function getPublicProfile(username: string) {
+  try {
+    const user = await db.user.findUnique({
+      where: {
+        username,
+      },
+      include: {
+        profile: true,
+        socialLink: true,
+      },
+    });
+    const userPublishChallenges = await db.challengeSolution.findMany({
+      where: {
+        userId: user?.id,
+      },
+      include: {
+        user: true,
+        challenge: {
+          include: {
+            challengeCategory: true,
+          },
+        },
+      },
+    });
+    if (!user) {
+      return {
+        success: false,
+        message: "user not found!",
+      };
+    }
+    return {
+      success: true,
+      user,
+      userPublishChallenges,
+      message: "success",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Something went wrong, Try again!",
+      err: getErrorMessage(error),
+    };
+  }
+}
 // export const revalidate = 60 * 60 * 24;
 export async function generateStaticParams() {
   const { users } = await getAllProfiles();

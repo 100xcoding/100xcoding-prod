@@ -4,12 +4,35 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { CodeEditorHeader } from "../../playground/_components/code-editor-header";
-import { getChallengeSolutionBySlug } from "../_data-access";
 import { ChallengeDescription } from "../../playground/_components/challenge-description";
 import { CustomSandpack } from "../../playground/_components/custom-sandpack";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-
+import { db } from "@/lib/db";
+import { getErrorMessage } from "@/lib/utils";
+async function getChallengeSolutionBySlug(slug: string) {
+  try {
+    const solution = await db.challengeSolution.findUnique({
+      where: {
+        slug,
+        status: true,
+      },
+      include: {
+        challenge: true,
+      },
+    });
+    return {
+      success: true,
+      solution,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+    };
+  }
+}
 const SolutionPlayground = async ({
   params: { slug },
 }: {
