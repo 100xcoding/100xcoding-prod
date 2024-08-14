@@ -11,3 +11,14 @@ export type CustomUser = {
   username: string;
   emailVerified?: Date | null;
 };
+export type ImagePreviewResType = {
+  url: string;
+  title: string;
+  siteName: string | undefined;
+  description: string | undefined;
+  mediaType: string;
+  contentType: string | undefined;
+  images: string[];
+  videos: {};
+  favicons: string[];
+};

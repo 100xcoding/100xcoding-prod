@@ -4,13 +4,14 @@ import { useState } from "react";
 import { MdLogout } from "react-icons/md";
 import { Button } from "./ui/button";
 import { ClipLoader } from "react-spinners";
-
+import { signOut } from "next-auth/react";
 export function SignOut() {
   const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
-    await signout();
+    // await signout();
+    signOut();
   };
   return (
     <form onSubmit={handleSubmit}>

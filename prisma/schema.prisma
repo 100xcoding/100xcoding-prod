@@ -34,6 +34,7 @@ model User {
   challengeSolution ChallengeSolution[]
   comments          Comment[]
   commentLikes      CommentLike[]
+  resources         Resource[]
 }
 
 model Account {
@@ -266,4 +267,41 @@ model QuestionToTag {
   tag      QuizTag      @relation(fields: [tagId], references: [id])
 
   @@id([questionId, tagId])
+}
+
+model Resource {
+  id             String          @id @default(uuid())
+  title          String
+  description    String?
+  imageUrl       String?
+  url            String
+  creatorId      String
+  isPublish      Boolean         @default(false)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  resourceType   ResourceType?   @relation(fields: [resourceTypeId], references: [id])
+  resourceTypeId String?
+  resourceTag    ResourceToTag[]
+  user           User            @relation(fields: [creatorId], references: [id])
+}
+
+model ResourceType {
+  id        String     @id @default(uuid())
+  name      String     @unique
+  resources Resource[]
+}
+
+model ResourceTag {
+  id        String          @id @default(uuid())
+  name      String          @unique
+  resources ResourceToTag[]
+}
+
+model ResourceToTag {
+  resourceId    String
+  resourceTagId String
+  resource      Resource    @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  resourceTag   ResourceTag @relation(fields: [resourceTagId], references: [id], onDelete: Cascade)
+
+  @@id([resourceId, resourceTagId])
 }

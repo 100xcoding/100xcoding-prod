@@ -107,3 +107,23 @@ export const SocialLinkFormSchema = z.object({
     })
     .optional(),
 });
+export const resourceInputFormSchema = z.object({
+  url: z.string().url({
+    message: "Invalid URL ",
+  }),
+});
+export const resourceDataFormSchema = z.object({
+  title: z.string().min(10, {
+    message: "Invalid Title",
+  }),
+  description: z.string().min(500, {
+    message: "Invalid Description",
+  }),
+  imageUrl: z.string().url({
+    message: "Invalid URL ",
+  }),
+  typeId: z.string(),
+  url: z.string().url({
+    message: "Invalid URL ",
+  }),
+});
