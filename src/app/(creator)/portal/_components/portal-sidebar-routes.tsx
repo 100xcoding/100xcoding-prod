@@ -1,5 +1,5 @@
 "use client";
-import { BarChart, Compass, Layout, List } from "lucide-react";
+import { BarChart, BookOpen, Compass, Layout, List } from "lucide-react";
 import { PortalSidebarItem } from "./portal-sidebar-item";
 const routes = [
   {
@@ -11,6 +11,11 @@ const routes = [
     icon: BarChart,
     label: "Quiz",
     href: "/portal/quiz",
+  },
+  {
+    icon: BookOpen,
+    label: "Resources",
+    href: "/portal/resources",
   },
 ];
 export const PortalSidebarRoutes = () => {
