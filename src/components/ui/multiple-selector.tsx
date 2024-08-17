@@ -388,7 +388,7 @@ const MultipleSelector = React.forwardRef<
       >
         <div
           className={cn(
-            "min-h-10 rounded-md border border-input text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
+            "min-h-10 rounded-md bg-dark-500  text-white ",
             {
               "px-3 py-2": selected.length !== 0,
               "cursor-text": !disabled && selected.length !== 0,
@@ -474,7 +474,7 @@ const MultipleSelector = React.forwardRef<
         </div>
         <div className="relative">
           {open && (
-            <CommandList className="absolute top-1 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
+            <CommandList className="absolute top-1 z-10 w-full rounded-md border-none bg-popover text-popover-foreground shadow-md outline-none animate-in">
               {isLoading ? (
                 <>{loadingIndicator}</>
               ) : (
@@ -488,7 +488,7 @@ const MultipleSelector = React.forwardRef<
                     <CommandGroup
                       key={key}
                       heading={key}
-                      className="h-full overflow-auto"
+                      className="h-full overflow-auto bg-dark-500 border-none"
                     >
                       <>
                         {dropdowns.map((option) => {
@@ -513,8 +513,7 @@ const MultipleSelector = React.forwardRef<
                               }}
                               className={cn(
                                 "cursor-pointer",
-                                option.disable &&
-                                  "cursor-default text-muted-foreground",
+                                option.disable && "cursor-default text-white",
                               )}
                             >
                               {option.label}

@@ -33,7 +33,7 @@ const multiSelectVariants = cva(
     variants: {
       variant: {
         default:
-          "border-foreground/10 text-foreground bg-card hover:bg-card/80",
+          "border-green-[500]/10 text-primary bg-dark-400 hover:bg-dark-400/80",
         secondary:
           "border-foreground/10 bg-secondary text-secondary-foreground hover:bg-secondary/80",
         destructive:
@@ -139,7 +139,7 @@ export const MultiSelect = React.forwardRef<
             {...props}
             onClick={handleTogglePopover}
             className={cn(
-              "flex w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit",
+              "flex w-full  p-1 rounded-md border z-50 min-h-10 h-auto items-center justify-between bg-dark-400 text-white hover:bg-inherit",
               className,
             )}
           >
@@ -175,7 +175,7 @@ export const MultiSelect = React.forwardRef<
                   {selectedValues.length > maxCount && (
                     <Badge
                       className={cn(
-                        " bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
+                        " bg-dark-400 text-white border-green-600/1 hover:bg-transparent",
                         isAnimating ? "animate-bounce" : "",
                         multiSelectVariants({ variant, className }),
                       )}
@@ -194,7 +194,7 @@ export const MultiSelect = React.forwardRef<
                 </div>
                 <div className="flex items-center justify-between">
                   <XIcon
-                    className="h-4 mx-2 cursor-pointer text-muted-foreground"
+                    className="h-4 mx-2 cursor-pointer text-white"
                     onClick={(event) => {
                       event.stopPropagation();
                       handleClear();
@@ -204,7 +204,7 @@ export const MultiSelect = React.forwardRef<
                     orientation="vertical"
                     className="flex min-h-6 h-full"
                   />
-                  <ChevronDown className="h-4 mx-2 cursor-pointer text-muted-foreground" />
+                  <ChevronDown className="h-4 mx-2 cursor-pointer text-white" />
                 </div>
               </div>
             ) : (
@@ -241,7 +241,7 @@ export const MultiSelect = React.forwardRef<
                     >
                       <div
                         className={cn(
-                          "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+                          "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border text-white border-primary",
                           isSelected
                             ? "bg-primary text-primary-foreground"
                             : "opacity-50 [&_svg]:invisible",
@@ -252,7 +252,7 @@ export const MultiSelect = React.forwardRef<
                       {option.icon && (
                         <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
                       )}
-                      <span>{option.label}</span>
+                      <span className="text-white">{option.label}</span>
                     </CommandItem>
                   );
                 })}

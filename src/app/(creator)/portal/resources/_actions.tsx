@@ -7,10 +7,13 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
 import { ImagePreviewResType } from "@/types";
+import { resourceDataFormSchema } from "@/schema";
+import { revalidatePath } from "next/cache";
 const FormSchema = z.object({
   url: z.string().url(),
 });
 type ResourceInput = z.infer<typeof FormSchema>;
+type ResourceFullData = z.infer<typeof resourceDataFormSchema>;
 
 export async function getResourceContent(data: ResourceInput) {
   try {
@@ -27,10 +30,10 @@ export async function getResourceContent(data: ResourceInput) {
         imagesPropertyType: "og",
         followRedirects: "follow",
       })) as ImagePreviewResType;
-      console.log(final);
+      // console.log(final);
       return {
         success: true,
-        message: "Quiz title updated Successfully!",
+        message: "Data fetched Successfully!",
         finalData: {
           title: final?.title!,
           url: final?.url,
@@ -39,6 +42,122 @@ export async function getResourceContent(data: ResourceInput) {
         },
       };
     }
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+      data: null,
+    };
+  }
+}
+export async function getResourceType() {
+  try {
+    const session = await auth();
+    if (!session || !session.user || session.user.role !== "creator") {
+      redirect("/?msg='sign-in first' ");
+    }
+    const data = await db.resourceType.findMany({});
+    return {
+      success: true,
+      message: "Quiz title updated Successfully!",
+      data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+      data: null,
+    };
+  }
+}
+export async function addResource(data: ResourceFullData) {
+  try {
+    const session = await auth();
+    if (!session || !session.user || session.user.role !== "creator") {
+      redirect("/?msg='sign-in first' ");
+    }
+    const isCreator = session?.user?.role === "creator";
+    const result = resourceDataFormSchema.safeParse(data);
+    if (result.error) {
+      return { success: false, error: result.error.format(), data: null };
+    }
+    if (result.success) {
+      await db.resource.create({
+        data: {
+          title: result?.data.title,
+          description: result.data.description,
+          imageUrl: result.data.imageUrl,
+          creatorId: session?.user?.id,
+          resourceTypeId: result.data.resourceType,
+          url: result.data.url,
+          isPublish: isCreator ? true : false,
+          resourceTag: {
+            create: result.data.resourceTags.map((tagg) => ({
+              resourceTag: {
+                connect: { id: tagg.value },
+              },
+            })),
+          },
+        },
+      });
+      return {
+        success: true,
+        message: "Resource added Successfully!",
+        data,
+      };
+    }
+    // const data = await db.resourceType.findMany({});
+
+    // console.log(data);
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+      data: null,
+    };
+  }
+}
+export async function getResources() {
+  try {
+    const session = await auth();
+    if (!session || !session.user || session.user.role !== "creator") {
+      redirect("/?msg='sign-in first' ");
+    }
+    const resources = await db.resource.findMany({});
+    return {
+      success: true,
+      message: "Data fetched Successfully!",
+      resources,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      err: getErrorMessage(error),
+      message: "Something went wrong",
+      data: null,
+    };
+  }
+}
+export async function deleteResource(id: string) {
+  try {
+    const session = await auth();
+    if (!session || !session.user || session.user.role !== "creator") {
+      redirect("/?msg='sign-in first' ");
+    }
+    await db.resource.delete({
+      where: {
+        id: id,
+        creatorId: session?.user?.id,
+      },
+    });
+    revalidatePath("/portal/resources");
+    return {
+      success: true,
+      message: "Resource Deleted Successfully!",
+    };
   } catch (error) {
     return {
       success: false,

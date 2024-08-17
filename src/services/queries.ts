@@ -111,3 +111,27 @@ export function useCreatorQuizQuestionById(questionId: string, quizId: string) {
     refreshCreatorQuizQuestionData,
   };
 }
+export function useCreatorResourceTypes() {
+  const cacheKey = `/creator/resources/type`;
+  const { data, error } = useSWR(cacheKey, fetcher);
+  const refreshCreatorResourceTypesData = async () => {
+    await mutate(cacheKey); // Trigger revalidation for the specific cache key
+  };
+  return {
+    data,
+    error,
+    refreshCreatorResourceTypesData,
+  };
+}
+export function useCreatorResourceTags() {
+  const cacheKey = `/creator/resources/tags`;
+  const { data, error } = useSWR(cacheKey, fetcher);
+  const refreshCreatorResourceTagsData = async () => {
+    await mutate(cacheKey); // Trigger revalidation for the specific cache key
+  };
+  return {
+    data,
+    error,
+    refreshCreatorResourceTagsData,
+  };
+}

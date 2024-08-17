@@ -22,19 +22,30 @@ import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 import { Combobox } from "@/components/ui/combo-box";
+import {
+  useCreatorResourceTags,
+  useCreatorResourceTypes,
+} from "@/services/queries";
+import { MultiSelect } from "@/components/ui/multi-select";
+import FinalContent from "../_components/final-content";
 
 type ResourceFetchData = {
   title?: string;
   description?: string;
   url?: string;
   imageUrl?: string;
+  resourceType?: string;
+  resourceTags?: string[] | undefined;
 };
 const ResourceCreatePage = () => {
   const router = useRouter();
   const [finalData, setFinalData] = useState<
     ResourceFetchData | null | undefined
   >(null);
+
   const [isLoading, setIsLoading] = useState(false);
+  const { data: resourceTypes } = useCreatorResourceTypes();
+  const { data: resourceTags } = useCreatorResourceTags();
   const form = useForm<z.infer<typeof resourceInputFormSchema>>({
     resolver: zodResolver(resourceInputFormSchema),
     defaultValues: {
@@ -56,11 +67,22 @@ const ResourceCreatePage = () => {
     }
   };
   const handleChange = (fieldName: string, value: string) => {
+    // console.log(fieldName)
+    // console.log(value)
     setFinalData({
       ...finalData,
       [fieldName]: value || "",
     });
   };
+  // const handleTest = (values: string[]) => {
+  //   // console.log(values);
+  //   setResourceTags(prev => {
+  //     const combinedValues = [...prev, ...values];
+  //     // Use a Set to eliminate duplicates and convert it back to an array
+  //     return Array.from(new Set(combinedValues));
+  //   });
+  // };
+  // console.log(resourceTags);
   return (
     <div className="max-w-5xl  text-white mx-auto flex flex-col md:items-center md:justify-center h-full p-6">
       <div className="w-full ">
@@ -115,26 +137,48 @@ const ResourceCreatePage = () => {
       <div className="w-full space-y-2 mt-4">
         {finalData && (
           <>
-            <div className="flex w-full items-center gap-2 justify-between">
+            <FinalContent
+              initialData={finalData}
+              resourceTypes={resourceTypes?.map((resourceType: any) => ({
+                label: resourceType?.name,
+                value: resourceType?.id,
+              }))}
+              resourceTags={resourceTags?.map((resourceType: any) => ({
+                label: resourceType?.name,
+                value: resourceType?.id,
+              }))}
+            />
+            {/* <div className="flex w-full items-center gap-2 justify-between">
               <Input
                 className="portal-input"
                 value={finalData?.title}
                 onChange={(e) => handleChange("title", e.target.value)}
               />
               <Input value={finalData?.url} className="portal-input" readOnly />
-            </div>
-            <Textarea
+            </div> */}
+            {/* <Textarea
               className="portal-input"
               value={finalData?.description}
               onChange={(e) => handleChange("description", e.target.value)}
             />
-            {/* <Combobox /> */}
+            <Combobox options={resourceTypes?.map((resourceType: any) => (
+              {
+                label: resourceType?.name,
+                value: resourceType?.id
+              }
+            ))} onChange={(selected) => handleChange("resourceType", selected)} value={finalData?.resourceType} />
+            <MultiSelect options={resourceTypes?.map((resourceType: any) => (
+              {
+                label: resourceType?.name,
+                value: resourceType?.id
+              }
+            ))} defaultValue={[]} onValueChange={(value) => handleTest(value)} />
             <Image
               src={finalData?.imageUrl!}
               alt="thumbnail"
               width="500"
               height="500"
-            />
+            /> */}
           </>
         )}
       </div>

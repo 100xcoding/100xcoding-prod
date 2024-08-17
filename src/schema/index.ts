@@ -112,17 +112,24 @@ export const resourceInputFormSchema = z.object({
     message: "Invalid URL ",
   }),
 });
+const optionSchema = z.object({
+  label: z.string(),
+  value: z.string(),
+  disable: z.boolean().optional(),
+});
 export const resourceDataFormSchema = z.object({
   title: z.string().min(10, {
     message: "Invalid Title",
   }),
-  description: z.string().min(500, {
+  description: z.string().min(10, {
     message: "Invalid Description",
   }),
   imageUrl: z.string().url({
     message: "Invalid URL ",
   }),
-  typeId: z.string(),
+  resourceType: z.string(),
+  // resourceTags: z.array(z.string().min(1)).min(1),
+  resourceTags: z.array(optionSchema).min(1),
   url: z.string().url({
     message: "Invalid URL ",
   }),
