@@ -17,6 +17,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 type Tag = {
   name: string;
 };
@@ -39,7 +40,7 @@ export const ResourceCard = ({ resource, tags, type }: ResourceCardProps) => {
   //     challenge?.challengeCategory?.name!,
   // );
   return (
-    <Card className="max-w-[320px] md:max-w-[360px] lg:max-w-[400px] rounded-2xl  border-none  text-white bg-card bg-cover shadow-lg">
+    <Card className="max-w-[320px] md:max-w-[340px]  rounded-2xl  border-none  text-white bg-card bg-cover shadow-lg">
       <CardHeader>
         <Link href={`${resource.url}`} aria-label="resource-thumbnail">
           <Image
@@ -51,7 +52,10 @@ export const ResourceCard = ({ resource, tags, type }: ResourceCardProps) => {
           />
         </Link>
       </CardHeader>
-      <CardContent className="space-y-2 md:space-y-4">
+      <CardContent className="space-y-2">
+        <p className="rounded-full w-fit px-3 text-white text-sm bg-dark-600 font-bold  uppercase tracking-widest">
+          {type.name}
+        </p>
         {/* <p
                     className={cn(
                         " rounded-full  w-fit px-4 py-2  text-xs xl:text-base  font-bold leading-[16px] uppercase tracking-widest",
@@ -65,15 +69,20 @@ export const ResourceCard = ({ resource, tags, type }: ResourceCardProps) => {
         <Link
           aria-label="solution title"
           href={`${resource.url}`}
-          className="block hover:underline underline-offset-2 capitalize  tracking-wider text-xl md:text-2xl lg:text-3xl font-bold"
+          className="block hover:underline underline-offset-2 capitalize  tracking-wider text-xl  font-bold"
         >
           {resource.title}
         </Link>
-        <p className=" text-sm md:text-base text-dark-700 tracking-wide leading-[1.6rem!important]">
+        <p className=" text-sm text-dark-700 tracking-wide leading-[1.5rem!important]">
           {resource.description}
         </p>
       </CardContent>
-      <CardFooter className="flex items-center gap-4"></CardFooter>
+      <CardFooter className="flex flex-wrap items-center gap-3 ">
+        {tags &&
+          tags?.map(({ resourceTag }, ind) => (
+            <Badge key={ind}>{resourceTag.name}</Badge>
+          ))}
+      </CardFooter>
     </Card>
   );
 };

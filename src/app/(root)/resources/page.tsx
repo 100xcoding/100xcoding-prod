@@ -26,16 +26,18 @@ const ResourcesPage = async () => {
   // console.log(data);
   // console.log(data[0]?.resourceTag);
   return (
-    <section>
-      {data &&
-        data.map((item) => (
-          <ResourceCard
-            resource={item}
-            tags={item.resourceTag!}
-            type={item.resourceType!}
-            key={item.id}
-          />
-        ))}
+    <section className="container p-3 my-10 mx-auto ">
+      <div className="">
+        {data &&
+          data.map((item) => (
+            <ResourceCard
+              resource={item}
+              tags={item.resourceTag!}
+              type={item.resourceType!}
+              key={item.id}
+            />
+          ))}
+      </div>
     </section>
   );
 };
