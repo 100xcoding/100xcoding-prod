@@ -4,6 +4,41 @@ export const metadata: Metadata = {
 };
 import { ChallengeCard } from "./_components/challenge-card";
 // import { getChallenges } from "./_data-access";
+function sortAndShuffleChallenges(challenges: Challenge[]) {
+  // Define the order of types you want to prioritize
+  const typePriority: any = {
+    "23cc9c69-28a7-469d-a33e-b36e68129322": 4, // Higher priority types get lower numbers
+    "24019dd4-31a6-4ae8-8863-e0998c6ebf23": 3,
+    "2bed94f6-379c-4dd6-b021-50d1b5926696": 2,
+    "ffd31115-a78f-43a3-86fd-83f24dc467d2": 1,
+  };
+
+  // Sort challenges with a secondary random criterion
+  return challenges.sort((a, b) => {
+    // Handle the case where challengeCategoryId might be null
+    const aPriority = a.challengeCategoryId
+      ? typePriority[a.challengeCategoryId]
+      : Infinity;
+    const bPriority = b.challengeCategoryId
+      ? typePriority[b.challengeCategoryId]
+      : Infinity;
+
+    // Compare by type priority
+    if (aPriority !== bPriority) {
+      return aPriority - bPriority;
+    }
+
+    // If types are the same, compare by createdAt in descending order (newest first)
+    const dateComparison =
+      new Date(b?.updatedAt!).getTime() - new Date(a?.updatedAt!).getTime();
+    if (dateComparison !== 0) {
+      return dateComparison;
+    }
+
+    // Introduce randomness as a secondary sorting criterion
+    return Math.random() - 0.5;
+  });
+}
 async function getChallenges({ take, skip }: { take: number; skip: number }) {
   try {
     const challenges = await db.challenge.findMany({
@@ -16,6 +51,9 @@ async function getChallenges({ take, skip }: { take: number; skip: number }) {
         challengeCategory: true,
       },
     });
+
+    const algoChallenges = sortAndShuffleChallenges(challenges);
+    // console.log(algoChallenges);
     const total = await db.challenge.count();
     return {
       success: true,
@@ -38,6 +76,7 @@ import { Loader2 } from "@/components/loader2";
 import { Pagination } from "@/components/pagination";
 import { db } from "@/lib/db";
 import { getErrorMessage } from "@/lib/utils";
+import { Challenge } from "@prisma/client";
 const PAGE_SIZE = 8;
 const ChallengesPage = async ({
   searchParams,
