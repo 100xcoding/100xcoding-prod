@@ -15,6 +15,11 @@ export const navbarRoutes = [
     path: "/solutions",
     text: "Solutions",
   },
+  {
+    id: 3,
+    path: "/resources",
+    text: "Resources",
+  },
   // {
   //   id: 3,
   //   path: "/",

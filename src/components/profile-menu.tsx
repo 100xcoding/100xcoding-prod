@@ -13,6 +13,7 @@ import Link from "next/link";
 import { SignOut } from "@/components/sign-out";
 import { useProfile } from "@/services/queries";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { Button } from "./ui/button";
 export const ProfileMenu = () => {
   const user = useCurrentUser();
   const { data } = useProfile();
@@ -46,6 +47,18 @@ export const ProfileMenu = () => {
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
+        {user?.role === "creator" && (
+          <>
+            <DropdownMenuSeparator className="bg-green-500 " />
+            <DropdownMenuGroup>
+              <DropdownMenuItem asChild className="">
+                <Button asChild>
+                  <Link href={"/portal/challenges"}>Portal</Link>
+                </Button>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </>
+        )}
         <DropdownMenuSeparator className="bg-green-500 " />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild className="">

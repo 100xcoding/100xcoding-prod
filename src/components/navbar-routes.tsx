@@ -16,17 +16,17 @@ export const NavbarRoutes = () => {
           <Logo />
         </Link>
       </div>
-      <div className="flex gap-8 items-center text-lg lg:text-2xl z-30">
+      <div className="flex gap-8 items-center text-lg  z-30">
         {navbarRoutes.map((route) => {
           return <NavbarItem key={route.id} {...route} />;
         })}
-        {user?.role == "creator" && (
+        {/* {user?.role == "creator" && (
           <Button asChild aria-label="portal" className="z-30">
             <Link aria-label="portal" href="/portal/challenges">
               Portal
             </Link>
           </Button>
-        )}
+        )} */}
         {user ? (
           <ProfileMenu />
         ) : (
