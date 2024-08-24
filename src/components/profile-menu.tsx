@@ -52,7 +52,7 @@ export const ProfileMenu = () => {
             <DropdownMenuSeparator className="bg-green-500 " />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild className="">
-                <Button asChild>
+                <Button asChild className="cursor-pointer">
                   <Link href={"/portal/challenges"}>Portal</Link>
                 </Button>
               </DropdownMenuItem>
