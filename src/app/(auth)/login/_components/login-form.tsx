@@ -21,6 +21,7 @@ import { z } from "zod";
 import { magicLinkSignIn } from "@/actions/auth";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/logo";
 const formSchema = z.object({
   email: z
     .string()
@@ -72,9 +73,9 @@ export const LoginForm = () => {
             <Link
               aria-label="100xcoding"
               href="/"
-              className="text-center block tracking-wider text-4xl font-bold  mt-4 mb-6"
+              className="flex justify-center  mt-4 mb-6"
             >
-              100xCoding
+              <Logo />
             </Link>
             <p className="text-center text-lg mb-6">
               Welcome 👋

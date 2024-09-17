@@ -130,10 +130,11 @@ const SingleSolution = async ({
 }) => {
   const { solution } = await getSolutionCache(slug);
   const session = await auth();
-
+  console.log(solution);
   const index = challengesCategoryNames.indexOf(
     solution?.challenge?.challengeCategory?.name!,
   );
+  console.log(index);
   return (
     <section className="container mx-auto mt-4 ">
       <Suspense fallback={<Loader2 />}>
@@ -142,9 +143,9 @@ const SingleSolution = async ({
             <div className="flex-1 space-y-4 md:space-y-6">
               <p
                 className={cn(
-                  " rounded-full  w-fit px-4 py-2  text-xs xl:text-base  font-bold leading-[16px] uppercase tracking-widest",
+                  "rounded-full  w-fit px-4 py-2  text-xs xl:text-base  font-bold leading-[16px] uppercase tracking-widest",
                   challengesCategoryNames.includes(
-                    solution?.challenge?.challengeCategory?.id!,
+                    solution?.challenge?.challengeCategory?.name!,
                   ) && challengeCategoryColorClass(index),
                 )}
               >

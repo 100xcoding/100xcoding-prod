@@ -204,7 +204,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       // if (url.startsWith(baseUrl)) return url;
       // return baseUrl;
       const redirectUrl = new URL(url, baseUrl).searchParams.get("redirect");
-
+      if (!redirectUrl && url.startsWith("/login")) return baseUrl;
       if (redirectUrl) return `${baseUrl}${redirectUrl}`;
       if (url.startsWith("/")) return `${baseUrl}${url}`;
       if (new URL(url).origin === baseUrl) return url;
