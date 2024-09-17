@@ -9,6 +9,7 @@ import { db } from "./lib/db";
 import { CustomUser } from "./types";
 import Resend from "next-auth/providers/resend";
 import { authSendRequest } from "./lib/authSendRequest";
+import { redirect } from "next/navigation";
 const generateRandomSuffix = () => {
   const timestamp = Date.now().toString(36); // Convert current timestamp to base36
   const randomNum = Math.floor(Math.random() * 1000).toString(36); // Generate a random number and convert to base36
@@ -65,13 +66,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: "/login",
     signOut: "/",
-    verifyRequest: "/verification",
+    // verifyRequest: "/verification",
   },
   providers: [
     GitHub({
       clientId: Env.AUTH_GITHUB_ID,
       clientSecret: Env.AUTH_GITHUB_SECRET,
       allowDangerousEmailAccountLinking: true,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
       profile(profile) {
         return {
           role: "user",
@@ -91,8 +99,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Resend({
       server: Env.RESEND_API_KEY,
       from: `100xCoding <${Env.RESEND_EMAIL}>`,
-      sendVerificationRequest(params) {
-        authSendRequest(params);
+      async sendVerificationRequest(params) {
+        await authSendRequest(params);
       },
     }),
   ],

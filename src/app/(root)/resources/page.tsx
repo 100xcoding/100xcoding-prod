@@ -11,6 +11,7 @@ const getResources = async ({
 }) => {
   return await db.resource.findMany({
     where: {
+      isPublish: true,
       resourceTypeId: currentType,
       resourceTag: {
         some: {

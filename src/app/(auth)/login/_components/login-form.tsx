@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { signin } from "@/actions/auth";
@@ -36,6 +36,7 @@ export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const seacrhParams = useSearchParams();
   const message = seacrhParams.get("msg");
+  const router = useRouter();
   useEffect(() => {
     if (message) {
       toast.error(message);
@@ -64,6 +65,9 @@ export const LoginForm = () => {
       formData.append(key, values[key as keyof FormSchema]);
     });
     await magicLinkSignIn(formData);
+    // console.log("LOGINPAGE", result);
+    toast.success("Check your email for sign in link");
+    router.push("/");
   };
   return (
     <div className="bg-dark-300 text-white flex max-h-screen h-screen">

@@ -130,11 +130,11 @@ const SingleSolution = async ({
 }) => {
   const { solution } = await getSolutionCache(slug);
   const session = await auth();
-  console.log(solution);
+  // console.log(solution);
   const index = challengesCategoryNames.indexOf(
     solution?.challenge?.challengeCategory?.name!,
   );
-  console.log(index);
+  // console.log(index);
   return (
     <section className="container mx-auto mt-4 ">
       <Suspense fallback={<Loader2 />}>
