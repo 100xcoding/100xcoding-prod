@@ -12,6 +12,7 @@ export const ResourceTypeItem = ({ id, name }: ResourceTypeItemProps) => {
   const searchParams = useSearchParams();
   const currentType = searchParams.get("currentType");
   const currentTag = searchParams.get("tag");
+  const currentLanguage = searchParams.get("language");
   const isSelected = currentType === id;
   const onClick = () => {
     // console.log("Clicked");
@@ -21,6 +22,7 @@ export const ResourceTypeItem = ({ id, name }: ResourceTypeItemProps) => {
         query: {
           tag: currentTag,
           currentType: isSelected ? null : id,
+          language: currentLanguage,
         },
       },
       { skipNull: true, skipEmptyString: true },

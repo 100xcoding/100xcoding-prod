@@ -30,7 +30,7 @@ export const Footer = () => {
           </Link>
         </div>
         <div className="flex lg:justify-center items-center gap-5">
-          <Link aria-label="twitter" href={"/"}>
+          <Link aria-label="twitter" href={"https://x.com/Techysiddhant"}>
             <FaXTwitter size={26} />
           </Link>
           <Link
@@ -45,9 +45,9 @@ export const Footer = () => {
           >
             <BsInstagram size={26} />
           </Link>
-          <Link href={"/"} aria-label="discord">
+          {/* <Link href={"/"} aria-label="discord">
             <FaDiscord size={26} />
-          </Link>
+          </Link> */}
         </div>
       </div>
     </footer>

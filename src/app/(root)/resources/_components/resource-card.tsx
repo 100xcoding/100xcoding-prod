@@ -13,6 +13,7 @@ import {
   cn,
   formatterDescription,
   getImageUrl,
+  sliceText,
 } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,16 +32,24 @@ interface ResourceCardProps {
   type: {
     name: string;
   };
+  language: {
+    name: string;
+  };
   tags: ResourceTag[];
 }
-export const ResourceCard = ({ resource, tags, type }: ResourceCardProps) => {
+export const ResourceCard = ({
+  resource,
+  tags,
+  type,
+  language,
+}: ResourceCardProps) => {
   // console.log(user);
 
   // const index = challengesCategoryNames.indexOf(
   //     challenge?.challengeCategory?.name!,
   // );
   return (
-    <Card className="max-w-[320px] md:max-w-[340px]  rounded-2xl  border-none  text-white bg-card bg-cover shadow-lg">
+    <Card className="max-w-[320px] md:max-w-[340px] max-h-[480px] h-[450px]  rounded-2xl  border-none  text-white bg-card bg-cover shadow-lg pb-0">
       <CardHeader>
         <Link href={`${resource.url}`} aria-label="resource-thumbnail">
           <Image
@@ -52,37 +61,30 @@ export const ResourceCard = ({ resource, tags, type }: ResourceCardProps) => {
           />
         </Link>
       </CardHeader>
-      <CardContent className="space-y-2">
-        <p className="rounded-full w-fit px-3 text-white text-sm bg-dark-600 font-bold  uppercase tracking-widest">
-          {type.name}
-        </p>
-        {/* <p
-                    className={cn(
-                        " rounded-full  w-fit px-4 py-2  text-xs xl:text-base  font-bold leading-[16px] uppercase tracking-widest",
-                        challengesCategoryNames.includes(
-                            challenge?.challengeCategory?.name!,
-                        ) && challengeCategoryColorClass(index),
-                    )}
-                >
-                    {challenge.challengeCategory?.name}
-                </p> */}
-        <Link
-          aria-label="solution title"
-          href={`${resource.url}`}
-          className="block hover:underline underline-offset-2 capitalize  tracking-wider text-xl  font-bold"
-        >
-          {resource.title}
-        </Link>
-        <p className=" text-sm text-dark-700 tracking-wide leading-[1.5rem!important]">
-          {resource.description}
-        </p>
-      </CardContent>
-      <CardFooter className="flex flex-wrap items-center gap-3 ">
-        {tags &&
-          tags?.map(({ resourceTag }, ind) => (
-            <Badge key={ind}>{resourceTag.name}</Badge>
-          ))}
-      </CardFooter>
+      <div className="">
+        <CardContent className="space-y-2">
+          <div className="flex justify-between items-center">
+            <Badge className="bg-dark-600 uppercase">{type.name}</Badge>
+            <Badge className="bg-dark-600 uppercase">{language.name}</Badge>
+          </div>
+          <Link
+            aria-label="solution title"
+            href={`${resource.url}`}
+            className="block hover:underline underline-offset-2 capitalize  tracking-wider text-xl  font-bold"
+          >
+            {sliceText(resource.title, 52)}
+          </Link>
+          <p className=" text-sm text-dark-700 tracking-wide leading-[1.5rem!important]">
+            {sliceText(resource.description!, 120)}
+          </p>
+          <div className="flex flex-wrap items-center gap-3 ">
+            {tags &&
+              tags?.map(({ resourceTag }, ind) => (
+                <Badge key={ind}>{resourceTag.name}</Badge>
+              ))}
+          </div>
+        </CardContent>
+      </div>
     </Card>
   );
 };

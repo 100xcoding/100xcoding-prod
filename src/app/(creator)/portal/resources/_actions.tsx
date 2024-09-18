@@ -91,6 +91,7 @@ export async function addResource(data: ResourceFullData) {
           imageUrl: result.data.imageUrl,
           creatorId: session?.user?.id,
           resourceTypeId: result.data.resourceType,
+          resourceLanguageId: result.data.resourceLanguage,
           url: result.data.url,
           isPublish: isCreator ? true : false,
           resourceTag: {

@@ -133,4 +133,5 @@ export const resourceDataFormSchema = z.object({
   url: z.string().url({
     message: "Invalid URL ",
   }),
+  resourceLanguage: z.string(),
 });

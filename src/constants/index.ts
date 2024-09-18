@@ -45,12 +45,12 @@ export const mobileNavbarRoutes = [
     text: "Solutions",
     symbol: HiCodeBracketSquare,
   },
-  // {
-  //   id: 3,
-  //   path: "/",
-  //   text: "Blog",
-  //   symbol: GrResources,
-  // },
+  {
+    id: 3,
+    path: "/resources",
+    text: "Resources",
+    symbol: GrResources,
+  },
   // {
   //   id: 4,
   //   path: "/",
@@ -144,7 +144,7 @@ export const faqs = [
     id: 4,
     question: "Can I skip challenges or do I have to complete them in order?",
     answer:
-      "ou can skip challenges if you prefer, but it's generally recommended to work through them in order. This will ensure you build a strong foundation in core concepts before moving on to more advanced topics.",
+      "You can skip challenges if you prefer, but it's generally recommended to work through them in order. This will ensure you build a strong foundation in core concepts before moving on to more advanced topics.",
   },
   {
     id: 5,

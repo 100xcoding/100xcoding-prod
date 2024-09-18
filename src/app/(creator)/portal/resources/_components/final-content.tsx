@@ -19,6 +19,7 @@ import { Combobox } from "@/components/ui/combo-box";
 import MultipleSelector from "@/components/ui/multiple-selector";
 import { addResource } from "../_actions";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 type ResourceFetchData = {
   title?: string;
   description?: string;
@@ -31,11 +32,13 @@ type FinalContentProps = {
   initialData: ResourceFetchData;
   resourceTypes: { label: string; value: string }[];
   resourceTags: { label: string; value: string }[];
+  resourceLanguages: { label: string; value: string }[];
 };
 const FinalContent = ({
   initialData,
   resourceTypes,
   resourceTags,
+  resourceLanguages,
 }: FinalContentProps) => {
   const saveForm = useForm<z.infer<typeof resourceDataFormSchema>>({
     resolver: zodResolver(resourceDataFormSchema),
@@ -47,6 +50,7 @@ const FinalContent = ({
     },
   });
   const { reset } = saveForm;
+  const router = useRouter();
   async function onSubmitResource(
     data: z.infer<typeof resourceDataFormSchema>,
   ) {
@@ -56,7 +60,17 @@ const FinalContent = ({
     // console.log(result);
     if (result?.success) {
       toast.success("Resource added successfully!");
-      reset();
+      reset({
+        title: "",
+        url: "",
+        description: "",
+        imageUrl: "",
+        resourceType: "",
+        resourceTags: [],
+        resourceLanguage: "",
+      });
+      router.refresh();
+      router.push("/portal/resources");
     } else {
       toast.error("Something went wrong!");
     }
@@ -144,6 +158,29 @@ const FinalContent = ({
                                     /> */}
                   <Combobox
                     options={resourceTypes}
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={saveForm.control}
+            name="resourceLanguage"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Select Language</FormLabel>
+                <FormControl>
+                  {/* <Input
+                                        className="portal-input border w-[400px]"
+                                        placeholder="enter url"
+                                        {...field}
+                                    /> */}
+                  <Combobox
+                    options={resourceLanguages}
                     value={field.value}
                     onChange={field.onChange}
                   />

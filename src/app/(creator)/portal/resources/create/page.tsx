@@ -23,6 +23,7 @@ import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 import { Combobox } from "@/components/ui/combo-box";
 import {
+  useCreatorResourceLanguages,
   useCreatorResourceTags,
   useCreatorResourceTypes,
 } from "@/services/queries";
@@ -46,6 +47,7 @@ const ResourceCreatePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { data: resourceTypes } = useCreatorResourceTypes();
   const { data: resourceTags } = useCreatorResourceTags();
+  const { data: resourceLanguages } = useCreatorResourceLanguages();
   const form = useForm<z.infer<typeof resourceInputFormSchema>>({
     resolver: zodResolver(resourceInputFormSchema),
     defaultValues: {
@@ -147,6 +149,12 @@ const ResourceCreatePage = () => {
                 label: resourceType?.name,
                 value: resourceType?.id,
               }))}
+              resourceLanguages={resourceLanguages?.map(
+                (resourceLanguage: any) => ({
+                  label: resourceLanguage?.name,
+                  value: resourceLanguage?.id,
+                }),
+              )}
             />
             {/* <div className="flex w-full items-center gap-2 justify-between">
               <Input

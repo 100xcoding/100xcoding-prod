@@ -272,19 +272,21 @@ model QuestionToTag {
 }
 
 model Resource {
-  id             String          @id @default(uuid())
-  title          String
-  description    String?
-  imageUrl       String?
-  url            String
-  creatorId      String
-  isPublish      Boolean         @default(false)
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  resourceType   ResourceType?   @relation(fields: [resourceTypeId], references: [id])
-  resourceTypeId String?
-  resourceTag    ResourceToTag[]
-  user           User            @relation(fields: [creatorId], references: [id])
+  id                 String            @id @default(uuid())
+  title              String
+  description        String?
+  imageUrl           String?
+  url                String
+  creatorId          String
+  isPublish          Boolean           @default(false)
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  resourceType       ResourceType?     @relation(fields: [resourceTypeId], references: [id])
+  resourceTypeId     String?
+  resourceTag        ResourceToTag[]
+  user               User              @relation(fields: [creatorId], references: [id])
+  resourceLanguage   ResourceLanguage? @relation(fields: [resourceLanguageId], references: [id])
+  resourceLanguageId String?
 }
 
 model ResourceType {
@@ -297,6 +299,12 @@ model ResourceTag {
   id        String          @id @default(uuid())
   name      String          @unique
   resources ResourceToTag[]
+}
+
+model ResourceLanguage {
+  id        String     @id @default(uuid())
+  name      String     @unique
+  resources Resource[]
 }
 
 model ResourceToTag {

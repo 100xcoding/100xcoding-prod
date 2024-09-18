@@ -135,3 +135,15 @@ export function useCreatorResourceTags() {
     refreshCreatorResourceTagsData,
   };
 }
+export function useCreatorResourceLanguages() {
+  const cacheKey = `/creator/resources/languages`;
+  const { data, error } = useSWR(cacheKey, fetcher);
+  const refreshCreatorResourceLanguagesData = async () => {
+    await mutate(cacheKey); // Trigger revalidation for the specific cache key
+  };
+  return {
+    data,
+    error,
+    refreshCreatorResourceLanguagesData,
+  };
+}

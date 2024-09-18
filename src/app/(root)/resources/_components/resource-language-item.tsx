@@ -2,27 +2,30 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import qs from "query-string";
-type ResourceTagItemProps = {
+type ResourceLanguageItemProps = {
   id: string;
   name: string;
 };
-export const ResourceTagItem = ({ id, name }: ResourceTagItemProps) => {
+export const ResourceLanguageItem = ({
+  id,
+  name,
+}: ResourceLanguageItemProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentType = searchParams.get("currentType");
   const currentTag = searchParams.get("tag");
   const currentLanguage = searchParams.get("language");
-  const isSelected = currentTag === id;
+  const isSelected = currentLanguage === id;
   const onClick = () => {
     // console.log("Clicked");
     const url = qs.stringifyUrl(
       {
         url: pathname,
         query: {
-          tag: isSelected ? null : id,
+          language: isSelected ? null : id,
+          tag: currentTag,
           currentType: currentType,
-          language: currentLanguage,
         },
       },
       { skipNull: true, skipEmptyString: true },

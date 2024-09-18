@@ -66,6 +66,9 @@ export const formatterDescription = (description: string) => {
     ? `${description.slice(0, 130)}...`
     : description;
 };
+export const sliceText = (text: string, count: number = 30) => {
+  return text.length > count ? `${text.slice(0, count)}...` : text;
+};
 export const challengesCategoryNames = [
   "Starter",
   "Learner",
