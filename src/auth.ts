@@ -73,13 +73,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: Env.AUTH_GITHUB_ID,
       clientSecret: Env.AUTH_GITHUB_SECRET,
       allowDangerousEmailAccountLinking: true,
-      authorization: {
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code",
-        },
-      },
+      // authorization: {
+      //   params: {
+      //     prompt: "consent",
+      //     access_type: "offline",
+      //     response_type: "code",
+      //   },
+      // },
       profile(profile) {
         return {
           role: "user",
