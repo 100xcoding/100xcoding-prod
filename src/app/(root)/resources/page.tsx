@@ -66,11 +66,31 @@ interface SearchProps {
     language: string;
   };
 }
+function shuffleArray(array) {
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there remain elements to shuffle
+  while (currentIndex !== 0) {
+    // Pick a remaining element
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // Swap it with the current element
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+}
 const ResourcesPage = async ({ searchParams }: SearchProps) => {
   const data = await getResources({ ...searchParams });
   const resourceTypeData = await getResourcesType();
   const resourceTags = await getResourcesTags();
   const resourceLanguages = await getResourcesLanguages();
+  const finalResult = shuffleArray(data);
   return (
     <section className="container p-3 my-6 space-y-4 mx-auto ">
       <div className="">
@@ -82,7 +102,7 @@ const ResourcesPage = async ({ searchParams }: SearchProps) => {
       </div>
       <div className="flex flex-wrap  items-center gap-4">
         {data.length > 0 &&
-          data.map((item) => (
+          finalResult.map((item) => (
             <ResourceCard
               resource={item}
               tags={item.resourceTag!}
