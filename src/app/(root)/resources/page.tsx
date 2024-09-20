@@ -4,6 +4,7 @@ import { Filters } from "./_components/filters";
 import Link from "next/link";
 import { Metadata } from "next";
 import { TagFilter } from "./_components/tag-filter";
+import { Suspense } from "react";
 export const metadata: Metadata = {
   title: "Resources",
 };
@@ -128,18 +129,20 @@ const ResourcesPage = async ({ searchParams }: SearchProps) => {
         resourceLanguages={resourceLanguages}
       />
       <TagFilter resourceTags={resourceTags} />
-      <div className="flex flex-wrap  items-center gap-4 mt-2">
-        {data.length > 0 &&
-          finalResult.map((item) => (
-            <ResourceCard
-              resource={item}
-              tags={item.resourceTag!}
-              type={item.resourceType!}
-              language={item.resourceLanguage!}
-              key={item.id}
-            />
-          ))}
-      </div>
+      <Suspense fallback={<div>loading...</div>}>
+        <div className="flex flex-wrap  items-center gap-4 mt-2">
+          {data.length > 0 &&
+            finalResult.map((item) => (
+              <ResourceCard
+                resource={item}
+                tags={item.resourceTag!}
+                type={item.resourceType!}
+                language={item.resourceLanguage!}
+                key={item.id}
+              />
+            ))}
+        </div>
+      </Suspense>
       <div className="">
         {data.length === 0 && (
           <div className="text-center">
