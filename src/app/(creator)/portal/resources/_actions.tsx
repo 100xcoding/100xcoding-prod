@@ -84,6 +84,21 @@ export async function addResource(data: ResourceFullData) {
       return { success: false, error: result.error.format(), data: null };
     }
     if (result.success) {
+      const finalTags = result.data.resourceTags.toLowerCase().split(",");
+      // Find or create tags by name
+      const tags = await Promise.all(
+        finalTags.map(async (tagName) => {
+          let tag = await db.resourceTag.findUnique({
+            where: { name: tagName },
+          });
+          if (!tag) {
+            tag = await db.resourceTag.create({
+              data: { name: tagName },
+            });
+          }
+          return tag;
+        }),
+      );
       await db.resource.create({
         data: {
           title: result?.data.title,
@@ -95,9 +110,9 @@ export async function addResource(data: ResourceFullData) {
           url: result.data.url,
           isPublish: isCreator ? true : false,
           resourceTag: {
-            create: result.data.resourceTags.map((tagg) => ({
+            create: tags.map((tag) => ({
               resourceTag: {
-                connect: { id: tagg.value },
+                connect: { id: tag.id },
               },
             })),
           },

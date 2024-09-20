@@ -20,6 +20,7 @@ import MultipleSelector from "@/components/ui/multiple-selector";
 import { addResource } from "../_actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { truncate } from "fs/promises";
 type ResourceFetchData = {
   title?: string;
   description?: string;
@@ -55,22 +56,22 @@ const FinalContent = ({
     data: z.infer<typeof resourceDataFormSchema>,
   ) {
     // await getResourceContent(data);
-    // console.log(data);
+    // console.log(data.resourceTags.toLowerCase());
     const result = await addResource(data);
     // console.log(result);
     if (result?.success) {
-      toast.success("Resource added successfully!");
-      reset({
-        title: "",
-        url: "",
-        description: "",
-        imageUrl: "",
-        resourceType: "",
-        resourceTags: [],
-        resourceLanguage: "",
-      });
+      // reset({
+      //   title: "",
+      //   url: "",
+      //   description: "",
+      //   imageUrl: "",
+      //   resourceType: "",
+      //   resourceTags: "",
+      //   resourceLanguage: "",
+      // });
       router.refresh();
       router.push("/portal/resources");
+      toast.success("Resource added successfully!");
     } else {
       toast.error("Something went wrong!");
     }
@@ -195,18 +196,18 @@ const FinalContent = ({
             name="resourceTags"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Select Tags</FormLabel>
+                <FormLabel>Enter Tag name seperate with ,</FormLabel>
                 <FormControl>
-                  {/* <Input
-                                        className="portal-input border w-[400px]"
-                                        placeholder="enter url"
-                                        {...field}
-                                    /> */}
-                  <MultipleSelector
+                  <Input
+                    className="portal-input border "
+                    placeholder="enter tag name with seperate with ,"
+                    {...field}
+                  />
+                  {/* <MultipleSelector
                     defaultOptions={resourceTags}
                     {...field}
                     placeholder="Select frameworks you like..."
-                  />
+                  /> */}
                   {/* <MultiSelect placeholder="Select options" variant={'default'} options={resourceTags} onValueChange={field.onChange} defaultValue={[]} /> */}
                 </FormControl>
                 <FormMessage />

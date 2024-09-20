@@ -128,8 +128,8 @@ export const resourceDataFormSchema = z.object({
     message: "Invalid URL ",
   }),
   resourceType: z.string(),
-  // resourceTags: z.array(z.string().min(1)).min(1),
-  resourceTags: z.array(optionSchema).min(1),
+  resourceTags: z.string(),
+  // resourceTags: z.array(optionSchema).min(1),
   url: z.string().url({
     message: "Invalid URL ",
   }),
