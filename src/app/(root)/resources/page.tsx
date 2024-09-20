@@ -3,7 +3,6 @@ import { ResourceCard } from "./_components/resource-card";
 import { Filters } from "./_components/filters";
 import Link from "next/link";
 import { Metadata } from "next";
-import { Resource } from "@prisma/client";
 import { TagFilter } from "./_components/tag-filter";
 export const metadata: Metadata = {
   title: "Resources",
@@ -11,18 +10,26 @@ export const metadata: Metadata = {
 interface IResource {
   id: string;
   title: string;
-  description?: string;
-  imageUrl?: string;
-  url: string;
+  description: string | null;
+  imageUrl: string | null;
+  url: string; // Add the 'url' field
   creatorId: string;
   isPublish: boolean;
   createdAt: Date;
   updatedAt: Date;
-  resourceTypeId?: string;
-  resourceType?: { name: string };
-  resourceTag?: { name: string }[];
-  resourceLanguage?: { name: string };
-  resourceLanguageId?: string;
+  resourceTypeId: string | null; // Add 'resourceTypeId'
+  resourceLanguageId: string | null; // Add 'resourceLanguageId'
+  resourceTag: {
+    resourceTag: {
+      name: string;
+    };
+  }[];
+  resourceType: {
+    name: string;
+  } | null; // Allow null for resourceType
+  resourceLanguage: {
+    name: string;
+  } | null;
 }
 const getResources = async ({
   currentType,
@@ -113,7 +120,7 @@ const ResourcesPage = async ({ searchParams }: SearchProps) => {
   const resourceTags = await getResourcesTags();
   const resourceLanguages = await getResourcesLanguages();
   const finalResult: IResource[] = shuffleArray(data);
-  console.log(finalResult);
+  // console.log(finalResult);
   return (
     <section className="container p-3 my-6 space-y-4 mx-auto ">
       <Filters
