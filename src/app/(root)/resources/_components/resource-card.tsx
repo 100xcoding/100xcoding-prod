@@ -43,13 +43,8 @@ export const ResourceCard = ({
   type,
   language,
 }: ResourceCardProps) => {
-  // console.log(user);
-
-  // const index = challengesCategoryNames.indexOf(
-  //     challenge?.challengeCategory?.name!,
-  // );
   return (
-    <Card className="max-w-[320px] md:max-w-[340px] max-h-[480px] h-[450px]  rounded-2xl  border-none  text-white bg-card bg-cover shadow-lg pb-0">
+    <Card className="max-w-[320px] md:max-w-[340px] max-h-[480px] h-[480px]  rounded-2xl  border-none  text-white bg-card bg-cover shadow-lg pb-0">
       <CardHeader>
         <Link href={`${resource.url}`} aria-label="resource-thumbnail">
           <Image
