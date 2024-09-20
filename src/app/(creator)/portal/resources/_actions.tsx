@@ -17,6 +17,13 @@ type ResourceFullData = z.infer<typeof resourceDataFormSchema>;
 
 export async function getResourceContent(data: ResourceInput) {
   try {
+    const headers = new Headers();
+    headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate",
+    );
+    headers.set("Pragma", "no-cache");
+    headers.set("Expires", "0");
     const session = await auth();
     if (!session || !session.user || session.user.role !== "creator") {
       redirect("/?msg='sign-in first' ");
@@ -29,6 +36,9 @@ export async function getResourceContent(data: ResourceInput) {
       const final: ImagePreviewResType = (await getLinkPreview(data?.url, {
         imagesPropertyType: "og",
         followRedirects: "follow",
+        headers: {
+          "Cache-Control": "no-store", // Ensure no cache for the API request
+        },
       })) as ImagePreviewResType;
       // console.log(final);
       return {
@@ -40,6 +50,7 @@ export async function getResourceContent(data: ResourceInput) {
           description: final?.description!,
           imageUrl: final.images[0],
         },
+        headers,
       };
     }
   } catch (error) {

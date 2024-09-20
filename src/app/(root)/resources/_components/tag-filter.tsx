@@ -54,7 +54,7 @@ export const TagFilter = ({ resourceTags }: FiltersProps) => {
     .filter((tag) => tagArray.includes(tag.name))
     .map((tag) => ({ label: tag.name, value: tag.name }));
   const OPTIONS: Option[] = resourceTags.map((resourceTag) => ({
-    label: resourceTag.name,
+    label: resourceTag.name.toUpperCase(),
     value: resourceTag.name,
   }));
 
