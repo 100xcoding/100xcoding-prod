@@ -37,7 +37,9 @@ export async function getResourceContent(data: ResourceInput) {
         imagesPropertyType: "og",
         followRedirects: "follow",
         headers: {
-          "Cache-Control": "no-store", // Ensure no cache for the API request
+          "user-agent": "googlebot",
+          "Cache-Control": "no-store",
+          // Ensure no cache for the API request
         },
       })) as ImagePreviewResType;
       // console.log(final);
