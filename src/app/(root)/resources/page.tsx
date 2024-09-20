@@ -3,9 +3,27 @@ import { ResourceCard } from "./_components/resource-card";
 import { Filters } from "./_components/filters";
 import Link from "next/link";
 import { Metadata } from "next";
+import { Resource } from "@prisma/client";
+import { TagFilter } from "./_components/tag-filter";
 export const metadata: Metadata = {
   title: "Resources",
 };
+interface IResource {
+  id: string;
+  title: string;
+  description?: string;
+  imageUrl?: string;
+  url: string;
+  creatorId: string;
+  isPublish: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  resourceTypeId?: string;
+  resourceType?: { name: string };
+  resourceTag?: { name: string }[];
+  resourceLanguage?: { name: string };
+  resourceLanguageId?: string;
+}
 const getResources = async ({
   currentType,
   tag,
@@ -15,6 +33,7 @@ const getResources = async ({
   tag?: string;
   language?: string;
 }) => {
+  const arrayTags = tag?.split(",");
   return await db.resource.findMany({
     where: {
       isPublish: true,
@@ -22,11 +41,14 @@ const getResources = async ({
       resourceLanguageId: language,
       resourceTag: {
         some: {
-          resourceTagId: tag,
+          resourceTag: {
+            name: {
+              in: arrayTags,
+            },
+          },
         },
       },
     },
-
     include: {
       resourceTag: {
         select: {
@@ -66,7 +88,7 @@ interface SearchProps {
     language: string;
   };
 }
-function shuffleArray(array) {
+function shuffleArray(array: IResource[]) {
   let currentIndex = array.length,
     randomIndex;
 
@@ -90,17 +112,16 @@ const ResourcesPage = async ({ searchParams }: SearchProps) => {
   const resourceTypeData = await getResourcesType();
   const resourceTags = await getResourcesTags();
   const resourceLanguages = await getResourcesLanguages();
-  const finalResult = shuffleArray(data);
+  const finalResult: IResource[] = shuffleArray(data);
+  console.log(finalResult);
   return (
     <section className="container p-3 my-6 space-y-4 mx-auto ">
-      <div className="">
-        <Filters
-          resourceTypes={resourceTypeData}
-          resourceTags={resourceTags}
-          resourceLanguages={resourceLanguages}
-        />
-      </div>
-      <div className="flex flex-wrap  items-center gap-4">
+      <Filters
+        resourceTypes={resourceTypeData}
+        resourceLanguages={resourceLanguages}
+      />
+      <TagFilter resourceTags={resourceTags} />
+      <div className="flex flex-wrap  items-center gap-4 mt-2">
         {data.length > 0 &&
           finalResult.map((item) => (
             <ResourceCard

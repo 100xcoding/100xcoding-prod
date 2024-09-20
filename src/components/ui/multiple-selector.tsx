@@ -345,7 +345,9 @@ const MultipleSelector = React.forwardRef<
         );
       }
 
-      return <CommandEmpty>{emptyIndicator}</CommandEmpty>;
+      return (
+        <CommandEmpty className="bg-dark-500">{emptyIndicator}</CommandEmpty>
+      );
     }, [creatable, emptyIndicator, onSearch, options]);
 
     const selectables = React.useMemo<GroupOption>(
