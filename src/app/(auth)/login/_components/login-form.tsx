@@ -22,6 +22,7 @@ import { magicLinkSignIn } from "@/actions/auth";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
+import { LoaderCircle } from "lucide-react";
 const formSchema = z.object({
   email: z
     .string()
@@ -70,10 +71,10 @@ export const LoginForm = () => {
     router.push("/");
   };
   return (
-    <div className="bg-dark-300 text-white flex max-h-screen h-screen">
-      <div className="container my-auto ">
-        <div className="sub-container max-w-[496px] mx-auto">
-          <div className="bg-card bg-cover shadow-lg p-6 rounded-xl">
+    <div className="bg-dark-300 text-white flex  h-screen overflow-hidden">
+      <div className="container py-10 remove-scrollbar overflow-y-scroll">
+        <div className="sub-container max-w-[496px]  mx-auto">
+          <div className="bg-card bg-cover shadow-lg p-6 rounded-xl ">
             <Link
               aria-label="100xcoding"
               href="/"
@@ -103,7 +104,7 @@ export const LoginForm = () => {
                       <span>Log in using GitHub</span>
                     </>
                   )}
-                  {isLoading && <ClipLoader color="#ffffff" />}
+                  {isLoading && <LoaderCircle className="animate-spin" />}
                 </Button>
               </form>
               {/* <DiscordSignIn /> */}
@@ -121,7 +122,7 @@ export const LoginForm = () => {
                       <span>Log in using Discord</span>
                     </>
                   )}
-                  {isLoading && <ClipLoader color="#ffffff" />}
+                  {isLoading && <LoaderCircle className="animate-spin" />}
                 </Button>
               </form>
               <div className="text-center relative after:bg-white after:absolute after:top-1/2 after:left-0 after:w-full after:h-[2px] after:z-0">
@@ -160,7 +161,7 @@ export const LoginForm = () => {
                     className="w-full tracking-wider font-poppins  capitalize py-6 text-base"
                   >
                     {isLoading ? (
-                      <ClipLoader color="#ffffff" />
+                      <LoaderCircle className="animate-spin" />
                     ) : (
                       "Log in using magic link"
                     )}
