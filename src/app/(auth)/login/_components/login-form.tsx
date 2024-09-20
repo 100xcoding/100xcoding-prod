@@ -72,7 +72,7 @@ export const LoginForm = () => {
   };
   return (
     <div className="bg-dark-300 text-white flex  h-screen overflow-hidden">
-      <div className="container py-10 remove-scrollbar overflow-y-scroll">
+      <div className="container py-10 my-auto remove-scrollbar overflow-y-scroll">
         <div className="sub-container max-w-[496px]  mx-auto">
           <div className="bg-card bg-cover shadow-lg p-6 rounded-xl ">
             <Link
