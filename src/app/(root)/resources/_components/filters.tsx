@@ -11,13 +11,15 @@ export const Filters = ({ resourceTypes, resourceLanguages }: FiltersProps) => {
   // console.log(resourceTags);
   return (
     <section className="space-y-3">
-      <div className="flex gap-2 items-center">
-        <Label className="text-primary text-[18px]">
+      <div className="flex flex-col lg:flex-row gap-2  w-full">
+        <Label className="text-primary text-[18px] ">
           Select Resource Type:
         </Label>
-        {resourceTypes?.map((resourceType) => (
-          <ResourceTypeItem key={resourceType.id} {...resourceType} />
-        ))}
+        <div className="flex gap-2 items-center">
+          {resourceTypes?.map((resourceType) => (
+            <ResourceTypeItem key={resourceType.id} {...resourceType} />
+          ))}
+        </div>
       </div>
       <div className="flex gap-2 items-center">
         <Label className="text-primary text-[18px]">Select Language:</Label>

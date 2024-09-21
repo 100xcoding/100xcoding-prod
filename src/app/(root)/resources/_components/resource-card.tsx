@@ -69,7 +69,7 @@ export const ResourceCard = ({
           >
             {sliceText(resource.title, 52)}
           </Link>
-          <p className=" text-sm text-dark-700 tracking-wide leading-[1.5rem!important]">
+          <p className=" text-sm text-dark-700 tracking-wide leading-[1.5rem!important] break-words">
             {sliceText(resource.description!, 120)}
           </p>
           <div className="flex flex-wrap items-center gap-3 ">

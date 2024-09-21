@@ -130,7 +130,7 @@ const ResourcesPage = async ({ searchParams }: SearchProps) => {
       />
       <TagFilter resourceTags={resourceTags} />
       <Suspense fallback={<div>loading...</div>}>
-        <div className="flex flex-wrap  items-center gap-4 mt-2">
+        <div className="flex flex-wrap justify-center lg:justify-normal  items-center gap-4 mt-2">
           {data.length > 0 &&
             finalResult.map((item) => (
               <ResourceCard
