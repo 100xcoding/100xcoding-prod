@@ -14,16 +14,11 @@ const FormSchema = z.object({
 });
 type ResourceInput = z.infer<typeof FormSchema>;
 type ResourceFullData = z.infer<typeof resourceDataFormSchema>;
+import { unstable_noStore } from "next/cache";
 
 export async function getResourceContent(data: ResourceInput) {
+  unstable_noStore();
   try {
-    const headers = new Headers();
-    headers.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate",
-    );
-    headers.set("Pragma", "no-cache");
-    headers.set("Expires", "0");
     const session = await auth();
     if (!session || !session.user || session.user.role !== "creator") {
       redirect("/?msg='sign-in first' ");
@@ -33,27 +28,76 @@ export async function getResourceContent(data: ResourceInput) {
       return { success: false, error: result.error.format(), data: null };
     }
     if (result.success) {
-      const final: ImagePreviewResType = (await getLinkPreview(data?.url, {
-        imagesPropertyType: "og",
-        followRedirects: "follow",
-        headers: {
-          "user-agent": "googlebot",
-          "Cache-Control": "no-store",
-          // Ensure no cache for the API request
-        },
-      })) as ImagePreviewResType;
+      // console.log("URL", data?.url);
+      if (data?.url.includes("youtube.com") || data?.url.includes("youtu.be")) {
+        const datas = await fetch(`https://api.microlink.io?url=${data?.url}`);
+        const response = await datas.json();
+        return {
+          success: true,
+          message: "Data fetched Successfully!",
+          finalData: {
+            title: response.data?.title!,
+            url: response.data?.url,
+            description: response.data?.description!,
+            imageUrl: response.data.image.url,
+          },
+        };
+      } else if (data?.url.includes("medium.com")) {
+        const datas = await fetch(`https://api.microlink.io?url=${data?.url}`);
+        const response = await datas.json();
+        return {
+          success: true,
+          message: "Data fetched Successfully!",
+          finalData: {
+            title: response.data?.title!,
+            url: response.data?.url,
+            description: response.data?.description!,
+            imageUrl: response.data.image.url,
+          },
+        };
+      } else if (data?.url.includes("dev.to")) {
+        const final: ImagePreviewResType = (await getLinkPreview(data?.url, {
+          imagesPropertyType: "og",
+          followRedirects: "follow",
+          headers: {
+            "user-agent": "googlebot",
+            "Cache-Control": "no-store",
+            // Ensure no cache for the API request
+          },
+        })) as ImagePreviewResType;
+        return {
+          success: true,
+          message: "Data fetched Successfully!",
+          finalData: {
+            title: final?.title!,
+            url: final?.url,
+            description: final?.description!,
+            imageUrl: final.images[0],
+          },
+        };
+      }
+
+      // console.log(response.data);
+      // const final: ImagePreviewResType = (await getLinkPreview(data?.url, {
+      //   imagesPropertyType: "og",
+      //   followRedirects: "follow",
+      //   headers: {
+      //     "user-agent": "googlebot",
+      //     "Cache-Control": "no-store",
+      //     // Ensure no cache for the API request
+      //   },
+      // })) as ImagePreviewResType;
       // console.log(final);
-      return {
-        success: true,
-        message: "Data fetched Successfully!",
-        finalData: {
-          title: final?.title!,
-          url: final?.url,
-          description: final?.description!,
-          imageUrl: final.images[0],
-        },
-        headers,
-      };
+      // return {
+      //   success: true,
+      //   message: "Data fetched Successfully!",
+      //   finalData: {
+      //     title: response.data?.title!,
+      //     url: response.data?.url,
+      //     description: response.data?.description!,
+      //     imageUrl: response.data.image.url
+      //   },
+      // };
     }
   } catch (error) {
     return {

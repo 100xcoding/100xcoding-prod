@@ -57,6 +57,10 @@ const ResourceCreatePage = () => {
   const onSubmit = async (values: z.infer<typeof resourceInputFormSchema>) => {
     // console.log(values);
     setIsLoading(true);
+    // console.log("URL FORMATION", `https://api.microlink.io?${values?.url}`)
+    // const datas = await fetch(`https://api.microlink.io?${values?.url}`);
+    // const res = await datas.json();
+    // console.log(res.data);
     const response = await getResourceContent(values);
     if (response?.success) {
       toast.success(response.message);
