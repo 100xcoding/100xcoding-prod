@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { signin } from "@/actions/auth";
 import { FaDiscord, FaGithub } from "react-icons/fa";
-import { ClipLoader } from "react-spinners";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
@@ -20,9 +19,8 @@ import {
 import { z } from "zod";
 import { magicLinkSignIn } from "@/actions/auth";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
-import { LoaderCircle } from "lucide-react";
+import { LoadingButton } from "@/components/ui/loading-button";
 const formSchema = z.object({
   email: z
     .string()
@@ -91,46 +89,37 @@ export const LoginForm = () => {
             <div className="space-y-4">
               {/* <SignIn /> */}
               <form onSubmit={handleSubmit}>
-                <Button
+                <LoadingButton
                   aria-label="Log in using GitHub"
                   type="submit"
                   variant={"secondary"}
                   disabled={isLoading}
+                  loading={isLoading}
                   className="w-full tracking-wide bg-dark-200 flex items-center gap-4 text-base py-6"
                 >
-                  {!isLoading && (
-                    <>
-                      <FaGithub className="text-2xl" />
-                      <span>Log in using GitHub</span>
-                    </>
-                  )}
-                  {isLoading && <LoaderCircle className="animate-spin" />}
-                </Button>
+                  <FaGithub className="text-2xl" />
+                  <span>Log in using GitHub</span>
+                </LoadingButton>
               </form>
               {/* <DiscordSignIn /> */}
               <form onSubmit={handleSubmitDiscord}>
-                <Button
+                <LoadingButton
                   aria-label="Log in using Discord"
                   type="submit"
                   variant={"secondary"}
                   disabled={isLoading}
+                  loading={isLoading}
                   className="w-full tracking-wide bg-[#5865F2] flex items-center gap-4 text-base py-6"
                 >
-                  {!isLoading && (
-                    <>
-                      <FaDiscord className="text-2xl" />
-                      <span>Log in using Discord</span>
-                    </>
-                  )}
-                  {isLoading && <LoaderCircle className="animate-spin" />}
-                </Button>
+                  <FaDiscord className="text-2xl" />
+                  <span>Log in using Discord</span>
+                </LoadingButton>
               </form>
               <div className="text-center relative after:bg-white after:absolute after:top-1/2 after:left-0 after:w-full after:h-[2px] after:z-0">
                 <span className="relative z-10 inline-block bg-[#1F2527] px-4 my-2">
                   OR
                 </span>
               </div>
-              {/* <MagicSignIn /> */}
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
@@ -154,18 +143,15 @@ export const LoginForm = () => {
                       </FormItem>
                     )}
                   />
-                  <Button
+                  <LoadingButton
                     aria-label="Log in using magic link"
                     type="submit"
                     disabled={isLoading}
-                    className="w-full tracking-wider font-poppins  capitalize py-6 text-base"
+                    loading={isLoading}
+                    className="w-full tracking-wider font-poppins flex gap-4  capitalize py-6 text-base"
                   >
-                    {isLoading ? (
-                      <LoaderCircle className="animate-spin" />
-                    ) : (
-                      "Log in using magic link"
-                    )}
-                  </Button>
+                    Log in using magic link
+                  </LoadingButton>
                 </form>
               </Form>
             </div>

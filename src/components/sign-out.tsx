@@ -5,6 +5,7 @@ import { MdLogout } from "react-icons/md";
 import { Button } from "./ui/button";
 import { ClipLoader } from "react-spinners";
 import { signOut } from "next-auth/react";
+import { LoadingButton } from "./ui/loading-button";
 export function SignOut() {
   const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e: any) => {
@@ -15,7 +16,18 @@ export function SignOut() {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Button
+      <LoadingButton
+        aria-label="sign out"
+        variant={"secondary"}
+        className="w-full bg-red-600 text-red-500 space-x-4"
+        type="submit"
+        loading={isLoading}
+        disabled={isLoading}
+      >
+        <MdLogout size={21} />
+        <span> Sign Out</span>
+      </LoadingButton>
+      {/* <Button
         aria-label="sign out"
         variant={"secondary"}
         className="w-full bg-red-600 text-red-500 space-x-4"
@@ -29,7 +41,7 @@ export function SignOut() {
             <span> Sign Out</span>
           </>
         )}
-      </Button>
+      </Button> */}
     </form>
   );
 }
