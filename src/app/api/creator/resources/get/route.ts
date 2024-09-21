@@ -2,8 +2,9 @@ import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
-
+import { unstable_noStore } from "next/cache";
 export async function POST(req: Request) {
+  unstable_noStore();
   try {
     // const session = await auth();
     // if (!session) {
