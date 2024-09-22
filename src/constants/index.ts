@@ -25,11 +25,11 @@ export const navbarRoutes = [
   //   path: "/",
   //   text: "Blog",
   // },
-  // {
-  //   id: 4,
-  //   path: "/quizzes",
-  //   text: "Quizzes",
-  // },
+  {
+    id: 4,
+    path: "/quizzes",
+    text: "Quizzes",
+  },
 ];
 
 export const mobileNavbarRoutes = [
