@@ -47,11 +47,13 @@ const SolutionsPage = async () => {
             <SolutionCard key={solution.id} {...solution} />
           ))}
         {solutions && solutions.length <= 0 && (
-          <h2 className="text-center font-heading mx-auto m-10 text-6xl sm:text-7xl lg:text-8xl leading-[5rem] sm:leading-[7rem] lg:leading-[7rem] font-black	 ">
+          <h2 className="text-center font-heading mx-auto m-10 text-2xl sm:text-xl lg:text-3xl   font-black	 ">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
-              {"Coming Soon!"}
+              {
+                "Be the First to Break Ground: Publish Your First Solution and Lead the Way!"
+              }
             </span>
-            <span className="">⏳</span>
+            <span className="">🚀</span>
           </h2>
         )}
       </div>
