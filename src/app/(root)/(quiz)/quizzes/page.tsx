@@ -15,7 +15,8 @@ const QuizPage = () => {
       </div>
       <QuizList /> */}
       <h2 className="text-green-500 font-bold text-4xl tracking-wider text-center">
-        Coming Soon
+        Prepare Yourself! <br /> Exciting New Quizzes Are Just Around the
+        Corner!
       </h2>
     </div>
   );
