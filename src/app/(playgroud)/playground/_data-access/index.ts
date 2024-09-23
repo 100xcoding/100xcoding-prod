@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 export async function getUnpublishSolutionBySlug(slug: string) {
   const session = await auth();
   if (!session || !session.user || !session.user.id) {
-    redirect("/login?msg='sign-in first' ");
+    redirect(`/login?msg=Login&redirect=/playground/${slug}`);
   }
   try {
     const solution = await db.challengeSolution.findUnique({

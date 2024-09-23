@@ -12,6 +12,10 @@ import { db } from "@/lib/db";
 import { getErrorMessage } from "@/lib/utils";
 async function getChallengeSolutionBySlug(slug: string) {
   try {
+    const session = await auth();
+    if (!session?.user) {
+      redirect(`/login?redirect=/solution-playground/${slug}`);
+    }
     const solution = await db.challengeSolution.findUnique({
       where: {
         slug,
@@ -38,10 +42,6 @@ const SolutionPlayground = async ({
 }: {
   params: { slug: string };
 }) => {
-  const session = await auth();
-  if (session?.user) {
-    redirect("/login?msg=Login First");
-  }
   const { solution } = await getChallengeSolutionBySlug(slug);
   // console.log(solution);
   return (

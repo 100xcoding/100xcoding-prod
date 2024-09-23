@@ -10,6 +10,7 @@ import { CustomUser } from "./types";
 import Resend from "next-auth/providers/resend";
 import { authSendRequest } from "./lib/authSendRequest";
 import { redirect } from "next/navigation";
+import { Console } from "console";
 const generateRandomSuffix = () => {
   const timestamp = Date.now().toString(36); // Convert current timestamp to base36
   const randomNum = Math.floor(Math.random() * 1000).toString(36); // Generate a random number and convert to base36
@@ -211,7 +212,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async redirect({ url, baseUrl }) {
       // if (url.startsWith(baseUrl)) return url;
       // return baseUrl;
+      // console.log("BASE", baseUrl);
+      // console.log("URL", url);
       const redirectUrl = new URL(url, baseUrl).searchParams.get("redirect");
+      // console.log("REDIRECT URL", redirectUrl);
       if (!redirectUrl && url.startsWith("/login")) return baseUrl;
       if (redirectUrl) return `${baseUrl}${redirectUrl}`;
       if (url.startsWith("/")) return `${baseUrl}${url}`;

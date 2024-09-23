@@ -40,10 +40,10 @@ const PlaygroudSlug = async ({
 }: {
   params: { slug: string };
 }) => {
-  const session = await auth();
-  if (session?.user) {
-    redirect("/login?msg=Login First");
-  }
+  // const session = await auth();
+  // if (session?.user) {
+  //   redirect(`/login?msg=Login`);
+  // }
   const { challenge } = await getChallenge(slug);
   const { solution } = await getUnpublishSolutionBySlug(slug);
   if (!challenge) {
@@ -51,9 +51,7 @@ const PlaygroudSlug = async ({
   }
   return (
     <section className=" bg-dark-400 text-white">
-      {solution?.status && (
-        <Warning status={solution?.status} slug={solution?.slug} />
-      )}
+      {solution && <Warning status={solution?.status} slug={solution?.slug} />}
       <div className="relative grid grid-rows-[50px_minmax(0,_1fr)] grid-cols-1 gap-4 h-screen xxl:max-w-screen-xxl mx-auto">
         <CodeEditorHeader
           descriptionRef={null}

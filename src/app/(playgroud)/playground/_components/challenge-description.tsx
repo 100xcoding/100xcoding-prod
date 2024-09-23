@@ -21,16 +21,16 @@ export const ChallengeDescription = ({
         {title}
       </h1>
       <p className="text-base text-dark-700 mb-4">{description}</p>
-      <div className="relative aspect-[4/3]">
+      <div className="relative">
         <Image
           src={getImageUrl(image!)}
-          width={400}
-          height={300}
+          width={300}
+          height={500}
           className="w-full"
-          alt={` Challenge`}
+          alt={`Challenge`}
         />
       </div>
-      <h2 className="mt-4 mb-2 text-white text-3xl font-bold">
+      <h2 className="mt-4 mb-2 text-primary text-3xl font-bold">
         Challenge Requirements
       </h2>
       <div className="prose w-full prose-a:text-green-500 prose-headings:text-white text-white ">
