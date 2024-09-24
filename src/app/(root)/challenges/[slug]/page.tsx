@@ -222,11 +222,12 @@ const SingleChallenge = async ({
               <CardFooter>
                 <Link
                   aria-label="join discord"
-                  href={"/"}
+                  href={""}
                   className="flex text-base md:text-lg items-center gap-2  w-fit  px-4 py-2.5 rounded-lg bg-[#5865F2] text-white capitalize  tracking-wide font-medium"
                 >
-                  join discord
-                  <FaDiscord />
+                  {/* join discord
+                  <FaDiscord /> */}
+                  Coming Soon
                 </Link>
               </CardFooter>
             </Card>
