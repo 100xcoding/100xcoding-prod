@@ -1,3 +1,4 @@
+"use client";
 import { useSandpack } from "@codesandbox/sandpack-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,6 +32,7 @@ export const EditorFooter = ({
   const { sandpack } = useSandpack();
   const { files, visibleFiles } = sandpack;
   const [loading, setLoading] = useState(false);
+  const [update, setUpdate] = useState(false);
   const handleSave = async () => {
     if (!isDirty) return;
     setLoading(true);
@@ -39,7 +41,7 @@ export const EditorFooter = ({
       files: data,
     };
 
-    if (playground || isCompleted) {
+    if (playground || isCompleted || update) {
       // Update the data only
       const result = await updateChallengeSolution(updatedData, slug);
       // console.log(result);
@@ -47,6 +49,7 @@ export const EditorFooter = ({
         toast.info("updated Successfully, now you can also publish this");
         setIsDirty(false);
       } else {
+        // console.log(result?.err);
         toast.error(result?.err);
         setIsDirty(true);
       }
@@ -56,6 +59,7 @@ export const EditorFooter = ({
       if (result?.success) {
         toast.info("Saved Successfully, now you can also publish this");
         setIsDirty(false);
+        setUpdate(true);
       } else {
         setIsDirty(true);
         toast.error(result?.message);

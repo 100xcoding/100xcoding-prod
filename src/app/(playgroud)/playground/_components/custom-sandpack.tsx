@@ -30,7 +30,7 @@ export const CustomSandpack = ({
       "/index.js": {
         code: solution?.jsContent!,
       },
-      "/src/styles.css": {
+      "/styles.css": {
         code: solution?.cssContent,
       },
     };
@@ -42,7 +42,7 @@ export const CustomSandpack = ({
       "/index.js": {
         code: playground?.jsContent!,
       },
-      "/src/styles.css": {
+      "/styles.css": {
         code: playground?.cssContent,
       },
     };
