@@ -7,7 +7,6 @@ const LoginPage = async ({
   searchParams: { redirect?: string };
 }) => {
   const params = searchParams;
-  console.log(params);
   const session = await auth();
 
   if (session?.user) {

@@ -14,7 +14,7 @@ export const WebsitePreview = ({ solution }: any) => {
     "/index.js": {
       code: solution?.jsContent!,
     },
-    "/src/styles.css": {
+    "/styles.css": {
       code: solution?.cssContent,
     },
   };

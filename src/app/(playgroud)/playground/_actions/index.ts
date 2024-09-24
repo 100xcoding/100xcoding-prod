@@ -33,7 +33,7 @@ export async function createChallengeSolution(data: any, slug: string) {
         slug: slug.concat(session?.user?.id),
         htmlContent: data.files["/index.html"]?.code!,
         jsContent: data.files["/index.js"]?.code!,
-        cssContent: data.files["/src/styles.css"]?.code!,
+        cssContent: data.files["/styles.css"]?.code!,
       },
     });
     // console.log(solution);
@@ -81,7 +81,7 @@ export async function updateChallengeSolution(data: any, slug: string) {
       data: {
         htmlContent: data.files["/index.html"]?.code!,
         jsContent: data.files["/index.js"]?.code!,
-        cssContent: data.files["/src/styles.css"]?.code!,
+        cssContent: data.files["/styles.css"]?.code!,
       },
     });
 

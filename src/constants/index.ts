@@ -198,9 +198,10 @@ export const challengeData = [
 export const FILES = {
   demo: {
     "/index.html": {
+      name: "vs.html",
       code: '<!DOCTYPE html>\n<html>\n\n<head>\n  <title>100xcoding Sandbox</title>\n  <meta charset="UTF-8" />\n</head>\n\n<body>\n  <h1>Accelerate Your Coding Journey with 100xCoding Developer Challenges 🚀</h1>\n \n  <script src="src/index.js"></script>\n</body>\n\n</html>',
     },
-    "/src/styles.css": {
+    "/styles.css": {
       code: "body {\n  font-family: sans-serif;\n  background-color: #1F2937;\n  text-align: center;\n  color: white;\n  padding-top: 64px;\n}\n",
     },
     "/index.js": {

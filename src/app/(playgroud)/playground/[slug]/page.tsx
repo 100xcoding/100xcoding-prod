@@ -51,7 +51,9 @@ const PlaygroudSlug = async ({
   }
   return (
     <section className=" bg-dark-400 text-white">
-      {solution && <Warning status={solution?.status} slug={solution?.slug} />}
+      {solution?.status && (
+        <Warning status={solution?.status} slug={solution?.slug} />
+      )}
       <div className="relative grid grid-rows-[50px_minmax(0,_1fr)] grid-cols-1 gap-4 h-screen xxl:max-w-screen-xxl mx-auto">
         <CodeEditorHeader
           descriptionRef={null}

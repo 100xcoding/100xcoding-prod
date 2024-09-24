@@ -44,7 +44,7 @@ export const EditorFooter = ({
       const result = await updateChallengeSolution(updatedData, slug);
       // console.log(result);
       if (result?.success) {
-        toast.info("Saved Successfully, now you can also publish this");
+        toast.info("updated Successfully, now you can also publish this");
         setIsDirty(false);
       } else {
         toast.error(result?.err);
