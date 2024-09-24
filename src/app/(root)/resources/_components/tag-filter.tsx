@@ -74,6 +74,7 @@ export const TagFilter = ({ resourceTags }: FiltersProps) => {
           tag: tagNames.length > 0 ? tagNames.join(",") : null,
           currentType: currentType,
           language: currentLanguage,
+          page: 1,
         },
       },
       { skipNull: true, skipEmptyString: true },

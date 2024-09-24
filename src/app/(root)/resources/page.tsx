@@ -5,9 +5,11 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { TagFilter } from "./_components/tag-filter";
 import { Suspense } from "react";
+import { Pagination } from "./_components/pagination";
 export const metadata: Metadata = {
   title: "Resources",
 };
+const PAGE_SIZE = 8;
 interface IResource {
   id: string;
   title: string;
@@ -36,13 +38,35 @@ const getResources = async ({
   currentType,
   tag,
   language,
+  take = PAGE_SIZE,
+  skip,
 }: {
   currentType?: string;
   tag?: string;
   language?: string;
+  take: number;
+  skip: number;
 }) => {
   const arrayTags = tag?.split(",");
-  return await db.resource.findMany({
+
+  const totalCount = await db.resource.count({
+    where: {
+      isPublish: true,
+      resourceTypeId: currentType,
+      resourceLanguageId: language,
+      resourceTag: {
+        some: {
+          resourceTag: {
+            name: {
+              in: arrayTags,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  const resources = await db.resource.findMany({
     where: {
       isPublish: true,
       resourceTypeId: currentType,
@@ -78,7 +102,16 @@ const getResources = async ({
         },
       },
     },
+    take: take,
+    skip: skip,
   });
+  return {
+    data: resources,
+    metadata: {
+      hasNextPage: skip + take < totalCount,
+      totalPages: Math.ceil(totalCount / take),
+    },
+  };
 };
 const getResourcesType = async () => {
   return await db.resourceType.findMany({});
@@ -94,6 +127,7 @@ interface SearchProps {
     currentType: string;
     tag: string;
     language: string;
+    page?: string;
   };
 }
 function shuffleArray(array: IResource[]) {
@@ -116,12 +150,19 @@ function shuffleArray(array: IResource[]) {
   return array;
 }
 const ResourcesPage = async ({ searchParams }: SearchProps) => {
-  const data = await getResources({ ...searchParams });
+  const pageNumber = Number(searchParams?.page || 1); // Get the page number. Default to 1 if not provided.
+  const take = PAGE_SIZE;
+  const skip = (pageNumber - 1) * take;
+  const { data, metadata } = await getResources({
+    ...searchParams,
+    take,
+    skip,
+  });
   const resourceTypeData = await getResourcesType();
   const resourceTags = await getResourcesTags();
   const resourceLanguages = await getResourcesLanguages();
   const finalResult: IResource[] = shuffleArray(data);
-  // console.log(finalResult);
+
   return (
     <section className="container p-3 my-6 space-y-4 mx-auto ">
       <Filters
@@ -162,6 +203,11 @@ const ResourcesPage = async ({ searchParams }: SearchProps) => {
           </div>
         )}
       </div>
+      {data.length > 0 && (
+        <div className="pt-6">
+          <Pagination {...metadata} />
+        </div>
+      )}
     </section>
   );
 };

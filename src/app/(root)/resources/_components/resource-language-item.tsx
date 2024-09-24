@@ -16,6 +16,7 @@ export const ResourceLanguageItem = ({
   const currentType = searchParams.get("currentType");
   const currentTag = searchParams.get("tag");
   const currentLanguage = searchParams.get("language");
+  const page = searchParams.get("page");
   const isSelected = currentLanguage === id;
   const onClick = () => {
     // console.log("Clicked");
@@ -26,6 +27,7 @@ export const ResourceLanguageItem = ({
           language: isSelected ? null : id,
           tag: currentTag,
           currentType: currentType,
+          page: page ? 1 : null,
         },
       },
       { skipNull: true, skipEmptyString: true },
