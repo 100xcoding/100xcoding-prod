@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import { TagFilter } from "./_components/tag-filter";
 import { Suspense } from "react";
 import { Pagination } from "./_components/pagination";
+import { Skeleton } from "@/components/ui/skeleton";
 export const metadata: Metadata = {
   title: "Resources",
 };
@@ -34,102 +35,6 @@ interface IResource {
     name: string;
   } | null;
 }
-const getResources = async ({
-  currentType,
-  tag,
-  language,
-  take = PAGE_SIZE,
-  skip,
-}: {
-  currentType?: string;
-  tag?: string;
-  language?: string;
-  take: number;
-  skip: number;
-}) => {
-  const arrayTags = tag?.split(",");
-
-  const totalCount = await db.resource.count({
-    where: {
-      isPublish: true,
-      resourceTypeId: currentType,
-      resourceLanguageId: language,
-      resourceTag: {
-        some: {
-          resourceTag: {
-            name: {
-              in: arrayTags,
-            },
-          },
-        },
-      },
-    },
-  });
-
-  const resources = await db.resource.findMany({
-    where: {
-      isPublish: true,
-      resourceTypeId: currentType,
-      resourceLanguageId: language,
-      resourceTag: {
-        some: {
-          resourceTag: {
-            name: {
-              in: arrayTags,
-            },
-          },
-        },
-      },
-    },
-    include: {
-      resourceTag: {
-        select: {
-          resourceTag: {
-            select: {
-              name: true,
-            },
-          },
-        },
-      },
-      resourceType: {
-        select: {
-          name: true,
-        },
-      },
-      resourceLanguage: {
-        select: {
-          name: true,
-        },
-      },
-    },
-    take: take,
-    skip: skip,
-  });
-  return {
-    data: resources,
-    metadata: {
-      hasNextPage: skip + take < totalCount,
-      totalPages: Math.ceil(totalCount / take),
-    },
-  };
-};
-const getResourcesType = async () => {
-  return await db.resourceType.findMany({});
-};
-const getResourcesTags = async () => {
-  return await db.resourceTag.findMany({});
-};
-const getResourcesLanguages = async () => {
-  return await db.resourceLanguage.findMany({});
-};
-interface SearchProps {
-  searchParams: {
-    currentType: string;
-    tag: string;
-    language: string;
-    page?: string;
-  };
-}
 function shuffleArray(array: IResource[]) {
   let currentIndex = array.length,
     randomIndex;
@@ -149,41 +54,145 @@ function shuffleArray(array: IResource[]) {
 
   return array;
 }
+const wait = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+const getResources = async ({
+  currentType,
+  tag,
+  language,
+  take = PAGE_SIZE,
+  skip,
+}: {
+  currentType?: string;
+  tag?: string;
+  language?: string;
+  take: number;
+  skip: number;
+}) => {
+  const arrayTags = tag?.split(",");
+  // await Promise.resolve(() => setTimeout(() => { }, 10000));
+  // Combine all the database calls into a single Promise.all
+  const [
+    totalCount,
+    resources,
+    resourceTypes,
+    resourceTags,
+    resourceLanguages,
+  ] = await Promise.all([
+    db.resource.count({
+      where: {
+        isPublish: true,
+        resourceTypeId: currentType,
+        resourceLanguageId: language,
+        resourceTag: {
+          some: {
+            resourceTag: {
+              name: {
+                in: arrayTags,
+              },
+            },
+          },
+        },
+      },
+    }),
+
+    db.resource.findMany({
+      where: {
+        isPublish: true,
+        resourceTypeId: currentType,
+        resourceLanguageId: language,
+        resourceTag: {
+          some: {
+            resourceTag: {
+              name: {
+                in: arrayTags,
+              },
+            },
+          },
+        },
+      },
+      include: {
+        resourceTag: {
+          select: {
+            resourceTag: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+        resourceType: {
+          select: {
+            name: true,
+          },
+        },
+        resourceLanguage: {
+          select: {
+            name: true,
+          },
+        },
+      },
+      take: take,
+      skip: skip,
+    }),
+
+    db.resourceType.findMany({}),
+    db.resourceTag.findMany({}),
+    db.resourceLanguage.findMany({}),
+  ]);
+  // await wait(4000);
+  return {
+    data: shuffleArray(resources),
+    metadata: {
+      hasNextPage: skip + take < totalCount,
+      totalPages: Math.ceil(totalCount / take),
+    },
+    resourceTypes,
+    resourceTags,
+    resourceLanguages,
+  };
+};
+
+interface SearchProps {
+  searchParams: {
+    currentType: string;
+    tag: string;
+    language: string;
+    page?: string;
+  };
+}
+
 const ResourcesPage = async ({ searchParams }: SearchProps) => {
   const pageNumber = Number(searchParams?.page || 1); // Get the page number. Default to 1 if not provided.
   const take = PAGE_SIZE;
   const skip = (pageNumber - 1) * take;
-  const { data, metadata } = await getResources({
-    ...searchParams,
-    take,
-    skip,
-  });
-  const resourceTypeData = await getResourcesType();
-  const resourceTags = await getResourcesTags();
-  const resourceLanguages = await getResourcesLanguages();
-  const finalResult: IResource[] = shuffleArray(data);
+  const { data, metadata, resourceTypes, resourceTags, resourceLanguages } =
+    await getResources({
+      ...searchParams,
+      take,
+      skip,
+    });
 
   return (
     <section className="container p-3 my-6 space-y-4 mx-auto ">
       <Filters
-        resourceTypes={resourceTypeData}
+        resourceTypes={resourceTypes}
         resourceLanguages={resourceLanguages}
       />
       <TagFilter resourceTags={resourceTags} />
-      <Suspense fallback={<div>loading...</div>}>
-        <div className="flex flex-wrap justify-center lg:justify-normal  items-center gap-4 mt-2">
-          {data.length > 0 &&
-            finalResult.map((item) => (
-              <ResourceCard
-                resource={item}
-                tags={item.resourceTag!}
-                type={item.resourceType!}
-                language={item.resourceLanguage!}
-                key={item.id}
-              />
-            ))}
-        </div>
-      </Suspense>
+      <div className="flex flex-wrap justify-center lg:justify-normal  items-center gap-4 mt-2">
+        {data.length > 0 &&
+          data.map((item) => (
+            <ResourceCard
+              resource={item}
+              tags={item.resourceTag!}
+              type={item.resourceType!}
+              language={item.resourceLanguage!}
+              key={item.id}
+            />
+          ))}
+      </div>
       <div className="">
         {data.length === 0 && (
           <div className="text-center">
